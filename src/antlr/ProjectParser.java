@@ -1,4 +1,4 @@
-// Generated from D:/about command/Compiler/Compiler/src/antlr/ProjectParser.g4 by ANTLR 4.13.2
+// Generated from D:/test.java.compiler/FlaskJinjaProject/src/antlr/ProjectParser.g4 by ANTLR 4.13.2
 package antlr;
  package parser; 
 import org.antlr.v4.runtime.atn.*;
@@ -350,18 +350,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Simple_stmtContext extends ParserRuleContext {
-		public Simple_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_simple_stmt; }
-	 
-		public Simple_stmtContext() { }
-		public void copyFrom(Simple_stmtContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class SimpleStmtLabelContext extends Simple_stmtContext {
 		public List<Small_stmtContext> small_stmt() {
 			return getRuleContexts(Small_stmtContext.class);
 		}
@@ -373,18 +361,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode SEMI(int i) {
 			return getToken(ProjectParser.SEMI, i);
 		}
-		public SimpleStmtLabelContext(Simple_stmtContext ctx) { copyFrom(ctx); }
+		public Simple_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_simple_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterSimpleStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterSimple_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitSimpleStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitSimple_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitSimpleStmtLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitSimple_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -395,7 +386,6 @@ public class ProjectParser extends Parser {
 		int _la;
 		try {
 			int _alt;
-			_localctx = new SimpleStmtLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(125);
@@ -676,7 +666,7 @@ public class ProjectParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class ExprStmtLabelContext extends Expr_stmtContext {
+	public static class ExprStmtContext extends Expr_stmtContext {
 		public List<Testlist_star_exprContext> testlist_star_expr() {
 			return getRuleContexts(Testlist_star_exprContext.class);
 		}
@@ -690,18 +680,18 @@ public class ProjectParser extends Parser {
 			return getRuleContext(AugassignContext.class,0);
 		}
 		public TerminalNode EQ() { return getToken(ProjectParser.EQ, 0); }
-		public ExprStmtLabelContext(Expr_stmtContext ctx) { copyFrom(ctx); }
+		public ExprStmtContext(Expr_stmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterExprStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterExprStmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitExprStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitExprStmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitExprStmtLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitExprStmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -710,7 +700,7 @@ public class ProjectParser extends Parser {
 		Expr_stmtContext _localctx = new Expr_stmtContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_expr_stmt);
 		try {
-			_localctx = new ExprStmtLabelContext(_localctx);
+			_localctx = new ExprStmtContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(146);
@@ -775,7 +765,7 @@ public class ProjectParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class AnnAssignLabelContext extends AnnassignContext {
+	public static class AnnAssignContext extends AnnassignContext {
 		public TerminalNode COLON() { return getToken(ProjectParser.COLON, 0); }
 		public List<TestContext> test() {
 			return getRuleContexts(TestContext.class);
@@ -784,18 +774,18 @@ public class ProjectParser extends Parser {
 			return getRuleContext(TestContext.class,i);
 		}
 		public TerminalNode EQ() { return getToken(ProjectParser.EQ, 0); }
-		public AnnAssignLabelContext(AnnassignContext ctx) { copyFrom(ctx); }
+		public AnnAssignContext(AnnassignContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAnnAssignLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAnnAssign(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAnnAssignLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAnnAssign(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAnnAssignLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAnnAssign(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -805,7 +795,7 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 10, RULE_annassign);
 		int _la;
 		try {
-			_localctx = new AnnAssignLabelContext(_localctx);
+			_localctx = new AnnAssignContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(155);
@@ -839,89 +829,26 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class AugassignContext extends ParserRuleContext {
+		public TerminalNode PLUS() { return getToken(ProjectParser.PLUS, 0); }
+		public TerminalNode EQ() { return getToken(ProjectParser.EQ, 0); }
+		public TerminalNode MINUS() { return getToken(ProjectParser.MINUS, 0); }
+		public TerminalNode STAR() { return getToken(ProjectParser.STAR, 0); }
+		public TerminalNode SLASH() { return getToken(ProjectParser.SLASH, 0); }
 		public AugassignContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_augassign; }
-	 
-		public AugassignContext() { }
-		public void copyFrom(AugassignContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class AugPlusLabelContext extends AugassignContext {
-		public TerminalNode PLUS() { return getToken(ProjectParser.PLUS, 0); }
-		public TerminalNode EQ() { return getToken(ProjectParser.EQ, 0); }
-		public AugPlusLabelContext(AugassignContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAugPlusLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAugassign(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAugPlusLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAugassign(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAugPlusLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class AugMinusLabelContext extends AugassignContext {
-		public TerminalNode MINUS() { return getToken(ProjectParser.MINUS, 0); }
-		public TerminalNode EQ() { return getToken(ProjectParser.EQ, 0); }
-		public AugMinusLabelContext(AugassignContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAugMinusLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAugMinusLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAugMinusLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class AugSlashLabelContext extends AugassignContext {
-		public TerminalNode SLASH() { return getToken(ProjectParser.SLASH, 0); }
-		public TerminalNode EQ() { return getToken(ProjectParser.EQ, 0); }
-		public AugSlashLabelContext(AugassignContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAugSlashLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAugSlashLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAugSlashLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class AugStarLabelContext extends AugassignContext {
-		public TerminalNode STAR() { return getToken(ProjectParser.STAR, 0); }
-		public TerminalNode EQ() { return getToken(ProjectParser.EQ, 0); }
-		public AugStarLabelContext(AugassignContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAugStarLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAugStarLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAugStarLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAugassign(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -934,7 +861,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case PLUS:
-				_localctx = new AugPlusLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(161);
@@ -944,7 +870,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case MINUS:
-				_localctx = new AugMinusLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(163);
@@ -954,7 +879,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case STAR:
-				_localctx = new AugStarLabelContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(165);
@@ -964,7 +888,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case SLASH:
-				_localctx = new AugSlashLabelContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(167);
@@ -990,18 +913,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Testlist_star_exprContext extends ParserRuleContext {
-		public Testlist_star_exprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_testlist_star_expr; }
-	 
-		public Testlist_star_exprContext() { }
-		public void copyFrom(Testlist_star_exprContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class TestListStarLabelContext extends Testlist_star_exprContext {
 		public List<TestContext> test() {
 			return getRuleContexts(TestContext.class);
 		}
@@ -1016,41 +927,24 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public TestListStarLabelContext(Testlist_star_exprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTestListStarLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTestListStarLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTestListStarLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class CompForExprLabelContext extends Testlist_star_exprContext {
-		public TestContext test() {
-			return getRuleContext(TestContext.class,0);
-		}
 		public Comp_forContext comp_for() {
 			return getRuleContext(Comp_forContext.class,0);
 		}
-		public CompForExprLabelContext(Testlist_star_exprContext ctx) { copyFrom(ctx); }
+		public Testlist_star_exprContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_testlist_star_expr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterCompForExprLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTestlist_star_expr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitCompForExprLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTestlist_star_expr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitCompForExprLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTestlist_star_expr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1065,7 +959,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
-				_localctx = new TestListStarLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(173);
@@ -1159,7 +1052,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new CompForExprLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(188);
@@ -1183,18 +1075,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class TestContext extends ParserRuleContext {
-		public TestContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_test; }
-	 
-		public TestContext() { }
-		public void copyFrom(TestContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class TestLabelContext extends TestContext {
 		public List<Or_testContext> or_test() {
 			return getRuleContexts(Or_testContext.class);
 		}
@@ -1206,18 +1086,21 @@ public class ProjectParser extends Parser {
 		public TestContext test() {
 			return getRuleContext(TestContext.class,0);
 		}
-		public TestLabelContext(TestContext ctx) { copyFrom(ctx); }
+		public TestContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_test; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTestLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTest(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTestLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTest(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTestLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTest(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1226,7 +1109,6 @@ public class ProjectParser extends Parser {
 		TestContext _localctx = new TestContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_test);
 		try {
-			_localctx = new TestLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(193);
@@ -1262,18 +1144,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Or_testContext extends ParserRuleContext {
-		public Or_testContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_or_test; }
-	 
-		public Or_testContext() { }
-		public void copyFrom(Or_testContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class OrTestLabelContext extends Or_testContext {
 		public List<And_testContext> and_test() {
 			return getRuleContexts(And_testContext.class);
 		}
@@ -1284,18 +1154,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode OR(int i) {
 			return getToken(ProjectParser.OR, i);
 		}
-		public OrTestLabelContext(Or_testContext ctx) { copyFrom(ctx); }
+		public Or_testContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_or_test; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterOrTestLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterOr_test(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitOrTestLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitOr_test(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitOrTestLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitOr_test(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1305,7 +1178,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 18, RULE_or_test);
 		int _la;
 		try {
-			_localctx = new OrTestLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(201);
@@ -1341,18 +1213,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class And_testContext extends ParserRuleContext {
-		public And_testContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_and_test; }
-	 
-		public And_testContext() { }
-		public void copyFrom(And_testContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class AndTestLabelContext extends And_testContext {
 		public List<Not_testContext> not_test() {
 			return getRuleContexts(Not_testContext.class);
 		}
@@ -1363,18 +1223,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode AND(int i) {
 			return getToken(ProjectParser.AND, i);
 		}
-		public AndTestLabelContext(And_testContext ctx) { copyFrom(ctx); }
+		public And_testContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_and_test; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAndTestLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAnd_test(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAndTestLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAnd_test(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAndTestLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAnd_test(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1384,7 +1247,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 20, RULE_and_test);
 		int _la;
 		try {
-			_localctx = new AndTestLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(209);
@@ -1420,54 +1282,28 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Not_testContext extends ParserRuleContext {
-		public Not_testContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_not_test; }
-	 
-		public Not_testContext() { }
-		public void copyFrom(Not_testContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class NotTestLabelContext extends Not_testContext {
 		public TerminalNode NOT() { return getToken(ProjectParser.NOT, 0); }
 		public Not_testContext not_test() {
 			return getRuleContext(Not_testContext.class,0);
 		}
-		public NotTestLabelContext(Not_testContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterNotTestLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitNotTestLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitNotTestLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ComparisonInNotTestLabelContext extends Not_testContext {
 		public ComparisonContext comparison() {
 			return getRuleContext(ComparisonContext.class,0);
 		}
-		public ComparisonInNotTestLabelContext(Not_testContext ctx) { copyFrom(ctx); }
+		public Not_testContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_not_test; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterComparisonInNotTestLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterNot_test(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitComparisonInNotTestLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitNot_test(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitComparisonInNotTestLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitNot_test(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1480,7 +1316,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NOT:
-				_localctx = new NotTestLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(217);
@@ -1502,7 +1337,6 @@ public class ProjectParser extends Parser {
 			case FSTRING:
 			case NUMBER:
 			case NAME:
-				_localctx = new ComparisonInNotTestLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(219);
@@ -1526,18 +1360,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ComparisonContext extends ParserRuleContext {
-		public ComparisonContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_comparison; }
-	 
-		public ComparisonContext() { }
-		public void copyFrom(ComparisonContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ComparisonLabelContext extends ComparisonContext {
 		public List<Arith_exprContext> arith_expr() {
 			return getRuleContexts(Arith_exprContext.class);
 		}
@@ -1550,18 +1372,21 @@ public class ProjectParser extends Parser {
 		public Comp_opContext comp_op(int i) {
 			return getRuleContext(Comp_opContext.class,i);
 		}
-		public ComparisonLabelContext(ComparisonContext ctx) { copyFrom(ctx); }
+		public ComparisonContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_comparison; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterComparisonLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterComparison(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitComparisonLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitComparison(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitComparisonLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitComparison(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1571,7 +1396,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 24, RULE_comparison);
 		try {
 			int _alt;
-			_localctx = new ComparisonLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(222);
@@ -1609,158 +1433,29 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Comp_opContext extends ParserRuleContext {
+		public TerminalNode LT() { return getToken(ProjectParser.LT, 0); }
+		public TerminalNode GT() { return getToken(ProjectParser.GT, 0); }
+		public TerminalNode EQEQ() { return getToken(ProjectParser.EQEQ, 0); }
+		public TerminalNode GE() { return getToken(ProjectParser.GE, 0); }
+		public TerminalNode LE() { return getToken(ProjectParser.LE, 0); }
+		public TerminalNode NOTEQ() { return getToken(ProjectParser.NOTEQ, 0); }
+		public TerminalNode IN() { return getToken(ProjectParser.IN, 0); }
+		public TerminalNode NOT() { return getToken(ProjectParser.NOT, 0); }
 		public Comp_opContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_comp_op; }
-	 
-		public Comp_opContext() { }
-		public void copyFrom(Comp_opContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class InLabelContext extends Comp_opContext {
-		public TerminalNode IN() { return getToken(ProjectParser.IN, 0); }
-		public InLabelContext(Comp_opContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterInLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterComp_op(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitInLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitComp_op(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitInLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class GeLabelContext extends Comp_opContext {
-		public TerminalNode GE() { return getToken(ProjectParser.GE, 0); }
-		public GeLabelContext(Comp_opContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterGeLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitGeLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitGeLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class LtLabelContext extends Comp_opContext {
-		public TerminalNode LT() { return getToken(ProjectParser.LT, 0); }
-		public LtLabelContext(Comp_opContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterLtLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitLtLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitLtLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class EqeqLabelContext extends Comp_opContext {
-		public TerminalNode EQEQ() { return getToken(ProjectParser.EQEQ, 0); }
-		public EqeqLabelContext(Comp_opContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterEqeqLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitEqeqLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitEqeqLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class GtLabelContext extends Comp_opContext {
-		public TerminalNode GT() { return getToken(ProjectParser.GT, 0); }
-		public GtLabelContext(Comp_opContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterGtLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitGtLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitGtLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class NotInLabelContext extends Comp_opContext {
-		public TerminalNode NOT() { return getToken(ProjectParser.NOT, 0); }
-		public TerminalNode IN() { return getToken(ProjectParser.IN, 0); }
-		public NotInLabelContext(Comp_opContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterNotInLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitNotInLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitNotInLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class LeLabelContext extends Comp_opContext {
-		public TerminalNode LE() { return getToken(ProjectParser.LE, 0); }
-		public LeLabelContext(Comp_opContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterLeLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitLeLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitLeLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class NoteqLabelContext extends Comp_opContext {
-		public TerminalNode NOTEQ() { return getToken(ProjectParser.NOTEQ, 0); }
-		public NoteqLabelContext(Comp_opContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterNoteqLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitNoteqLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitNoteqLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitComp_op(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1773,7 +1468,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case LT:
-				_localctx = new LtLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(231);
@@ -1781,7 +1475,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case GT:
-				_localctx = new GtLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(232);
@@ -1789,7 +1482,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case EQEQ:
-				_localctx = new EqeqLabelContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(233);
@@ -1797,7 +1489,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case GE:
-				_localctx = new GeLabelContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(234);
@@ -1805,7 +1496,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case LE:
-				_localctx = new LeLabelContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(235);
@@ -1813,7 +1503,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case NOTEQ:
-				_localctx = new NoteqLabelContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(236);
@@ -1821,7 +1510,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case IN:
-				_localctx = new InLabelContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(237);
@@ -1829,7 +1517,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case NOT:
-				_localctx = new NotInLabelContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(238);
@@ -1855,18 +1542,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Arith_exprContext extends ParserRuleContext {
-		public Arith_exprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_arith_expr; }
-	 
-		public Arith_exprContext() { }
-		public void copyFrom(Arith_exprContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ArithExprLabelContext extends Arith_exprContext {
 		public List<TermContext> term() {
 			return getRuleContexts(TermContext.class);
 		}
@@ -1881,18 +1556,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode MINUS(int i) {
 			return getToken(ProjectParser.MINUS, i);
 		}
-		public ArithExprLabelContext(Arith_exprContext ctx) { copyFrom(ctx); }
+		public Arith_exprContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_arith_expr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterArithExprLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterArith_expr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitArithExprLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitArith_expr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitArithExprLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitArith_expr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1903,7 +1581,6 @@ public class ProjectParser extends Parser {
 		int _la;
 		try {
 			int _alt;
-			_localctx = new ArithExprLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(242);
@@ -1949,18 +1626,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class TermContext extends ParserRuleContext {
-		public TermContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_term; }
-	 
-		public TermContext() { }
-		public void copyFrom(TermContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class TermLabelContext extends TermContext {
 		public List<FactorContext> factor() {
 			return getRuleContexts(FactorContext.class);
 		}
@@ -1983,18 +1648,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode PERCENT(int i) {
 			return getToken(ProjectParser.PERCENT, i);
 		}
-		public TermLabelContext(TermContext ctx) { copyFrom(ctx); }
+		public TermContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_term; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTermLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTerm(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTermLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTerm(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTermLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTerm(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2005,7 +1673,6 @@ public class ProjectParser extends Parser {
 		int _la;
 		try {
 			int _alt;
-			_localctx = new TermLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(250);
@@ -2051,56 +1718,30 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class FactorContext extends ParserRuleContext {
-		public FactorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_factor; }
-	 
-		public FactorContext() { }
-		public void copyFrom(FactorContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class UnaryFactorLabelContext extends FactorContext {
 		public FactorContext factor() {
 			return getRuleContext(FactorContext.class,0);
 		}
 		public TerminalNode PLUS() { return getToken(ProjectParser.PLUS, 0); }
 		public TerminalNode MINUS() { return getToken(ProjectParser.MINUS, 0); }
 		public TerminalNode TILDE() { return getToken(ProjectParser.TILDE, 0); }
-		public UnaryFactorLabelContext(FactorContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterUnaryFactorLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitUnaryFactorLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitUnaryFactorLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class PowerLabelContext extends FactorContext {
 		public PowerContext power() {
 			return getRuleContext(PowerContext.class,0);
 		}
-		public PowerLabelContext(FactorContext ctx) { copyFrom(ctx); }
+		public FactorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_factor; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterPowerLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterFactor(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitPowerLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitFactor(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitPowerLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitFactor(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2116,7 +1757,6 @@ public class ProjectParser extends Parser {
 			case PLUS:
 			case MINUS:
 			case TILDE:
-				_localctx = new UnaryFactorLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(258);
@@ -2143,7 +1783,6 @@ public class ProjectParser extends Parser {
 			case FSTRING:
 			case NUMBER:
 			case NAME:
-				_localctx = new PowerLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(260);
@@ -2167,18 +1806,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class PowerContext extends ParserRuleContext {
-		public PowerContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_power; }
-	 
-		public PowerContext() { }
-		public void copyFrom(PowerContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class PowerExprLabelContext extends PowerContext {
 		public Atom_exprContext atom_expr() {
 			return getRuleContext(Atom_exprContext.class,0);
 		}
@@ -2186,18 +1813,21 @@ public class ProjectParser extends Parser {
 		public FactorContext factor() {
 			return getRuleContext(FactorContext.class,0);
 		}
-		public PowerExprLabelContext(PowerContext ctx) { copyFrom(ctx); }
+		public PowerContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_power; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterPowerExprLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterPower(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitPowerExprLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitPower(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitPowerExprLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitPower(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2207,7 +1837,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 34, RULE_power);
 		int _la;
 		try {
-			_localctx = new PowerExprLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(263);
@@ -2239,43 +1868,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Atom_exprContext extends ParserRuleContext {
-		public Atom_exprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_atom_expr; }
-	 
-		public Atom_exprContext() { }
-		public void copyFrom(Atom_exprContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ParenExprLabelContext extends Atom_exprContext {
-		public TerminalNode LPAREN() { return getToken(ProjectParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(ProjectParser.RPAREN, 0); }
-		public TestContext test() {
-			return getRuleContext(TestContext.class,0);
-		}
-		public Testlist_compContext testlist_comp() {
-			return getRuleContext(Testlist_compContext.class,0);
-		}
-		public ParenExprLabelContext(Atom_exprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterParenExprLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitParenExprLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitParenExprLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class AtomExprLabelContext extends Atom_exprContext {
 		public AtomContext atom() {
 			return getRuleContext(AtomContext.class,0);
 		}
@@ -2285,18 +1877,29 @@ public class ProjectParser extends Parser {
 		public TrailerContext trailer(int i) {
 			return getRuleContext(TrailerContext.class,i);
 		}
-		public AtomExprLabelContext(Atom_exprContext ctx) { copyFrom(ctx); }
+		public TerminalNode LPAREN() { return getToken(ProjectParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(ProjectParser.RPAREN, 0); }
+		public TestContext test() {
+			return getRuleContext(TestContext.class,0);
+		}
+		public Testlist_compContext testlist_comp() {
+			return getRuleContext(Testlist_compContext.class,0);
+		}
+		public Atom_exprContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_atom_expr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomExprLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtom_expr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomExprLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtom_expr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomExprLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtom_expr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2310,7 +1913,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,26,_ctx) ) {
 			case 1:
-				_localctx = new AtomExprLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(268);
@@ -2334,7 +1936,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new ParenExprLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(275);
@@ -2385,194 +1986,194 @@ public class ProjectParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class AtomFalseLabelContext extends AtomContext {
+	public static class AtomFalseContext extends AtomContext {
 		public TerminalNode FALSE() { return getToken(ProjectParser.FALSE, 0); }
-		public AtomFalseLabelContext(AtomContext ctx) { copyFrom(ctx); }
+		public AtomFalseContext(AtomContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomFalseLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomFalse(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomFalseLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomFalse(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomFalseLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomFalse(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class AtomNameLabelContext extends AtomContext {
-		public TerminalNode NAME() { return getToken(ProjectParser.NAME, 0); }
-		public AtomNameLabelContext(AtomContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomNameLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomNameLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomNameLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class AtomParenLabelContext extends AtomContext {
+	public static class AtomParenContext extends AtomContext {
 		public TerminalNode LPAREN() { return getToken(ProjectParser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(ProjectParser.RPAREN, 0); }
 		public Testlist_compContext testlist_comp() {
 			return getRuleContext(Testlist_compContext.class,0);
 		}
-		public AtomParenLabelContext(AtomContext ctx) { copyFrom(ctx); }
+		public AtomParenContext(AtomContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomParenLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomParen(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomParenLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomParen(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomParenLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomParen(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class AtomStringLabelContext extends AtomContext {
-		public TerminalNode STRING() { return getToken(ProjectParser.STRING, 0); }
-		public AtomStringLabelContext(AtomContext ctx) { copyFrom(ctx); }
+	public static class AtomNumberContext extends AtomContext {
+		public TerminalNode NUMBER() { return getToken(ProjectParser.NUMBER, 0); }
+		public AtomNumberContext(AtomContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomStringLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomNumber(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomStringLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomNumber(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomStringLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomNumber(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class AtomFStringLabelContext extends AtomContext {
-		public TerminalNode FSTRING() { return getToken(ProjectParser.FSTRING, 0); }
-		public AtomFStringLabelContext(AtomContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomFStringLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomFStringLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomFStringLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class AtomTrueLabelContext extends AtomContext {
-		public TerminalNode TRUE() { return getToken(ProjectParser.TRUE, 0); }
-		public AtomTrueLabelContext(AtomContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomTrueLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomTrueLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomTrueLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class AtomNoneLabelContext extends AtomContext {
-		public TerminalNode NONE() { return getToken(ProjectParser.NONE, 0); }
-		public AtomNoneLabelContext(AtomContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomNoneLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomNoneLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomNoneLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class AtomDictLabelContext extends AtomContext {
+	public static class AtomDictContext extends AtomContext {
 		public TerminalNode LBRACE() { return getToken(ProjectParser.LBRACE, 0); }
 		public TerminalNode RBRACE() { return getToken(ProjectParser.RBRACE, 0); }
 		public DictmakerContext dictmaker() {
 			return getRuleContext(DictmakerContext.class,0);
 		}
-		public AtomDictLabelContext(AtomContext ctx) { copyFrom(ctx); }
+		public AtomDictContext(AtomContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomDictLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomDict(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomDictLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomDict(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomDictLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomDict(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class AtomListLabelContext extends AtomContext {
+	public static class AtomStringContext extends AtomContext {
+		public TerminalNode STRING() { return getToken(ProjectParser.STRING, 0); }
+		public AtomStringContext(AtomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomString(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomString(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomString(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class AtomTrueContext extends AtomContext {
+		public TerminalNode TRUE() { return getToken(ProjectParser.TRUE, 0); }
+		public AtomTrueContext(AtomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomTrue(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomTrue(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomTrue(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class AtomNoneContext extends AtomContext {
+		public TerminalNode NONE() { return getToken(ProjectParser.NONE, 0); }
+		public AtomNoneContext(AtomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomNone(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomNone(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomNone(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class AtomListContext extends AtomContext {
 		public TerminalNode LBRACK() { return getToken(ProjectParser.LBRACK, 0); }
 		public TerminalNode RBRACK() { return getToken(ProjectParser.RBRACK, 0); }
 		public ListmakerContext listmaker() {
 			return getRuleContext(ListmakerContext.class,0);
 		}
-		public AtomListLabelContext(AtomContext ctx) { copyFrom(ctx); }
+		public AtomListContext(AtomContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomList(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomList(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomListLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomList(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class AtomNumberLabelContext extends AtomContext {
-		public TerminalNode NUMBER() { return getToken(ProjectParser.NUMBER, 0); }
-		public AtomNumberLabelContext(AtomContext ctx) { copyFrom(ctx); }
+	public static class AtomNameContext extends AtomContext {
+		public TerminalNode NAME() { return getToken(ProjectParser.NAME, 0); }
+		public AtomNameContext(AtomContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomNumberLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomNumberLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomNumberLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomName(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class AtomFStringContext extends AtomContext {
+		public TerminalNode FSTRING() { return getToken(ProjectParser.FSTRING, 0); }
+		public AtomFStringContext(AtomContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterAtomFString(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitAtomFString(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitAtomFString(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2586,7 +2187,7 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case LPAREN:
-				_localctx = new AtomParenLabelContext(_localctx);
+				_localctx = new AtomParenContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(283);
@@ -2606,7 +2207,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case LBRACK:
-				_localctx = new AtomListLabelContext(_localctx);
+				_localctx = new AtomListContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(288);
@@ -2626,7 +2227,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case LBRACE:
-				_localctx = new AtomDictLabelContext(_localctx);
+				_localctx = new AtomDictContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(293);
@@ -2646,7 +2247,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case NAME:
-				_localctx = new AtomNameLabelContext(_localctx);
+				_localctx = new AtomNameContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(298);
@@ -2654,7 +2255,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case NUMBER:
-				_localctx = new AtomNumberLabelContext(_localctx);
+				_localctx = new AtomNumberContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(299);
@@ -2662,7 +2263,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case STRING:
-				_localctx = new AtomStringLabelContext(_localctx);
+				_localctx = new AtomStringContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(300);
@@ -2670,7 +2271,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case FSTRING:
-				_localctx = new AtomFStringLabelContext(_localctx);
+				_localctx = new AtomFStringContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(301);
@@ -2678,7 +2279,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case TRUE:
-				_localctx = new AtomTrueLabelContext(_localctx);
+				_localctx = new AtomTrueContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(302);
@@ -2686,7 +2287,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case FALSE:
-				_localctx = new AtomFalseLabelContext(_localctx);
+				_localctx = new AtomFalseContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
 				setState(303);
@@ -2694,7 +2295,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case NONE:
-				_localctx = new AtomNoneLabelContext(_localctx);
+				_localctx = new AtomNoneContext(_localctx);
 				enterOuterAlt(_localctx, 10);
 				{
 				setState(304);
@@ -2729,65 +2330,65 @@ public class ProjectParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class DotTrailerLabelContext extends TrailerContext {
-		public TerminalNode DOT() { return getToken(ProjectParser.DOT, 0); }
-		public TerminalNode NAME() { return getToken(ProjectParser.NAME, 0); }
-		public DotTrailerLabelContext(TrailerContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDotTrailerLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDotTrailerLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDotTrailerLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class SubscriptTrailerLabelContext extends TrailerContext {
+	public static class SubscriptTrailerContext extends TrailerContext {
 		public TerminalNode LBRACK() { return getToken(ProjectParser.LBRACK, 0); }
 		public SubscriptlistContext subscriptlist() {
 			return getRuleContext(SubscriptlistContext.class,0);
 		}
 		public TerminalNode RBRACK() { return getToken(ProjectParser.RBRACK, 0); }
-		public SubscriptTrailerLabelContext(TrailerContext ctx) { copyFrom(ctx); }
+		public SubscriptTrailerContext(TrailerContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterSubscriptTrailerLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterSubscriptTrailer(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitSubscriptTrailerLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitSubscriptTrailer(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitSubscriptTrailerLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitSubscriptTrailer(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class CallTrailerLabelContext extends TrailerContext {
+	public static class DotTrailerContext extends TrailerContext {
+		public TerminalNode DOT() { return getToken(ProjectParser.DOT, 0); }
+		public TerminalNode NAME() { return getToken(ProjectParser.NAME, 0); }
+		public DotTrailerContext(TrailerContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDotTrailer(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDotTrailer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDotTrailer(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class CallTrailerContext extends TrailerContext {
 		public TerminalNode LPAREN() { return getToken(ProjectParser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(ProjectParser.RPAREN, 0); }
 		public ArglistContext arglist() {
 			return getRuleContext(ArglistContext.class,0);
 		}
-		public CallTrailerLabelContext(TrailerContext ctx) { copyFrom(ctx); }
+		public CallTrailerContext(TrailerContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterCallTrailerLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterCallTrailer(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitCallTrailerLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitCallTrailer(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitCallTrailerLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitCallTrailer(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2801,7 +2402,7 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case LPAREN:
-				_localctx = new CallTrailerLabelContext(_localctx);
+				_localctx = new CallTrailerContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(307);
@@ -2821,7 +2422,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case LBRACK:
-				_localctx = new SubscriptTrailerLabelContext(_localctx);
+				_localctx = new SubscriptTrailerContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(312);
@@ -2833,7 +2434,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case DOT:
-				_localctx = new DotTrailerLabelContext(_localctx);
+				_localctx = new DotTrailerContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(316);
@@ -2859,18 +2460,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class SubscriptlistContext extends ParserRuleContext {
-		public SubscriptlistContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_subscriptlist; }
-	 
-		public SubscriptlistContext() { }
-		public void copyFrom(SubscriptlistContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class SubscriptListLabelContext extends SubscriptlistContext {
 		public List<SubscriptContext> subscript() {
 			return getRuleContexts(SubscriptContext.class);
 		}
@@ -2881,18 +2470,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public SubscriptListLabelContext(SubscriptlistContext ctx) { copyFrom(ctx); }
+		public SubscriptlistContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_subscriptlist; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterSubscriptListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterSubscriptlist(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitSubscriptListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitSubscriptlist(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitSubscriptListLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitSubscriptlist(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2903,7 +2495,6 @@ public class ProjectParser extends Parser {
 		int _la;
 		try {
 			int _alt;
-			_localctx = new SubscriptListLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(320);
@@ -2951,60 +2542,31 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class SubscriptContext extends ParserRuleContext {
-		public SubscriptContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_subscript; }
-	 
-		public SubscriptContext() { }
-		public void copyFrom(SubscriptContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class SubscriptSliceLabelContext extends SubscriptContext {
-		public List<TerminalNode> COLON() { return getTokens(ProjectParser.COLON); }
-		public TerminalNode COLON(int i) {
-			return getToken(ProjectParser.COLON, i);
-		}
 		public List<TestContext> test() {
 			return getRuleContexts(TestContext.class);
 		}
 		public TestContext test(int i) {
 			return getRuleContext(TestContext.class,i);
 		}
-		public SubscriptSliceLabelContext(SubscriptContext ctx) { copyFrom(ctx); }
+		public List<TerminalNode> COLON() { return getTokens(ProjectParser.COLON); }
+		public TerminalNode COLON(int i) {
+			return getToken(ProjectParser.COLON, i);
+		}
+		public SubscriptContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_subscript; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterSubscriptSliceLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterSubscript(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitSubscriptSliceLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitSubscript(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitSubscriptSliceLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class SubscriptTestLabelContext extends SubscriptContext {
-		public TestContext test() {
-			return getRuleContext(TestContext.class,0);
-		}
-		public SubscriptTestLabelContext(SubscriptContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterSubscriptTestLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitSubscriptTestLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitSubscriptTestLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitSubscript(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3018,7 +2580,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,39,_ctx) ) {
 			case 1:
-				_localctx = new SubscriptTestLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(331);
@@ -3026,7 +2587,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new SubscriptSliceLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(333);
@@ -3088,18 +2648,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ListmakerContext extends ParserRuleContext {
-		public ListmakerContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_listmaker; }
-	 
-		public ListmakerContext() { }
-		public void copyFrom(ListmakerContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ListLabelContext extends ListmakerContext {
 		public List<TestContext> test() {
 			return getRuleContexts(TestContext.class);
 		}
@@ -3114,41 +2662,24 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public ListLabelContext(ListmakerContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterListLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitListLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitListLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class CompForListLabelContext extends ListmakerContext {
-		public TestContext test() {
-			return getRuleContext(TestContext.class,0);
-		}
 		public Comp_forContext comp_for() {
 			return getRuleContext(Comp_forContext.class,0);
 		}
-		public CompForListLabelContext(ListmakerContext ctx) { copyFrom(ctx); }
+		public ListmakerContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_listmaker; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterCompForListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterListmaker(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitCompForListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitListmaker(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitCompForListLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitListmaker(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3163,7 +2694,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,46,_ctx) ) {
 			case 1:
-				_localctx = new ListLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(349); 
@@ -3277,7 +2807,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new CompForListLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(369);
@@ -3301,18 +2830,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DictmakerContext extends ParserRuleContext {
-		public DictmakerContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_dictmaker; }
-	 
-		public DictmakerContext() { }
-		public void copyFrom(DictmakerContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class DictLabelContext extends DictmakerContext {
 		public List<TestContext> test() {
 			return getRuleContexts(TestContext.class);
 		}
@@ -3331,45 +2848,24 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public DictLabelContext(DictmakerContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDictLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDictLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDictLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class CompForDictLabelContext extends DictmakerContext {
 		public Comp_forContext comp_for() {
 			return getRuleContext(Comp_forContext.class,0);
 		}
-		public List<TestContext> test() {
-			return getRuleContexts(TestContext.class);
+		public DictmakerContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
-		public TestContext test(int i) {
-			return getRuleContext(TestContext.class,i);
-		}
-		public TerminalNode COLON() { return getToken(ProjectParser.COLON, 0); }
-		public CompForDictLabelContext(DictmakerContext ctx) { copyFrom(ctx); }
+		@Override public int getRuleIndex() { return RULE_dictmaker; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterCompForDictLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDictmaker(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitCompForDictLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDictmaker(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitCompForDictLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDictmaker(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3384,7 +2880,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,53,_ctx) ) {
 			case 1:
-				_localctx = new DictLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(379); 
@@ -3506,7 +3001,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new CompForDictLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				{
@@ -3547,7 +3041,7 @@ public class ProjectParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class CompForLabelContext extends Comp_forContext {
+	public static class CompForContext extends Comp_forContext {
 		public TerminalNode FOR() { return getToken(ProjectParser.FOR, 0); }
 		public ExprlistContext exprlist() {
 			return getRuleContext(ExprlistContext.class,0);
@@ -3566,18 +3060,18 @@ public class ProjectParser extends Parser {
 		public TestContext test(int i) {
 			return getRuleContext(TestContext.class,i);
 		}
-		public CompForLabelContext(Comp_forContext ctx) { copyFrom(ctx); }
+		public CompForContext(Comp_forContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterCompForLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterCompFor(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitCompForLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitCompFor(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitCompForLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitCompFor(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3587,7 +3081,7 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 50, RULE_comp_for);
 		int _la;
 		try {
-			_localctx = new CompForLabelContext(_localctx);
+			_localctx = new CompForContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(410);
@@ -3629,41 +3123,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Testlist_compContext extends ParserRuleContext {
-		public Testlist_compContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_testlist_comp; }
-	 
-		public Testlist_compContext() { }
-		public void copyFrom(Testlist_compContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class CompForCompLabelContext extends Testlist_compContext {
-		public TestContext test() {
-			return getRuleContext(TestContext.class,0);
-		}
-		public Comp_forContext comp_for() {
-			return getRuleContext(Comp_forContext.class,0);
-		}
-		public CompForCompLabelContext(Testlist_compContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterCompForCompLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitCompForCompLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitCompForCompLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class TestListCompLabelContext extends Testlist_compContext {
 		public List<TestContext> test() {
 			return getRuleContexts(TestContext.class);
 		}
@@ -3678,18 +3137,24 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public TestListCompLabelContext(Testlist_compContext ctx) { copyFrom(ctx); }
+		public Comp_forContext comp_for() {
+			return getRuleContext(Comp_forContext.class,0);
+		}
+		public Testlist_compContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_testlist_comp; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTestListCompLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTestlist_comp(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTestListCompLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTestlist_comp(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTestListCompLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTestlist_comp(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3704,7 +3169,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,60,_ctx) ) {
 			case 1:
-				_localctx = new TestListCompLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(423);
@@ -3808,7 +3272,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new CompForCompLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(441);
@@ -3832,18 +3295,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ArglistContext extends ParserRuleContext {
-		public ArglistContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_arglist; }
-	 
-		public ArglistContext() { }
-		public void copyFrom(ArglistContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ArgListLabelContext extends ArglistContext {
 		public List<ArgumentContext> argument() {
 			return getRuleContexts(ArgumentContext.class);
 		}
@@ -3854,18 +3305,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public ArgListLabelContext(ArglistContext ctx) { copyFrom(ctx); }
+		public ArglistContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_arglist; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterArgListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterArglist(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitArgListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitArglist(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitArgListLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitArglist(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3876,7 +3330,6 @@ public class ProjectParser extends Parser {
 		int _la;
 		try {
 			int _alt;
-			_localctx = new ArgListLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(446);
@@ -3924,60 +3377,31 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ArgumentContext extends ParserRuleContext {
-		public ArgumentContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_argument; }
-	 
-		public ArgumentContext() { }
-		public void copyFrom(ArgumentContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class KeywordArgLabelContext extends ArgumentContext {
 		public List<TestContext> test() {
 			return getRuleContexts(TestContext.class);
 		}
 		public TestContext test(int i) {
 			return getRuleContext(TestContext.class,i);
 		}
-		public TerminalNode EQ() { return getToken(ProjectParser.EQ, 0); }
-		public KeywordArgLabelContext(ArgumentContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterKeywordArgLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitKeywordArgLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitKeywordArgLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class PositionalArgLabelContext extends ArgumentContext {
-		public TestContext test() {
-			return getRuleContext(TestContext.class,0);
-		}
 		public Comp_forContext comp_for() {
 			return getRuleContext(Comp_forContext.class,0);
 		}
-		public PositionalArgLabelContext(ArgumentContext ctx) { copyFrom(ctx); }
+		public TerminalNode EQ() { return getToken(ProjectParser.EQ, 0); }
+		public ArgumentContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_argument; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterPositionalArgLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterArgument(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitPositionalArgLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitArgument(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitPositionalArgLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitArgument(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3991,7 +3415,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,64,_ctx) ) {
 			case 1:
-				_localctx = new PositionalArgLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(457);
@@ -4009,7 +3432,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new KeywordArgLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(461);
@@ -4035,34 +3457,25 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Del_stmtContext extends ParserRuleContext {
-		public Del_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_del_stmt; }
-	 
-		public Del_stmtContext() { }
-		public void copyFrom(Del_stmtContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class DelStmtLabelContext extends Del_stmtContext {
 		public TerminalNode DEL() { return getToken(ProjectParser.DEL, 0); }
 		public ExprlistContext exprlist() {
 			return getRuleContext(ExprlistContext.class,0);
 		}
-		public DelStmtLabelContext(Del_stmtContext ctx) { copyFrom(ctx); }
+		public Del_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_del_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDelStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDel_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDelStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDel_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDelStmtLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDel_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4071,7 +3484,6 @@ public class ProjectParser extends Parser {
 		Del_stmtContext _localctx = new Del_stmtContext(_ctx, getState());
 		enterRule(_localctx, 58, RULE_del_stmt);
 		try {
-			_localctx = new DelStmtLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(467);
@@ -4093,31 +3505,22 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Pass_stmtContext extends ParserRuleContext {
+		public TerminalNode PASS() { return getToken(ProjectParser.PASS, 0); }
 		public Pass_stmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_pass_stmt; }
-	 
-		public Pass_stmtContext() { }
-		public void copyFrom(Pass_stmtContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class PassStmtLabelContext extends Pass_stmtContext {
-		public TerminalNode PASS() { return getToken(ProjectParser.PASS, 0); }
-		public PassStmtLabelContext(Pass_stmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterPassStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterPass_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitPassStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitPass_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitPassStmtLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitPass_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4126,7 +3529,6 @@ public class ProjectParser extends Parser {
 		Pass_stmtContext _localctx = new Pass_stmtContext(_ctx, getState());
 		enterRule(_localctx, 60, RULE_pass_stmt);
 		try {
-			_localctx = new PassStmtLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(470);
@@ -4146,70 +3548,27 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Flow_stmtContext extends ParserRuleContext {
-		public Flow_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_flow_stmt; }
-	 
-		public Flow_stmtContext() { }
-		public void copyFrom(Flow_stmtContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ReturnLabelContext extends Flow_stmtContext {
+		public TerminalNode BREAK() { return getToken(ProjectParser.BREAK, 0); }
+		public TerminalNode CONTINUE() { return getToken(ProjectParser.CONTINUE, 0); }
 		public TerminalNode RETURN() { return getToken(ProjectParser.RETURN, 0); }
 		public TestlistContext testlist() {
 			return getRuleContext(TestlistContext.class,0);
 		}
-		public ReturnLabelContext(Flow_stmtContext ctx) { copyFrom(ctx); }
+		public Flow_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_flow_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterReturnLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterFlow_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitReturnLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitFlow_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitReturnLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class BreakLabelContext extends Flow_stmtContext {
-		public TerminalNode BREAK() { return getToken(ProjectParser.BREAK, 0); }
-		public BreakLabelContext(Flow_stmtContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterBreakLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitBreakLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitBreakLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ContinueLabelContext extends Flow_stmtContext {
-		public TerminalNode CONTINUE() { return getToken(ProjectParser.CONTINUE, 0); }
-		public ContinueLabelContext(Flow_stmtContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterContinueLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitContinueLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitContinueLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitFlow_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4222,7 +3581,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case BREAK:
-				_localctx = new BreakLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(472);
@@ -4230,7 +3588,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case CONTINUE:
-				_localctx = new ContinueLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(473);
@@ -4238,7 +3595,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case RETURN:
-				_localctx = new ReturnLabelContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(474);
@@ -4272,60 +3628,33 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Import_stmtContext extends ParserRuleContext {
-		public Import_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_import_stmt; }
-	 
-		public Import_stmtContext() { }
-		public void copyFrom(Import_stmtContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ImportNamesLabelContext extends Import_stmtContext {
 		public TerminalNode IMPORT() { return getToken(ProjectParser.IMPORT, 0); }
 		public Dotted_as_namesContext dotted_as_names() {
 			return getRuleContext(Dotted_as_namesContext.class,0);
 		}
-		public ImportNamesLabelContext(Import_stmtContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterImportNamesLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitImportNamesLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitImportNamesLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ImportFromLabelContext extends Import_stmtContext {
 		public TerminalNode FROM() { return getToken(ProjectParser.FROM, 0); }
 		public Dotted_nameContext dotted_name() {
 			return getRuleContext(Dotted_nameContext.class,0);
 		}
-		public TerminalNode IMPORT() { return getToken(ProjectParser.IMPORT, 0); }
 		public TerminalNode STAR() { return getToken(ProjectParser.STAR, 0); }
 		public Import_as_namesContext import_as_names() {
 			return getRuleContext(Import_as_namesContext.class,0);
 		}
-		public ImportFromLabelContext(Import_stmtContext ctx) { copyFrom(ctx); }
+		public Import_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_import_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterImportFromLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterImport_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitImportFromLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitImport_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitImportFromLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitImport_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4338,7 +3667,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IMPORT:
-				_localctx = new ImportNamesLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(480);
@@ -4348,7 +3676,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case FROM:
-				_localctx = new ImportFromLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(482);
@@ -4394,18 +3721,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Dotted_nameContext extends ParserRuleContext {
-		public Dotted_nameContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_dotted_name; }
-	 
-		public Dotted_nameContext() { }
-		public void copyFrom(Dotted_nameContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class DottedNameLabelContext extends Dotted_nameContext {
 		public List<TerminalNode> NAME() { return getTokens(ProjectParser.NAME); }
 		public TerminalNode NAME(int i) {
 			return getToken(ProjectParser.NAME, i);
@@ -4414,18 +3729,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode DOT(int i) {
 			return getToken(ProjectParser.DOT, i);
 		}
-		public DottedNameLabelContext(Dotted_nameContext ctx) { copyFrom(ctx); }
+		public Dotted_nameContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_dotted_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDottedNameLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDotted_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDottedNameLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDotted_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDottedNameLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDotted_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4435,7 +3753,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 66, RULE_dotted_name);
 		int _la;
 		try {
-			_localctx = new DottedNameLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(491);
@@ -4471,18 +3788,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Dotted_as_namesContext extends ParserRuleContext {
-		public Dotted_as_namesContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_dotted_as_names; }
-	 
-		public Dotted_as_namesContext() { }
-		public void copyFrom(Dotted_as_namesContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class DottedAsNamesLabelContext extends Dotted_as_namesContext {
 		public List<Dotted_as_nameContext> dotted_as_name() {
 			return getRuleContexts(Dotted_as_nameContext.class);
 		}
@@ -4493,18 +3798,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public DottedAsNamesLabelContext(Dotted_as_namesContext ctx) { copyFrom(ctx); }
+		public Dotted_as_namesContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_dotted_as_names; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDottedAsNamesLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDotted_as_names(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDottedAsNamesLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDotted_as_names(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDottedAsNamesLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDotted_as_names(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4514,7 +3822,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 68, RULE_dotted_as_names);
 		int _la;
 		try {
-			_localctx = new DottedAsNamesLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(499);
@@ -4550,35 +3857,26 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Dotted_as_nameContext extends ParserRuleContext {
-		public Dotted_as_nameContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_dotted_as_name; }
-	 
-		public Dotted_as_nameContext() { }
-		public void copyFrom(Dotted_as_nameContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class DottedAsNameLabelContext extends Dotted_as_nameContext {
 		public Dotted_nameContext dotted_name() {
 			return getRuleContext(Dotted_nameContext.class,0);
 		}
 		public TerminalNode AS() { return getToken(ProjectParser.AS, 0); }
 		public TerminalNode NAME() { return getToken(ProjectParser.NAME, 0); }
-		public DottedAsNameLabelContext(Dotted_as_nameContext ctx) { copyFrom(ctx); }
+		public Dotted_as_nameContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_dotted_as_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDottedAsNameLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDotted_as_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDottedAsNameLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDotted_as_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDottedAsNameLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDotted_as_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4588,7 +3886,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 70, RULE_dotted_as_name);
 		int _la;
 		try {
-			_localctx = new DottedAsNameLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(507);
@@ -4620,18 +3917,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Import_as_namesContext extends ParserRuleContext {
-		public Import_as_namesContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_import_as_names; }
-	 
-		public Import_as_namesContext() { }
-		public void copyFrom(Import_as_namesContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ImportAsNamesLabelContext extends Import_as_namesContext {
 		public List<Import_as_nameContext> import_as_name() {
 			return getRuleContexts(Import_as_nameContext.class);
 		}
@@ -4642,18 +3927,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public ImportAsNamesLabelContext(Import_as_namesContext ctx) { copyFrom(ctx); }
+		public Import_as_namesContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_import_as_names; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterImportAsNamesLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterImport_as_names(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitImportAsNamesLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitImport_as_names(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitImportAsNamesLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitImport_as_names(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4663,7 +3951,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 72, RULE_import_as_names);
 		int _la;
 		try {
-			_localctx = new ImportAsNamesLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(512);
@@ -4699,35 +3986,26 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Import_as_nameContext extends ParserRuleContext {
-		public Import_as_nameContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_import_as_name; }
-	 
-		public Import_as_nameContext() { }
-		public void copyFrom(Import_as_nameContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ImportAsNameLabelContext extends Import_as_nameContext {
 		public List<TerminalNode> NAME() { return getTokens(ProjectParser.NAME); }
 		public TerminalNode NAME(int i) {
 			return getToken(ProjectParser.NAME, i);
 		}
 		public TerminalNode AS() { return getToken(ProjectParser.AS, 0); }
-		public ImportAsNameLabelContext(Import_as_nameContext ctx) { copyFrom(ctx); }
+		public Import_as_nameContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_import_as_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterImportAsNameLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterImport_as_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitImportAsNameLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitImport_as_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitImportAsNameLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitImport_as_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4737,7 +4015,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 74, RULE_import_as_name);
 		int _la;
 		try {
-			_localctx = new ImportAsNameLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(520);
@@ -4769,18 +4046,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Global_stmtContext extends ParserRuleContext {
-		public Global_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_global_stmt; }
-	 
-		public Global_stmtContext() { }
-		public void copyFrom(Global_stmtContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class GlobalStmtLabelContext extends Global_stmtContext {
 		public TerminalNode GLOBAL() { return getToken(ProjectParser.GLOBAL, 0); }
 		public List<TerminalNode> NAME() { return getTokens(ProjectParser.NAME); }
 		public TerminalNode NAME(int i) {
@@ -4790,18 +4055,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public GlobalStmtLabelContext(Global_stmtContext ctx) { copyFrom(ctx); }
+		public Global_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_global_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterGlobalStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterGlobal_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitGlobalStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitGlobal_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitGlobalStmtLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitGlobal_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4811,7 +4079,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 76, RULE_global_stmt);
 		int _la;
 		try {
-			_localctx = new GlobalStmtLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(525);
@@ -4860,162 +4127,162 @@ public class ProjectParser extends Parser {
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class WithStmtCompoundContext extends Compound_stmtContext {
-		public With_stmtContext with_stmt() {
-			return getRuleContext(With_stmtContext.class,0);
-		}
-		public WithStmtCompoundContext(Compound_stmtContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterWithStmtCompound(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitWithStmtCompound(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitWithStmtCompound(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ClassDefCompoundContext extends Compound_stmtContext {
-		public ClassdefContext classdef() {
-			return getRuleContext(ClassdefContext.class,0);
-		}
-		public ClassDefCompoundContext(Compound_stmtContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterClassDefCompound(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitClassDefCompound(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitClassDefCompound(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class DecoratedCompoundContext extends Compound_stmtContext {
+	public static class DecoratedStmtContext extends Compound_stmtContext {
 		public DecoratedContext decorated() {
 			return getRuleContext(DecoratedContext.class,0);
 		}
-		public DecoratedCompoundContext(Compound_stmtContext ctx) { copyFrom(ctx); }
+		public DecoratedStmtContext(Compound_stmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDecoratedCompound(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDecoratedStmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDecoratedCompound(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDecoratedStmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDecoratedCompound(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDecoratedStmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class FuncDefCompoundContext extends Compound_stmtContext {
-		public FuncdefContext funcdef() {
-			return getRuleContext(FuncdefContext.class,0);
-		}
-		public FuncDefCompoundContext(Compound_stmtContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterFuncDefCompound(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitFuncDefCompound(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitFuncDefCompound(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ForStmtCompoundContext extends Compound_stmtContext {
+	public static class ForStmtContext extends Compound_stmtContext {
 		public For_stmtContext for_stmt() {
 			return getRuleContext(For_stmtContext.class,0);
 		}
-		public ForStmtCompoundContext(Compound_stmtContext ctx) { copyFrom(ctx); }
+		public ForStmtContext(Compound_stmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterForStmtCompound(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterForStmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitForStmtCompound(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitForStmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitForStmtCompound(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitForStmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
-	public static class IfStmtCompoundContext extends Compound_stmtContext {
-		public If_stmtContext if_stmt() {
-			return getRuleContext(If_stmtContext.class,0);
-		}
-		public IfStmtCompoundContext(Compound_stmtContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterIfStmtCompound(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitIfStmtCompound(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitIfStmtCompound(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class TryStmtCompoundContext extends Compound_stmtContext {
-		public Try_stmtContext try_stmt() {
-			return getRuleContext(Try_stmtContext.class,0);
-		}
-		public TryStmtCompoundContext(Compound_stmtContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTryStmtCompound(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTryStmtCompound(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTryStmtCompound(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class WhileStmtCompoundContext extends Compound_stmtContext {
+	public static class WhileStmtContext extends Compound_stmtContext {
 		public While_stmtContext while_stmt() {
 			return getRuleContext(While_stmtContext.class,0);
 		}
-		public WhileStmtCompoundContext(Compound_stmtContext ctx) { copyFrom(ctx); }
+		public WhileStmtContext(Compound_stmtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterWhileStmtCompound(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterWhileStmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitWhileStmtCompound(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitWhileStmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitWhileStmtCompound(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitWhileStmt(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class WithStmtContext extends Compound_stmtContext {
+		public With_stmtContext with_stmt() {
+			return getRuleContext(With_stmtContext.class,0);
+		}
+		public WithStmtContext(Compound_stmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterWithStmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitWithStmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitWithStmt(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class IfStmtContext extends Compound_stmtContext {
+		public If_stmtContext if_stmt() {
+			return getRuleContext(If_stmtContext.class,0);
+		}
+		public IfStmtContext(Compound_stmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterIfStmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitIfStmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitIfStmt(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ClassDefContext extends Compound_stmtContext {
+		public ClassdefContext classdef() {
+			return getRuleContext(ClassdefContext.class,0);
+		}
+		public ClassDefContext(Compound_stmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterClassDef(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitClassDef(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitClassDef(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class TryStmtContext extends Compound_stmtContext {
+		public Try_stmtContext try_stmt() {
+			return getRuleContext(Try_stmtContext.class,0);
+		}
+		public TryStmtContext(Compound_stmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTryStmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTryStmt(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTryStmt(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class FuncDefContext extends Compound_stmtContext {
+		public FuncdefContext funcdef() {
+			return getRuleContext(FuncdefContext.class,0);
+		}
+		public FuncDefContext(Compound_stmtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterFuncDef(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitFuncDef(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitFuncDef(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5028,7 +4295,7 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IF:
-				_localctx = new IfStmtCompoundContext(_localctx);
+				_localctx = new IfStmtContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(534);
@@ -5036,7 +4303,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case WHILE:
-				_localctx = new WhileStmtCompoundContext(_localctx);
+				_localctx = new WhileStmtContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(535);
@@ -5044,7 +4311,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case FOR:
-				_localctx = new ForStmtCompoundContext(_localctx);
+				_localctx = new ForStmtContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(536);
@@ -5052,7 +4319,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case DEF:
-				_localctx = new FuncDefCompoundContext(_localctx);
+				_localctx = new FuncDefContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(537);
@@ -5060,7 +4327,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case CLASS:
-				_localctx = new ClassDefCompoundContext(_localctx);
+				_localctx = new ClassDefContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(538);
@@ -5068,7 +4335,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case TRY:
-				_localctx = new TryStmtCompoundContext(_localctx);
+				_localctx = new TryStmtContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(539);
@@ -5076,7 +4343,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case WITH:
-				_localctx = new WithStmtCompoundContext(_localctx);
+				_localctx = new WithStmtContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(540);
@@ -5084,7 +4351,7 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case AT:
-				_localctx = new DecoratedCompoundContext(_localctx);
+				_localctx = new DecoratedStmtContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(541);
@@ -5108,18 +4375,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DecoratedContext extends ParserRuleContext {
-		public DecoratedContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_decorated; }
-	 
-		public DecoratedContext() { }
-		public void copyFrom(DecoratedContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class DecoratedLabelContext extends DecoratedContext {
 		public FuncdefContext funcdef() {
 			return getRuleContext(FuncdefContext.class,0);
 		}
@@ -5132,18 +4387,21 @@ public class ProjectParser extends Parser {
 		public DecoratorContext decorator(int i) {
 			return getRuleContext(DecoratorContext.class,i);
 		}
-		public DecoratedLabelContext(DecoratedContext ctx) { copyFrom(ctx); }
+		public DecoratedContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_decorated; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDecoratedLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDecorated(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDecoratedLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDecorated(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDecoratedLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDecorated(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5153,7 +4411,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 80, RULE_decorated);
 		int _la;
 		try {
-			_localctx = new DecoratedLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(545); 
@@ -5203,18 +4460,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DecoratorContext extends ParserRuleContext {
-		public DecoratorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_decorator; }
-	 
-		public DecoratorContext() { }
-		public void copyFrom(DecoratorContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class DecoratorLabelContext extends DecoratorContext {
 		public TerminalNode AT() { return getToken(ProjectParser.AT, 0); }
 		public Dotted_nameContext dotted_name() {
 			return getRuleContext(Dotted_nameContext.class,0);
@@ -5225,18 +4470,21 @@ public class ProjectParser extends Parser {
 		public ArglistContext arglist() {
 			return getRuleContext(ArglistContext.class,0);
 		}
-		public DecoratorLabelContext(DecoratorContext ctx) { copyFrom(ctx); }
+		public DecoratorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_decorator; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDecoratorLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterDecorator(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDecoratorLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitDecorator(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDecoratorLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitDecorator(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5246,7 +4494,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 82, RULE_decorator);
 		int _la;
 		try {
-			_localctx = new DecoratorLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(553);
@@ -5292,18 +4539,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class If_stmtContext extends ParserRuleContext {
-		public If_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_if_stmt; }
-	 
-		public If_stmtContext() { }
-		public void copyFrom(If_stmtContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class IfStmtLabelContext extends If_stmtContext {
 		public TerminalNode IF() { return getToken(ProjectParser.IF, 0); }
 		public List<TestContext> test() {
 			return getRuleContexts(TestContext.class);
@@ -5326,18 +4561,21 @@ public class ProjectParser extends Parser {
 			return getToken(ProjectParser.ELIF, i);
 		}
 		public TerminalNode ELSE() { return getToken(ProjectParser.ELSE, 0); }
-		public IfStmtLabelContext(If_stmtContext ctx) { copyFrom(ctx); }
+		public If_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_if_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterIfStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterIf_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitIfStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitIf_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitIfStmtLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitIf_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5347,7 +4585,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 84, RULE_if_stmt);
 		int _la;
 		try {
-			_localctx = new IfStmtLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(564);
@@ -5407,18 +4644,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class While_stmtContext extends ParserRuleContext {
-		public While_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_while_stmt; }
-	 
-		public While_stmtContext() { }
-		public void copyFrom(While_stmtContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class WhileStmtLabelContext extends While_stmtContext {
 		public TerminalNode WHILE() { return getToken(ProjectParser.WHILE, 0); }
 		public TestContext test() {
 			return getRuleContext(TestContext.class,0);
@@ -5434,18 +4659,21 @@ public class ProjectParser extends Parser {
 			return getRuleContext(SuiteContext.class,i);
 		}
 		public TerminalNode ELSE() { return getToken(ProjectParser.ELSE, 0); }
-		public WhileStmtLabelContext(While_stmtContext ctx) { copyFrom(ctx); }
+		public While_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_while_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterWhileStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterWhile_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitWhileStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitWhile_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitWhileStmtLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitWhile_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5455,7 +4683,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 86, RULE_while_stmt);
 		int _la;
 		try {
-			_localctx = new WhileStmtLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(583);
@@ -5495,18 +4722,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class For_stmtContext extends ParserRuleContext {
-		public For_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_for_stmt; }
-	 
-		public For_stmtContext() { }
-		public void copyFrom(For_stmtContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ForStmtLabelContext extends For_stmtContext {
 		public TerminalNode FOR() { return getToken(ProjectParser.FOR, 0); }
 		public ExprlistContext exprlist() {
 			return getRuleContext(ExprlistContext.class,0);
@@ -5526,18 +4741,21 @@ public class ProjectParser extends Parser {
 			return getRuleContext(SuiteContext.class,i);
 		}
 		public TerminalNode ELSE() { return getToken(ProjectParser.ELSE, 0); }
-		public ForStmtLabelContext(For_stmtContext ctx) { copyFrom(ctx); }
+		public For_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_for_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterForStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterFor_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitForStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitFor_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitForStmtLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitFor_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5547,7 +4765,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 88, RULE_for_stmt);
 		int _la;
 		try {
-			_localctx = new ForStmtLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(592);
@@ -5591,18 +4808,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class FuncdefContext extends ParserRuleContext {
-		public FuncdefContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_funcdef; }
-	 
-		public FuncdefContext() { }
-		public void copyFrom(FuncdefContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class FuncDefLabelContext extends FuncdefContext {
 		public TerminalNode DEF() { return getToken(ProjectParser.DEF, 0); }
 		public TerminalNode NAME() { return getToken(ProjectParser.NAME, 0); }
 		public TerminalNode LPAREN() { return getToken(ProjectParser.LPAREN, 0); }
@@ -5618,18 +4823,21 @@ public class ProjectParser extends Parser {
 		public TestContext test() {
 			return getRuleContext(TestContext.class,0);
 		}
-		public FuncDefLabelContext(FuncdefContext ctx) { copyFrom(ctx); }
+		public FuncdefContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_funcdef; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterFuncDefLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterFuncdef(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitFuncDefLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitFuncdef(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitFuncDefLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitFuncdef(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5639,7 +4847,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 90, RULE_funcdef);
 		int _la;
 		try {
-			_localctx = new FuncDefLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(603);
@@ -5691,33 +4898,24 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ParametersContext extends ParserRuleContext {
+		public TypedargslistContext typedargslist() {
+			return getRuleContext(TypedargslistContext.class,0);
+		}
 		public ParametersContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parameters; }
-	 
-		public ParametersContext() { }
-		public void copyFrom(ParametersContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ParametersLabelContext extends ParametersContext {
-		public TypedargslistContext typedargslist() {
-			return getRuleContext(TypedargslistContext.class,0);
-		}
-		public ParametersLabelContext(ParametersContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterParametersLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterParameters(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitParametersLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitParameters(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitParametersLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitParameters(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5726,7 +4924,6 @@ public class ProjectParser extends Parser {
 		ParametersContext _localctx = new ParametersContext(_ctx, getState());
 		enterRule(_localctx, 92, RULE_parameters);
 		try {
-			_localctx = new ParametersLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(617);
@@ -5746,18 +4943,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class TypedargslistContext extends ParserRuleContext {
-		public TypedargslistContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_typedargslist; }
-	 
-		public TypedargslistContext() { }
-		public void copyFrom(TypedargslistContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class TypedArgsListLabelContext extends TypedargslistContext {
 		public List<TfpdefContext> tfpdef() {
 			return getRuleContexts(TfpdefContext.class);
 		}
@@ -5778,44 +4963,26 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public TypedArgsListLabelContext(TypedargslistContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTypedArgsListLabel(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTypedArgsListLabel(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTypedArgsListLabel(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class TypedArgsStarLabelContext extends TypedargslistContext {
 		public TerminalNode STAR() { return getToken(ProjectParser.STAR, 0); }
 		public List<TerminalNode> NAME() { return getTokens(ProjectParser.NAME); }
 		public TerminalNode NAME(int i) {
 			return getToken(ProjectParser.NAME, i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(ProjectParser.COMMA); }
-		public TerminalNode COMMA(int i) {
-			return getToken(ProjectParser.COMMA, i);
+		public TypedargslistContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
-		public TypedArgsStarLabelContext(TypedargslistContext ctx) { copyFrom(ctx); }
+		@Override public int getRuleIndex() { return RULE_typedargslist; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTypedArgsStarLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTypedargslist(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTypedArgsStarLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTypedargslist(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTypedArgsStarLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTypedargslist(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5829,7 +4996,6 @@ public class ProjectParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,92,_ctx) ) {
 			case 1:
-				_localctx = new TypedArgsListLabelContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(635);
@@ -5885,7 +5051,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new TypedArgsStarLabelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(646);
@@ -5933,35 +5098,26 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class TfpdefContext extends ParserRuleContext {
-		public TfpdefContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_tfpdef; }
-	 
-		public TfpdefContext() { }
-		public void copyFrom(TfpdefContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class TfpdefLabelContext extends TfpdefContext {
 		public TerminalNode NAME() { return getToken(ProjectParser.NAME, 0); }
 		public TerminalNode COLON() { return getToken(ProjectParser.COLON, 0); }
 		public TestContext test() {
 			return getRuleContext(TestContext.class,0);
 		}
-		public TfpdefLabelContext(TfpdefContext ctx) { copyFrom(ctx); }
+		public TfpdefContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_tfpdef; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTfpdefLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTfpdef(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTfpdefLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTfpdef(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTfpdefLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTfpdef(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5971,7 +5127,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 96, RULE_tfpdef);
 		int _la;
 		try {
-			_localctx = new TfpdefLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(650);
@@ -6003,18 +5158,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ClassdefContext extends ParserRuleContext {
-		public ClassdefContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_classdef; }
-	 
-		public ClassdefContext() { }
-		public void copyFrom(ClassdefContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ClassDefLabelContext extends ClassdefContext {
 		public TerminalNode CLASS() { return getToken(ProjectParser.CLASS, 0); }
 		public TerminalNode NAME() { return getToken(ProjectParser.NAME, 0); }
 		public TerminalNode COLON() { return getToken(ProjectParser.COLON, 0); }
@@ -6026,18 +5169,21 @@ public class ProjectParser extends Parser {
 		public ArglistContext arglist() {
 			return getRuleContext(ArglistContext.class,0);
 		}
-		public ClassDefLabelContext(ClassdefContext ctx) { copyFrom(ctx); }
+		public ClassdefContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_classdef; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterClassDefLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterClassdef(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitClassDefLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitClassdef(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitClassDefLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitClassdef(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6047,7 +5193,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 98, RULE_classdef);
 		int _la;
 		try {
-			_localctx = new ClassDefLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(655);
@@ -6095,18 +5240,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Try_stmtContext extends ParserRuleContext {
-		public Try_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_try_stmt; }
-	 
-		public Try_stmtContext() { }
-		public void copyFrom(Try_stmtContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class TryStmtLabelContext extends Try_stmtContext {
 		public TerminalNode TRY() { return getToken(ProjectParser.TRY, 0); }
 		public List<TerminalNode> COLON() { return getTokens(ProjectParser.COLON); }
 		public TerminalNode COLON(int i) {
@@ -6138,18 +5271,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode NAME(int i) {
 			return getToken(ProjectParser.NAME, i);
 		}
-		public TryStmtLabelContext(Try_stmtContext ctx) { copyFrom(ctx); }
+		public Try_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_try_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTryStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTry_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTryStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTry_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTryStmtLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTry_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6159,7 +5295,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 100, RULE_try_stmt);
 		int _la;
 		try {
-			_localctx = new TryStmtLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(667);
@@ -6277,18 +5412,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class With_stmtContext extends ParserRuleContext {
-		public With_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_with_stmt; }
-	 
-		public With_stmtContext() { }
-		public void copyFrom(With_stmtContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class WithStmtLabelContext extends With_stmtContext {
 		public TerminalNode WITH() { return getToken(ProjectParser.WITH, 0); }
 		public List<With_itemContext> with_item() {
 			return getRuleContexts(With_itemContext.class);
@@ -6304,18 +5427,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public WithStmtLabelContext(With_stmtContext ctx) { copyFrom(ctx); }
+		public With_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_with_stmt; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterWithStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterWith_stmt(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitWithStmtLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitWith_stmt(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitWithStmtLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitWith_stmt(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6325,7 +5451,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 102, RULE_with_stmt);
 		int _la;
 		try {
-			_localctx = new WithStmtLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(691);
@@ -6367,18 +5492,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class With_itemContext extends ParserRuleContext {
-		public With_itemContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_with_item; }
-	 
-		public With_itemContext() { }
-		public void copyFrom(With_itemContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class WithItemLabelContext extends With_itemContext {
 		public List<TestContext> test() {
 			return getRuleContexts(TestContext.class);
 		}
@@ -6386,18 +5499,21 @@ public class ProjectParser extends Parser {
 			return getRuleContext(TestContext.class,i);
 		}
 		public TerminalNode AS() { return getToken(ProjectParser.AS, 0); }
-		public WithItemLabelContext(With_itemContext ctx) { copyFrom(ctx); }
+		public With_itemContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_with_item; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterWithItemLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterWith_item(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitWithItemLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitWith_item(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitWithItemLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitWith_item(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6407,7 +5523,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 104, RULE_with_item);
 		int _la;
 		try {
-			_localctx = new WithItemLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(703);
@@ -6439,38 +5554,9 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class SuiteContext extends ParserRuleContext {
-		public SuiteContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_suite; }
-	 
-		public SuiteContext() { }
-		public void copyFrom(SuiteContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class SimpleSuiteContext extends SuiteContext {
 		public Simple_stmtContext simple_stmt() {
 			return getRuleContext(Simple_stmtContext.class,0);
 		}
-		public SimpleSuiteContext(SuiteContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterSimpleSuite(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitSimpleSuite(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitSimpleSuite(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class IndentedSuiteContext extends SuiteContext {
 		public TerminalNode INDENT() { return getToken(ProjectParser.INDENT, 0); }
 		public TerminalNode DEDENT() { return getToken(ProjectParser.DEDENT, 0); }
 		public List<StatementContext> statement() {
@@ -6479,18 +5565,21 @@ public class ProjectParser extends Parser {
 		public StatementContext statement(int i) {
 			return getRuleContext(StatementContext.class,i);
 		}
-		public IndentedSuiteContext(SuiteContext ctx) { copyFrom(ctx); }
+		public SuiteContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_suite; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterIndentedSuite(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterSuite(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitIndentedSuite(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitSuite(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitIndentedSuite(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitSuite(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6526,7 +5615,6 @@ public class ProjectParser extends Parser {
 			case FSTRING:
 			case NUMBER:
 			case NAME:
-				_localctx = new SimpleSuiteContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(708);
@@ -6534,7 +5622,6 @@ public class ProjectParser extends Parser {
 				}
 				break;
 			case INDENT:
-				_localctx = new IndentedSuiteContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(709);
@@ -6574,18 +5661,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExprlistContext extends ParserRuleContext {
-		public ExprlistContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_exprlist; }
-	 
-		public ExprlistContext() { }
-		public void copyFrom(ExprlistContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class ExprListLabelContext extends ExprlistContext {
 		public List<TestContext> test() {
 			return getRuleContexts(TestContext.class);
 		}
@@ -6600,18 +5675,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public ExprListLabelContext(ExprlistContext ctx) { copyFrom(ctx); }
+		public ExprlistContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_exprlist; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterExprListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterExprlist(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitExprListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitExprlist(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitExprListLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitExprlist(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6622,7 +5700,6 @@ public class ProjectParser extends Parser {
 		int _la;
 		try {
 			int _alt;
-			_localctx = new ExprListLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(721);
@@ -6740,18 +5817,6 @@ public class ProjectParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class TestlistContext extends ParserRuleContext {
-		public TestlistContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_testlist; }
-	 
-		public TestlistContext() { }
-		public void copyFrom(TestlistContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	@SuppressWarnings("CheckReturnValue")
-	public static class TestListLabelContext extends TestlistContext {
 		public List<TestContext> test() {
 			return getRuleContexts(TestContext.class);
 		}
@@ -6766,18 +5831,21 @@ public class ProjectParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ProjectParser.COMMA, i);
 		}
-		public TestListLabelContext(TestlistContext ctx) { copyFrom(ctx); }
+		public TestlistContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_testlist; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTestListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).enterTestlist(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTestListLabel(this);
+			if ( listener instanceof ProjectParserListener ) ((ProjectParserListener)listener).exitTestlist(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTestListLabel(this);
+			if ( visitor instanceof ProjectParserVisitor ) return ((ProjectParserVisitor<? extends T>)visitor).visitTestlist(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6787,7 +5855,6 @@ public class ProjectParser extends Parser {
 		enterRule(_localctx, 110, RULE_testlist);
 		try {
 			int _alt;
-			_localctx = new TestListLabelContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(741);

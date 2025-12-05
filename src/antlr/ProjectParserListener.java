@@ -1,4 +1,4 @@
-// Generated from D:/about command/Compiler/Compiler/src/antlr/ProjectParser.g4 by ANTLR 4.13.2
+// Generated from D:/test.java.compiler/FlaskJinjaProject/src/antlr/ProjectParser.g4 by ANTLR 4.13.2
 package antlr;
  package parser; 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
@@ -45,17 +45,15 @@ public interface ProjectParserListener extends ParseTreeListener {
 	 */
 	void exitCompoundStatement(ProjectParser.CompoundStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code simpleStmtLabel}
-	 * labeled alternative in {@link ProjectParser#simple_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#simple_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterSimpleStmtLabel(ProjectParser.SimpleStmtLabelContext ctx);
+	void enterSimple_stmt(ProjectParser.Simple_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code simpleStmtLabel}
-	 * labeled alternative in {@link ProjectParser#simple_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#simple_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitSimpleStmtLabel(ProjectParser.SimpleStmtLabelContext ctx);
+	void exitSimple_stmt(ProjectParser.Simple_stmtContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code exprStatement}
 	 * labeled alternative in {@link ProjectParser#small_stmt}.
@@ -129,1131 +127,751 @@ public interface ProjectParserListener extends ParseTreeListener {
 	 */
 	void exitGlobalStatement(ProjectParser.GlobalStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code exprStmtLabel}
+	 * Enter a parse tree produced by the {@code exprStmt}
 	 * labeled alternative in {@link ProjectParser#expr_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterExprStmtLabel(ProjectParser.ExprStmtLabelContext ctx);
+	void enterExprStmt(ProjectParser.ExprStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code exprStmtLabel}
+	 * Exit a parse tree produced by the {@code exprStmt}
 	 * labeled alternative in {@link ProjectParser#expr_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitExprStmtLabel(ProjectParser.ExprStmtLabelContext ctx);
+	void exitExprStmt(ProjectParser.ExprStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code annAssignLabel}
+	 * Enter a parse tree produced by the {@code annAssign}
 	 * labeled alternative in {@link ProjectParser#annassign}.
 	 * @param ctx the parse tree
 	 */
-	void enterAnnAssignLabel(ProjectParser.AnnAssignLabelContext ctx);
+	void enterAnnAssign(ProjectParser.AnnAssignContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code annAssignLabel}
+	 * Exit a parse tree produced by the {@code annAssign}
 	 * labeled alternative in {@link ProjectParser#annassign}.
 	 * @param ctx the parse tree
 	 */
-	void exitAnnAssignLabel(ProjectParser.AnnAssignLabelContext ctx);
+	void exitAnnAssign(ProjectParser.AnnAssignContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code augPlusLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Enter a parse tree produced by {@link ProjectParser#augassign}.
 	 * @param ctx the parse tree
 	 */
-	void enterAugPlusLabel(ProjectParser.AugPlusLabelContext ctx);
+	void enterAugassign(ProjectParser.AugassignContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code augPlusLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Exit a parse tree produced by {@link ProjectParser#augassign}.
 	 * @param ctx the parse tree
 	 */
-	void exitAugPlusLabel(ProjectParser.AugPlusLabelContext ctx);
+	void exitAugassign(ProjectParser.AugassignContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code augMinusLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Enter a parse tree produced by {@link ProjectParser#testlist_star_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterAugMinusLabel(ProjectParser.AugMinusLabelContext ctx);
+	void enterTestlist_star_expr(ProjectParser.Testlist_star_exprContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code augMinusLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Exit a parse tree produced by {@link ProjectParser#testlist_star_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitAugMinusLabel(ProjectParser.AugMinusLabelContext ctx);
+	void exitTestlist_star_expr(ProjectParser.Testlist_star_exprContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code augStarLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Enter a parse tree produced by {@link ProjectParser#test}.
 	 * @param ctx the parse tree
 	 */
-	void enterAugStarLabel(ProjectParser.AugStarLabelContext ctx);
+	void enterTest(ProjectParser.TestContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code augStarLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Exit a parse tree produced by {@link ProjectParser#test}.
 	 * @param ctx the parse tree
 	 */
-	void exitAugStarLabel(ProjectParser.AugStarLabelContext ctx);
+	void exitTest(ProjectParser.TestContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code augSlashLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Enter a parse tree produced by {@link ProjectParser#or_test}.
 	 * @param ctx the parse tree
 	 */
-	void enterAugSlashLabel(ProjectParser.AugSlashLabelContext ctx);
+	void enterOr_test(ProjectParser.Or_testContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code augSlashLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Exit a parse tree produced by {@link ProjectParser#or_test}.
 	 * @param ctx the parse tree
 	 */
-	void exitAugSlashLabel(ProjectParser.AugSlashLabelContext ctx);
+	void exitOr_test(ProjectParser.Or_testContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code testListStarLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_star_expr}.
+	 * Enter a parse tree produced by {@link ProjectParser#and_test}.
 	 * @param ctx the parse tree
 	 */
-	void enterTestListStarLabel(ProjectParser.TestListStarLabelContext ctx);
+	void enterAnd_test(ProjectParser.And_testContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code testListStarLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_star_expr}.
+	 * Exit a parse tree produced by {@link ProjectParser#and_test}.
 	 * @param ctx the parse tree
 	 */
-	void exitTestListStarLabel(ProjectParser.TestListStarLabelContext ctx);
+	void exitAnd_test(ProjectParser.And_testContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code compForExprLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_star_expr}.
+	 * Enter a parse tree produced by {@link ProjectParser#not_test}.
 	 * @param ctx the parse tree
 	 */
-	void enterCompForExprLabel(ProjectParser.CompForExprLabelContext ctx);
+	void enterNot_test(ProjectParser.Not_testContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code compForExprLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_star_expr}.
+	 * Exit a parse tree produced by {@link ProjectParser#not_test}.
 	 * @param ctx the parse tree
 	 */
-	void exitCompForExprLabel(ProjectParser.CompForExprLabelContext ctx);
+	void exitNot_test(ProjectParser.Not_testContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code testLabel}
-	 * labeled alternative in {@link ProjectParser#test}.
+	 * Enter a parse tree produced by {@link ProjectParser#comparison}.
 	 * @param ctx the parse tree
 	 */
-	void enterTestLabel(ProjectParser.TestLabelContext ctx);
+	void enterComparison(ProjectParser.ComparisonContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code testLabel}
-	 * labeled alternative in {@link ProjectParser#test}.
+	 * Exit a parse tree produced by {@link ProjectParser#comparison}.
 	 * @param ctx the parse tree
 	 */
-	void exitTestLabel(ProjectParser.TestLabelContext ctx);
+	void exitComparison(ProjectParser.ComparisonContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code orTestLabel}
-	 * labeled alternative in {@link ProjectParser#or_test}.
+	 * Enter a parse tree produced by {@link ProjectParser#comp_op}.
 	 * @param ctx the parse tree
 	 */
-	void enterOrTestLabel(ProjectParser.OrTestLabelContext ctx);
+	void enterComp_op(ProjectParser.Comp_opContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code orTestLabel}
-	 * labeled alternative in {@link ProjectParser#or_test}.
+	 * Exit a parse tree produced by {@link ProjectParser#comp_op}.
 	 * @param ctx the parse tree
 	 */
-	void exitOrTestLabel(ProjectParser.OrTestLabelContext ctx);
+	void exitComp_op(ProjectParser.Comp_opContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code andTestLabel}
-	 * labeled alternative in {@link ProjectParser#and_test}.
+	 * Enter a parse tree produced by {@link ProjectParser#arith_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterAndTestLabel(ProjectParser.AndTestLabelContext ctx);
+	void enterArith_expr(ProjectParser.Arith_exprContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code andTestLabel}
-	 * labeled alternative in {@link ProjectParser#and_test}.
+	 * Exit a parse tree produced by {@link ProjectParser#arith_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitAndTestLabel(ProjectParser.AndTestLabelContext ctx);
+	void exitArith_expr(ProjectParser.Arith_exprContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code notTestLabel}
-	 * labeled alternative in {@link ProjectParser#not_test}.
+	 * Enter a parse tree produced by {@link ProjectParser#term}.
 	 * @param ctx the parse tree
 	 */
-	void enterNotTestLabel(ProjectParser.NotTestLabelContext ctx);
+	void enterTerm(ProjectParser.TermContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code notTestLabel}
-	 * labeled alternative in {@link ProjectParser#not_test}.
+	 * Exit a parse tree produced by {@link ProjectParser#term}.
 	 * @param ctx the parse tree
 	 */
-	void exitNotTestLabel(ProjectParser.NotTestLabelContext ctx);
+	void exitTerm(ProjectParser.TermContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code comparisonInNotTestLabel}
-	 * labeled alternative in {@link ProjectParser#not_test}.
+	 * Enter a parse tree produced by {@link ProjectParser#factor}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparisonInNotTestLabel(ProjectParser.ComparisonInNotTestLabelContext ctx);
+	void enterFactor(ProjectParser.FactorContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code comparisonInNotTestLabel}
-	 * labeled alternative in {@link ProjectParser#not_test}.
+	 * Exit a parse tree produced by {@link ProjectParser#factor}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparisonInNotTestLabel(ProjectParser.ComparisonInNotTestLabelContext ctx);
+	void exitFactor(ProjectParser.FactorContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code comparisonLabel}
-	 * labeled alternative in {@link ProjectParser#comparison}.
+	 * Enter a parse tree produced by {@link ProjectParser#power}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparisonLabel(ProjectParser.ComparisonLabelContext ctx);
+	void enterPower(ProjectParser.PowerContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code comparisonLabel}
-	 * labeled alternative in {@link ProjectParser#comparison}.
+	 * Exit a parse tree produced by {@link ProjectParser#power}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparisonLabel(ProjectParser.ComparisonLabelContext ctx);
+	void exitPower(ProjectParser.PowerContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ltLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
+	 * Enter a parse tree produced by {@link ProjectParser#atom_expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterLtLabel(ProjectParser.LtLabelContext ctx);
+	void enterAtom_expr(ProjectParser.Atom_exprContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ltLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
+	 * Exit a parse tree produced by {@link ProjectParser#atom_expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitLtLabel(ProjectParser.LtLabelContext ctx);
+	void exitAtom_expr(ProjectParser.Atom_exprContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code gtLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void enterGtLabel(ProjectParser.GtLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code gtLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void exitGtLabel(ProjectParser.GtLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code eqeqLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void enterEqeqLabel(ProjectParser.EqeqLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code eqeqLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void exitEqeqLabel(ProjectParser.EqeqLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code geLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void enterGeLabel(ProjectParser.GeLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code geLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void exitGeLabel(ProjectParser.GeLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code leLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void enterLeLabel(ProjectParser.LeLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code leLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void exitLeLabel(ProjectParser.LeLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code noteqLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void enterNoteqLabel(ProjectParser.NoteqLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code noteqLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void exitNoteqLabel(ProjectParser.NoteqLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code inLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void enterInLabel(ProjectParser.InLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code inLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void exitInLabel(ProjectParser.InLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code notInLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void enterNotInLabel(ProjectParser.NotInLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code notInLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 */
-	void exitNotInLabel(ProjectParser.NotInLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code arithExprLabel}
-	 * labeled alternative in {@link ProjectParser#arith_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterArithExprLabel(ProjectParser.ArithExprLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code arithExprLabel}
-	 * labeled alternative in {@link ProjectParser#arith_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitArithExprLabel(ProjectParser.ArithExprLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code termLabel}
-	 * labeled alternative in {@link ProjectParser#term}.
-	 * @param ctx the parse tree
-	 */
-	void enterTermLabel(ProjectParser.TermLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code termLabel}
-	 * labeled alternative in {@link ProjectParser#term}.
-	 * @param ctx the parse tree
-	 */
-	void exitTermLabel(ProjectParser.TermLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code unaryFactorLabel}
-	 * labeled alternative in {@link ProjectParser#factor}.
-	 * @param ctx the parse tree
-	 */
-	void enterUnaryFactorLabel(ProjectParser.UnaryFactorLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code unaryFactorLabel}
-	 * labeled alternative in {@link ProjectParser#factor}.
-	 * @param ctx the parse tree
-	 */
-	void exitUnaryFactorLabel(ProjectParser.UnaryFactorLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code powerLabel}
-	 * labeled alternative in {@link ProjectParser#factor}.
-	 * @param ctx the parse tree
-	 */
-	void enterPowerLabel(ProjectParser.PowerLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code powerLabel}
-	 * labeled alternative in {@link ProjectParser#factor}.
-	 * @param ctx the parse tree
-	 */
-	void exitPowerLabel(ProjectParser.PowerLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code powerExprLabel}
-	 * labeled alternative in {@link ProjectParser#power}.
-	 * @param ctx the parse tree
-	 */
-	void enterPowerExprLabel(ProjectParser.PowerExprLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code powerExprLabel}
-	 * labeled alternative in {@link ProjectParser#power}.
-	 * @param ctx the parse tree
-	 */
-	void exitPowerExprLabel(ProjectParser.PowerExprLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code atomExprLabel}
-	 * labeled alternative in {@link ProjectParser#atom_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterAtomExprLabel(ProjectParser.AtomExprLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code atomExprLabel}
-	 * labeled alternative in {@link ProjectParser#atom_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitAtomExprLabel(ProjectParser.AtomExprLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code parenExprLabel}
-	 * labeled alternative in {@link ProjectParser#atom_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterParenExprLabel(ProjectParser.ParenExprLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code parenExprLabel}
-	 * labeled alternative in {@link ProjectParser#atom_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitParenExprLabel(ProjectParser.ParenExprLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code atomParenLabel}
+	 * Enter a parse tree produced by the {@code atomParen}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtomParenLabel(ProjectParser.AtomParenLabelContext ctx);
+	void enterAtomParen(ProjectParser.AtomParenContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code atomParenLabel}
+	 * Exit a parse tree produced by the {@code atomParen}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtomParenLabel(ProjectParser.AtomParenLabelContext ctx);
+	void exitAtomParen(ProjectParser.AtomParenContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code atomListLabel}
+	 * Enter a parse tree produced by the {@code atomList}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtomListLabel(ProjectParser.AtomListLabelContext ctx);
+	void enterAtomList(ProjectParser.AtomListContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code atomListLabel}
+	 * Exit a parse tree produced by the {@code atomList}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtomListLabel(ProjectParser.AtomListLabelContext ctx);
+	void exitAtomList(ProjectParser.AtomListContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code atomDictLabel}
+	 * Enter a parse tree produced by the {@code atomDict}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtomDictLabel(ProjectParser.AtomDictLabelContext ctx);
+	void enterAtomDict(ProjectParser.AtomDictContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code atomDictLabel}
+	 * Exit a parse tree produced by the {@code atomDict}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtomDictLabel(ProjectParser.AtomDictLabelContext ctx);
+	void exitAtomDict(ProjectParser.AtomDictContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code atomNameLabel}
+	 * Enter a parse tree produced by the {@code atomName}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtomNameLabel(ProjectParser.AtomNameLabelContext ctx);
+	void enterAtomName(ProjectParser.AtomNameContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code atomNameLabel}
+	 * Exit a parse tree produced by the {@code atomName}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtomNameLabel(ProjectParser.AtomNameLabelContext ctx);
+	void exitAtomName(ProjectParser.AtomNameContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code atomNumberLabel}
+	 * Enter a parse tree produced by the {@code atomNumber}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtomNumberLabel(ProjectParser.AtomNumberLabelContext ctx);
+	void enterAtomNumber(ProjectParser.AtomNumberContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code atomNumberLabel}
+	 * Exit a parse tree produced by the {@code atomNumber}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtomNumberLabel(ProjectParser.AtomNumberLabelContext ctx);
+	void exitAtomNumber(ProjectParser.AtomNumberContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code atomStringLabel}
+	 * Enter a parse tree produced by the {@code atomString}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtomStringLabel(ProjectParser.AtomStringLabelContext ctx);
+	void enterAtomString(ProjectParser.AtomStringContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code atomStringLabel}
+	 * Exit a parse tree produced by the {@code atomString}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtomStringLabel(ProjectParser.AtomStringLabelContext ctx);
+	void exitAtomString(ProjectParser.AtomStringContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code atomFStringLabel}
+	 * Enter a parse tree produced by the {@code atomFString}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtomFStringLabel(ProjectParser.AtomFStringLabelContext ctx);
+	void enterAtomFString(ProjectParser.AtomFStringContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code atomFStringLabel}
+	 * Exit a parse tree produced by the {@code atomFString}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtomFStringLabel(ProjectParser.AtomFStringLabelContext ctx);
+	void exitAtomFString(ProjectParser.AtomFStringContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code atomTrueLabel}
+	 * Enter a parse tree produced by the {@code atomTrue}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtomTrueLabel(ProjectParser.AtomTrueLabelContext ctx);
+	void enterAtomTrue(ProjectParser.AtomTrueContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code atomTrueLabel}
+	 * Exit a parse tree produced by the {@code atomTrue}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtomTrueLabel(ProjectParser.AtomTrueLabelContext ctx);
+	void exitAtomTrue(ProjectParser.AtomTrueContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code atomFalseLabel}
+	 * Enter a parse tree produced by the {@code atomFalse}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtomFalseLabel(ProjectParser.AtomFalseLabelContext ctx);
+	void enterAtomFalse(ProjectParser.AtomFalseContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code atomFalseLabel}
+	 * Exit a parse tree produced by the {@code atomFalse}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtomFalseLabel(ProjectParser.AtomFalseLabelContext ctx);
+	void exitAtomFalse(ProjectParser.AtomFalseContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code atomNoneLabel}
+	 * Enter a parse tree produced by the {@code atomNone}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void enterAtomNoneLabel(ProjectParser.AtomNoneLabelContext ctx);
+	void enterAtomNone(ProjectParser.AtomNoneContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code atomNoneLabel}
+	 * Exit a parse tree produced by the {@code atomNone}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 */
-	void exitAtomNoneLabel(ProjectParser.AtomNoneLabelContext ctx);
+	void exitAtomNone(ProjectParser.AtomNoneContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code callTrailerLabel}
+	 * Enter a parse tree produced by the {@code callTrailer}
 	 * labeled alternative in {@link ProjectParser#trailer}.
 	 * @param ctx the parse tree
 	 */
-	void enterCallTrailerLabel(ProjectParser.CallTrailerLabelContext ctx);
+	void enterCallTrailer(ProjectParser.CallTrailerContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code callTrailerLabel}
+	 * Exit a parse tree produced by the {@code callTrailer}
 	 * labeled alternative in {@link ProjectParser#trailer}.
 	 * @param ctx the parse tree
 	 */
-	void exitCallTrailerLabel(ProjectParser.CallTrailerLabelContext ctx);
+	void exitCallTrailer(ProjectParser.CallTrailerContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code subscriptTrailerLabel}
+	 * Enter a parse tree produced by the {@code subscriptTrailer}
 	 * labeled alternative in {@link ProjectParser#trailer}.
 	 * @param ctx the parse tree
 	 */
-	void enterSubscriptTrailerLabel(ProjectParser.SubscriptTrailerLabelContext ctx);
+	void enterSubscriptTrailer(ProjectParser.SubscriptTrailerContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code subscriptTrailerLabel}
+	 * Exit a parse tree produced by the {@code subscriptTrailer}
 	 * labeled alternative in {@link ProjectParser#trailer}.
 	 * @param ctx the parse tree
 	 */
-	void exitSubscriptTrailerLabel(ProjectParser.SubscriptTrailerLabelContext ctx);
+	void exitSubscriptTrailer(ProjectParser.SubscriptTrailerContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code dotTrailerLabel}
+	 * Enter a parse tree produced by the {@code dotTrailer}
 	 * labeled alternative in {@link ProjectParser#trailer}.
 	 * @param ctx the parse tree
 	 */
-	void enterDotTrailerLabel(ProjectParser.DotTrailerLabelContext ctx);
+	void enterDotTrailer(ProjectParser.DotTrailerContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code dotTrailerLabel}
+	 * Exit a parse tree produced by the {@code dotTrailer}
 	 * labeled alternative in {@link ProjectParser#trailer}.
 	 * @param ctx the parse tree
 	 */
-	void exitDotTrailerLabel(ProjectParser.DotTrailerLabelContext ctx);
+	void exitDotTrailer(ProjectParser.DotTrailerContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code subscriptListLabel}
-	 * labeled alternative in {@link ProjectParser#subscriptlist}.
+	 * Enter a parse tree produced by {@link ProjectParser#subscriptlist}.
 	 * @param ctx the parse tree
 	 */
-	void enterSubscriptListLabel(ProjectParser.SubscriptListLabelContext ctx);
+	void enterSubscriptlist(ProjectParser.SubscriptlistContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code subscriptListLabel}
-	 * labeled alternative in {@link ProjectParser#subscriptlist}.
+	 * Exit a parse tree produced by {@link ProjectParser#subscriptlist}.
 	 * @param ctx the parse tree
 	 */
-	void exitSubscriptListLabel(ProjectParser.SubscriptListLabelContext ctx);
+	void exitSubscriptlist(ProjectParser.SubscriptlistContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code subscriptTestLabel}
-	 * labeled alternative in {@link ProjectParser#subscript}.
+	 * Enter a parse tree produced by {@link ProjectParser#subscript}.
 	 * @param ctx the parse tree
 	 */
-	void enterSubscriptTestLabel(ProjectParser.SubscriptTestLabelContext ctx);
+	void enterSubscript(ProjectParser.SubscriptContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code subscriptTestLabel}
-	 * labeled alternative in {@link ProjectParser#subscript}.
+	 * Exit a parse tree produced by {@link ProjectParser#subscript}.
 	 * @param ctx the parse tree
 	 */
-	void exitSubscriptTestLabel(ProjectParser.SubscriptTestLabelContext ctx);
+	void exitSubscript(ProjectParser.SubscriptContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code subscriptSliceLabel}
-	 * labeled alternative in {@link ProjectParser#subscript}.
+	 * Enter a parse tree produced by {@link ProjectParser#listmaker}.
 	 * @param ctx the parse tree
 	 */
-	void enterSubscriptSliceLabel(ProjectParser.SubscriptSliceLabelContext ctx);
+	void enterListmaker(ProjectParser.ListmakerContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code subscriptSliceLabel}
-	 * labeled alternative in {@link ProjectParser#subscript}.
+	 * Exit a parse tree produced by {@link ProjectParser#listmaker}.
 	 * @param ctx the parse tree
 	 */
-	void exitSubscriptSliceLabel(ProjectParser.SubscriptSliceLabelContext ctx);
+	void exitListmaker(ProjectParser.ListmakerContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code listLabel}
-	 * labeled alternative in {@link ProjectParser#listmaker}.
+	 * Enter a parse tree produced by {@link ProjectParser#dictmaker}.
 	 * @param ctx the parse tree
 	 */
-	void enterListLabel(ProjectParser.ListLabelContext ctx);
+	void enterDictmaker(ProjectParser.DictmakerContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code listLabel}
-	 * labeled alternative in {@link ProjectParser#listmaker}.
+	 * Exit a parse tree produced by {@link ProjectParser#dictmaker}.
 	 * @param ctx the parse tree
 	 */
-	void exitListLabel(ProjectParser.ListLabelContext ctx);
+	void exitDictmaker(ProjectParser.DictmakerContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code compForListLabel}
-	 * labeled alternative in {@link ProjectParser#listmaker}.
-	 * @param ctx the parse tree
-	 */
-	void enterCompForListLabel(ProjectParser.CompForListLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code compForListLabel}
-	 * labeled alternative in {@link ProjectParser#listmaker}.
-	 * @param ctx the parse tree
-	 */
-	void exitCompForListLabel(ProjectParser.CompForListLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code dictLabel}
-	 * labeled alternative in {@link ProjectParser#dictmaker}.
-	 * @param ctx the parse tree
-	 */
-	void enterDictLabel(ProjectParser.DictLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code dictLabel}
-	 * labeled alternative in {@link ProjectParser#dictmaker}.
-	 * @param ctx the parse tree
-	 */
-	void exitDictLabel(ProjectParser.DictLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code compForDictLabel}
-	 * labeled alternative in {@link ProjectParser#dictmaker}.
-	 * @param ctx the parse tree
-	 */
-	void enterCompForDictLabel(ProjectParser.CompForDictLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code compForDictLabel}
-	 * labeled alternative in {@link ProjectParser#dictmaker}.
-	 * @param ctx the parse tree
-	 */
-	void exitCompForDictLabel(ProjectParser.CompForDictLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code compForLabel}
+	 * Enter a parse tree produced by the {@code compFor}
 	 * labeled alternative in {@link ProjectParser#comp_for}.
 	 * @param ctx the parse tree
 	 */
-	void enterCompForLabel(ProjectParser.CompForLabelContext ctx);
+	void enterCompFor(ProjectParser.CompForContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code compForLabel}
+	 * Exit a parse tree produced by the {@code compFor}
 	 * labeled alternative in {@link ProjectParser#comp_for}.
 	 * @param ctx the parse tree
 	 */
-	void exitCompForLabel(ProjectParser.CompForLabelContext ctx);
+	void exitCompFor(ProjectParser.CompForContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code testListCompLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_comp}.
+	 * Enter a parse tree produced by {@link ProjectParser#testlist_comp}.
 	 * @param ctx the parse tree
 	 */
-	void enterTestListCompLabel(ProjectParser.TestListCompLabelContext ctx);
+	void enterTestlist_comp(ProjectParser.Testlist_compContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code testListCompLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_comp}.
+	 * Exit a parse tree produced by {@link ProjectParser#testlist_comp}.
 	 * @param ctx the parse tree
 	 */
-	void exitTestListCompLabel(ProjectParser.TestListCompLabelContext ctx);
+	void exitTestlist_comp(ProjectParser.Testlist_compContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code compForCompLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_comp}.
+	 * Enter a parse tree produced by {@link ProjectParser#arglist}.
 	 * @param ctx the parse tree
 	 */
-	void enterCompForCompLabel(ProjectParser.CompForCompLabelContext ctx);
+	void enterArglist(ProjectParser.ArglistContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code compForCompLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_comp}.
+	 * Exit a parse tree produced by {@link ProjectParser#arglist}.
 	 * @param ctx the parse tree
 	 */
-	void exitCompForCompLabel(ProjectParser.CompForCompLabelContext ctx);
+	void exitArglist(ProjectParser.ArglistContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code argListLabel}
-	 * labeled alternative in {@link ProjectParser#arglist}.
+	 * Enter a parse tree produced by {@link ProjectParser#argument}.
 	 * @param ctx the parse tree
 	 */
-	void enterArgListLabel(ProjectParser.ArgListLabelContext ctx);
+	void enterArgument(ProjectParser.ArgumentContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code argListLabel}
-	 * labeled alternative in {@link ProjectParser#arglist}.
+	 * Exit a parse tree produced by {@link ProjectParser#argument}.
 	 * @param ctx the parse tree
 	 */
-	void exitArgListLabel(ProjectParser.ArgListLabelContext ctx);
+	void exitArgument(ProjectParser.ArgumentContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code positionalArgLabel}
-	 * labeled alternative in {@link ProjectParser#argument}.
+	 * Enter a parse tree produced by {@link ProjectParser#del_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterPositionalArgLabel(ProjectParser.PositionalArgLabelContext ctx);
+	void enterDel_stmt(ProjectParser.Del_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code positionalArgLabel}
-	 * labeled alternative in {@link ProjectParser#argument}.
+	 * Exit a parse tree produced by {@link ProjectParser#del_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitPositionalArgLabel(ProjectParser.PositionalArgLabelContext ctx);
+	void exitDel_stmt(ProjectParser.Del_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code keywordArgLabel}
-	 * labeled alternative in {@link ProjectParser#argument}.
+	 * Enter a parse tree produced by {@link ProjectParser#pass_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterKeywordArgLabel(ProjectParser.KeywordArgLabelContext ctx);
+	void enterPass_stmt(ProjectParser.Pass_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code keywordArgLabel}
-	 * labeled alternative in {@link ProjectParser#argument}.
+	 * Exit a parse tree produced by {@link ProjectParser#pass_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitKeywordArgLabel(ProjectParser.KeywordArgLabelContext ctx);
+	void exitPass_stmt(ProjectParser.Pass_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code delStmtLabel}
-	 * labeled alternative in {@link ProjectParser#del_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#flow_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterDelStmtLabel(ProjectParser.DelStmtLabelContext ctx);
+	void enterFlow_stmt(ProjectParser.Flow_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code delStmtLabel}
-	 * labeled alternative in {@link ProjectParser#del_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#flow_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitDelStmtLabel(ProjectParser.DelStmtLabelContext ctx);
+	void exitFlow_stmt(ProjectParser.Flow_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code passStmtLabel}
-	 * labeled alternative in {@link ProjectParser#pass_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#import_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterPassStmtLabel(ProjectParser.PassStmtLabelContext ctx);
+	void enterImport_stmt(ProjectParser.Import_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code passStmtLabel}
-	 * labeled alternative in {@link ProjectParser#pass_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#import_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitPassStmtLabel(ProjectParser.PassStmtLabelContext ctx);
+	void exitImport_stmt(ProjectParser.Import_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code breakLabel}
-	 * labeled alternative in {@link ProjectParser#flow_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#dotted_name}.
 	 * @param ctx the parse tree
 	 */
-	void enterBreakLabel(ProjectParser.BreakLabelContext ctx);
+	void enterDotted_name(ProjectParser.Dotted_nameContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code breakLabel}
-	 * labeled alternative in {@link ProjectParser#flow_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#dotted_name}.
 	 * @param ctx the parse tree
 	 */
-	void exitBreakLabel(ProjectParser.BreakLabelContext ctx);
+	void exitDotted_name(ProjectParser.Dotted_nameContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code continueLabel}
-	 * labeled alternative in {@link ProjectParser#flow_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#dotted_as_names}.
 	 * @param ctx the parse tree
 	 */
-	void enterContinueLabel(ProjectParser.ContinueLabelContext ctx);
+	void enterDotted_as_names(ProjectParser.Dotted_as_namesContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code continueLabel}
-	 * labeled alternative in {@link ProjectParser#flow_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#dotted_as_names}.
 	 * @param ctx the parse tree
 	 */
-	void exitContinueLabel(ProjectParser.ContinueLabelContext ctx);
+	void exitDotted_as_names(ProjectParser.Dotted_as_namesContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code returnLabel}
-	 * labeled alternative in {@link ProjectParser#flow_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#dotted_as_name}.
 	 * @param ctx the parse tree
 	 */
-	void enterReturnLabel(ProjectParser.ReturnLabelContext ctx);
+	void enterDotted_as_name(ProjectParser.Dotted_as_nameContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code returnLabel}
-	 * labeled alternative in {@link ProjectParser#flow_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#dotted_as_name}.
 	 * @param ctx the parse tree
 	 */
-	void exitReturnLabel(ProjectParser.ReturnLabelContext ctx);
+	void exitDotted_as_name(ProjectParser.Dotted_as_nameContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code importNamesLabel}
-	 * labeled alternative in {@link ProjectParser#import_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#import_as_names}.
 	 * @param ctx the parse tree
 	 */
-	void enterImportNamesLabel(ProjectParser.ImportNamesLabelContext ctx);
+	void enterImport_as_names(ProjectParser.Import_as_namesContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code importNamesLabel}
-	 * labeled alternative in {@link ProjectParser#import_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#import_as_names}.
 	 * @param ctx the parse tree
 	 */
-	void exitImportNamesLabel(ProjectParser.ImportNamesLabelContext ctx);
+	void exitImport_as_names(ProjectParser.Import_as_namesContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code importFromLabel}
-	 * labeled alternative in {@link ProjectParser#import_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#import_as_name}.
 	 * @param ctx the parse tree
 	 */
-	void enterImportFromLabel(ProjectParser.ImportFromLabelContext ctx);
+	void enterImport_as_name(ProjectParser.Import_as_nameContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code importFromLabel}
-	 * labeled alternative in {@link ProjectParser#import_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#import_as_name}.
 	 * @param ctx the parse tree
 	 */
-	void exitImportFromLabel(ProjectParser.ImportFromLabelContext ctx);
+	void exitImport_as_name(ProjectParser.Import_as_nameContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code dottedNameLabel}
-	 * labeled alternative in {@link ProjectParser#dotted_name}.
+	 * Enter a parse tree produced by {@link ProjectParser#global_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterDottedNameLabel(ProjectParser.DottedNameLabelContext ctx);
+	void enterGlobal_stmt(ProjectParser.Global_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code dottedNameLabel}
-	 * labeled alternative in {@link ProjectParser#dotted_name}.
+	 * Exit a parse tree produced by {@link ProjectParser#global_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitDottedNameLabel(ProjectParser.DottedNameLabelContext ctx);
+	void exitGlobal_stmt(ProjectParser.Global_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code dottedAsNamesLabel}
-	 * labeled alternative in {@link ProjectParser#dotted_as_names}.
-	 * @param ctx the parse tree
-	 */
-	void enterDottedAsNamesLabel(ProjectParser.DottedAsNamesLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code dottedAsNamesLabel}
-	 * labeled alternative in {@link ProjectParser#dotted_as_names}.
-	 * @param ctx the parse tree
-	 */
-	void exitDottedAsNamesLabel(ProjectParser.DottedAsNamesLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code dottedAsNameLabel}
-	 * labeled alternative in {@link ProjectParser#dotted_as_name}.
-	 * @param ctx the parse tree
-	 */
-	void enterDottedAsNameLabel(ProjectParser.DottedAsNameLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code dottedAsNameLabel}
-	 * labeled alternative in {@link ProjectParser#dotted_as_name}.
-	 * @param ctx the parse tree
-	 */
-	void exitDottedAsNameLabel(ProjectParser.DottedAsNameLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code importAsNamesLabel}
-	 * labeled alternative in {@link ProjectParser#import_as_names}.
-	 * @param ctx the parse tree
-	 */
-	void enterImportAsNamesLabel(ProjectParser.ImportAsNamesLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code importAsNamesLabel}
-	 * labeled alternative in {@link ProjectParser#import_as_names}.
-	 * @param ctx the parse tree
-	 */
-	void exitImportAsNamesLabel(ProjectParser.ImportAsNamesLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code importAsNameLabel}
-	 * labeled alternative in {@link ProjectParser#import_as_name}.
-	 * @param ctx the parse tree
-	 */
-	void enterImportAsNameLabel(ProjectParser.ImportAsNameLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code importAsNameLabel}
-	 * labeled alternative in {@link ProjectParser#import_as_name}.
-	 * @param ctx the parse tree
-	 */
-	void exitImportAsNameLabel(ProjectParser.ImportAsNameLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code globalStmtLabel}
-	 * labeled alternative in {@link ProjectParser#global_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterGlobalStmtLabel(ProjectParser.GlobalStmtLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code globalStmtLabel}
-	 * labeled alternative in {@link ProjectParser#global_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitGlobalStmtLabel(ProjectParser.GlobalStmtLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code ifStmtCompound}
+	 * Enter a parse tree produced by the {@code ifStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterIfStmtCompound(ProjectParser.IfStmtCompoundContext ctx);
+	void enterIfStmt(ProjectParser.IfStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ifStmtCompound}
+	 * Exit a parse tree produced by the {@code ifStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitIfStmtCompound(ProjectParser.IfStmtCompoundContext ctx);
+	void exitIfStmt(ProjectParser.IfStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code whileStmtCompound}
+	 * Enter a parse tree produced by the {@code whileStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterWhileStmtCompound(ProjectParser.WhileStmtCompoundContext ctx);
+	void enterWhileStmt(ProjectParser.WhileStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code whileStmtCompound}
+	 * Exit a parse tree produced by the {@code whileStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitWhileStmtCompound(ProjectParser.WhileStmtCompoundContext ctx);
+	void exitWhileStmt(ProjectParser.WhileStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code forStmtCompound}
+	 * Enter a parse tree produced by the {@code forStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterForStmtCompound(ProjectParser.ForStmtCompoundContext ctx);
+	void enterForStmt(ProjectParser.ForStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code forStmtCompound}
+	 * Exit a parse tree produced by the {@code forStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitForStmtCompound(ProjectParser.ForStmtCompoundContext ctx);
+	void exitForStmt(ProjectParser.ForStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code funcDefCompound}
+	 * Enter a parse tree produced by the {@code funcDef}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterFuncDefCompound(ProjectParser.FuncDefCompoundContext ctx);
+	void enterFuncDef(ProjectParser.FuncDefContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code funcDefCompound}
+	 * Exit a parse tree produced by the {@code funcDef}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitFuncDefCompound(ProjectParser.FuncDefCompoundContext ctx);
+	void exitFuncDef(ProjectParser.FuncDefContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code classDefCompound}
+	 * Enter a parse tree produced by the {@code classDef}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterClassDefCompound(ProjectParser.ClassDefCompoundContext ctx);
+	void enterClassDef(ProjectParser.ClassDefContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code classDefCompound}
+	 * Exit a parse tree produced by the {@code classDef}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitClassDefCompound(ProjectParser.ClassDefCompoundContext ctx);
+	void exitClassDef(ProjectParser.ClassDefContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code tryStmtCompound}
+	 * Enter a parse tree produced by the {@code tryStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterTryStmtCompound(ProjectParser.TryStmtCompoundContext ctx);
+	void enterTryStmt(ProjectParser.TryStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code tryStmtCompound}
+	 * Exit a parse tree produced by the {@code tryStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitTryStmtCompound(ProjectParser.TryStmtCompoundContext ctx);
+	void exitTryStmt(ProjectParser.TryStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code withStmtCompound}
+	 * Enter a parse tree produced by the {@code withStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterWithStmtCompound(ProjectParser.WithStmtCompoundContext ctx);
+	void enterWithStmt(ProjectParser.WithStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code withStmtCompound}
+	 * Exit a parse tree produced by the {@code withStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitWithStmtCompound(ProjectParser.WithStmtCompoundContext ctx);
+	void exitWithStmt(ProjectParser.WithStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code decoratedCompound}
+	 * Enter a parse tree produced by the {@code decoratedStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterDecoratedCompound(ProjectParser.DecoratedCompoundContext ctx);
+	void enterDecoratedStmt(ProjectParser.DecoratedStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code decoratedCompound}
+	 * Exit a parse tree produced by the {@code decoratedStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitDecoratedCompound(ProjectParser.DecoratedCompoundContext ctx);
+	void exitDecoratedStmt(ProjectParser.DecoratedStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code decoratedLabel}
-	 * labeled alternative in {@link ProjectParser#decorated}.
+	 * Enter a parse tree produced by {@link ProjectParser#decorated}.
 	 * @param ctx the parse tree
 	 */
-	void enterDecoratedLabel(ProjectParser.DecoratedLabelContext ctx);
+	void enterDecorated(ProjectParser.DecoratedContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code decoratedLabel}
-	 * labeled alternative in {@link ProjectParser#decorated}.
+	 * Exit a parse tree produced by {@link ProjectParser#decorated}.
 	 * @param ctx the parse tree
 	 */
-	void exitDecoratedLabel(ProjectParser.DecoratedLabelContext ctx);
+	void exitDecorated(ProjectParser.DecoratedContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code decoratorLabel}
-	 * labeled alternative in {@link ProjectParser#decorator}.
+	 * Enter a parse tree produced by {@link ProjectParser#decorator}.
 	 * @param ctx the parse tree
 	 */
-	void enterDecoratorLabel(ProjectParser.DecoratorLabelContext ctx);
+	void enterDecorator(ProjectParser.DecoratorContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code decoratorLabel}
-	 * labeled alternative in {@link ProjectParser#decorator}.
+	 * Exit a parse tree produced by {@link ProjectParser#decorator}.
 	 * @param ctx the parse tree
 	 */
-	void exitDecoratorLabel(ProjectParser.DecoratorLabelContext ctx);
+	void exitDecorator(ProjectParser.DecoratorContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ifStmtLabel}
-	 * labeled alternative in {@link ProjectParser#if_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#if_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterIfStmtLabel(ProjectParser.IfStmtLabelContext ctx);
+	void enterIf_stmt(ProjectParser.If_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ifStmtLabel}
-	 * labeled alternative in {@link ProjectParser#if_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#if_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitIfStmtLabel(ProjectParser.IfStmtLabelContext ctx);
+	void exitIf_stmt(ProjectParser.If_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code whileStmtLabel}
-	 * labeled alternative in {@link ProjectParser#while_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#while_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterWhileStmtLabel(ProjectParser.WhileStmtLabelContext ctx);
+	void enterWhile_stmt(ProjectParser.While_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code whileStmtLabel}
-	 * labeled alternative in {@link ProjectParser#while_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#while_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitWhileStmtLabel(ProjectParser.WhileStmtLabelContext ctx);
+	void exitWhile_stmt(ProjectParser.While_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code forStmtLabel}
-	 * labeled alternative in {@link ProjectParser#for_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#for_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterForStmtLabel(ProjectParser.ForStmtLabelContext ctx);
+	void enterFor_stmt(ProjectParser.For_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code forStmtLabel}
-	 * labeled alternative in {@link ProjectParser#for_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#for_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitForStmtLabel(ProjectParser.ForStmtLabelContext ctx);
+	void exitFor_stmt(ProjectParser.For_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code funcDefLabel}
-	 * labeled alternative in {@link ProjectParser#funcdef}.
+	 * Enter a parse tree produced by {@link ProjectParser#funcdef}.
 	 * @param ctx the parse tree
 	 */
-	void enterFuncDefLabel(ProjectParser.FuncDefLabelContext ctx);
+	void enterFuncdef(ProjectParser.FuncdefContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code funcDefLabel}
-	 * labeled alternative in {@link ProjectParser#funcdef}.
+	 * Exit a parse tree produced by {@link ProjectParser#funcdef}.
 	 * @param ctx the parse tree
 	 */
-	void exitFuncDefLabel(ProjectParser.FuncDefLabelContext ctx);
+	void exitFuncdef(ProjectParser.FuncdefContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code parametersLabel}
-	 * labeled alternative in {@link ProjectParser#parameters}.
+	 * Enter a parse tree produced by {@link ProjectParser#parameters}.
 	 * @param ctx the parse tree
 	 */
-	void enterParametersLabel(ProjectParser.ParametersLabelContext ctx);
+	void enterParameters(ProjectParser.ParametersContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code parametersLabel}
-	 * labeled alternative in {@link ProjectParser#parameters}.
+	 * Exit a parse tree produced by {@link ProjectParser#parameters}.
 	 * @param ctx the parse tree
 	 */
-	void exitParametersLabel(ProjectParser.ParametersLabelContext ctx);
+	void exitParameters(ProjectParser.ParametersContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code typedArgsListLabel}
-	 * labeled alternative in {@link ProjectParser#typedargslist}.
+	 * Enter a parse tree produced by {@link ProjectParser#typedargslist}.
 	 * @param ctx the parse tree
 	 */
-	void enterTypedArgsListLabel(ProjectParser.TypedArgsListLabelContext ctx);
+	void enterTypedargslist(ProjectParser.TypedargslistContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code typedArgsListLabel}
-	 * labeled alternative in {@link ProjectParser#typedargslist}.
+	 * Exit a parse tree produced by {@link ProjectParser#typedargslist}.
 	 * @param ctx the parse tree
 	 */
-	void exitTypedArgsListLabel(ProjectParser.TypedArgsListLabelContext ctx);
+	void exitTypedargslist(ProjectParser.TypedargslistContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code typedArgsStarLabel}
-	 * labeled alternative in {@link ProjectParser#typedargslist}.
+	 * Enter a parse tree produced by {@link ProjectParser#tfpdef}.
 	 * @param ctx the parse tree
 	 */
-	void enterTypedArgsStarLabel(ProjectParser.TypedArgsStarLabelContext ctx);
+	void enterTfpdef(ProjectParser.TfpdefContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code typedArgsStarLabel}
-	 * labeled alternative in {@link ProjectParser#typedargslist}.
+	 * Exit a parse tree produced by {@link ProjectParser#tfpdef}.
 	 * @param ctx the parse tree
 	 */
-	void exitTypedArgsStarLabel(ProjectParser.TypedArgsStarLabelContext ctx);
+	void exitTfpdef(ProjectParser.TfpdefContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code tfpdefLabel}
-	 * labeled alternative in {@link ProjectParser#tfpdef}.
+	 * Enter a parse tree produced by {@link ProjectParser#classdef}.
 	 * @param ctx the parse tree
 	 */
-	void enterTfpdefLabel(ProjectParser.TfpdefLabelContext ctx);
+	void enterClassdef(ProjectParser.ClassdefContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code tfpdefLabel}
-	 * labeled alternative in {@link ProjectParser#tfpdef}.
+	 * Exit a parse tree produced by {@link ProjectParser#classdef}.
 	 * @param ctx the parse tree
 	 */
-	void exitTfpdefLabel(ProjectParser.TfpdefLabelContext ctx);
+	void exitClassdef(ProjectParser.ClassdefContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code classDefLabel}
-	 * labeled alternative in {@link ProjectParser#classdef}.
+	 * Enter a parse tree produced by {@link ProjectParser#try_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterClassDefLabel(ProjectParser.ClassDefLabelContext ctx);
+	void enterTry_stmt(ProjectParser.Try_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code classDefLabel}
-	 * labeled alternative in {@link ProjectParser#classdef}.
+	 * Exit a parse tree produced by {@link ProjectParser#try_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitClassDefLabel(ProjectParser.ClassDefLabelContext ctx);
+	void exitTry_stmt(ProjectParser.Try_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code tryStmtLabel}
-	 * labeled alternative in {@link ProjectParser#try_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#with_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterTryStmtLabel(ProjectParser.TryStmtLabelContext ctx);
+	void enterWith_stmt(ProjectParser.With_stmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code tryStmtLabel}
-	 * labeled alternative in {@link ProjectParser#try_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#with_stmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitTryStmtLabel(ProjectParser.TryStmtLabelContext ctx);
+	void exitWith_stmt(ProjectParser.With_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code withStmtLabel}
-	 * labeled alternative in {@link ProjectParser#with_stmt}.
+	 * Enter a parse tree produced by {@link ProjectParser#with_item}.
 	 * @param ctx the parse tree
 	 */
-	void enterWithStmtLabel(ProjectParser.WithStmtLabelContext ctx);
+	void enterWith_item(ProjectParser.With_itemContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code withStmtLabel}
-	 * labeled alternative in {@link ProjectParser#with_stmt}.
+	 * Exit a parse tree produced by {@link ProjectParser#with_item}.
 	 * @param ctx the parse tree
 	 */
-	void exitWithStmtLabel(ProjectParser.WithStmtLabelContext ctx);
+	void exitWith_item(ProjectParser.With_itemContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code withItemLabel}
-	 * labeled alternative in {@link ProjectParser#with_item}.
+	 * Enter a parse tree produced by {@link ProjectParser#suite}.
 	 * @param ctx the parse tree
 	 */
-	void enterWithItemLabel(ProjectParser.WithItemLabelContext ctx);
+	void enterSuite(ProjectParser.SuiteContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code withItemLabel}
-	 * labeled alternative in {@link ProjectParser#with_item}.
+	 * Exit a parse tree produced by {@link ProjectParser#suite}.
 	 * @param ctx the parse tree
 	 */
-	void exitWithItemLabel(ProjectParser.WithItemLabelContext ctx);
+	void exitSuite(ProjectParser.SuiteContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code simpleSuite}
-	 * labeled alternative in {@link ProjectParser#suite}.
+	 * Enter a parse tree produced by {@link ProjectParser#exprlist}.
 	 * @param ctx the parse tree
 	 */
-	void enterSimpleSuite(ProjectParser.SimpleSuiteContext ctx);
+	void enterExprlist(ProjectParser.ExprlistContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code simpleSuite}
-	 * labeled alternative in {@link ProjectParser#suite}.
+	 * Exit a parse tree produced by {@link ProjectParser#exprlist}.
 	 * @param ctx the parse tree
 	 */
-	void exitSimpleSuite(ProjectParser.SimpleSuiteContext ctx);
+	void exitExprlist(ProjectParser.ExprlistContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code indentedSuite}
-	 * labeled alternative in {@link ProjectParser#suite}.
+	 * Enter a parse tree produced by {@link ProjectParser#testlist}.
 	 * @param ctx the parse tree
 	 */
-	void enterIndentedSuite(ProjectParser.IndentedSuiteContext ctx);
+	void enterTestlist(ProjectParser.TestlistContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code indentedSuite}
-	 * labeled alternative in {@link ProjectParser#suite}.
+	 * Exit a parse tree produced by {@link ProjectParser#testlist}.
 	 * @param ctx the parse tree
 	 */
-	void exitIndentedSuite(ProjectParser.IndentedSuiteContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code exprListLabel}
-	 * labeled alternative in {@link ProjectParser#exprlist}.
-	 * @param ctx the parse tree
-	 */
-	void enterExprListLabel(ProjectParser.ExprListLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code exprListLabel}
-	 * labeled alternative in {@link ProjectParser#exprlist}.
-	 * @param ctx the parse tree
-	 */
-	void exitExprListLabel(ProjectParser.ExprListLabelContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code testListLabel}
-	 * labeled alternative in {@link ProjectParser#testlist}.
-	 * @param ctx the parse tree
-	 */
-	void enterTestListLabel(ProjectParser.TestListLabelContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code testListLabel}
-	 * labeled alternative in {@link ProjectParser#testlist}.
-	 * @param ctx the parse tree
-	 */
-	void exitTestListLabel(ProjectParser.TestListLabelContext ctx);
+	void exitTestlist(ProjectParser.TestlistContext ctx);
 }

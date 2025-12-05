@@ -1,4 +1,4 @@
-// Generated from D:/about command/Compiler/Compiler/src/antlr/ProjectParser.g4 by ANTLR 4.13.2
+// Generated from D:/test.java.compiler/FlaskJinjaProject/src/antlr/ProjectParser.g4 by ANTLR 4.13.2
 package antlr;
  package parser; 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
@@ -33,12 +33,11 @@ public interface ProjectParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCompoundStatement(ProjectParser.CompoundStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code simpleStmtLabel}
-	 * labeled alternative in {@link ProjectParser#simple_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#simple_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSimpleStmtLabel(ProjectParser.SimpleStmtLabelContext ctx);
+	T visitSimple_stmt(ProjectParser.Simple_stmtContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exprStatement}
 	 * labeled alternative in {@link ProjectParser#small_stmt}.
@@ -82,661 +81,447 @@ public interface ProjectParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGlobalStatement(ProjectParser.GlobalStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code exprStmtLabel}
+	 * Visit a parse tree produced by the {@code exprStmt}
 	 * labeled alternative in {@link ProjectParser#expr_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExprStmtLabel(ProjectParser.ExprStmtLabelContext ctx);
+	T visitExprStmt(ProjectParser.ExprStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code annAssignLabel}
+	 * Visit a parse tree produced by the {@code annAssign}
 	 * labeled alternative in {@link ProjectParser#annassign}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAnnAssignLabel(ProjectParser.AnnAssignLabelContext ctx);
+	T visitAnnAssign(ProjectParser.AnnAssignContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code augPlusLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Visit a parse tree produced by {@link ProjectParser#augassign}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAugPlusLabel(ProjectParser.AugPlusLabelContext ctx);
+	T visitAugassign(ProjectParser.AugassignContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code augMinusLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Visit a parse tree produced by {@link ProjectParser#testlist_star_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAugMinusLabel(ProjectParser.AugMinusLabelContext ctx);
+	T visitTestlist_star_expr(ProjectParser.Testlist_star_exprContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code augStarLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Visit a parse tree produced by {@link ProjectParser#test}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAugStarLabel(ProjectParser.AugStarLabelContext ctx);
+	T visitTest(ProjectParser.TestContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code augSlashLabel}
-	 * labeled alternative in {@link ProjectParser#augassign}.
+	 * Visit a parse tree produced by {@link ProjectParser#or_test}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAugSlashLabel(ProjectParser.AugSlashLabelContext ctx);
+	T visitOr_test(ProjectParser.Or_testContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code testListStarLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_star_expr}.
+	 * Visit a parse tree produced by {@link ProjectParser#and_test}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTestListStarLabel(ProjectParser.TestListStarLabelContext ctx);
+	T visitAnd_test(ProjectParser.And_testContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code compForExprLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_star_expr}.
+	 * Visit a parse tree produced by {@link ProjectParser#not_test}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCompForExprLabel(ProjectParser.CompForExprLabelContext ctx);
+	T visitNot_test(ProjectParser.Not_testContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code testLabel}
-	 * labeled alternative in {@link ProjectParser#test}.
+	 * Visit a parse tree produced by {@link ProjectParser#comparison}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTestLabel(ProjectParser.TestLabelContext ctx);
+	T visitComparison(ProjectParser.ComparisonContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code orTestLabel}
-	 * labeled alternative in {@link ProjectParser#or_test}.
+	 * Visit a parse tree produced by {@link ProjectParser#comp_op}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOrTestLabel(ProjectParser.OrTestLabelContext ctx);
+	T visitComp_op(ProjectParser.Comp_opContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code andTestLabel}
-	 * labeled alternative in {@link ProjectParser#and_test}.
+	 * Visit a parse tree produced by {@link ProjectParser#arith_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAndTestLabel(ProjectParser.AndTestLabelContext ctx);
+	T visitArith_expr(ProjectParser.Arith_exprContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code notTestLabel}
-	 * labeled alternative in {@link ProjectParser#not_test}.
+	 * Visit a parse tree produced by {@link ProjectParser#term}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNotTestLabel(ProjectParser.NotTestLabelContext ctx);
+	T visitTerm(ProjectParser.TermContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code comparisonInNotTestLabel}
-	 * labeled alternative in {@link ProjectParser#not_test}.
+	 * Visit a parse tree produced by {@link ProjectParser#factor}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComparisonInNotTestLabel(ProjectParser.ComparisonInNotTestLabelContext ctx);
+	T visitFactor(ProjectParser.FactorContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code comparisonLabel}
-	 * labeled alternative in {@link ProjectParser#comparison}.
+	 * Visit a parse tree produced by {@link ProjectParser#power}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComparisonLabel(ProjectParser.ComparisonLabelContext ctx);
+	T visitPower(ProjectParser.PowerContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ltLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
+	 * Visit a parse tree produced by {@link ProjectParser#atom_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLtLabel(ProjectParser.LtLabelContext ctx);
+	T visitAtom_expr(ProjectParser.Atom_exprContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code gtLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitGtLabel(ProjectParser.GtLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code eqeqLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEqeqLabel(ProjectParser.EqeqLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code geLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitGeLabel(ProjectParser.GeLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code leLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLeLabel(ProjectParser.LeLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code noteqLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNoteqLabel(ProjectParser.NoteqLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code inLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInLabel(ProjectParser.InLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code notInLabel}
-	 * labeled alternative in {@link ProjectParser#comp_op}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNotInLabel(ProjectParser.NotInLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code arithExprLabel}
-	 * labeled alternative in {@link ProjectParser#arith_expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArithExprLabel(ProjectParser.ArithExprLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code termLabel}
-	 * labeled alternative in {@link ProjectParser#term}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTermLabel(ProjectParser.TermLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code unaryFactorLabel}
-	 * labeled alternative in {@link ProjectParser#factor}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUnaryFactorLabel(ProjectParser.UnaryFactorLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code powerLabel}
-	 * labeled alternative in {@link ProjectParser#factor}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPowerLabel(ProjectParser.PowerLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code powerExprLabel}
-	 * labeled alternative in {@link ProjectParser#power}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPowerExprLabel(ProjectParser.PowerExprLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code atomExprLabel}
-	 * labeled alternative in {@link ProjectParser#atom_expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAtomExprLabel(ProjectParser.AtomExprLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code parenExprLabel}
-	 * labeled alternative in {@link ProjectParser#atom_expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParenExprLabel(ProjectParser.ParenExprLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code atomParenLabel}
+	 * Visit a parse tree produced by the {@code atomParen}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtomParenLabel(ProjectParser.AtomParenLabelContext ctx);
+	T visitAtomParen(ProjectParser.AtomParenContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code atomListLabel}
+	 * Visit a parse tree produced by the {@code atomList}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtomListLabel(ProjectParser.AtomListLabelContext ctx);
+	T visitAtomList(ProjectParser.AtomListContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code atomDictLabel}
+	 * Visit a parse tree produced by the {@code atomDict}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtomDictLabel(ProjectParser.AtomDictLabelContext ctx);
+	T visitAtomDict(ProjectParser.AtomDictContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code atomNameLabel}
+	 * Visit a parse tree produced by the {@code atomName}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtomNameLabel(ProjectParser.AtomNameLabelContext ctx);
+	T visitAtomName(ProjectParser.AtomNameContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code atomNumberLabel}
+	 * Visit a parse tree produced by the {@code atomNumber}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtomNumberLabel(ProjectParser.AtomNumberLabelContext ctx);
+	T visitAtomNumber(ProjectParser.AtomNumberContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code atomStringLabel}
+	 * Visit a parse tree produced by the {@code atomString}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtomStringLabel(ProjectParser.AtomStringLabelContext ctx);
+	T visitAtomString(ProjectParser.AtomStringContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code atomFStringLabel}
+	 * Visit a parse tree produced by the {@code atomFString}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtomFStringLabel(ProjectParser.AtomFStringLabelContext ctx);
+	T visitAtomFString(ProjectParser.AtomFStringContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code atomTrueLabel}
+	 * Visit a parse tree produced by the {@code atomTrue}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtomTrueLabel(ProjectParser.AtomTrueLabelContext ctx);
+	T visitAtomTrue(ProjectParser.AtomTrueContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code atomFalseLabel}
+	 * Visit a parse tree produced by the {@code atomFalse}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtomFalseLabel(ProjectParser.AtomFalseLabelContext ctx);
+	T visitAtomFalse(ProjectParser.AtomFalseContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code atomNoneLabel}
+	 * Visit a parse tree produced by the {@code atomNone}
 	 * labeled alternative in {@link ProjectParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAtomNoneLabel(ProjectParser.AtomNoneLabelContext ctx);
+	T visitAtomNone(ProjectParser.AtomNoneContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code callTrailerLabel}
+	 * Visit a parse tree produced by the {@code callTrailer}
 	 * labeled alternative in {@link ProjectParser#trailer}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCallTrailerLabel(ProjectParser.CallTrailerLabelContext ctx);
+	T visitCallTrailer(ProjectParser.CallTrailerContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code subscriptTrailerLabel}
+	 * Visit a parse tree produced by the {@code subscriptTrailer}
 	 * labeled alternative in {@link ProjectParser#trailer}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSubscriptTrailerLabel(ProjectParser.SubscriptTrailerLabelContext ctx);
+	T visitSubscriptTrailer(ProjectParser.SubscriptTrailerContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code dotTrailerLabel}
+	 * Visit a parse tree produced by the {@code dotTrailer}
 	 * labeled alternative in {@link ProjectParser#trailer}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDotTrailerLabel(ProjectParser.DotTrailerLabelContext ctx);
+	T visitDotTrailer(ProjectParser.DotTrailerContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code subscriptListLabel}
-	 * labeled alternative in {@link ProjectParser#subscriptlist}.
+	 * Visit a parse tree produced by {@link ProjectParser#subscriptlist}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSubscriptListLabel(ProjectParser.SubscriptListLabelContext ctx);
+	T visitSubscriptlist(ProjectParser.SubscriptlistContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code subscriptTestLabel}
-	 * labeled alternative in {@link ProjectParser#subscript}.
+	 * Visit a parse tree produced by {@link ProjectParser#subscript}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSubscriptTestLabel(ProjectParser.SubscriptTestLabelContext ctx);
+	T visitSubscript(ProjectParser.SubscriptContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code subscriptSliceLabel}
-	 * labeled alternative in {@link ProjectParser#subscript}.
+	 * Visit a parse tree produced by {@link ProjectParser#listmaker}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSubscriptSliceLabel(ProjectParser.SubscriptSliceLabelContext ctx);
+	T visitListmaker(ProjectParser.ListmakerContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code listLabel}
-	 * labeled alternative in {@link ProjectParser#listmaker}.
+	 * Visit a parse tree produced by {@link ProjectParser#dictmaker}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitListLabel(ProjectParser.ListLabelContext ctx);
+	T visitDictmaker(ProjectParser.DictmakerContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code compForListLabel}
-	 * labeled alternative in {@link ProjectParser#listmaker}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCompForListLabel(ProjectParser.CompForListLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code dictLabel}
-	 * labeled alternative in {@link ProjectParser#dictmaker}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDictLabel(ProjectParser.DictLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code compForDictLabel}
-	 * labeled alternative in {@link ProjectParser#dictmaker}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCompForDictLabel(ProjectParser.CompForDictLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code compForLabel}
+	 * Visit a parse tree produced by the {@code compFor}
 	 * labeled alternative in {@link ProjectParser#comp_for}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCompForLabel(ProjectParser.CompForLabelContext ctx);
+	T visitCompFor(ProjectParser.CompForContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code testListCompLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_comp}.
+	 * Visit a parse tree produced by {@link ProjectParser#testlist_comp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTestListCompLabel(ProjectParser.TestListCompLabelContext ctx);
+	T visitTestlist_comp(ProjectParser.Testlist_compContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code compForCompLabel}
-	 * labeled alternative in {@link ProjectParser#testlist_comp}.
+	 * Visit a parse tree produced by {@link ProjectParser#arglist}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCompForCompLabel(ProjectParser.CompForCompLabelContext ctx);
+	T visitArglist(ProjectParser.ArglistContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code argListLabel}
-	 * labeled alternative in {@link ProjectParser#arglist}.
+	 * Visit a parse tree produced by {@link ProjectParser#argument}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArgListLabel(ProjectParser.ArgListLabelContext ctx);
+	T visitArgument(ProjectParser.ArgumentContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code positionalArgLabel}
-	 * labeled alternative in {@link ProjectParser#argument}.
+	 * Visit a parse tree produced by {@link ProjectParser#del_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPositionalArgLabel(ProjectParser.PositionalArgLabelContext ctx);
+	T visitDel_stmt(ProjectParser.Del_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code keywordArgLabel}
-	 * labeled alternative in {@link ProjectParser#argument}.
+	 * Visit a parse tree produced by {@link ProjectParser#pass_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitKeywordArgLabel(ProjectParser.KeywordArgLabelContext ctx);
+	T visitPass_stmt(ProjectParser.Pass_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code delStmtLabel}
-	 * labeled alternative in {@link ProjectParser#del_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#flow_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDelStmtLabel(ProjectParser.DelStmtLabelContext ctx);
+	T visitFlow_stmt(ProjectParser.Flow_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code passStmtLabel}
-	 * labeled alternative in {@link ProjectParser#pass_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#import_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPassStmtLabel(ProjectParser.PassStmtLabelContext ctx);
+	T visitImport_stmt(ProjectParser.Import_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code breakLabel}
-	 * labeled alternative in {@link ProjectParser#flow_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#dotted_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBreakLabel(ProjectParser.BreakLabelContext ctx);
+	T visitDotted_name(ProjectParser.Dotted_nameContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code continueLabel}
-	 * labeled alternative in {@link ProjectParser#flow_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#dotted_as_names}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitContinueLabel(ProjectParser.ContinueLabelContext ctx);
+	T visitDotted_as_names(ProjectParser.Dotted_as_namesContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code returnLabel}
-	 * labeled alternative in {@link ProjectParser#flow_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#dotted_as_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitReturnLabel(ProjectParser.ReturnLabelContext ctx);
+	T visitDotted_as_name(ProjectParser.Dotted_as_nameContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code importNamesLabel}
-	 * labeled alternative in {@link ProjectParser#import_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#import_as_names}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitImportNamesLabel(ProjectParser.ImportNamesLabelContext ctx);
+	T visitImport_as_names(ProjectParser.Import_as_namesContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code importFromLabel}
-	 * labeled alternative in {@link ProjectParser#import_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#import_as_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitImportFromLabel(ProjectParser.ImportFromLabelContext ctx);
+	T visitImport_as_name(ProjectParser.Import_as_nameContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code dottedNameLabel}
-	 * labeled alternative in {@link ProjectParser#dotted_name}.
+	 * Visit a parse tree produced by {@link ProjectParser#global_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDottedNameLabel(ProjectParser.DottedNameLabelContext ctx);
+	T visitGlobal_stmt(ProjectParser.Global_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code dottedAsNamesLabel}
-	 * labeled alternative in {@link ProjectParser#dotted_as_names}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDottedAsNamesLabel(ProjectParser.DottedAsNamesLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code dottedAsNameLabel}
-	 * labeled alternative in {@link ProjectParser#dotted_as_name}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDottedAsNameLabel(ProjectParser.DottedAsNameLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code importAsNamesLabel}
-	 * labeled alternative in {@link ProjectParser#import_as_names}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitImportAsNamesLabel(ProjectParser.ImportAsNamesLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code importAsNameLabel}
-	 * labeled alternative in {@link ProjectParser#import_as_name}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitImportAsNameLabel(ProjectParser.ImportAsNameLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code globalStmtLabel}
-	 * labeled alternative in {@link ProjectParser#global_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitGlobalStmtLabel(ProjectParser.GlobalStmtLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code ifStmtCompound}
+	 * Visit a parse tree produced by the {@code ifStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIfStmtCompound(ProjectParser.IfStmtCompoundContext ctx);
+	T visitIfStmt(ProjectParser.IfStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code whileStmtCompound}
+	 * Visit a parse tree produced by the {@code whileStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWhileStmtCompound(ProjectParser.WhileStmtCompoundContext ctx);
+	T visitWhileStmt(ProjectParser.WhileStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code forStmtCompound}
+	 * Visit a parse tree produced by the {@code forStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitForStmtCompound(ProjectParser.ForStmtCompoundContext ctx);
+	T visitForStmt(ProjectParser.ForStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code funcDefCompound}
+	 * Visit a parse tree produced by the {@code funcDef}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFuncDefCompound(ProjectParser.FuncDefCompoundContext ctx);
+	T visitFuncDef(ProjectParser.FuncDefContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code classDefCompound}
+	 * Visit a parse tree produced by the {@code classDef}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitClassDefCompound(ProjectParser.ClassDefCompoundContext ctx);
+	T visitClassDef(ProjectParser.ClassDefContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code tryStmtCompound}
+	 * Visit a parse tree produced by the {@code tryStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTryStmtCompound(ProjectParser.TryStmtCompoundContext ctx);
+	T visitTryStmt(ProjectParser.TryStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code withStmtCompound}
+	 * Visit a parse tree produced by the {@code withStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWithStmtCompound(ProjectParser.WithStmtCompoundContext ctx);
+	T visitWithStmt(ProjectParser.WithStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code decoratedCompound}
+	 * Visit a parse tree produced by the {@code decoratedStmt}
 	 * labeled alternative in {@link ProjectParser#compound_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDecoratedCompound(ProjectParser.DecoratedCompoundContext ctx);
+	T visitDecoratedStmt(ProjectParser.DecoratedStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code decoratedLabel}
-	 * labeled alternative in {@link ProjectParser#decorated}.
+	 * Visit a parse tree produced by {@link ProjectParser#decorated}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDecoratedLabel(ProjectParser.DecoratedLabelContext ctx);
+	T visitDecorated(ProjectParser.DecoratedContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code decoratorLabel}
-	 * labeled alternative in {@link ProjectParser#decorator}.
+	 * Visit a parse tree produced by {@link ProjectParser#decorator}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDecoratorLabel(ProjectParser.DecoratorLabelContext ctx);
+	T visitDecorator(ProjectParser.DecoratorContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ifStmtLabel}
-	 * labeled alternative in {@link ProjectParser#if_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#if_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIfStmtLabel(ProjectParser.IfStmtLabelContext ctx);
+	T visitIf_stmt(ProjectParser.If_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code whileStmtLabel}
-	 * labeled alternative in {@link ProjectParser#while_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#while_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWhileStmtLabel(ProjectParser.WhileStmtLabelContext ctx);
+	T visitWhile_stmt(ProjectParser.While_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code forStmtLabel}
-	 * labeled alternative in {@link ProjectParser#for_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#for_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitForStmtLabel(ProjectParser.ForStmtLabelContext ctx);
+	T visitFor_stmt(ProjectParser.For_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code funcDefLabel}
-	 * labeled alternative in {@link ProjectParser#funcdef}.
+	 * Visit a parse tree produced by {@link ProjectParser#funcdef}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFuncDefLabel(ProjectParser.FuncDefLabelContext ctx);
+	T visitFuncdef(ProjectParser.FuncdefContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code parametersLabel}
-	 * labeled alternative in {@link ProjectParser#parameters}.
+	 * Visit a parse tree produced by {@link ProjectParser#parameters}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParametersLabel(ProjectParser.ParametersLabelContext ctx);
+	T visitParameters(ProjectParser.ParametersContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code typedArgsListLabel}
-	 * labeled alternative in {@link ProjectParser#typedargslist}.
+	 * Visit a parse tree produced by {@link ProjectParser#typedargslist}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTypedArgsListLabel(ProjectParser.TypedArgsListLabelContext ctx);
+	T visitTypedargslist(ProjectParser.TypedargslistContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code typedArgsStarLabel}
-	 * labeled alternative in {@link ProjectParser#typedargslist}.
+	 * Visit a parse tree produced by {@link ProjectParser#tfpdef}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTypedArgsStarLabel(ProjectParser.TypedArgsStarLabelContext ctx);
+	T visitTfpdef(ProjectParser.TfpdefContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code tfpdefLabel}
-	 * labeled alternative in {@link ProjectParser#tfpdef}.
+	 * Visit a parse tree produced by {@link ProjectParser#classdef}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTfpdefLabel(ProjectParser.TfpdefLabelContext ctx);
+	T visitClassdef(ProjectParser.ClassdefContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code classDefLabel}
-	 * labeled alternative in {@link ProjectParser#classdef}.
+	 * Visit a parse tree produced by {@link ProjectParser#try_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitClassDefLabel(ProjectParser.ClassDefLabelContext ctx);
+	T visitTry_stmt(ProjectParser.Try_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code tryStmtLabel}
-	 * labeled alternative in {@link ProjectParser#try_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#with_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTryStmtLabel(ProjectParser.TryStmtLabelContext ctx);
+	T visitWith_stmt(ProjectParser.With_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code withStmtLabel}
-	 * labeled alternative in {@link ProjectParser#with_stmt}.
+	 * Visit a parse tree produced by {@link ProjectParser#with_item}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWithStmtLabel(ProjectParser.WithStmtLabelContext ctx);
+	T visitWith_item(ProjectParser.With_itemContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code withItemLabel}
-	 * labeled alternative in {@link ProjectParser#with_item}.
+	 * Visit a parse tree produced by {@link ProjectParser#suite}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWithItemLabel(ProjectParser.WithItemLabelContext ctx);
+	T visitSuite(ProjectParser.SuiteContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code simpleSuite}
-	 * labeled alternative in {@link ProjectParser#suite}.
+	 * Visit a parse tree produced by {@link ProjectParser#exprlist}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSimpleSuite(ProjectParser.SimpleSuiteContext ctx);
+	T visitExprlist(ProjectParser.ExprlistContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code indentedSuite}
-	 * labeled alternative in {@link ProjectParser#suite}.
+	 * Visit a parse tree produced by {@link ProjectParser#testlist}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIndentedSuite(ProjectParser.IndentedSuiteContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code exprListLabel}
-	 * labeled alternative in {@link ProjectParser#exprlist}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExprListLabel(ProjectParser.ExprListLabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code testListLabel}
-	 * labeled alternative in {@link ProjectParser#testlist}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTestListLabel(ProjectParser.TestListLabelContext ctx);
+	T visitTestlist(ProjectParser.TestlistContext ctx);
 }
