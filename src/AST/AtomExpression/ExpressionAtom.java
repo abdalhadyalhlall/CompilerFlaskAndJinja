@@ -1,6 +1,5 @@
 package AST.AtomExpression;
 
-import AST.Statment;
 import AST.StatmentRoot;
 
 public abstract class ExpressionAtom extends StatmentRoot {
