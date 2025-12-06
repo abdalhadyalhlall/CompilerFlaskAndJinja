@@ -1,4 +1,4 @@
-// Generated from D:/test.java.compiler/FlaskJinjaProject/src/antlr/ProjectLexer.g4 by ANTLR 4.13.2
+// Generated from C:/Users/DELL/Desktop/CompilerFlaskAndJinja/src/antlr/ProjectLexer.g4 by ANTLR 4.13.2
 package antlr;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;

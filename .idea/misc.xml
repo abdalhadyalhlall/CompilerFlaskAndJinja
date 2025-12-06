@@ -6,7 +6,7 @@
         <PerGrammarGenerationSettings>
           <option name="fileName" value="$PROJECT_DIR$/src/antlr/ProjectLexer.g4" />
           <option name="autoGen" value="true" />
-          <option name="outputDir" value="D:\test.java.compiler\FlaskJinjaProject\src" />
+          <option name="outputDir" value="C:\Users\DELL\Desktop\CompilerFlaskAndJinja\src" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
           <option name="pkg" value="" />
@@ -16,7 +16,7 @@
         <PerGrammarGenerationSettings>
           <option name="fileName" value="$PROJECT_DIR$/src/antlr/ProjectParser.g4" />
           <option name="autoGen" value="true" />
-          <option name="outputDir" value="D:\test.java.compiler\FlaskJinjaProject\src" />
+          <option name="outputDir" value="C:\Users\DELL\Desktop\CompilerFlaskAndJinja\src" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
           <option name="pkg" value="" />
