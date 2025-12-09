@@ -18,7 +18,7 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDocument(HTMLCSSJINJA_parser.DocumentContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDocumentLabel(HTMLCSSJINJA_parser.DocumentLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -74,7 +74,7 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAttributehtml(HTMLCSSJINJA_parser.AttributehtmlContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLangAttributeLabel(HTMLCSSJINJA_parser.LangAttributeLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -130,14 +130,14 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitJinjaElementlabel1(HTMLCSSJINJA_parser.JinjaElementlabel1Context ctx) { return visitChildren(ctx); }
+	@Override public T visitJinjasecondElementlabel(HTMLCSSJINJA_parser.JinjasecondElementlabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNormalTagElementhead(HTMLCSSJINJA_parser.NormalTagElementheadContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNormaltaghead(HTMLCSSJINJA_parser.NormaltagheadContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -151,7 +151,7 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSelfClosingTagElementhead(HTMLCSSJINJA_parser.SelfClosingTagElementheadContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSelfclostaglabel(HTMLCSSJINJA_parser.SelfclostaglabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -179,7 +179,7 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitJinjaElementlabel2(HTMLCSSJINJA_parser.JinjaElementlabel2Context ctx) { return visitChildren(ctx); }
+	@Override public T visitJinjathirdElementlabel(HTMLCSSJINJA_parser.JinjathirdElementlabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -200,98 +200,98 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAttribute_style(HTMLCSSJINJA_parser.Attribute_styleContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStylelabel(HTMLCSSJINJA_parser.StylelabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitColorlabel(HTMLCSSJINJA_parser.ColorlabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitColorLabel(HTMLCSSJINJA_parser.ColorLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLengthlabel(HTMLCSSJINJA_parser.LengthlabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLengthLabel(HTMLCSSJINJA_parser.LengthLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitUrllabel(HTMLCSSJINJA_parser.UrllabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUrlLabel(HTMLCSSJINJA_parser.UrlLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRepeatlabel(HTMLCSSJINJA_parser.RepeatlabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRepeatLabel(HTMLCSSJINJA_parser.RepeatLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPositionlabel(HTMLCSSJINJA_parser.PositionlabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPositionLabel(HTMLCSSJINJA_parser.PositionLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBorder_stylelabel(HTMLCSSJINJA_parser.Border_stylelabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBorderStyleLabel(HTMLCSSJINJA_parser.BorderStyleLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBorder_widthlabel(HTMLCSSJINJA_parser.Border_widthlabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBorderWidthLabel(HTMLCSSJINJA_parser.BorderWidthLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBorderlabel(HTMLCSSJINJA_parser.BorderlabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBorderLabel(HTMLCSSJINJA_parser.BorderLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFontlabel(HTMLCSSJINJA_parser.FontlabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFontLabel(HTMLCSSJINJA_parser.FontLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTextcsslabel(HTMLCSSJINJA_parser.TextcsslabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTextCssLabel(HTMLCSSJINJA_parser.TextCssLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitEffectlabel(HTMLCSSJINJA_parser.EffectlabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitEffectLabel(HTMLCSSJINJA_parser.EffectLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLayoutlabel(HTMLCSSJINJA_parser.LayoutlabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLayoutLabel(HTMLCSSJINJA_parser.LayoutLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOffsetlabel(HTMLCSSJINJA_parser.OffsetlabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOffsetLabel(HTMLCSSJINJA_parser.OffsetLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -508,21 +508,42 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitJinjaBlockContent(HTMLCSSJINJA_parser.JinjaBlockContentContext ctx) { return visitChildren(ctx); }
+	@Override public T visitJinjaNormalTagLabel(HTMLCSSJINJA_parser.JinjaNormalTagLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitJinjaIfBlockLabel(HTMLCSSJINJA_parser.JinjaIfBlockLabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitJinjaSelfClosingTagLabel(HTMLCSSJINJA_parser.JinjaSelfClosingTagLabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitJinjaForBlockLabel(HTMLCSSJINJA_parser.JinjaForBlockLabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitJinjaNestedElementLabel(HTMLCSSJINJA_parser.JinjaNestedElementLabelContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJinjaTextLabel(HTMLCSSJINJA_parser.JinjaTextLabelContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJinjaIfBlock(HTMLCSSJINJA_parser.JinjaIfBlockContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJinjaForBlock(HTMLCSSJINJA_parser.JinjaForBlockContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -536,12 +557,12 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitJinjaStmtLabel(HTMLCSSJINJA_parser.JinjaStmtLabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitJinjaStmt(HTMLCSSJINJA_parser.JinjaStmtContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitJinjaCommentLabel(HTMLCSSJINJA_parser.JinjaCommentLabelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx) { return visitChildren(ctx); }
 }

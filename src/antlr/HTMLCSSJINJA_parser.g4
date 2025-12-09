@@ -3,7 +3,7 @@ parser grammar HTMLCSSJINJA_parser;
 options { tokenVocab = HTMLCSSJINJA_lexer; }
 
 document
-    : html* EOF
+    : html* EOF         #documentLabel
     ;
 
 html:  htmlelement      #htmlelementlabel
@@ -18,7 +18,7 @@ htmlelement: OPEN_TAG_START TAG_HTML attruputehtml* CLOSE contenthtml* END_TAG_S
 
 attruputehtml: attributehtml;
 
-attributehtml : ATTR_LANG EQUALS (VALUE_LANG_EN|VALUE_LANG_AR);
+attributehtml: ATTR_LANG EQUALS (VALUE_LANG_EN|VALUE_LANG_AR) #langAttributeLabel;
 
 contenthtml: head     #headlabel
            | body     #bodylabel;
@@ -30,40 +30,40 @@ body: OPEN_TAG_START TAG_BODY attributebody* CLOSE contentbody* END_TAG_START TA
 
 contenthead: normalTagElementhead          #normalTagElementheadlabel
            | selfClosingTagElementhead     #selfClosingTagElementheadlabel
-           | jinjaElement                  #jinjaElementlabel1
+           | jinjaElement                  #jinjasecondElementlabel
            ;
 
-normalTagElementhead: OPEN_TAG_START tagsheadnormal attributehead* CLOSE text* END_TAG_START tagsheadnormal CLOSE;
+normalTagElementhead: OPEN_TAG_START tagsheadnormal attributehead* CLOSE text* END_TAG_START tagsheadnormal CLOSE #normaltaghead;
 tagsheadnormal: TAG_TITLE;
 
-selfClosingTagElementhead: OPEN_TAG_START tagsheadself attributehead* SLASH_CLOSE;
+selfClosingTagElementhead: OPEN_TAG_START tagsheadself attributehead* SLASH_CLOSE #selfclostaglabel;
 tagsheadself: TAG_META;
 
 contentbody
     : normalTagElementbody          #normalTagElementbodylabel
     | selfClosingTagElementbody     #selfClosingTagElementbodylabel
-    | jinjaElement                  #jinjaElementlabel2
+    | jinjaElement                  #jinjathirdElementlabel
     | TEXT                          #textlabel
     ;
 
 normalTagElementbody: OPEN_TAG_START  tagsbodynamenormal attributebody* CLOSE contentbody* END_TAG_START tagsbodynamenormal CLOSE #normal_Tag_Element_body;
 
-attribute_style: STYLE_ATTRIBUTE_START stylename+ STYLE_END;
+attribute_style: STYLE_ATTRIBUTE_START stylename+ STYLE_END #stylelabel;
 
 stylename
-        : color         #colorlabel
-        | length        #lengthlabel
-        | url           #urllabel
-        | repeat        #repeatlabel
-        | position      #positionlabel
-        | border_style  #border_stylelabel
-        | border_width  #border_widthlabel
-        | border        #borderlabel
-        | font          #fontlabel
-        | textcss       #textcsslabel
-        | effect        #effectlabel
-        | layout        #layoutlabel
-        | offset        #offsetlabel
+        : color         #colorLabel
+        | length        #lengthLabel
+        | url           #urlLabel
+        | repeat        #repeatLabel
+        | position      #positionLabel
+        | border_style  #borderStyleLabel
+        | border_width  #borderWidthLabel
+        | border        #borderLabel
+        | font          #fontLabel
+        | textcss       #textCssLabel
+        | effect        #effectLabel
+        | layout        #layoutLabel
+        | offset        #offsetLabel
         ;
 
 color: CSS_ATTR_COLOR CSS_TWOPOINT CSS_COLOR_VALUE CSS_SEMI;
@@ -294,7 +294,10 @@ jinjaExprContent
     ;
 
 jinjaBlockContent
-    : contentbody
+    : normalTagElementbody          #jinjaNormalTagLabel
+    | selfClosingTagElementbody     #jinjaSelfClosingTagLabel
+    | jinjaElement                  #jinjaNestedElementLabel
+    | TEXT                          #jinjaTextLabel
     ;
 
 jinjaIfBlock
@@ -303,7 +306,6 @@ jinjaIfBlock
       (JINJA_STMT_START JINJA_STMT_ELIF jinjaStmtArgument* JINJA_STMT_END jinjaBlockContent*)*
       (JINJA_STMT_START JINJA_STMT_ELSE JINJA_STMT_END jinjaBlockContent*)*
       JINJA_STMT_START JINJA_STMT_ENDIF JINJA_STMT_END
-    #jinjaIfBlockLabel
     ;
 
 jinjaForBlock
@@ -311,7 +313,6 @@ jinjaForBlock
       jinjaBlockContent*
       (JINJA_STMT_START JINJA_STMT_ELSE JINJA_STMT_END jinjaBlockContent*)*
       JINJA_STMT_START JINJA_STMT_ENDFOR JINJA_STMT_END
-    #jinjaForBlockLabel
     ;
 
 jinjaStmtArgument
@@ -323,9 +324,9 @@ jinjaStmtArgument
     ;
 
 jinjaStmt
-    : JINJA_STMT_START jinjaStmtArgument+ JINJA_STMT_END #jinjaStmtLabel
+    : JINJA_STMT_START jinjaStmtArgument+ JINJA_STMT_END
     ;
 
 jinjaComment
-    : JANJI_COMMENT #jinjaCommentLabel
+    : JANJI_COMMENT
     ;

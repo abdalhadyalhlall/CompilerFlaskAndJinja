@@ -17,13 +17,13 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDocument(HTMLCSSJINJA_parser.DocumentContext ctx) { }
+	@Override public void enterDocumentLabel(HTMLCSSJINJA_parser.DocumentLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDocument(HTMLCSSJINJA_parser.DocumentContext ctx) { }
+	@Override public void exitDocumentLabel(HTMLCSSJINJA_parser.DocumentLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -113,13 +113,13 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAttributehtml(HTMLCSSJINJA_parser.AttributehtmlContext ctx) { }
+	@Override public void enterLangAttributeLabel(HTMLCSSJINJA_parser.LangAttributeLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAttributehtml(HTMLCSSJINJA_parser.AttributehtmlContext ctx) { }
+	@Override public void exitLangAttributeLabel(HTMLCSSJINJA_parser.LangAttributeLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -209,25 +209,25 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJinjaElementlabel1(HTMLCSSJINJA_parser.JinjaElementlabel1Context ctx) { }
+	@Override public void enterJinjasecondElementlabel(HTMLCSSJINJA_parser.JinjasecondElementlabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitJinjaElementlabel1(HTMLCSSJINJA_parser.JinjaElementlabel1Context ctx) { }
+	@Override public void exitJinjasecondElementlabel(HTMLCSSJINJA_parser.JinjasecondElementlabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNormalTagElementhead(HTMLCSSJINJA_parser.NormalTagElementheadContext ctx) { }
+	@Override public void enterNormaltaghead(HTMLCSSJINJA_parser.NormaltagheadContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNormalTagElementhead(HTMLCSSJINJA_parser.NormalTagElementheadContext ctx) { }
+	@Override public void exitNormaltaghead(HTMLCSSJINJA_parser.NormaltagheadContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -245,13 +245,13 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSelfClosingTagElementhead(HTMLCSSJINJA_parser.SelfClosingTagElementheadContext ctx) { }
+	@Override public void enterSelfclostaglabel(HTMLCSSJINJA_parser.SelfclostaglabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSelfClosingTagElementhead(HTMLCSSJINJA_parser.SelfClosingTagElementheadContext ctx) { }
+	@Override public void exitSelfclostaglabel(HTMLCSSJINJA_parser.SelfclostaglabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -293,13 +293,13 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJinjaElementlabel2(HTMLCSSJINJA_parser.JinjaElementlabel2Context ctx) { }
+	@Override public void enterJinjathirdElementlabel(HTMLCSSJINJA_parser.JinjathirdElementlabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitJinjaElementlabel2(HTMLCSSJINJA_parser.JinjaElementlabel2Context ctx) { }
+	@Override public void exitJinjathirdElementlabel(HTMLCSSJINJA_parser.JinjathirdElementlabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -329,169 +329,169 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAttribute_style(HTMLCSSJINJA_parser.Attribute_styleContext ctx) { }
+	@Override public void enterStylelabel(HTMLCSSJINJA_parser.StylelabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAttribute_style(HTMLCSSJINJA_parser.Attribute_styleContext ctx) { }
+	@Override public void exitStylelabel(HTMLCSSJINJA_parser.StylelabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterColorlabel(HTMLCSSJINJA_parser.ColorlabelContext ctx) { }
+	@Override public void enterColorLabel(HTMLCSSJINJA_parser.ColorLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitColorlabel(HTMLCSSJINJA_parser.ColorlabelContext ctx) { }
+	@Override public void exitColorLabel(HTMLCSSJINJA_parser.ColorLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLengthlabel(HTMLCSSJINJA_parser.LengthlabelContext ctx) { }
+	@Override public void enterLengthLabel(HTMLCSSJINJA_parser.LengthLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLengthlabel(HTMLCSSJINJA_parser.LengthlabelContext ctx) { }
+	@Override public void exitLengthLabel(HTMLCSSJINJA_parser.LengthLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUrllabel(HTMLCSSJINJA_parser.UrllabelContext ctx) { }
+	@Override public void enterUrlLabel(HTMLCSSJINJA_parser.UrlLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUrllabel(HTMLCSSJINJA_parser.UrllabelContext ctx) { }
+	@Override public void exitUrlLabel(HTMLCSSJINJA_parser.UrlLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRepeatlabel(HTMLCSSJINJA_parser.RepeatlabelContext ctx) { }
+	@Override public void enterRepeatLabel(HTMLCSSJINJA_parser.RepeatLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRepeatlabel(HTMLCSSJINJA_parser.RepeatlabelContext ctx) { }
+	@Override public void exitRepeatLabel(HTMLCSSJINJA_parser.RepeatLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPositionlabel(HTMLCSSJINJA_parser.PositionlabelContext ctx) { }
+	@Override public void enterPositionLabel(HTMLCSSJINJA_parser.PositionLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPositionlabel(HTMLCSSJINJA_parser.PositionlabelContext ctx) { }
+	@Override public void exitPositionLabel(HTMLCSSJINJA_parser.PositionLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBorder_stylelabel(HTMLCSSJINJA_parser.Border_stylelabelContext ctx) { }
+	@Override public void enterBorderStyleLabel(HTMLCSSJINJA_parser.BorderStyleLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBorder_stylelabel(HTMLCSSJINJA_parser.Border_stylelabelContext ctx) { }
+	@Override public void exitBorderStyleLabel(HTMLCSSJINJA_parser.BorderStyleLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBorder_widthlabel(HTMLCSSJINJA_parser.Border_widthlabelContext ctx) { }
+	@Override public void enterBorderWidthLabel(HTMLCSSJINJA_parser.BorderWidthLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBorder_widthlabel(HTMLCSSJINJA_parser.Border_widthlabelContext ctx) { }
+	@Override public void exitBorderWidthLabel(HTMLCSSJINJA_parser.BorderWidthLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBorderlabel(HTMLCSSJINJA_parser.BorderlabelContext ctx) { }
+	@Override public void enterBorderLabel(HTMLCSSJINJA_parser.BorderLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBorderlabel(HTMLCSSJINJA_parser.BorderlabelContext ctx) { }
+	@Override public void exitBorderLabel(HTMLCSSJINJA_parser.BorderLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFontlabel(HTMLCSSJINJA_parser.FontlabelContext ctx) { }
+	@Override public void enterFontLabel(HTMLCSSJINJA_parser.FontLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFontlabel(HTMLCSSJINJA_parser.FontlabelContext ctx) { }
+	@Override public void exitFontLabel(HTMLCSSJINJA_parser.FontLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTextcsslabel(HTMLCSSJINJA_parser.TextcsslabelContext ctx) { }
+	@Override public void enterTextCssLabel(HTMLCSSJINJA_parser.TextCssLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTextcsslabel(HTMLCSSJINJA_parser.TextcsslabelContext ctx) { }
+	@Override public void exitTextCssLabel(HTMLCSSJINJA_parser.TextCssLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEffectlabel(HTMLCSSJINJA_parser.EffectlabelContext ctx) { }
+	@Override public void enterEffectLabel(HTMLCSSJINJA_parser.EffectLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEffectlabel(HTMLCSSJINJA_parser.EffectlabelContext ctx) { }
+	@Override public void exitEffectLabel(HTMLCSSJINJA_parser.EffectLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLayoutlabel(HTMLCSSJINJA_parser.LayoutlabelContext ctx) { }
+	@Override public void enterLayoutLabel(HTMLCSSJINJA_parser.LayoutLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLayoutlabel(HTMLCSSJINJA_parser.LayoutlabelContext ctx) { }
+	@Override public void exitLayoutLabel(HTMLCSSJINJA_parser.LayoutLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOffsetlabel(HTMLCSSJINJA_parser.OffsetlabelContext ctx) { }
+	@Override public void enterOffsetLabel(HTMLCSSJINJA_parser.OffsetLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOffsetlabel(HTMLCSSJINJA_parser.OffsetlabelContext ctx) { }
+	@Override public void exitOffsetLabel(HTMLCSSJINJA_parser.OffsetLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -857,37 +857,73 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJinjaBlockContent(HTMLCSSJINJA_parser.JinjaBlockContentContext ctx) { }
+	@Override public void enterJinjaNormalTagLabel(HTMLCSSJINJA_parser.JinjaNormalTagLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitJinjaBlockContent(HTMLCSSJINJA_parser.JinjaBlockContentContext ctx) { }
+	@Override public void exitJinjaNormalTagLabel(HTMLCSSJINJA_parser.JinjaNormalTagLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJinjaIfBlockLabel(HTMLCSSJINJA_parser.JinjaIfBlockLabelContext ctx) { }
+	@Override public void enterJinjaSelfClosingTagLabel(HTMLCSSJINJA_parser.JinjaSelfClosingTagLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitJinjaIfBlockLabel(HTMLCSSJINJA_parser.JinjaIfBlockLabelContext ctx) { }
+	@Override public void exitJinjaSelfClosingTagLabel(HTMLCSSJINJA_parser.JinjaSelfClosingTagLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJinjaForBlockLabel(HTMLCSSJINJA_parser.JinjaForBlockLabelContext ctx) { }
+	@Override public void enterJinjaNestedElementLabel(HTMLCSSJINJA_parser.JinjaNestedElementLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitJinjaForBlockLabel(HTMLCSSJINJA_parser.JinjaForBlockLabelContext ctx) { }
+	@Override public void exitJinjaNestedElementLabel(HTMLCSSJINJA_parser.JinjaNestedElementLabelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJinjaTextLabel(HTMLCSSJINJA_parser.JinjaTextLabelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJinjaTextLabel(HTMLCSSJINJA_parser.JinjaTextLabelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJinjaIfBlock(HTMLCSSJINJA_parser.JinjaIfBlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJinjaIfBlock(HTMLCSSJINJA_parser.JinjaIfBlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJinjaForBlock(HTMLCSSJINJA_parser.JinjaForBlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJinjaForBlock(HTMLCSSJINJA_parser.JinjaForBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -905,25 +941,25 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJinjaStmtLabel(HTMLCSSJINJA_parser.JinjaStmtLabelContext ctx) { }
+	@Override public void enterJinjaStmt(HTMLCSSJINJA_parser.JinjaStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitJinjaStmtLabel(HTMLCSSJINJA_parser.JinjaStmtLabelContext ctx) { }
+	@Override public void exitJinjaStmt(HTMLCSSJINJA_parser.JinjaStmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJinjaCommentLabel(HTMLCSSJINJA_parser.JinjaCommentLabelContext ctx) { }
+	@Override public void enterJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitJinjaCommentLabel(HTMLCSSJINJA_parser.JinjaCommentLabelContext ctx) { }
+	@Override public void exitJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

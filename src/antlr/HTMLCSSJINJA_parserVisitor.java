@@ -11,11 +11,12 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#document}.
+	 * Visit a parse tree produced by the {@code documentLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#document}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDocument(HTMLCSSJINJA_parser.DocumentContext ctx);
+	T visitDocumentLabel(HTMLCSSJINJA_parser.DocumentLabelContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code htmlelementlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#html}.
@@ -63,11 +64,12 @@ public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAttruputehtml(HTMLCSSJINJA_parser.AttruputehtmlContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#attributehtml}.
+	 * Visit a parse tree produced by the {@code langAttributeLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#attributehtml}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAttributehtml(HTMLCSSJINJA_parser.AttributehtmlContext ctx);
+	T visitLangAttributeLabel(HTMLCSSJINJA_parser.LangAttributeLabelContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code headlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#contenthtml}.
@@ -115,18 +117,19 @@ public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSelfClosingTagElementheadlabel(HTMLCSSJINJA_parser.SelfClosingTagElementheadlabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code jinjaElementlabel1}
+	 * Visit a parse tree produced by the {@code jinjasecondElementlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#contenthead}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitJinjaElementlabel1(HTMLCSSJINJA_parser.JinjaElementlabel1Context ctx);
+	T visitJinjasecondElementlabel(HTMLCSSJINJA_parser.JinjasecondElementlabelContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#normalTagElementhead}.
+	 * Visit a parse tree produced by the {@code normaltaghead}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#normalTagElementhead}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNormalTagElementhead(HTMLCSSJINJA_parser.NormalTagElementheadContext ctx);
+	T visitNormaltaghead(HTMLCSSJINJA_parser.NormaltagheadContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#tagsheadnormal}.
 	 * @param ctx the parse tree
@@ -134,11 +137,12 @@ public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTagsheadnormal(HTMLCSSJINJA_parser.TagsheadnormalContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#selfClosingTagElementhead}.
+	 * Visit a parse tree produced by the {@code selfclostaglabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#selfClosingTagElementhead}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSelfClosingTagElementhead(HTMLCSSJINJA_parser.SelfClosingTagElementheadContext ctx);
+	T visitSelfclostaglabel(HTMLCSSJINJA_parser.SelfclostaglabelContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#tagsheadself}.
 	 * @param ctx the parse tree
@@ -160,12 +164,12 @@ public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSelfClosingTagElementbodylabel(HTMLCSSJINJA_parser.SelfClosingTagElementbodylabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code jinjaElementlabel2}
+	 * Visit a parse tree produced by the {@code jinjathirdElementlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#contentbody}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitJinjaElementlabel2(HTMLCSSJINJA_parser.JinjaElementlabel2Context ctx);
+	T visitJinjathirdElementlabel(HTMLCSSJINJA_parser.JinjathirdElementlabelContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code textlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#contentbody}.
@@ -181,102 +185,103 @@ public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNormal_Tag_Element_body(HTMLCSSJINJA_parser.Normal_Tag_Element_bodyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#attribute_style}.
+	 * Visit a parse tree produced by the {@code stylelabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#attribute_style}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAttribute_style(HTMLCSSJINJA_parser.Attribute_styleContext ctx);
+	T visitStylelabel(HTMLCSSJINJA_parser.StylelabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code colorlabel}
+	 * Visit a parse tree produced by the {@code colorLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitColorlabel(HTMLCSSJINJA_parser.ColorlabelContext ctx);
+	T visitColorLabel(HTMLCSSJINJA_parser.ColorLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code lengthlabel}
+	 * Visit a parse tree produced by the {@code lengthLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLengthlabel(HTMLCSSJINJA_parser.LengthlabelContext ctx);
+	T visitLengthLabel(HTMLCSSJINJA_parser.LengthLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code urllabel}
+	 * Visit a parse tree produced by the {@code urlLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUrllabel(HTMLCSSJINJA_parser.UrllabelContext ctx);
+	T visitUrlLabel(HTMLCSSJINJA_parser.UrlLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code repeatlabel}
+	 * Visit a parse tree produced by the {@code repeatLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRepeatlabel(HTMLCSSJINJA_parser.RepeatlabelContext ctx);
+	T visitRepeatLabel(HTMLCSSJINJA_parser.RepeatLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code positionlabel}
+	 * Visit a parse tree produced by the {@code positionLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPositionlabel(HTMLCSSJINJA_parser.PositionlabelContext ctx);
+	T visitPositionLabel(HTMLCSSJINJA_parser.PositionLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code border_stylelabel}
+	 * Visit a parse tree produced by the {@code borderStyleLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBorder_stylelabel(HTMLCSSJINJA_parser.Border_stylelabelContext ctx);
+	T visitBorderStyleLabel(HTMLCSSJINJA_parser.BorderStyleLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code border_widthlabel}
+	 * Visit a parse tree produced by the {@code borderWidthLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBorder_widthlabel(HTMLCSSJINJA_parser.Border_widthlabelContext ctx);
+	T visitBorderWidthLabel(HTMLCSSJINJA_parser.BorderWidthLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code borderlabel}
+	 * Visit a parse tree produced by the {@code borderLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBorderlabel(HTMLCSSJINJA_parser.BorderlabelContext ctx);
+	T visitBorderLabel(HTMLCSSJINJA_parser.BorderLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code fontlabel}
+	 * Visit a parse tree produced by the {@code fontLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFontlabel(HTMLCSSJINJA_parser.FontlabelContext ctx);
+	T visitFontLabel(HTMLCSSJINJA_parser.FontLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code textcsslabel}
+	 * Visit a parse tree produced by the {@code textCssLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTextcsslabel(HTMLCSSJINJA_parser.TextcsslabelContext ctx);
+	T visitTextCssLabel(HTMLCSSJINJA_parser.TextCssLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code effectlabel}
+	 * Visit a parse tree produced by the {@code effectLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitEffectlabel(HTMLCSSJINJA_parser.EffectlabelContext ctx);
+	T visitEffectLabel(HTMLCSSJINJA_parser.EffectLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code layoutlabel}
+	 * Visit a parse tree produced by the {@code layoutLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLayoutlabel(HTMLCSSJINJA_parser.LayoutlabelContext ctx);
+	T visitLayoutLabel(HTMLCSSJINJA_parser.LayoutLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code offsetlabel}
+	 * Visit a parse tree produced by the {@code offsetLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOffsetlabel(HTMLCSSJINJA_parser.OffsetlabelContext ctx);
+	T visitOffsetLabel(HTMLCSSJINJA_parser.OffsetLabelContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#color}.
 	 * @param ctx the parse tree
@@ -466,25 +471,45 @@ public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJinjaExprContent(HTMLCSSJINJA_parser.JinjaExprContentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
+	 * Visit a parse tree produced by the {@code jinjaNormalTagLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitJinjaBlockContent(HTMLCSSJINJA_parser.JinjaBlockContentContext ctx);
+	T visitJinjaNormalTagLabel(HTMLCSSJINJA_parser.JinjaNormalTagLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code jinjaIfBlockLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaIfBlock}.
+	 * Visit a parse tree produced by the {@code jinjaSelfClosingTagLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitJinjaIfBlockLabel(HTMLCSSJINJA_parser.JinjaIfBlockLabelContext ctx);
+	T visitJinjaSelfClosingTagLabel(HTMLCSSJINJA_parser.JinjaSelfClosingTagLabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code jinjaForBlockLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaForBlock}.
+	 * Visit a parse tree produced by the {@code jinjaNestedElementLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitJinjaForBlockLabel(HTMLCSSJINJA_parser.JinjaForBlockLabelContext ctx);
+	T visitJinjaNestedElementLabel(HTMLCSSJINJA_parser.JinjaNestedElementLabelContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code jinjaTextLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJinjaTextLabel(HTMLCSSJINJA_parser.JinjaTextLabelContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaIfBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJinjaIfBlock(HTMLCSSJINJA_parser.JinjaIfBlockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaForBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJinjaForBlock(HTMLCSSJINJA_parser.JinjaForBlockContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaStmtArgument}.
 	 * @param ctx the parse tree
@@ -492,17 +517,15 @@ public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJinjaStmtArgument(HTMLCSSJINJA_parser.JinjaStmtArgumentContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code jinjaStmtLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaStmt}.
+	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaStmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitJinjaStmtLabel(HTMLCSSJINJA_parser.JinjaStmtLabelContext ctx);
+	T visitJinjaStmt(HTMLCSSJINJA_parser.JinjaStmtContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code jinjaCommentLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaComment}.
+	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaComment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitJinjaCommentLabel(HTMLCSSJINJA_parser.JinjaCommentLabelContext ctx);
+	T visitJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx);
 }
