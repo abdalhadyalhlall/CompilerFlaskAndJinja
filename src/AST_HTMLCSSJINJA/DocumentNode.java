@@ -1,4 +1,4 @@
-package AST;
+package AST_HTMLCSSJINJA;
 
 public class DocumentNode extends ASTNode {
     public DocumentNode(int lineNumber) {

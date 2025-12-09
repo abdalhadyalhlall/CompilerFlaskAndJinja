@@ -1,4 +1,4 @@
-package AST;
+package AST_HTMLCSSJINJA;
 
 public class AttributeNode extends ASTNode {
     private String name;

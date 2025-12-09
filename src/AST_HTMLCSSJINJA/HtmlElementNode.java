@@ -1,4 +1,4 @@
-package AST;
+package AST_HTMLCSSJINJA;
 
 public class HtmlElementNode extends ASTNode {
     private String tagName;

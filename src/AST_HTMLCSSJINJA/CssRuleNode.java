@@ -1,4 +1,4 @@
-package AST;
+package AST_HTMLCSSJINJA;
 
 public class CssRuleNode extends ASTNode {
     private String property;
