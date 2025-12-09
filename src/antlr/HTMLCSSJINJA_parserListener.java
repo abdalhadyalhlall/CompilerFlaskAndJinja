@@ -8,15 +8,17 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface HTMLCSSJINJA_parserListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#document}.
+	 * Enter a parse tree produced by the {@code documentLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#document}.
 	 * @param ctx the parse tree
 	 */
-	void enterDocument(HTMLCSSJINJA_parser.DocumentContext ctx);
+	void enterDocumentLabel(HTMLCSSJINJA_parser.DocumentLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HTMLCSSJINJA_parser#document}.
+	 * Exit a parse tree produced by the {@code documentLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#document}.
 	 * @param ctx the parse tree
 	 */
-	void exitDocument(HTMLCSSJINJA_parser.DocumentContext ctx);
+	void exitDocumentLabel(HTMLCSSJINJA_parser.DocumentLabelContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code htmlelementlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#html}.
@@ -96,15 +98,17 @@ public interface HTMLCSSJINJA_parserListener extends ParseTreeListener {
 	 */
 	void exitAttruputehtml(HTMLCSSJINJA_parser.AttruputehtmlContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#attributehtml}.
+	 * Enter a parse tree produced by the {@code langAttributeLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#attributehtml}.
 	 * @param ctx the parse tree
 	 */
-	void enterAttributehtml(HTMLCSSJINJA_parser.AttributehtmlContext ctx);
+	void enterLangAttributeLabel(HTMLCSSJINJA_parser.LangAttributeLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HTMLCSSJINJA_parser#attributehtml}.
+	 * Exit a parse tree produced by the {@code langAttributeLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#attributehtml}.
 	 * @param ctx the parse tree
 	 */
-	void exitAttributehtml(HTMLCSSJINJA_parser.AttributehtmlContext ctx);
+	void exitLangAttributeLabel(HTMLCSSJINJA_parser.LangAttributeLabelContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code headlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#contenthtml}.
@@ -184,27 +188,29 @@ public interface HTMLCSSJINJA_parserListener extends ParseTreeListener {
 	 */
 	void exitSelfClosingTagElementheadlabel(HTMLCSSJINJA_parser.SelfClosingTagElementheadlabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code jinjaElementlabel1}
+	 * Enter a parse tree produced by the {@code jinjasecondElementlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#contenthead}.
 	 * @param ctx the parse tree
 	 */
-	void enterJinjaElementlabel1(HTMLCSSJINJA_parser.JinjaElementlabel1Context ctx);
+	void enterJinjasecondElementlabel(HTMLCSSJINJA_parser.JinjasecondElementlabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code jinjaElementlabel1}
+	 * Exit a parse tree produced by the {@code jinjasecondElementlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#contenthead}.
 	 * @param ctx the parse tree
 	 */
-	void exitJinjaElementlabel1(HTMLCSSJINJA_parser.JinjaElementlabel1Context ctx);
+	void exitJinjasecondElementlabel(HTMLCSSJINJA_parser.JinjasecondElementlabelContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#normalTagElementhead}.
+	 * Enter a parse tree produced by the {@code normaltaghead}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#normalTagElementhead}.
 	 * @param ctx the parse tree
 	 */
-	void enterNormalTagElementhead(HTMLCSSJINJA_parser.NormalTagElementheadContext ctx);
+	void enterNormaltaghead(HTMLCSSJINJA_parser.NormaltagheadContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HTMLCSSJINJA_parser#normalTagElementhead}.
+	 * Exit a parse tree produced by the {@code normaltaghead}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#normalTagElementhead}.
 	 * @param ctx the parse tree
 	 */
-	void exitNormalTagElementhead(HTMLCSSJINJA_parser.NormalTagElementheadContext ctx);
+	void exitNormaltaghead(HTMLCSSJINJA_parser.NormaltagheadContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#tagsheadnormal}.
 	 * @param ctx the parse tree
@@ -216,15 +222,17 @@ public interface HTMLCSSJINJA_parserListener extends ParseTreeListener {
 	 */
 	void exitTagsheadnormal(HTMLCSSJINJA_parser.TagsheadnormalContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#selfClosingTagElementhead}.
+	 * Enter a parse tree produced by the {@code selfclostaglabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#selfClosingTagElementhead}.
 	 * @param ctx the parse tree
 	 */
-	void enterSelfClosingTagElementhead(HTMLCSSJINJA_parser.SelfClosingTagElementheadContext ctx);
+	void enterSelfclostaglabel(HTMLCSSJINJA_parser.SelfclostaglabelContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HTMLCSSJINJA_parser#selfClosingTagElementhead}.
+	 * Exit a parse tree produced by the {@code selfclostaglabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#selfClosingTagElementhead}.
 	 * @param ctx the parse tree
 	 */
-	void exitSelfClosingTagElementhead(HTMLCSSJINJA_parser.SelfClosingTagElementheadContext ctx);
+	void exitSelfclostaglabel(HTMLCSSJINJA_parser.SelfclostaglabelContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#tagsheadself}.
 	 * @param ctx the parse tree
@@ -260,17 +268,17 @@ public interface HTMLCSSJINJA_parserListener extends ParseTreeListener {
 	 */
 	void exitSelfClosingTagElementbodylabel(HTMLCSSJINJA_parser.SelfClosingTagElementbodylabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code jinjaElementlabel2}
+	 * Enter a parse tree produced by the {@code jinjathirdElementlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#contentbody}.
 	 * @param ctx the parse tree
 	 */
-	void enterJinjaElementlabel2(HTMLCSSJINJA_parser.JinjaElementlabel2Context ctx);
+	void enterJinjathirdElementlabel(HTMLCSSJINJA_parser.JinjathirdElementlabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code jinjaElementlabel2}
+	 * Exit a parse tree produced by the {@code jinjathirdElementlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#contentbody}.
 	 * @param ctx the parse tree
 	 */
-	void exitJinjaElementlabel2(HTMLCSSJINJA_parser.JinjaElementlabel2Context ctx);
+	void exitJinjathirdElementlabel(HTMLCSSJINJA_parser.JinjathirdElementlabelContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code textlabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#contentbody}.
@@ -296,171 +304,173 @@ public interface HTMLCSSJINJA_parserListener extends ParseTreeListener {
 	 */
 	void exitNormal_Tag_Element_body(HTMLCSSJINJA_parser.Normal_Tag_Element_bodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#attribute_style}.
+	 * Enter a parse tree produced by the {@code stylelabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#attribute_style}.
 	 * @param ctx the parse tree
 	 */
-	void enterAttribute_style(HTMLCSSJINJA_parser.Attribute_styleContext ctx);
+	void enterStylelabel(HTMLCSSJINJA_parser.StylelabelContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HTMLCSSJINJA_parser#attribute_style}.
+	 * Exit a parse tree produced by the {@code stylelabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#attribute_style}.
 	 * @param ctx the parse tree
 	 */
-	void exitAttribute_style(HTMLCSSJINJA_parser.Attribute_styleContext ctx);
+	void exitStylelabel(HTMLCSSJINJA_parser.StylelabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code colorlabel}
+	 * Enter a parse tree produced by the {@code colorLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterColorlabel(HTMLCSSJINJA_parser.ColorlabelContext ctx);
+	void enterColorLabel(HTMLCSSJINJA_parser.ColorLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code colorlabel}
+	 * Exit a parse tree produced by the {@code colorLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitColorlabel(HTMLCSSJINJA_parser.ColorlabelContext ctx);
+	void exitColorLabel(HTMLCSSJINJA_parser.ColorLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code lengthlabel}
+	 * Enter a parse tree produced by the {@code lengthLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterLengthlabel(HTMLCSSJINJA_parser.LengthlabelContext ctx);
+	void enterLengthLabel(HTMLCSSJINJA_parser.LengthLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code lengthlabel}
+	 * Exit a parse tree produced by the {@code lengthLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitLengthlabel(HTMLCSSJINJA_parser.LengthlabelContext ctx);
+	void exitLengthLabel(HTMLCSSJINJA_parser.LengthLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code urllabel}
+	 * Enter a parse tree produced by the {@code urlLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterUrllabel(HTMLCSSJINJA_parser.UrllabelContext ctx);
+	void enterUrlLabel(HTMLCSSJINJA_parser.UrlLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code urllabel}
+	 * Exit a parse tree produced by the {@code urlLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitUrllabel(HTMLCSSJINJA_parser.UrllabelContext ctx);
+	void exitUrlLabel(HTMLCSSJINJA_parser.UrlLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code repeatlabel}
+	 * Enter a parse tree produced by the {@code repeatLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterRepeatlabel(HTMLCSSJINJA_parser.RepeatlabelContext ctx);
+	void enterRepeatLabel(HTMLCSSJINJA_parser.RepeatLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code repeatlabel}
+	 * Exit a parse tree produced by the {@code repeatLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitRepeatlabel(HTMLCSSJINJA_parser.RepeatlabelContext ctx);
+	void exitRepeatLabel(HTMLCSSJINJA_parser.RepeatLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code positionlabel}
+	 * Enter a parse tree produced by the {@code positionLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterPositionlabel(HTMLCSSJINJA_parser.PositionlabelContext ctx);
+	void enterPositionLabel(HTMLCSSJINJA_parser.PositionLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code positionlabel}
+	 * Exit a parse tree produced by the {@code positionLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitPositionlabel(HTMLCSSJINJA_parser.PositionlabelContext ctx);
+	void exitPositionLabel(HTMLCSSJINJA_parser.PositionLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code border_stylelabel}
+	 * Enter a parse tree produced by the {@code borderStyleLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterBorder_stylelabel(HTMLCSSJINJA_parser.Border_stylelabelContext ctx);
+	void enterBorderStyleLabel(HTMLCSSJINJA_parser.BorderStyleLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code border_stylelabel}
+	 * Exit a parse tree produced by the {@code borderStyleLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitBorder_stylelabel(HTMLCSSJINJA_parser.Border_stylelabelContext ctx);
+	void exitBorderStyleLabel(HTMLCSSJINJA_parser.BorderStyleLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code border_widthlabel}
+	 * Enter a parse tree produced by the {@code borderWidthLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterBorder_widthlabel(HTMLCSSJINJA_parser.Border_widthlabelContext ctx);
+	void enterBorderWidthLabel(HTMLCSSJINJA_parser.BorderWidthLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code border_widthlabel}
+	 * Exit a parse tree produced by the {@code borderWidthLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitBorder_widthlabel(HTMLCSSJINJA_parser.Border_widthlabelContext ctx);
+	void exitBorderWidthLabel(HTMLCSSJINJA_parser.BorderWidthLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code borderlabel}
+	 * Enter a parse tree produced by the {@code borderLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterBorderlabel(HTMLCSSJINJA_parser.BorderlabelContext ctx);
+	void enterBorderLabel(HTMLCSSJINJA_parser.BorderLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code borderlabel}
+	 * Exit a parse tree produced by the {@code borderLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitBorderlabel(HTMLCSSJINJA_parser.BorderlabelContext ctx);
+	void exitBorderLabel(HTMLCSSJINJA_parser.BorderLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code fontlabel}
+	 * Enter a parse tree produced by the {@code fontLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterFontlabel(HTMLCSSJINJA_parser.FontlabelContext ctx);
+	void enterFontLabel(HTMLCSSJINJA_parser.FontLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code fontlabel}
+	 * Exit a parse tree produced by the {@code fontLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitFontlabel(HTMLCSSJINJA_parser.FontlabelContext ctx);
+	void exitFontLabel(HTMLCSSJINJA_parser.FontLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code textcsslabel}
+	 * Enter a parse tree produced by the {@code textCssLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterTextcsslabel(HTMLCSSJINJA_parser.TextcsslabelContext ctx);
+	void enterTextCssLabel(HTMLCSSJINJA_parser.TextCssLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code textcsslabel}
+	 * Exit a parse tree produced by the {@code textCssLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitTextcsslabel(HTMLCSSJINJA_parser.TextcsslabelContext ctx);
+	void exitTextCssLabel(HTMLCSSJINJA_parser.TextCssLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code effectlabel}
+	 * Enter a parse tree produced by the {@code effectLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterEffectlabel(HTMLCSSJINJA_parser.EffectlabelContext ctx);
+	void enterEffectLabel(HTMLCSSJINJA_parser.EffectLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code effectlabel}
+	 * Exit a parse tree produced by the {@code effectLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitEffectlabel(HTMLCSSJINJA_parser.EffectlabelContext ctx);
+	void exitEffectLabel(HTMLCSSJINJA_parser.EffectLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code layoutlabel}
+	 * Enter a parse tree produced by the {@code layoutLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterLayoutlabel(HTMLCSSJINJA_parser.LayoutlabelContext ctx);
+	void enterLayoutLabel(HTMLCSSJINJA_parser.LayoutLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code layoutlabel}
+	 * Exit a parse tree produced by the {@code layoutLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitLayoutlabel(HTMLCSSJINJA_parser.LayoutlabelContext ctx);
+	void exitLayoutLabel(HTMLCSSJINJA_parser.LayoutLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code offsetlabel}
+	 * Enter a parse tree produced by the {@code offsetLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void enterOffsetlabel(HTMLCSSJINJA_parser.OffsetlabelContext ctx);
+	void enterOffsetLabel(HTMLCSSJINJA_parser.OffsetLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code offsetlabel}
+	 * Exit a parse tree produced by the {@code offsetLabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#stylename}.
 	 * @param ctx the parse tree
 	 */
-	void exitOffsetlabel(HTMLCSSJINJA_parser.OffsetlabelContext ctx);
+	void exitOffsetLabel(HTMLCSSJINJA_parser.OffsetLabelContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#color}.
 	 * @param ctx the parse tree
@@ -778,39 +788,73 @@ public interface HTMLCSSJINJA_parserListener extends ParseTreeListener {
 	 */
 	void exitJinjaExprContent(HTMLCSSJINJA_parser.JinjaExprContentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
+	 * Enter a parse tree produced by the {@code jinjaNormalTagLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
 	 * @param ctx the parse tree
 	 */
-	void enterJinjaBlockContent(HTMLCSSJINJA_parser.JinjaBlockContentContext ctx);
+	void enterJinjaNormalTagLabel(HTMLCSSJINJA_parser.JinjaNormalTagLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
+	 * Exit a parse tree produced by the {@code jinjaNormalTagLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
 	 * @param ctx the parse tree
 	 */
-	void exitJinjaBlockContent(HTMLCSSJINJA_parser.JinjaBlockContentContext ctx);
+	void exitJinjaNormalTagLabel(HTMLCSSJINJA_parser.JinjaNormalTagLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code jinjaIfBlockLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaIfBlock}.
+	 * Enter a parse tree produced by the {@code jinjaSelfClosingTagLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
 	 * @param ctx the parse tree
 	 */
-	void enterJinjaIfBlockLabel(HTMLCSSJINJA_parser.JinjaIfBlockLabelContext ctx);
+	void enterJinjaSelfClosingTagLabel(HTMLCSSJINJA_parser.JinjaSelfClosingTagLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code jinjaIfBlockLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaIfBlock}.
+	 * Exit a parse tree produced by the {@code jinjaSelfClosingTagLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
 	 * @param ctx the parse tree
 	 */
-	void exitJinjaIfBlockLabel(HTMLCSSJINJA_parser.JinjaIfBlockLabelContext ctx);
+	void exitJinjaSelfClosingTagLabel(HTMLCSSJINJA_parser.JinjaSelfClosingTagLabelContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code jinjaForBlockLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaForBlock}.
+	 * Enter a parse tree produced by the {@code jinjaNestedElementLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
 	 * @param ctx the parse tree
 	 */
-	void enterJinjaForBlockLabel(HTMLCSSJINJA_parser.JinjaForBlockLabelContext ctx);
+	void enterJinjaNestedElementLabel(HTMLCSSJINJA_parser.JinjaNestedElementLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code jinjaForBlockLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaForBlock}.
+	 * Exit a parse tree produced by the {@code jinjaNestedElementLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
 	 * @param ctx the parse tree
 	 */
-	void exitJinjaForBlockLabel(HTMLCSSJINJA_parser.JinjaForBlockLabelContext ctx);
+	void exitJinjaNestedElementLabel(HTMLCSSJINJA_parser.JinjaNestedElementLabelContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code jinjaTextLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
+	 * @param ctx the parse tree
+	 */
+	void enterJinjaTextLabel(HTMLCSSJINJA_parser.JinjaTextLabelContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code jinjaTextLabel}
+	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaBlockContent}.
+	 * @param ctx the parse tree
+	 */
+	void exitJinjaTextLabel(HTMLCSSJINJA_parser.JinjaTextLabelContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaIfBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterJinjaIfBlock(HTMLCSSJINJA_parser.JinjaIfBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaIfBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitJinjaIfBlock(HTMLCSSJINJA_parser.JinjaIfBlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaForBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterJinjaForBlock(HTMLCSSJINJA_parser.JinjaForBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaForBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitJinjaForBlock(HTMLCSSJINJA_parser.JinjaForBlockContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaStmtArgument}.
 	 * @param ctx the parse tree
@@ -822,27 +866,23 @@ public interface HTMLCSSJINJA_parserListener extends ParseTreeListener {
 	 */
 	void exitJinjaStmtArgument(HTMLCSSJINJA_parser.JinjaStmtArgumentContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code jinjaStmtLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaStmt}.
+	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaStmt}.
 	 * @param ctx the parse tree
 	 */
-	void enterJinjaStmtLabel(HTMLCSSJINJA_parser.JinjaStmtLabelContext ctx);
+	void enterJinjaStmt(HTMLCSSJINJA_parser.JinjaStmtContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code jinjaStmtLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaStmt}.
+	 * Exit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaStmt}.
 	 * @param ctx the parse tree
 	 */
-	void exitJinjaStmtLabel(HTMLCSSJINJA_parser.JinjaStmtLabelContext ctx);
+	void exitJinjaStmt(HTMLCSSJINJA_parser.JinjaStmtContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code jinjaCommentLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaComment}.
+	 * Enter a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaComment}.
 	 * @param ctx the parse tree
 	 */
-	void enterJinjaCommentLabel(HTMLCSSJINJA_parser.JinjaCommentLabelContext ctx);
+	void enterJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code jinjaCommentLabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaComment}.
+	 * Exit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaComment}.
 	 * @param ctx the parse tree
 	 */
-	void exitJinjaCommentLabel(HTMLCSSJINJA_parser.JinjaCommentLabelContext ctx);
+	void exitJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx);
 }
