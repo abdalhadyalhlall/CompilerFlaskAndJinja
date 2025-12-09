@@ -1,4 +1,4 @@
-package AST;
+package AST_HTMLCSSJINJA;
 
 public class TextNode extends ASTNode {
     private String text;
