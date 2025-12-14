@@ -1,144 +1,43 @@
-package VISITORJINJA;
+package VISITORJINJA.ST;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
 
-public class SymbolTable {
+import java.util.*;
 
-    public enum SymbolType {
-        // HTML Elements
-        HTML_ELEMENT,
-        HEAD_ELEMENT,
-        BODY_ELEMENT,
-        NORMAL_ELEMENT,
-        SELF_CLOSING_ELEMENT,
-
-        // Attributes
-        ATTRIBUTE,
-        LANG_ATTRIBUTE,
-        STYLE_ATTRIBUTE,
-
-        // CSS
-        CSS_RULE,
-        CSS_COLOR,
-        CSS_LENGTH,
-        CSS_URL,
-        CSS_REPEAT,
-        CSS_POSITION,
-        CSS_BORDER,
-        CSS_FONT,
-        CSS_TEXT,
-        CSS_EFFECT,
-        CSS_LAYOUT,
-        CSS_OFFSET,
-
-        // Jinja
-        JINJA_EXPRESSION,
-        JINJA_STATEMENT,
-        JINJA_COMMENT,
-        JINJA_IF_BLOCK,
-        JINJA_FOR_BLOCK,
-        JINJA_BLOCK,
-
-        // Text
-        TEXT_HTML,
-        TEXT_JINJA,
-
-        // Document
-        DOCUMENT,
-        DOCTYPE,
-
-        // Variables (for Jinja)
-        VARIABLE,
-        TEMPLATE_VARIABLE,
-
-        // Unknown
-        UNKNOWN
-    }
-
-    public static class Symbol {
-        private String name;
-        private SymbolType type;
-        private int lineNumber;
-        private String scope;
-        private Map<String, String> properties;
-        private String parentElement;
-
-        public Symbol(String name, SymbolType type, int lineNumber, String scope) {
-            this.name = name;
-            this.type = type;
-            this.lineNumber = lineNumber;
-            this.scope = scope;
-            this.properties = new HashMap<>();
-            this.parentElement = null;
-        }
-
-        public void addProperty(String key, String value) {
-            properties.put(key, value);
-        }
-
-        public String getProperty(String key) {
-            return properties.get(key);
-        }
-
-        public String getName() { return name; }
-        public SymbolType getType() { return type; }
-        public int getLineNumber() { return lineNumber; }
-        public String getScope() { return scope; }
-        public Map<String, String> getProperties() { return properties; }
-        public String getParentElement() { return parentElement; }
-        public void setParentElement(String parentElement) { this.parentElement = parentElement; }
-
-        @Override
-        public String toString() {
-            return String.format("Symbol{name='%s', type=%s, line=%d, scope='%s', parent='%s'}",
-                    name, type, lineNumber, scope, parentElement != null ? parentElement : "null");
-        }
-    }
-
+public class SymbolTableImpl implements SymbolTableOperations {
     private Map<String, List<Symbol>> symbols;
-    private Stack<String> scopeStack;
+    private ScopeManager scopeManager;
     private Map<String, String> elementHierarchy;
-    private int blockCounter;
 
-    public SymbolTable() {
+    public SymbolTableImpl() {
         symbols = new HashMap<>();
-        scopeStack = new Stack<>();
+        scopeManager = new ScopeManagerImpl();
         elementHierarchy = new HashMap<>();
-        blockCounter = 0;
-        pushScope("global");
     }
 
-    public void pushScope(String scopeName) {
-        scopeStack.push(scopeName);
+    public SymbolTableImpl(ScopeManager scopeManager) {
+        symbols = new HashMap<>();
+        this.scopeManager = scopeManager;
+        elementHierarchy = new HashMap<>();
     }
 
-    public void popScope() {
-        if (!scopeStack.isEmpty()) {
-            scopeStack.pop();
-        }
-    }
-
-    public String getCurrentScope() {
-        return scopeStack.isEmpty() ? "global" : scopeStack.peek();
-    }
-
+    @Override
     public void addSymbol(String name, SymbolType type, int lineNumber) {
         addSymbol(name, type, lineNumber, null);
     }
 
+    @Override
     public void addSymbol(String name, SymbolType type, int lineNumber, Map<String, String> properties) {
-        Symbol symbol = new Symbol(name, type, lineNumber, getCurrentScope());
+        Symbol symbol = new Symbol(name, type, lineNumber, scopeManager.getCurrentScope());
 
         if (properties != null) {
             symbol.getProperties().putAll(properties);
         }
 
-        if (!scopeStack.isEmpty() && scopeStack.size() > 1) {
-            symbol.setParentElement(getParentElementFromScope());
+        if (scopeManager instanceof ScopeManagerImpl) {
+            Stack<String> scopeStack = ((ScopeManagerImpl) scopeManager).getScopeStack();
+            if (!scopeStack.isEmpty() && scopeStack.size() > 1) {
+                symbol.setParentElement(getParentElementFromScope(scopeStack));
+            }
         }
 
         if (!symbols.containsKey(name)) {
@@ -146,54 +45,43 @@ public class SymbolTable {
         }
         symbols.get(name).add(symbol);
 
-        if (type == SymbolType.HTML_ELEMENT || type == SymbolType.NORMAL_ELEMENT ||
-                type == SymbolType.SELF_CLOSING_ELEMENT) {
+        if (isElementType(type)) {
             updateElementHierarchy(name, symbol);
         }
     }
 
-    private String getParentElementFromScope() {
+    private boolean isElementType(SymbolType type) {
+        return type == SymbolType.HTML_ELEMENT ||
+                type == SymbolType.NORMAL_ELEMENT ||
+                type == SymbolType.SELF_CLOSING_ELEMENT;
+    }
+
+    private String getParentElementFromScope(Stack<String> scopeStack) {
         for (int i = scopeStack.size() - 1; i >= 0; i--) {
             String scope = scopeStack.get(i);
             if (scope.startsWith("element_")) {
-                return scope.substring(8);
+                return scope.substring(8).split("_")[0];
             }
         }
         return null;
     }
 
     private void updateElementHierarchy(String elementName, Symbol elementSymbol) {
-        String parentElement = getParentElementFromScope();
+        String parentElement = elementSymbol.getParentElement();
         if (parentElement != null) {
             elementHierarchy.put(elementName, parentElement);
         }
     }
 
-    public void enterBlock(String blockType) {
-        String blockScope = blockType + "_" + (++blockCounter);
-        pushScope(blockScope);
-    }
-
-    public void exitBlock() {
-        popScope();
-    }
-
-    public void enterElement(String elementName) {
-        String elementScope = "element_" + elementName + "_" + System.identityHashCode(this);
-        pushScope(elementScope);
-    }
-
-    public void exitElement() {
-        popScope();
-    }
-
+    @Override
     public List<Symbol> lookup(String name) {
         return symbols.getOrDefault(name, new ArrayList<>());
     }
 
+    @Override
     public List<Symbol> lookupInCurrentScope(String name) {
         List<Symbol> result = new ArrayList<>();
-        String currentScope = getCurrentScope();
+        String currentScope = scopeManager.getCurrentScope();
 
         List<Symbol> allSymbols = symbols.get(name);
         if (allSymbols != null) {
@@ -207,6 +95,7 @@ public class SymbolTable {
         return result;
     }
 
+    @Override
     public List<Symbol> getAllSymbols() {
         List<Symbol> allSymbols = new ArrayList<>();
         for (List<Symbol> symbolList : symbols.values()) {
@@ -215,6 +104,7 @@ public class SymbolTable {
         return allSymbols;
     }
 
+    @Override
     public List<Symbol> getSymbolsByType(SymbolType type) {
         List<Symbol> result = new ArrayList<>();
         for (List<Symbol> symbolList : symbols.values()) {
@@ -227,6 +117,7 @@ public class SymbolTable {
         return result;
     }
 
+    @Override
     public List<Symbol> getSymbolsByLine(int lineNumber) {
         List<Symbol> result = new ArrayList<>();
         for (List<Symbol> symbolList : symbols.values()) {
@@ -257,10 +148,22 @@ public class SymbolTable {
         return hierarchy;
     }
 
+    public ScopeManager getScopeManager() {
+        return scopeManager;
+    }
+
+    public Map<String, String> getElementHierarchy() {
+        return elementHierarchy;
+    }
+
     public void printSymbolTable() {
         System.out.println("\n=== SYMBOL TABLE ===");
-        System.out.println("Current Scope: " + getCurrentScope());
-        System.out.println("Scope Stack: " + scopeStack);
+        System.out.println("Current Scope: " + scopeManager.getCurrentScope());
+
+        if (scopeManager instanceof ScopeManagerImpl) {
+            System.out.println("Scope Stack: " + ((ScopeManagerImpl) scopeManager).getScopeStack());
+        }
+
         System.out.println("\nSymbols:");
 
         for (String name : symbols.keySet()) {
