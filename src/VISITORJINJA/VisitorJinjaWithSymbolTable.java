@@ -1,5 +1,5 @@
 package VISITORJINJA;
-
+import VISITORJINJA.ST.*;
 import AST_HTMLCSSJINJA.*;
 import antlrJinja.HTMLCSSJINJA_parser;
 import antlrJinja.HTMLCSSJINJA_parserBaseVisitor;
@@ -13,22 +13,50 @@ import java.util.Map;
 
 public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
-    private SymbolTable symbolTable;
+    private SymbolTableImpl symbolTable;
+    private String currentSourceFile;
+    private int elementIdCounter;
 
     public VisitorJinjaWithSymbolTable() {
-        this.symbolTable = new SymbolTable();
+        this.symbolTable = SymbolTableFactory.createDefaultSymbolTable();
+        this.elementIdCounter = 0;
     }
 
-    public SymbolTable getSymbolTable() {
+    public VisitorJinjaWithSymbolTable(String sourceFile) {
+        this();
+        this.currentSourceFile = sourceFile;
+    }
+
+    public SymbolTableImpl getSymbolTable() {
         return symbolTable;
+    }
+
+    public void setSourceFile(String sourceFile) {
+        this.currentSourceFile = sourceFile;
     }
 
     @Override
     public ASTNode visitDocumentLabel(HTMLCSSJINJA_parser.DocumentLabelContext ctx) {
+        // إزالة الجزء الخاص بـ HTML_DOCTYPE لأنه غير موجود في القواعد النحوية
         Map<String, String> docProps = new HashMap<>();
         docProps.put("nodeType", "DocumentNode");
+        docProps.put("source", "html");
 
-        symbolTable.addSymbol("document", SymbolTable.SymbolType.DOCUMENT,
+        // التحقق من وجود Doctype بشكل مختلف
+        boolean hasDoctype = false;
+        for (ParseTree child : ctx.children) {
+            if (child.getText() != null && child.getText().toLowerCase().contains("doctype")) {
+                hasDoctype = true;
+                break;
+            }
+        }
+        docProps.put("hasDoctype", String.valueOf(hasDoctype));
+
+        if (currentSourceFile != null) {
+            docProps.put("sourceFile", currentSourceFile);
+        }
+
+        symbolTable.addSymbol("document", SymbolType.DOCUMENT,
                 ctx.getStart().getLine(), docProps);
 
         DocumentNode document = new DocumentNode(ctx.getStart().getLine());
@@ -45,13 +73,18 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
 
     @Override
     public ASTNode visitHtmlelement(HTMLCSSJINJA_parser.HtmlelementContext ctx) {
-        symbolTable.enterElement("html");
+        String elementId = "html_" + (elementIdCounter++);
+        symbolTable.getScopeManager().enterElement("html");
 
         Map<String, String> htmlProps = new HashMap<>();
         htmlProps.put("elementType", "HTML");
         htmlProps.put("nodeType", "HtmlElementNode");
+        htmlProps.put("elementId", elementId);
+        if (currentSourceFile != null) {
+            htmlProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol("html", SymbolTable.SymbolType.HTML_ELEMENT,
+        symbolTable.addSymbol("html", SymbolType.HTML_ELEMENT,
                 ctx.getStart().getLine(), htmlProps);
 
         HtmlElementNode htmlElement = new HtmlElementNode(
@@ -60,6 +93,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
                 HtmlElementNode.ElementType.HTML
         );
 
+        // Process attributes
         for (HTMLCSSJINJA_parser.AttruputehtmlContext attrCtx : ctx.attruputehtml()) {
             ASTNode attrNode = visit(attrCtx);
             if (attrNode != null) {
@@ -67,6 +101,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             }
         }
 
+        // Process content
         for (HTMLCSSJINJA_parser.ContenthtmlContext contentCtx : ctx.contenthtml()) {
             ASTNode contentNode = visit(contentCtx);
             if (contentNode != null) {
@@ -74,20 +109,26 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             }
         }
 
-        symbolTable.exitElement();
+        symbolTable.getScopeManager().exitElement();
 
         return htmlElement;
     }
 
     @Override
     public ASTNode visitHead(HTMLCSSJINJA_parser.HeadContext ctx) {
-        symbolTable.enterElement("head");
+        String elementId = "head_" + (elementIdCounter++);
+        symbolTable.getScopeManager().enterElement("head");
 
         Map<String, String> headProps = new HashMap<>();
         headProps.put("elementType", "HEAD");
         headProps.put("nodeType", "HtmlElementNode");
+        headProps.put("elementId", elementId);
+        headProps.put("parent", "html");
+        if (currentSourceFile != null) {
+            headProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol("head", SymbolTable.SymbolType.HEAD_ELEMENT,
+        symbolTable.addSymbol("head", SymbolType.HEAD_ELEMENT,
                 ctx.getStart().getLine(), headProps);
 
         HtmlElementNode headElement = new HtmlElementNode(
@@ -103,20 +144,26 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             }
         }
 
-        symbolTable.exitElement();
+        symbolTable.getScopeManager().exitElement();
 
         return headElement;
     }
 
     @Override
     public ASTNode visitBody(HTMLCSSJINJA_parser.BodyContext ctx) {
-        symbolTable.enterElement("body");
+        String elementId = "body_" + (elementIdCounter++);
+        symbolTable.getScopeManager().enterElement("body");
 
         Map<String, String> bodyProps = new HashMap<>();
         bodyProps.put("elementType", "BODY");
         bodyProps.put("nodeType", "HtmlElementNode");
+        bodyProps.put("elementId", elementId);
+        bodyProps.put("parent", "html");
+        if (currentSourceFile != null) {
+            bodyProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol("body", SymbolTable.SymbolType.BODY_ELEMENT,
+        symbolTable.addSymbol("body", SymbolType.BODY_ELEMENT,
                 ctx.getStart().getLine(), bodyProps);
 
         HtmlElementNode bodyElement = new HtmlElementNode(
@@ -125,6 +172,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
                 HtmlElementNode.ElementType.BODY
         );
 
+        // Process attributes
         for (HTMLCSSJINJA_parser.AttributebodyContext attrCtx : ctx.attributebody()) {
             ASTNode attrNode = visit(attrCtx);
             if (attrNode != null) {
@@ -132,6 +180,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             }
         }
 
+        // Process content
         for (HTMLCSSJINJA_parser.ContentbodyContext contentCtx : ctx.contentbody()) {
             ASTNode childNode = visit(contentCtx);
             if (childNode != null) {
@@ -139,7 +188,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             }
         }
 
-        symbolTable.exitElement();
+        symbolTable.getScopeManager().exitElement();
 
         return bodyElement;
     }
@@ -147,16 +196,22 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
     @Override
     public ASTNode visitNormaltaghead(HTMLCSSJINJA_parser.NormaltagheadContext ctx) {
         String tagName = ctx.tagsheadnormal(0).getText();
+        String elementId = tagName + "_" + (elementIdCounter++);
 
-        symbolTable.enterElement(tagName);
+        symbolTable.getScopeManager().enterElement(tagName);
 
         Map<String, String> elementProps = new HashMap<>();
         elementProps.put("elementType", "NORMAL");
         elementProps.put("tagName", tagName);
         elementProps.put("location", "head");
         elementProps.put("nodeType", "HtmlElementNode");
+        elementProps.put("elementId", elementId);
+        elementProps.put("parent", "head");
+        if (currentSourceFile != null) {
+            elementProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol(tagName, SymbolTable.SymbolType.NORMAL_ELEMENT,
+        symbolTable.addSymbol(tagName, SymbolType.NORMAL_ELEMENT,
                 ctx.getStart().getLine(), elementProps);
 
         HtmlElementNode element = new HtmlElementNode(
@@ -165,6 +220,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
                 HtmlElementNode.ElementType.NORMAL
         );
 
+        // Process attributes
         for (HTMLCSSJINJA_parser.AttributeheadContext attrCtx : ctx.attributehead()) {
             ASTNode attrNode = visit(attrCtx);
             if (attrNode != null) {
@@ -172,6 +228,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             }
         }
 
+        // Process text content
         if (ctx.text() != null) {
             for (HTMLCSSJINJA_parser.TextContext textCtx : ctx.text()) {
                 ASTNode textNode = visit(textCtx);
@@ -181,7 +238,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             }
         }
 
-        symbolTable.exitElement();
+        symbolTable.getScopeManager().exitElement();
 
         return element;
     }
@@ -189,14 +246,20 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
     @Override
     public ASTNode visitSelfclostaglabel(HTMLCSSJINJA_parser.SelfclostaglabelContext ctx) {
         String tagName = ctx.tagsheadself().getText();
+        String elementId = tagName + "_" + (elementIdCounter++);
 
         Map<String, String> elementProps = new HashMap<>();
         elementProps.put("elementType", "SELF_CLOSING");
         elementProps.put("tagName", tagName);
         elementProps.put("location", "head");
         elementProps.put("nodeType", "HtmlElementNode");
+        elementProps.put("elementId", elementId);
+        elementProps.put("parent", "head");
+        if (currentSourceFile != null) {
+            elementProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol(tagName, SymbolTable.SymbolType.SELF_CLOSING_ELEMENT,
+        symbolTable.addSymbol(tagName, SymbolType.SELF_CLOSING_ELEMENT,
                 ctx.getStart().getLine(), elementProps);
 
         HtmlElementNode element = new HtmlElementNode(
@@ -218,16 +281,22 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
     @Override
     public ASTNode visitNormal_Tag_Element_body(HTMLCSSJINJA_parser.Normal_Tag_Element_bodyContext ctx) {
         String tagName = ctx.tagsbodynamenormal(0).getText();
+        String elementId = tagName + "_" + (elementIdCounter++);
 
-        symbolTable.enterElement(tagName);
+        symbolTable.getScopeManager().enterElement(tagName);
 
         Map<String, String> elementProps = new HashMap<>();
         elementProps.put("elementType", "NORMAL");
         elementProps.put("tagName", tagName);
         elementProps.put("location", "body");
         elementProps.put("nodeType", "HtmlElementNode");
+        elementProps.put("elementId", elementId);
+        elementProps.put("parent", "body");
+        if (currentSourceFile != null) {
+            elementProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol(tagName, SymbolTable.SymbolType.NORMAL_ELEMENT,
+        symbolTable.addSymbol(tagName, SymbolType.NORMAL_ELEMENT,
                 ctx.getStart().getLine(), elementProps);
 
         HtmlElementNode element = new HtmlElementNode(
@@ -236,6 +305,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
                 HtmlElementNode.ElementType.NORMAL
         );
 
+        // Process attributes
         for (HTMLCSSJINJA_parser.AttributebodyContext attrCtx : ctx.attributebody()) {
             ASTNode attrNode = visit(attrCtx);
             if (attrNode != null) {
@@ -243,6 +313,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             }
         }
 
+        // Process content
         for (HTMLCSSJINJA_parser.ContentbodyContext contentCtx : ctx.contentbody()) {
             ASTNode childNode = visit(contentCtx);
             if (childNode != null) {
@@ -250,7 +321,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             }
         }
 
-        symbolTable.exitElement();
+        symbolTable.getScopeManager().exitElement();
 
         return element;
     }
@@ -268,8 +339,18 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
         attrProps.put("attributeType", "NORMAL");
         attrProps.put("value", value);
         attrProps.put("nodeType", "AttributeNode");
+        attrProps.put("context", "body");
+        if (currentSourceFile != null) {
+            attrProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol(name, SymbolTable.SymbolType.ATTRIBUTE,
+        // Extract parent element from current scope
+        String parentElement = extractParentElement();
+        if (parentElement != null) {
+            attrProps.put("parentElement", parentElement);
+        }
+
+        symbolTable.addSymbol(name, SymbolType.ATTRIBUTE,
                 ctx.getStart().getLine(), attrProps);
 
         return new AttributeNode(
@@ -293,8 +374,12 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
         attrProps.put("attributeType", "LANG");
         attrProps.put("value", value);
         attrProps.put("nodeType", "AttributeNode");
+        attrProps.put("context", "html");
+        if (currentSourceFile != null) {
+            attrProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol("lang", SymbolTable.SymbolType.LANG_ATTRIBUTE,
+        symbolTable.addSymbol("lang", SymbolType.LANG_ATTRIBUTE,
                 ctx.getStart().getLine(), attrProps);
 
         return new AttributeNode(
@@ -309,8 +394,18 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
     public ASTNode visitStylelabel(HTMLCSSJINJA_parser.StylelabelContext ctx) {
         Map<String, String> styleProps = new HashMap<>();
         styleProps.put("nodeType", "StyleAttributeNode");
+        styleProps.put("context", "inline");
+        if (currentSourceFile != null) {
+            styleProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol("style", SymbolTable.SymbolType.STYLE_ATTRIBUTE,
+        // Extract parent element from current scope
+        String parentElement = extractParentElement();
+        if (parentElement != null) {
+            styleProps.put("parentElement", parentElement);
+        }
+
+        symbolTable.addSymbol("style", SymbolType.STYLE_ATTRIBUTE,
                 ctx.getStart().getLine(), styleProps);
 
         StyleAttributeNode styleAttr = new StyleAttributeNode(ctx.getStart().getLine());
@@ -335,8 +430,12 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
         cssProps.put("value", value);
         cssProps.put("ruleType", "COLOR");
         cssProps.put("nodeType", "CssRuleNode");
+        cssProps.put("context", "style");
+        if (currentSourceFile != null) {
+            cssProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol(property, SymbolTable.SymbolType.CSS_COLOR,
+        symbolTable.addSymbol(property, SymbolType.CSS_COLOR,
                 ctx.getStart().getLine(), cssProps);
 
         return new CssRuleNode(
@@ -364,8 +463,12 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
         cssProps.put("value", valueBuilder.toString());
         cssProps.put("ruleType", "LENGTH");
         cssProps.put("nodeType", "CssRuleNode");
+        cssProps.put("context", "style");
+        if (currentSourceFile != null) {
+            cssProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol(property, SymbolTable.SymbolType.CSS_LENGTH,
+        symbolTable.addSymbol(property, SymbolType.CSS_LENGTH,
                 ctx.getStart().getLine(), cssProps);
 
         return new CssRuleNode(
@@ -398,10 +501,19 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
         jinjaProps.put("type", "EXPRESSION");
         jinjaProps.put("content", exprContent);
         jinjaProps.put("nodeType", "JinjaNode");
+        if (currentSourceFile != null) {
+            jinjaProps.put("sourceFile", currentSourceFile);
+        }
+
+        // Extract parent element from current scope
+        String parentElement = extractParentElement();
+        if (parentElement != null) {
+            jinjaProps.put("parentElement", parentElement);
+        }
 
         extractVariablesFromExpression(exprContent, ctx.getStart().getLine());
 
-        symbolTable.addSymbol("jinja_expr", SymbolTable.SymbolType.JINJA_EXPRESSION,
+        symbolTable.addSymbol("jinja_expr", SymbolType.JINJA_EXPRESSION,
                 ctx.getStart().getLine(), jinjaProps);
 
         JinjaNode jinjaNode = new JinjaNode(
@@ -439,8 +551,17 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
         jinjaProps.put("type", "STATEMENT");
         jinjaProps.put("content", stmtContent);
         jinjaProps.put("nodeType", "JinjaNode");
+        if (currentSourceFile != null) {
+            jinjaProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol("jinja_stmt", SymbolTable.SymbolType.JINJA_STATEMENT,
+        // Extract parent element from current scope
+        String parentElement = extractParentElement();
+        if (parentElement != null) {
+            jinjaProps.put("parentElement", parentElement);
+        }
+
+        symbolTable.addSymbol("jinja_stmt", SymbolType.JINJA_STATEMENT,
                 ctx.getStart().getLine(), jinjaProps);
 
         JinjaNode jinjaNode = new JinjaNode(
@@ -454,13 +575,22 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
 
     @Override
     public ASTNode visitJinjaIfBlock(HTMLCSSJINJA_parser.JinjaIfBlockContext ctx) {
-        symbolTable.enterBlock("if");
+        symbolTable.getScopeManager().enterBlock("if");
 
         Map<String, String> jinjaProps = new HashMap<>();
         jinjaProps.put("type", "IF_BLOCK");
         jinjaProps.put("nodeType", "JinjaBlockNode");
+        if (currentSourceFile != null) {
+            jinjaProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol("jinja_if", SymbolTable.SymbolType.JINJA_IF_BLOCK,
+        // Extract parent element from current scope
+        String parentElement = extractParentElement();
+        if (parentElement != null) {
+            jinjaProps.put("parentElement", parentElement);
+        }
+
+        symbolTable.addSymbol("jinja_if", SymbolType.JINJA_IF_BLOCK,
                 ctx.getStart().getLine(), jinjaProps);
 
         JinjaBlockNode ifBlock = new JinjaBlockNode(
@@ -495,20 +625,29 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             }
         }
 
-        symbolTable.exitBlock();
+        symbolTable.getScopeManager().exitBlock();
 
         return ifBlock;
     }
 
     @Override
     public ASTNode visitJinjaForBlock(HTMLCSSJINJA_parser.JinjaForBlockContext ctx) {
-        symbolTable.enterBlock("for");
+        symbolTable.getScopeManager().enterBlock("for");
 
         Map<String, String> jinjaProps = new HashMap<>();
         jinjaProps.put("type", "FOR_BLOCK");
         jinjaProps.put("nodeType", "JinjaBlockNode");
+        if (currentSourceFile != null) {
+            jinjaProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol("jinja_for", SymbolTable.SymbolType.JINJA_FOR_BLOCK,
+        // Extract parent element from current scope
+        String parentElement = extractParentElement();
+        if (parentElement != null) {
+            jinjaProps.put("parentElement", parentElement);
+        }
+
+        symbolTable.addSymbol("jinja_for", SymbolType.JINJA_FOR_BLOCK,
                 ctx.getStart().getLine(), jinjaProps);
 
         JinjaBlockNode forBlock = new JinjaBlockNode(
@@ -537,7 +676,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             }
         }
 
-        symbolTable.exitBlock();
+        symbolTable.getScopeManager().exitBlock();
 
         return forBlock;
     }
@@ -551,8 +690,17 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
         textProps.put("context", "HTML");
         textProps.put("content", textContent);
         textProps.put("nodeType", "TextNode");
+        if (currentSourceFile != null) {
+            textProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol("text", SymbolTable.SymbolType.TEXT_HTML,
+        // Extract parent element from current scope
+        String parentElement = extractParentElement();
+        if (parentElement != null) {
+            textProps.put("parentElement", parentElement);
+        }
+
+        symbolTable.addSymbol("text", SymbolType.TEXT_HTML,
                 token.getLine(), textProps);
 
         return new TextNode(
@@ -571,8 +719,17 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
         textProps.put("context", "JINJA");
         textProps.put("content", textContent);
         textProps.put("nodeType", "TextNode");
+        if (currentSourceFile != null) {
+            textProps.put("sourceFile", currentSourceFile);
+        }
 
-        symbolTable.addSymbol("text_jinja", SymbolTable.SymbolType.TEXT_JINJA,
+        // Extract parent element from current scope
+        String parentElement = extractParentElement();
+        if (parentElement != null) {
+            textProps.put("parentElement", parentElement);
+        }
+
+        symbolTable.addSymbol("text_jinja", SymbolType.TEXT_JINJA,
                 token.getLine(), textProps);
 
         return new TextNode(
@@ -591,9 +748,18 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
                 Map<String, String> varProps = new HashMap<>();
                 varProps.put("type", "EXPRESSION_VARIABLE");
                 varProps.put("context", "JINJA");
+                varProps.put("source", "expression");
+                if (currentSourceFile != null) {
+                    varProps.put("sourceFile", currentSourceFile);
+                }
 
-                symbolTable.addSymbol(part, SymbolTable.SymbolType.VARIABLE,
-                        lineNumber, varProps);
+                // Extract parent element from current scope
+                String parentElement = extractParentElement();
+                if (parentElement != null) {
+                    varProps.put("parentElement", parentElement);
+                }
+
+                symbolTable.addSymbol(part, SymbolType.VARIABLE, lineNumber, varProps);
             }
         }
     }
@@ -606,10 +772,31 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
             Map<String, String> varProps = new HashMap<>();
             varProps.put("type", "LOOP_VARIABLE");
             varProps.put("context", "JINJA_FOR");
+            varProps.put("source", "for_loop");
+            if (currentSourceFile != null) {
+                varProps.put("sourceFile", currentSourceFile);
+            }
 
-            symbolTable.addSymbol(loopVar, SymbolTable.SymbolType.VARIABLE,
-                    lineNumber, varProps);
+            // Extract parent element from current scope
+            String parentElement = extractParentElement();
+            if (parentElement != null) {
+                varProps.put("parentElement", parentElement);
+            }
+
+            symbolTable.addSymbol(loopVar, SymbolType.VARIABLE, lineNumber, varProps);
         }
+    }
+
+    private String extractParentElement() {
+        String currentScope = symbolTable.getScopeManager().getCurrentScope();
+        if (currentScope != null && currentScope.startsWith("element_")) {
+            // Extract element name from scope (element_<name>_<id>)
+            String[] parts = currentScope.split("_");
+            if (parts.length >= 2) {
+                return parts[1];
+            }
+        }
+        return null;
     }
 
     private boolean isKeyword(String word) {
@@ -650,5 +837,53 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
         return condition.toString().trim();
     }
 
+    // Utility methods for analysis
+    public void printSymbolAnalysis() {
+        System.out.println("\n=== SYMBOL ANALYSIS ===");
+        System.out.println("Total Symbols: " + symbolTable.getAllSymbols().size());
 
+        System.out.println("\nSymbols by Type:");
+        for (SymbolType type : SymbolType.values()) {
+            List<Symbol> symbolsByType = symbolTable.getSymbolsByType(type);
+            if (!symbolsByType.isEmpty()) {
+                System.out.println("  " + type + ": " + symbolsByType.size());
+            }
+        }
+
+        System.out.println("\nElement Hierarchy:");
+        Map<String, List<Symbol>> hierarchy = symbolTable.getSymbolHierarchy();
+        for (Map.Entry<String, List<Symbol>> entry : hierarchy.entrySet()) {
+            System.out.println("  " + entry.getKey() + ":");
+            for (Symbol child : entry.getValue()) {
+                System.out.println("    - " + child.getName() +
+                        " (" + child.getType() + ")" +
+                        " [line " + child.getLineNumber() + "]");
+            }
+        }
+    }
+
+    public List<Symbol> getUnusedVariables() {
+        List<Symbol> variables = symbolTable.getSymbolsByType(SymbolType.VARIABLE);
+        List<Symbol> jinjaExprs = symbolTable.getSymbolsByType(SymbolType.JINJA_EXPRESSION);
+        List<Symbol> unused = new ArrayList<>();
+
+        for (Symbol var : variables) {
+            boolean isUsed = false;
+            String varName = var.getName();
+
+            for (Symbol expr : jinjaExprs) {
+                String content = expr.getProperty("content");
+                if (content != null && content.contains(varName)) {
+                    isUsed = true;
+                    break;
+                }
+            }
+
+            if (!isUsed) {
+                unused.add(var);
+            }
+        }
+
+        return unused;
+    }
 }
