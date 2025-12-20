@@ -31,7 +31,6 @@ public class TextNode extends ASTNode {
 
     @Override
     public String getAdditionalInfo() {
-        // تقصير النص الطويل للعرض
         if (text.length() > 50) {
             return "\"" + text.substring(0, 47) + "...\"";
         }

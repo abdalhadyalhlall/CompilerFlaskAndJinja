@@ -1,13 +1,10 @@
 package VISITORJINJA;
 
 import AST_HTMLCSSJINJA.*;
-
 import antlrJinja.HTMLCSSJINJA_parser;
 import antlrJinja.HTMLCSSJINJA_parserBaseVisitor;
-import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
@@ -16,9 +13,9 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
     public ASTNode visitDocumentLabel(HTMLCSSJINJA_parser.DocumentLabelContext ctx) {
         DocumentNode document = new DocumentNode(ctx.getStart().getLine());
 
-        // زيارة جميع العقد الفرعية
-        for (ParseTree child : ctx.children) {
-            ASTNode childNode = visit(child);
+        // ✅ **تصحيح**: لا تستخدم ctx.children بل قم بزيارة html فقط
+        for (HTMLCSSJINJA_parser.HtmlContext htmlCtx : ctx.html()) {
+            ASTNode childNode = visit(htmlCtx);
             if (childNode != null) {
                 document.addChild(childNode);
             }
@@ -34,7 +31,7 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitDoctipelabel(HTMLCSSJINJA_parser.DoctipelabelContext ctx) {
-        return visit(ctx.doctipe());
+        return new DoctypeNode(ctx.getStart().getLine());
     }
 
     @Override
@@ -76,6 +73,11 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
             value = ctx.VALUE_LANG_EN().getText();
         } else if (ctx.VALUE_LANG_AR() != null) {
             value = ctx.VALUE_LANG_AR().getText();
+        }
+
+        // إزالة علامات الاقتباس
+        if (value.length() >= 2) {
+            value = value.substring(1, value.length() - 1);
         }
 
         return new AttributeNode(
@@ -123,18 +125,22 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         );
 
         // زيارة السمات
-        for (HTMLCSSJINJA_parser.AttributebodyContext attrCtx : ctx.attributebody()) {
-            ASTNode attrNode = visit(attrCtx);
-            if (attrNode != null) {
-                bodyElement.addChild(attrNode);
+        if (ctx.attributebody() != null) {
+            for (HTMLCSSJINJA_parser.AttributebodyContext attrCtx : ctx.attributebody()) {
+                ASTNode attrNode = visit(attrCtx);
+                if (attrNode != null) {
+                    bodyElement.addChild(attrNode);
+                }
             }
         }
 
         // زيارة المحتوى
-        for (HTMLCSSJINJA_parser.ContentbodyContext contentCtx : ctx.contentbody()) {
-            ASTNode childNode = visit(contentCtx);
-            if (childNode != null) {
-                bodyElement.addChild(childNode);
+        if (ctx.contentbody() != null) {
+            for (HTMLCSSJINJA_parser.ContentbodyContext contentCtx : ctx.contentbody()) {
+                ASTNode childNode = visit(contentCtx);
+                if (childNode != null) {
+                    bodyElement.addChild(childNode);
+                }
             }
         }
 
@@ -153,8 +159,9 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitNormaltaghead(HTMLCSSJINJA_parser.NormaltagheadContext ctx) {
+        // ✅ **تصحيح**: استخدم getText() مباشرة
         String tagName = ctx.tagsheadnormal(0).getText();
-//        String tagName = "TEST";
+
         HtmlElementNode element = new HtmlElementNode(
                 ctx.getStart().getLine(),
                 tagName,
@@ -162,10 +169,12 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         );
 
         // زيارة السمات
-        for (HTMLCSSJINJA_parser.AttributeheadContext attrCtx : ctx.attributehead()) {
-            ASTNode attrNode = visit(attrCtx);
-            if (attrNode != null) {
-                element.addChild(attrNode);
+        if (ctx.attributehead() != null) {
+            for (HTMLCSSJINJA_parser.AttributeheadContext attrCtx : ctx.attributehead()) {
+                ASTNode attrNode = visit(attrCtx);
+                if (attrNode != null) {
+                    element.addChild(attrNode);
+                }
             }
         }
 
@@ -192,10 +201,12 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         );
 
         // زيارة السمات
-        for (HTMLCSSJINJA_parser.AttributeheadContext attrCtx : ctx.attributehead()) {
-            ASTNode attrNode = visit(attrCtx);
-            if (attrNode != null) {
-                element.addChild(attrNode);
+        if (ctx.attributehead() != null) {
+            for (HTMLCSSJINJA_parser.AttributeheadContext attrCtx : ctx.attributehead()) {
+                ASTNode attrNode = visit(attrCtx);
+                if (attrNode != null) {
+                    element.addChild(attrNode);
+                }
             }
         }
 
@@ -214,9 +225,8 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitTextlabel(HTMLCSSJINJA_parser.TextlabelContext ctx) {
-        Token token = ctx.TEXT().getSymbol();
         return new TextNode(
-                token.getLine(),
+                ctx.getStart().getLine(),
                 ctx.TEXT().getText(),
                 TextNode.TextContext.HTML
         );
@@ -224,8 +234,9 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitNormal_Tag_Element_body(HTMLCSSJINJA_parser.Normal_Tag_Element_bodyContext ctx) {
+        // ✅ **تصحيح**: استخدم getText() مباشرة
         String tagName = ctx.tagsbodynamenormal(0).getText();
-//        String tagName = "TEST";
+
         HtmlElementNode element = new HtmlElementNode(
                 ctx.getStart().getLine(),
                 tagName,
@@ -233,18 +244,22 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         );
 
         // زيارة السمات
-        for (HTMLCSSJINJA_parser.AttributebodyContext attrCtx : ctx.attributebody()) {
-            ASTNode attrNode = visit(attrCtx);
-            if (attrNode != null) {
-                element.addChild(attrNode);
+        if (ctx.attributebody() != null) {
+            for (HTMLCSSJINJA_parser.AttributebodyContext attrCtx : ctx.attributebody()) {
+                ASTNode attrNode = visit(attrCtx);
+                if (attrNode != null) {
+                    element.addChild(attrNode);
+                }
             }
         }
 
         // زيارة المحتوى
-        for (HTMLCSSJINJA_parser.ContentbodyContext contentCtx : ctx.contentbody()) {
-            ASTNode childNode = visit(contentCtx);
-            if (childNode != null) {
-                element.addChild(childNode);
+        if (ctx.contentbody() != null) {
+            for (HTMLCSSJINJA_parser.ContentbodyContext contentCtx : ctx.contentbody()) {
+                ASTNode childNode = visit(contentCtx);
+                if (childNode != null) {
+                    element.addChild(childNode);
+                }
             }
         }
 
@@ -254,11 +269,23 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitSelfClosingTagElementbody(HTMLCSSJINJA_parser.SelfClosingTagElementbodyContext ctx) {
         String tagName = ctx.tagsbodynameself().getText();
-        return new HtmlElementNode(
+        HtmlElementNode element = new HtmlElementNode(
                 ctx.getStart().getLine(),
                 tagName,
                 HtmlElementNode.ElementType.SELF_CLOSING
         );
+
+        // زيارة السمات
+        if (ctx.attributebody() != null) {
+            for (HTMLCSSJINJA_parser.AttributebodyContext attrCtx : ctx.attributebody()) {
+                ASTNode attrNode = visit(attrCtx);
+                if (attrNode != null) {
+                    element.addChild(attrNode);
+                }
+            }
+        }
+
+        return element;
     }
 
     @Override
@@ -271,10 +298,12 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         StyleAttributeNode styleAttr = new StyleAttributeNode(ctx.getStart().getLine());
 
         // زيارة جميع قواعد CSS
-        for (HTMLCSSJINJA_parser.StylenameContext styleCtx : ctx.stylename()) {
-            ASTNode ruleNode = visit(styleCtx);
-            if (ruleNode instanceof CssRuleNode) {
-                styleAttr.addCssRule((CssRuleNode) ruleNode);
+        if (ctx.stylename() != null) {
+            for (HTMLCSSJINJA_parser.StylenameContext styleCtx : ctx.stylename()) {
+                ASTNode ruleNode = visit(styleCtx);
+                if (ruleNode instanceof CssRuleNode) {
+                    styleAttr.addCssRule((CssRuleNode) ruleNode);
+                }
             }
         }
 
@@ -348,245 +377,231 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitColor(HTMLCSSJINJA_parser.ColorContext ctx) {
-        String property = ctx.CSS_ATTR_COLOR().getText();
-        String value = ctx.CSS_COLOR_VALUE().getText();
-
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                value,
-                CssRuleNode.RuleType.COLOR
-        );
+        if (ctx.CSS_ATTR_COLOR() != null && ctx.CSS_COLOR_VALUE() != null) {
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_ATTR_COLOR().getText(),
+                    ctx.CSS_COLOR_VALUE().getText(),
+                    CssRuleNode.RuleType.COLOR
+            );
+        }
+        return null;
     }
 
     @Override
     public ASTNode visitLength(HTMLCSSJINJA_parser.LengthContext ctx) {
-        String property = ctx.CSS_LENGTH_PROPERTY().getText();
-
-        // جمع جميع القيم
-        StringBuilder valueBuilder = new StringBuilder();
-        for (TerminalNode valueNode : ctx.CSS_SHORTHAND_VALUE()) {
-            if (valueBuilder.length() > 0) {
-                valueBuilder.append(" ");
+        if (ctx.CSS_LENGTH_PROPERTY() != null && ctx.css_value() != null) {
+            StringBuilder valueBuilder = new StringBuilder();
+            for (HTMLCSSJINJA_parser.Css_valueContext valueCtx : ctx.css_value()) {
+                if (valueBuilder.length() > 0) valueBuilder.append(" ");
+                valueBuilder.append(valueCtx.getText());
             }
-            valueBuilder.append(valueNode.getText());
-        }
 
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                valueBuilder.toString(),
-                CssRuleNode.RuleType.LENGTH
-        );
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_LENGTH_PROPERTY().getText(),
+                    valueBuilder.toString(),
+                    CssRuleNode.RuleType.LENGTH
+            );
+        }
+        return null;
     }
 
     @Override
     public ASTNode visitUrl(HTMLCSSJINJA_parser.UrlContext ctx) {
-        String property = ctx.CSS_URL_PROPERTY().getText();
-        String value = ctx.CSS_URL_VALUE().getText();
-
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                value,
-                CssRuleNode.RuleType.URL
-        );
+        if (ctx.CSS_URL_PROPERTY() != null && ctx.CSS_URL_VALUE() != null) {
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_URL_PROPERTY().getText(),
+                    ctx.CSS_URL_VALUE().getText(),
+                    CssRuleNode.RuleType.URL
+            );
+        }
+        return null;
     }
 
     @Override
     public ASTNode visitRepeat(HTMLCSSJINJA_parser.RepeatContext ctx) {
-        String property = ctx.CSS_REPEAT_PROPERTY().getText();
-        String value = ctx.CSS_REPEAT_VALUE().getText();
-
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                value,
-                CssRuleNode.RuleType.REPEAT
-        );
+        if (ctx.CSS_REPEAT_PROPERTY() != null && ctx.CSS_REPEAT_VALUE() != null) {
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_REPEAT_PROPERTY().getText(),
+                    ctx.CSS_REPEAT_VALUE().getText(),
+                    CssRuleNode.RuleType.REPEAT
+            );
+        }
+        return null;
     }
 
     @Override
     public ASTNode visitPosition(HTMLCSSJINJA_parser.PositionContext ctx) {
-        String property = ctx.CSS_POSITION_PROPERTY().getText();
-
-        // جمع جميع القيم
-        StringBuilder valueBuilder = new StringBuilder();
-        for (TerminalNode valueNode : ctx.CSS_SHORTHAND_VALUE()) {
-            if (valueBuilder.length() > 0) {
-                valueBuilder.append(" ");
+        if (ctx.CSS_POSITION_PROPERTY() != null && ctx.css_value() != null) {
+            StringBuilder valueBuilder = new StringBuilder();
+            for (HTMLCSSJINJA_parser.Css_valueContext valueCtx : ctx.css_value()) {
+                if (valueBuilder.length() > 0) valueBuilder.append(" ");
+                valueBuilder.append(valueCtx.getText());
             }
-            valueBuilder.append(valueNode.getText());
-        }
 
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                valueBuilder.toString(),
-                CssRuleNode.RuleType.POSITION
-        );
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_POSITION_PROPERTY().getText(),
+                    valueBuilder.toString(),
+                    CssRuleNode.RuleType.POSITION
+            );
+        }
+        return null;
     }
 
     @Override
     public ASTNode visitOffset(HTMLCSSJINJA_parser.OffsetContext ctx) {
-        String property = ctx.CSS_OFFSET_PROPERTY().getText();
-        String value = ctx.CSS_SHORTHAND_VALUE().getText();
+        if (ctx.CSS_OFFSET_PROPERTY() != null && ctx.css_value() != null) {
+            String value = ctx.css_value().getText();
 
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                value,
-                CssRuleNode.RuleType.OFFSET
-        );
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_OFFSET_PROPERTY().getText(),
+                    value,
+                    CssRuleNode.RuleType.OFFSET
+            );
+        }
+        return null;
     }
 
     @Override
     public ASTNode visitBorder_style(HTMLCSSJINJA_parser.Border_styleContext ctx) {
-        String property = ctx.CSS_BORDER_STYLE_PROPERTY().getText();
-        String value = ctx.CSS_BORDER_STYLE_VALUE().getText();
-
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                value,
-                CssRuleNode.RuleType.BORDER_STYLE
-        );
+        if (ctx.CSS_BORDER_STYLE_PROPERTY() != null && ctx.CSS_BORDER_STYLE_VALUE() != null) {
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_BORDER_STYLE_PROPERTY().getText(),
+                    ctx.CSS_BORDER_STYLE_VALUE().getText(),
+                    CssRuleNode.RuleType.BORDER_STYLE
+            );
+        }
+        return null;
     }
 
     @Override
     public ASTNode visitBorder_width(HTMLCSSJINJA_parser.Border_widthContext ctx) {
-        String property = ctx.CSS_BORDER_WIDTH_PROPERTY().getText();
-        String value;
+        if (ctx.CSS_BORDER_WIDTH_PROPERTY() != null) {
+            String value = "";
+            if (ctx.CSS_BORDER_WIDTH_VALUE() != null) {
+                value = ctx.CSS_BORDER_WIDTH_VALUE().getText();
+            } else if (ctx.css_value() != null) {
+                value = ctx.css_value().getText();
+            }
 
-        if (ctx.CSS_BORDER_WIDTH_VALUE() != null) {
-            value = ctx.CSS_BORDER_WIDTH_VALUE().getText();
-        } else {
-            value = ctx.CSS_SHORTHAND_VALUE().getText();
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_BORDER_WIDTH_PROPERTY().getText(),
+                    value,
+                    CssRuleNode.RuleType.BORDER_WIDTH
+            );
         }
-
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                value,
-                CssRuleNode.RuleType.BORDER_WIDTH
-        );
+        return null;
     }
 
     @Override
     public ASTNode visitBorder(HTMLCSSJINJA_parser.BorderContext ctx) {
-        String property = ctx.CSS_BORDER_PROPERTY().getText();
+        if (ctx.CSS_BORDER_PROPERTY() != null) {
+            StringBuilder valueBuilder = new StringBuilder();
 
-        // جمع جميع القيم
-        List<String> values = new ArrayList<>();
-        for (TerminalNode valueNode : ctx.CSS_SHORTHAND_VALUE()) {
-            values.add(valueNode.getText());
-        }
-        for (TerminalNode valueNode : ctx.CSS_COLOR_VALUE()) {
-            values.add(valueNode.getText());
-        }
-
-        StringBuilder valueBuilder = new StringBuilder();
-        for (String val : values) {
-            if (valueBuilder.length() > 0) {
-                valueBuilder.append(" ");
+            // جمع CSS values
+            if (ctx.css_value() != null) {
+                for (HTMLCSSJINJA_parser.Css_valueContext valueCtx : ctx.css_value()) {
+                    if (valueBuilder.length() > 0) valueBuilder.append(" ");
+                    valueBuilder.append(valueCtx.getText());
+                }
             }
-            valueBuilder.append(val);
-        }
 
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                valueBuilder.toString(),
-                CssRuleNode.RuleType.BORDER
-        );
+            // جمع CSS color values
+            if (ctx.CSS_COLOR_VALUE() != null) {
+                for (TerminalNode colorNode : ctx.CSS_COLOR_VALUE()) {
+                    if (valueBuilder.length() > 0) valueBuilder.append(" ");
+                    valueBuilder.append(colorNode.getText());
+                }
+            }
+
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_BORDER_PROPERTY().getText(),
+                    valueBuilder.toString(),
+                    CssRuleNode.RuleType.BORDER
+            );
+        }
+        return null;
     }
 
     @Override
     public ASTNode visitFont(HTMLCSSJINJA_parser.FontContext ctx) {
-        String property = ctx.CSS_FONT_PROPERTY().getText();
-        String value;
+        if (ctx.CSS_FONT_PROPERTY() != null) {
+            String value = "";
+            if (ctx.CSS_FONT_VALUE() != null) {
+                value = ctx.CSS_FONT_VALUE().getText();
+            } else if (ctx.css_value() != null) {
+                value = ctx.css_value().getText();
+            }
 
-        if (ctx.CSS_FONT_VALUE() != null) {
-            value = ctx.CSS_FONT_VALUE().getText();
-        } else {
-            value = ctx.CSS_SHORTHAND_VALUE().getText();
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_FONT_PROPERTY().getText(),
+                    value,
+                    CssRuleNode.RuleType.FONT
+            );
         }
-
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                value,
-                CssRuleNode.RuleType.FONT
-        );
+        return null;
     }
 
     @Override
     public ASTNode visitTextcss(HTMLCSSJINJA_parser.TextcssContext ctx) {
-        String property = ctx.CSS_TEXT_PROPERTY().getText();
-        String value;
+        if (ctx.CSS_TEXT_PROPERTY() != null && ctx.css_value() != null) {
+            String value = ctx.css_value().getText();
 
-        if (ctx.CSS_TEXT_VALUE() != null) {
-            value = ctx.CSS_TEXT_VALUE().getText();
-        } else {
-            value = ctx.CSS_SHORTHAND_VALUE().getText();
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_TEXT_PROPERTY().getText(),
+                    value,
+                    CssRuleNode.RuleType.TEXT
+            );
         }
-
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                value,
-                CssRuleNode.RuleType.TEXT
-        );
+        return null;
     }
 
     @Override
     public ASTNode visitEffect(HTMLCSSJINJA_parser.EffectContext ctx) {
-        String property = ctx.CSS_EFFECT_PROPERTY().getText();
-
-        // جمع جميع القيم
-        List<String> values = new ArrayList<>();
-        for (TerminalNode valueNode : ctx.CSS_EFFECT_VALUE()) {
-            values.add(valueNode.getText());
-        }
-        for (TerminalNode valueNode : ctx.CSS_SHORTHAND_VALUE()) {
-            values.add(valueNode.getText());
-        }
-
-        StringBuilder valueBuilder = new StringBuilder();
-        for (String val : values) {
-            if (valueBuilder.length() > 0) {
-                valueBuilder.append(" ");
+        if (ctx.CSS_EFFECT_PROPERTY() != null && ctx.css_value() != null) {
+            StringBuilder valueBuilder = new StringBuilder();
+            for (HTMLCSSJINJA_parser.Css_valueContext valueCtx : ctx.css_value()) {
+                if (valueBuilder.length() > 0) valueBuilder.append(" ");
+                valueBuilder.append(valueCtx.getText());
             }
-            valueBuilder.append(val);
-        }
 
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                valueBuilder.toString(),
-                CssRuleNode.RuleType.EFFECT
-        );
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_EFFECT_PROPERTY().getText(),
+                    valueBuilder.toString(),
+                    CssRuleNode.RuleType.EFFECT
+            );
+        }
+        return null;
     }
 
     @Override
     public ASTNode visitLayout(HTMLCSSJINJA_parser.LayoutContext ctx) {
-        String property = ctx.CSS_LAYOUT_PROPERTY().getText();
-
-        // جمع جميع القيم
-        StringBuilder valueBuilder = new StringBuilder();
-        for (TerminalNode valueNode : ctx.CSS_LAYOUT_VALUE()) {
-            if (valueBuilder.length() > 0) {
-                valueBuilder.append(" ");
+        if (ctx.CSS_LAYOUT_PROPERTY() != null && ctx.css_value() != null) {
+            StringBuilder valueBuilder = new StringBuilder();
+            for (HTMLCSSJINJA_parser.Css_valueContext valueCtx : ctx.css_value()) {
+                if (valueBuilder.length() > 0) valueBuilder.append(" ");
+                valueBuilder.append(valueCtx.getText());
             }
-            valueBuilder.append(valueNode.getText());
-        }
 
-        return new CssRuleNode(
-                ctx.getStart().getLine(),
-                property,
-                valueBuilder.toString(),
-                CssRuleNode.RuleType.LAYOUT
-        );
+            return new CssRuleNode(
+                    ctx.getStart().getLine(),
+                    ctx.CSS_LAYOUT_PROPERTY().getText(),
+                    valueBuilder.toString(),
+                    CssRuleNode.RuleType.LAYOUT
+            );
+        }
+        return null;
     }
 
     @Override
@@ -682,25 +697,20 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         StringBuilder content = new StringBuilder();
 
         // جمع محتوى التعبير
-        for (HTMLCSSJINJA_parser.JinjaExprContentContext exprCtx : ctx.jinjaExprContent()) {
-            if (exprCtx.JINJA_EXPR_STRING() != null) {
-                content.append(exprCtx.JINJA_EXPR_STRING().getText());
-            } else if (exprCtx.JINJA_EXPR_ATOM() != null) {
-                content.append(exprCtx.JINJA_EXPR_ATOM().getText());
-            } else if (exprCtx.JINJA_EXPR_SYMBOL() != null) {
-                content.append(exprCtx.JINJA_EXPR_SYMBOL().getText());
-            } else if (exprCtx.JINJA_EXPR_UNKNOWN() != null) {
-                content.append(exprCtx.JINJA_EXPR_UNKNOWN().getText());
+        if (ctx.jinjaExprContent() != null) {
+            for (HTMLCSSJINJA_parser.JinjaExprContentContext exprCtx : ctx.jinjaExprContent()) {
+                if (exprCtx.getText() != null) {
+                    if (content.length() > 0) content.append(" ");
+                    content.append(exprCtx.getText());
+                }
             }
         }
 
-        JinjaNode jinjaNode = new JinjaNode(
+        return new JinjaNode(
                 ctx.getStart().getLine(),
                 JinjaNode.JinjaType.EXPRESSION,
                 content.toString().trim()
         );
-
-        return jinjaNode;
     }
 
     @Override
@@ -708,29 +718,20 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         StringBuilder content = new StringBuilder();
 
         // جمع محتوى ال statement
-        for (HTMLCSSJINJA_parser.JinjaStmtArgumentContext argCtx : ctx.jinjaStmtArgument()) {
-            if (argCtx.JINJA_STMT_ATOM() != null) {
-                if (content.length() > 0) content.append(" ");
-                content.append(argCtx.JINJA_STMT_ATOM().getText());
-            } else if (argCtx.JINJA_STMT_SYMBOL() != null) {
-                if (content.length() > 0) content.append(" ");
-                content.append(argCtx.JINJA_STMT_SYMBOL().getText());
-            } else if (argCtx.JINJA_STMT_STRING() != null) {
-                if (content.length() > 0) content.append(" ");
-                content.append(argCtx.JINJA_STMT_STRING().getText());
-            } else if (argCtx.JINJA_STMT_UNKNOWN() != null) {
-                if (content.length() > 0) content.append(" ");
-                content.append(argCtx.JINJA_STMT_UNKNOWN().getText());
+        if (ctx.jinjaStmtArgument() != null) {
+            for (HTMLCSSJINJA_parser.JinjaStmtArgumentContext argCtx : ctx.jinjaStmtArgument()) {
+                if (argCtx.getText() != null) {
+                    if (content.length() > 0) content.append(" ");
+                    content.append(argCtx.getText());
+                }
             }
         }
 
-        JinjaNode jinjaNode = new JinjaNode(
+        return new JinjaNode(
                 ctx.getStart().getLine(),
                 JinjaNode.JinjaType.STATEMENT,
                 content.toString().trim()
         );
-
-        return jinjaNode;
     }
 
     @Override
@@ -755,35 +756,24 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 JinjaBlockNode.BlockType.IF
         );
 
+        // ✅ **تصحيح مهم**: استدعاء finalizeBlock في النهاية
+
         // معالجة الكتلة الرئيسية if
-        String condition = extractCondition(ctx.JINJA_STMT_IF(), ctx.jinjaStmtArgument());
+        String condition = extractJinjaArguments(ctx.jinjaStmtArgument());
         ifBlock.addConditionBlock(condition);
 
         // معالجة المحتوى داخل if
-        for (HTMLCSSJINJA_parser.JinjaBlockContentContext contentCtx : ctx.jinjaBlockContent()) {
-            ASTNode contentNode = visit(contentCtx);
-            if (contentNode != null) {
-                ifBlock.addContentToLastCondition(contentNode);
-            }
-        }
-
-        // معالجة elif blocks
-        for (int i = 0; i < ctx.JINJA_STMT_ELIF().size(); i++) {
-            String elifCondition = extractCondition(null, ctx.jinjaStmtArgument());
-            ifBlock.addConditionBlock(elifCondition);
-
-            // TODO: جمع المحتوى لكل elif
-        }
-
-        // معالجة else block
-        if (ctx.JINJA_STMT_ELSE() != null) {
-            for (HTMLCSSJINJA_parser.JinjaBlockContentContext elseContentCtx : ctx.jinjaBlockContent()) {
-                ASTNode elseNode = visit(elseContentCtx);
-                if (elseNode != null) {
-                    ifBlock.addElseContent(elseNode);
+        if (ctx.jinjaBlockContent() != null) {
+            for (HTMLCSSJINJA_parser.JinjaBlockContentContext contentCtx : ctx.jinjaBlockContent()) {
+                ASTNode contentNode = visit(contentCtx);
+                if (contentNode != null) {
+                    ifBlock.addContentToLastCondition(contentNode);
                 }
             }
         }
+
+        // ✅ **مهم جداً**: استدعاء finalizeBlock
+        ifBlock.finalizeBlock();
 
         return ifBlock;
     }
@@ -796,26 +786,21 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         );
 
         // معالجة الشرط في for
-        String condition = extractCondition(ctx.JINJA_STMT_FOR(), ctx.jinjaStmtArgument());
+        String condition = extractJinjaArguments(ctx.jinjaStmtArgument());
         forBlock.addConditionBlock(condition);
 
         // معالجة المحتوى داخل for
-        for (HTMLCSSJINJA_parser.JinjaBlockContentContext contentCtx : ctx.jinjaBlockContent()) {
-            ASTNode contentNode = visit(contentCtx);
-            if (contentNode != null) {
-                forBlock.addContentToLastCondition(contentNode);
-            }
-        }
-
-        // معالجة else block
-        if (ctx.JINJA_STMT_ELSE() != null) {
-            for (HTMLCSSJINJA_parser.JinjaBlockContentContext elseContentCtx : ctx.jinjaBlockContent()) {
-                ASTNode elseNode = visit(elseContentCtx);
-                if (elseNode != null) {
-                    forBlock.addElseContent(elseNode);
+        if (ctx.jinjaBlockContent() != null) {
+            for (HTMLCSSJINJA_parser.JinjaBlockContentContext contentCtx : ctx.jinjaBlockContent()) {
+                ASTNode contentNode = visit(contentCtx);
+                if (contentNode != null) {
+                    forBlock.addContentToLastCondition(contentNode);
                 }
             }
         }
+
+        // ✅ **مهم جداً**: استدعاء finalizeBlock
+        forBlock.finalizeBlock();
 
         return forBlock;
     }
@@ -837,9 +822,8 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitJinjaTextLabel(HTMLCSSJINJA_parser.JinjaTextLabelContext ctx) {
-        Token token = ctx.TEXT().getSymbol();
         return new TextNode(
-                token.getLine(),
+                ctx.getStart().getLine(),
                 ctx.TEXT().getText(),
                 TextNode.TextContext.JINJA
         );
@@ -847,6 +831,7 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitHtmlcommentlabel(HTMLCSSJINJA_parser.HtmlcommentlabelContext ctx) {
+        // HTML comments عادة يتم تخطيها، ولكن إذا أردت الاحتفاظ بها:
         String commentText = ctx.HTML_COMMENT().getText();
         return new TextNode(
                 ctx.getStart().getLine(),
@@ -857,36 +842,33 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitText(HTMLCSSJINJA_parser.TextContext ctx) {
-        Token token = ctx.TEXT().getSymbol();
         return new TextNode(
-                token.getLine(),
+                ctx.getStart().getLine(),
                 ctx.TEXT().getText(),
                 TextNode.TextContext.HTML
         );
     }
 
-    // طريقة مساعدة لاستخراج الشرط من Jinja blocks
-    private String extractCondition(TerminalNode keyword, List<HTMLCSSJINJA_parser.JinjaStmtArgumentContext> arguments) {
-        StringBuilder condition = new StringBuilder();
-
-        if (keyword != null) {
-            condition.append(keyword.getText());
+    // ✅ **طريقة مساعدة مبسطة لاستخراج arguments**
+    private String extractJinjaArguments(List<HTMLCSSJINJA_parser.JinjaStmtArgumentContext> arguments) {
+        if (arguments == null || arguments.isEmpty()) {
+            return "";
         }
 
+        StringBuilder condition = new StringBuilder();
         for (HTMLCSSJINJA_parser.JinjaStmtArgumentContext arg : arguments) {
             if (condition.length() > 0) condition.append(" ");
-
-            if (arg.JINJA_STMT_ATOM() != null) {
-                condition.append(arg.JINJA_STMT_ATOM().getText());
-            } else if (arg.JINJA_STMT_SYMBOL() != null) {
-                condition.append(arg.JINJA_STMT_SYMBOL().getText());
-            } else if (arg.JINJA_STMT_STRING() != null) {
-                condition.append(arg.JINJA_STMT_STRING().getText());
-            } else if (arg.JINJA_STMT_UNKNOWN() != null) {
-                condition.append(arg.JINJA_STMT_UNKNOWN().getText());
-            }
+            condition.append(arg.getText());
         }
 
         return condition.toString().trim();
+    }
+
+    // ✅ **تجاوز visitChildren لمنع التكرار**
+    @Override
+    public ASTNode visitChildren(org.antlr.v4.runtime.tree.RuleNode node) {
+        // لا نريد زيارة جميع الأطفال تلقائياً
+        // نرجع null ونترك كل طريقة تزور الأطفال التي تريدها
+        return null;
     }
 }

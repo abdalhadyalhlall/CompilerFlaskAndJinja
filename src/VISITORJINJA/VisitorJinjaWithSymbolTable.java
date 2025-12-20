@@ -451,7 +451,7 @@ public class VisitorJinjaWithSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<
         String property = ctx.CSS_LENGTH_PROPERTY().getText();
 
         StringBuilder valueBuilder = new StringBuilder();
-        for (TerminalNode valueNode : ctx.CSS_SHORTHAND_VALUE()) {
+        for (HTMLCSSJINJA_parser.Css_valueContext valueNode : ctx.css_value()) {
             if (valueBuilder.length() > 0) {
                 valueBuilder.append(" ");
             }

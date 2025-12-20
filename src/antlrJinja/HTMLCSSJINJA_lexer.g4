@@ -109,7 +109,7 @@ TAG_MAIN        : 'main';
 TAG_SPAN        : 'span';
 
 
-// HTML ATTRIBUTES (Same as before)
+// HTML ATTRIBUTES
 ATTR_HIDDEN             : 'hidden';
 ATTR_DRAGGABLE          : 'draggable';
 ATTR_CONTENTEDITABLE    : 'contenteditable';
@@ -207,6 +207,7 @@ STYLE_END               : '"' -> popMode;
 CSS_TWOPOINT            : ':';
 CSS_SEMI                : ';';
 
+// CSS Properties
 CSS_TEXT_PROPERTY
     : 'text-align'
     | 'text-decoration'
@@ -285,18 +286,7 @@ CSS_EFFECT_PROPERTY
     : 'opacity' | 'cursor' | 'filter' | 'mix-blend-mode'
     ;
 
-CSS_SHORTHAND_VALUE
-    : LENGTH
-    | PERCENT
-    | INT
-    | FLOAT
-    | 'none'
-    | 'auto'
-    | 'top' | 'bottom' | 'left' | 'right' | 'center'
-    | CSS_BORDER_STYLE_VALUE
-    | CSS_BORDER_WIDTH_VALUE
-    ;
-
+// CSS Values - Reordered to handle conflicts
 CSS_TEXT_VALUE
     : 'left' | 'right' | 'center' | 'justify' | 'start' | 'end'
     | 'underline' | 'overline' | 'line-through' | 'none'
@@ -307,6 +297,29 @@ CSS_TEXT_VALUE
     | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap' | 'break-spaces'
     ;
 
+CSS_SHORTHAND_VALUE
+    : LENGTH
+    | PERCENT
+    | INT
+    | FLOAT
+    | 'none'
+    | 'auto'
+    | 'left' | 'right' | 'center' | 'justify'  // Added text-align values
+    | 'top' | 'bottom'  // Added position values
+    | 'solid' | 'dashed' | 'dotted' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' | 'hidden'
+    | 'thin' | 'medium' | 'thick'
+    | 'normal' | 'italic' | 'oblique'
+    | 'bold' | 'bolder' | 'lighter'
+    | 'small' | 'medium' | 'large' | 'x-small' | 'xx-small' | 'x-large' | 'xx-large'
+    | 'pointer' | 'default' | 'move' | 'text' | 'wait' | 'help' | 'not-allowed' | 'crosshair'
+    | 'inherit' | 'initial' | 'unset'
+    | 'rtl' | 'ltr'
+    | 'block' | 'inline' | 'inline-block' | 'flex' | 'grid' | 'table'
+    | 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
+    | 'visible' | 'hidden' | 'scroll' | 'auto'
+    | 'cover' | 'contain' | 'fill' | 'scale-down'
+    ;
+
 CSS_EFFECT_VALUE
     : OPACITY_VALUE
     | CURSOR_VALUE
@@ -315,10 +328,10 @@ CSS_EFFECT_VALUE
     ;
 
 CSS_LAYOUT_VALUE
-    : 'block' | 'inline' | 'inline-block' | 'flex' | 'grid'
+    : 'block' | 'inline' | 'inline-block' | 'flex' | 'grid' | 'table'
     | 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
-    | 'visible' | 'hidden' | 'scroll' | 'collapse'
-    | 'both'
+    | 'visible' | 'hidden' | 'scroll' | 'collapse' | 'auto'
+    | 'both' | 'none'
     | 'cover' | 'contain' | 'fill' | 'scale-down'
     | 'rtl' | 'ltr'
     ;
@@ -367,7 +380,7 @@ CSS_GENERIC_VALUE
 
 fragment INT : [0-9]+ ;
 fragment FLOAT : [0-9]+ '.' [0-9]+ ;
-fragment LENGTH_UNIT : ('px'|'em'|'rem'|'vh'|'vw'|'pt') ;
+fragment LENGTH_UNIT : ('px'|'em'|'rem'|'vh'|'vw'|'pt'|'%') ;
 
 fragment LENGTH : INT LENGTH_UNIT | FLOAT LENGTH_UNIT ;
 fragment LENGTH_POSITION : LENGTH ;
@@ -385,6 +398,35 @@ fragment NAMED_COLOR
     : 'red' | 'green' | 'blue' | 'black' | 'white'
     | 'yellow' | 'cyan' | 'magenta' | 'gray' | 'grey'
     | 'silver' | 'transparent' | 'currentColor' | 'orange' | 'purple' | 'pink'
+    | 'aliceblue' | 'antiquewhite' | 'aqua' | 'aquamarine' | 'azure'
+    | 'beige' | 'bisque' | 'blanchedalmond' | 'blueviolet' | 'brown'
+    | 'burlywood' | 'cadetblue' | 'chartreuse' | 'chocolate' | 'coral'
+    | 'cornflowerblue' | 'cornsilk' | 'crimson' | 'darkblue' | 'darkcyan'
+    | 'darkgoldenrod' | 'darkgray' | 'darkgreen' | 'darkgrey' | 'darkkhaki'
+    | 'darkmagenta' | 'darkolivegreen' | 'darkorange' | 'darkorchid'
+    | 'darkred' | 'darksalmon' | 'darkseagreen' | 'darkslateblue'
+    | 'darkslategray' | 'darkslategrey' | 'darkturquoise' | 'darkviolet'
+    | 'deeppink' | 'deepskyblue' | 'dimgray' | 'dimgrey' | 'dodgerblue'
+    | 'firebrick' | 'floralwhite' | 'forestgreen' | 'fuchsia' | 'gainsboro'
+    | 'ghostwhite' | 'gold' | 'goldenrod' | 'greenyellow' | 'honeydew'
+    | 'hotpink' | 'indianred' | 'indigo' | 'ivory' | 'khaki' | 'lavender'
+    | 'lavenderblush' | 'lawngreen' | 'lemonchiffon' | 'lightblue'
+    | 'lightcoral' | 'lightcyan' | 'lightgoldenrodyellow' | 'lightgray'
+    | 'lightgreen' | 'lightgrey' | 'lightpink' | 'lightsalmon'
+    | 'lightseagreen' | 'lightskyblue' | 'lightslategray' | 'lightslategrey'
+    | 'lightsteelblue' | 'lightyellow' | 'lime' | 'limegreen' | 'linen'
+    | 'maroon' | 'mediumaquamarine' | 'mediumblue' | 'mediumorchid'
+    | 'mediumpurple' | 'mediumseagreen' | 'mediumslateblue'
+    | 'mediumspringgreen' | 'mediumturquoise' | 'mediumvioletred'
+    | 'midnightblue' | 'mintcream' | 'mistyrose' | 'moccasin' | 'navajowhite'
+    | 'navy' | 'oldlace' | 'olive' | 'olivedrab' | 'orangered' | 'orchid'
+    | 'palegoldenrod' | 'palegreen' | 'paleturquoise' | 'palevioletred'
+    | 'papayawhip' | 'peachpuff' | 'peru' | 'plum' | 'powderblue'
+    | 'rosybrown' | 'royalblue' | 'saddlebrown' | 'salmon' | 'sandybrown'
+    | 'seagreen' | 'seashell' | 'sienna' | 'skyblue' | 'slateblue'
+    | 'slategray' | 'slategrey' | 'snow' | 'springgreen' | 'steelblue'
+    | 'tan' | 'teal' | 'thistle' | 'tomato' | 'turquoise' | 'violet'
+    | 'wheat' | 'whitesmoke' | 'yellowgreen'
     ;
 
 // Text Keywords
@@ -395,17 +437,18 @@ fragment FONT_SIZE_VALUE
 
 fragment FONT_WEIGHT_VALUE
     : 'bold' | 'lighter' | 'bolder'
+    | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900'
     ;
 
 fragment FONT_STYLE_VALUE
-    : 'italic' | 'oblique'
+    : 'italic' | 'oblique' | 'normal'
     ;
 
 fragment FONT_FAMILY_VALUE
     : ('"' ~["\r\n]* '"')
     | '\'' ~['\r\n]* '\''
     | 'serif' | 'sans-serif' | 'monospace'
-    | 'cursive' | 'fantasy'
+    | 'cursive' | 'fantasy' | 'Arial' | 'Helvetica' | 'Times New Roman'
     ;
 
 fragment OPACITY_VALUE : '0' | '1' | '0.' [0-9]+ ;
@@ -445,11 +488,11 @@ JINJA_EXPR_STRING
     | '\'' (~[']|'\\\'')* '\''
     ;
 
-JINJA_EXPR_ATOM : [a-zA-Z_][a-zA-Z0-9_.]+ ;
+JINJA_EXPR_ATOM : [a-zA-Z_][a-zA-Z0-9_.]* ;
 
-JINJA_EXPR_SYMBOL : .? ;
+JINJA_EXPR_SYMBOL : [+\-*/%=><!&|.,:;()[\]{}] ;
 
-JINJA_EXPR_UNKNOWN : .? ;
+JINJA_EXPR_UNKNOWN : . ;
 
 mode JINJA_STMT_MODE;
 
@@ -480,8 +523,8 @@ JINJA_STMT_STRING
     | '\'' (~[']|'\\\'')* '\''
     ;
 
-JINJA_STMT_ATOM : [a-zA-Z_][a-zA-Z0-9_.]+ ;
+JINJA_STMT_ATOM : [a-zA-Z_][a-zA-Z0-9_.]* ;
 
-JINJA_STMT_SYMBOL : .? ;
+JINJA_STMT_SYMBOL : [+\-*/%=><!&|.,:;()[\]{}] ;
 
 JINJA_STMT_UNKNOWN : . ;
