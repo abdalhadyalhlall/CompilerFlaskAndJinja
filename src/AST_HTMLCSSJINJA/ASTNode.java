@@ -6,7 +6,6 @@ import java.util.List;
 public abstract class ASTNode {
     protected int lineNumber;
     protected List<ASTNode> children;
-    private static int printIndentLevel = 0;
 
     public ASTNode(int lineNumber) {
         this.lineNumber = lineNumber;
@@ -29,7 +28,6 @@ public abstract class ASTNode {
 
     public abstract String getNodeName();
 
-    // طريقة الطباعة المحسنة
     public void print() {
         print("");
     }
@@ -37,12 +35,11 @@ public abstract class ASTNode {
     public void print(String indent) {
         System.out.println(indent + toString());
         String childIndent = indent + "  ";
-        for (ASTNode child : children) {
+        for (ASTNode child : getChildren()) {
             child.print(childIndent);
         }
     }
 
-    // طريقة لطباعة معلومات إضافية (للإرث)
     public String getAdditionalInfo() {
         return "";
     }

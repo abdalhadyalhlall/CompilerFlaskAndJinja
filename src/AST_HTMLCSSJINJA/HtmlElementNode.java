@@ -5,11 +5,7 @@ public class HtmlElementNode extends ASTNode {
     private ElementType elementType;
 
     public enum ElementType {
-        NORMAL,
-        SELF_CLOSING,
-        HEAD,
-        BODY,
-        HTML
+        NORMAL, SELF_CLOSING, HEAD, BODY, HTML
     }
 
     public HtmlElementNode(int lineNumber, String tagName, ElementType elementType) {

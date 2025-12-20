@@ -5,7 +5,6 @@ import java.util.List;
 
 public class JinjaBlockNode extends ASTNode {
     private BlockType blockType;
-    private String condition;
     private List<ConditionBlock> conditionBlocks;
     private List<ASTNode> elseContent;
 
@@ -52,14 +51,17 @@ public class JinjaBlockNode extends ASTNode {
 
     public void addContentToLastCondition(ASTNode node) {
         if (!conditionBlocks.isEmpty()) {
-            conditionBlocks.get(conditionBlocks.size() - 1).getContent().add(node);
-            this.addChild(node);
+            ConditionBlock lastCondition = conditionBlocks.get(conditionBlocks.size() - 1);
+            lastCondition.getContent().add(node);
+            // ⚠️ مهم: لا تضيف node كطفل مباشرة هنا
+            // سيتم إضافتها في finalizeBlock()
         }
     }
 
     public void addElseContent(ASTNode node) {
         elseContent.add(node);
-        this.addChild(node);
+        // ⚠️ مهم: لا تضيف node كطفل مباشرة هنا
+        // سيتم إضافتها في finalizeBlock()
     }
 
     public List<ConditionBlock> getConditionBlocks() {
@@ -70,6 +72,24 @@ public class JinjaBlockNode extends ASTNode {
         return elseContent;
     }
 
+    // دالة جديدة: تجميع جميع المحتويات كأطفال للعقدة
+    public void finalizeBlock() {
+        // مسح الأطفال الحاليين إذا كانوا موجودين
+        children.clear();
+
+        // إضافة محتوى جميع الكتل الشرطية
+        for (ConditionBlock conditionBlock : conditionBlocks) {
+            for (ASTNode node : conditionBlock.getContent()) {
+                super.addChild(node);
+            }
+        }
+
+        // إضافة محتوى else
+        for (ASTNode node : elseContent) {
+            super.addChild(node);
+        }
+    }
+
     @Override
     public String getNodeName() {
         return "JinjaBlockNode[" + blockType + "]";
@@ -77,11 +97,11 @@ public class JinjaBlockNode extends ASTNode {
 
     @Override
     public String getAdditionalInfo() {
-        if (blockType == BlockType.IF) {
+        if (blockType == BlockType.IF && !conditionBlocks.isEmpty()) {
             return "{% if " + conditionBlocks.get(0).getCondition() + " %}";
-        } else if (blockType == BlockType.FOR) {
-            return "{% for ... in ... %}";
+        } else if (blockType == BlockType.FOR && !conditionBlocks.isEmpty()) {
+            return "{% for " + conditionBlocks.get(0).getCondition() + " %}";
         }
-        return "";
+        return "{% " + blockType.toString().toLowerCase() + " ... %}";
     }
 }
