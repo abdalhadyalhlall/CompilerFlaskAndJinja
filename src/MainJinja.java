@@ -1,91 +1,773 @@
+import VISITORJINJA.*;
+
 import AST_HTMLCSSJINJA.*;
-import VISITORJINJA.VisitorJinja;
-import VISITORJINJA.VisitorJinjaWithSymbolTable;
 import VISITORJINJA.ST.*;
-import antlrJinja.HTMLCSSJINJA_lexer;
 import antlrJinja.HTMLCSSJINJA_parser;
+import antlrJinja.HTMLCSSJINJA_lexer;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainJinja {
-    public static void main(String[] args) {
-        try {
-            // ============ 1. قراءة الملف ============
-            String filePath = "Files/html.txt";
-            String input = new String(Files.readAllBytes(Paths.get(filePath)));
+    public static void main(String[] args) throws IOException {
+        String fileName = "Files/html.txt";
 
-            System.out.println("=== قراءة الملف ===");
-            System.out.println(input);
-            System.out.println("===================\n");
+        System.out.println("=== محتوى الملف ===");
+        String fileContent = Files.readString(Paths.get(fileName));
+        System.out.println(fileContent);
+        System.out.println("====================\n");
 
-            // ============ 2. إنشاء Lexer و Parser ============
-            CharStream charStream = CharStreams.fromString(input);
-            HTMLCSSJINJA_lexer lexer = new HTMLCSSJINJA_lexer(charStream);
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            HTMLCSSJINJA_parser parser = new HTMLCSSJINJA_parser(tokens);
+        CharStream charStream = CharStreams.fromFileName(fileName);
+        HTMLCSSJINJA_lexer lexer = new HTMLCSSJINJA_lexer(charStream);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        tokens.fill();
 
-            // ============ 3. إعداد معالجة الأخطاء ============
-            parser.removeErrorListeners();
-            parser.addErrorListener(new BaseErrorListener() {
-                @Override
-                public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol,
-                                        int line, int charPositionInLine,
-                                        String msg, RecognitionException e) {
-                    System.err.println("⚠️ خطأ في السطر " + line + ":" + charPositionInLine + " - " + msg);
-                }
-            });
+        System.out.println("=== تحليل الرموز ===");
+        for (Token t : tokens.getTokens()) {
+            String tokenName = lexer.VOCABULARY.getSymbolicName(t.getType());
+            if (tokenName != null && !tokenName.equals("EOF")) {
+                System.out.printf("TOKEN: %-25s -> '%s' (السطر: %d, العمود: %d)\n",
+                        tokenName, t.getText(), t.getLine(), t.getCharPositionInLine());
+            }
+        }
+        System.out.println("======================\n");
 
-            // ============ 4. تحليل الشجرة مرتين ============
-            ParseTree tree = parser.document();
+        HTMLCSSJINJA_parser parser = new HTMLCSSJINJA_parser(tokens);
+        ParseTree parseTree = parser.document();
 
-            // ============ 5. أولاً: استخدام Visitor العادي لطباعة AST كاملة ============
-            System.out.println("\n🎄 ==================== شجرة AST (كاملة) ==================== 🎄\n");
-            VisitorJinja visitor = new VisitorJinja();
-            ASTNode ast = visitor.visit(tree);
+        System.out.println("=== بناء شجرة الـAST ===");
+        VisitorJinja visitor = new VisitorJinja();
+        ASTNode astRoot = visitor.visit(parseTree);
 
-            if (ast != null) {
-                ast.print();  // ✅ هذه تطبع AST كاملة
-            } else {
-                System.out.println("❌ AST فارغة من Visitor العادي!");
+        if (astRoot instanceof DocumentNode) {
+            System.out.println("تم بناء AST بنجاح!");
+            System.out.println("عدد العناصر: " + ((DocumentNode) astRoot).getChildren().size());
+        }
+        System.out.println("===========================\n");
+
+        System.out.println("=== بناء جدول الرموز ===");
+        VisitorJinjaSymbolTable symbolTableVisitor = new VisitorJinjaSymbolTable(visitor);
+        symbolTableVisitor.visit(parseTree);
+        HtmlCssJinjaSymbolTable symbolTable = symbolTableVisitor.getSymbolTable();
+        System.out.println("تم بناء جدول الرموز بنجاح!");
+        System.out.println("==============================\n");
+
+        interactiveMenu(symbolTableVisitor, symbolTable);
+    }
+
+    private static void interactiveMenu(VisitorJinjaSymbolTable visitor, HtmlCssJinjaSymbolTable symbolTable) {
+        Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
+
+        System.out.println("=== نظام إدارة جدول الرموز HTML/CSS/Jinja ===");
+
+        while (!exit) {
+            System.out.println("\n=== القائمة الرئيسية ===");
+            System.out.println("1. عرض جدول الرموز");
+            System.out.println("2. البحث عن عنصر HTML");
+            System.out.println("3. البحث عن سمة CSS");
+            System.out.println("4. البحث عن تعبير Jinja");
+            System.out.println("5. عرض إحصائيات الرموز");
+            System.out.println("6. البحث عن عناصر ضمن نطاق");
+            System.out.println("7. عرض عناصر Jinja حسب النوع");
+            System.out.println("8. عرض الأخطاء والتحذيرات");
+            System.out.println("9. اختبار جميع الوظائف");
+            System.out.println("10. تصدير جدول الرموز");
+            System.out.println("11. عرض الهياكل المتداخلة");
+            System.out.println("0. الخروج");
+            System.out.print("اختر خيارًا: ");
+
+            int choice;
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("يرجى إدخال رقم صحيح!");
+                scanner.nextLine();
+                continue;
             }
 
-            // ============ 6. ثانياً: استخدام Visitor مع Symbol Table ============
-            System.out.println("\n📊 ============== تحليل جدول الرموز ============== 📊\n");
-            VisitorJinjaWithSymbolTable visitorWithST = new VisitorJinjaWithSymbolTable(filePath);
-            ASTNode astWithST = visitorWithST.visit(tree);
+            switch (choice) {
+                case 1:
+                    displaySymbolTable(symbolTable);
+                    break;
+                case 2:
+                    searchHtmlElement(symbolTable, scanner);
+                    break;
+                case 3:
+                    searchCssAttribute(symbolTable, scanner);
+                    break;
+                case 4:
+                    searchJinja(symbolTable, scanner);
+                    break;
+                case 5:
+                    displayStatistics(symbolTable);
+                    break;
+                case 6:
+                    searchWithinScope(symbolTable, scanner);
+                    break;
+                case 7:
+                    displayJinjaByType(symbolTable, scanner);
+                    break;
+                case 8:
+                    displayErrorsAndWarnings(visitor);
+                    break;
+                case 9:
+                    testAllFunctions(symbolTable, visitor);
+                    break;
+                case 10:
+                    exportSymbolTable(symbolTable);
+                    break;
+                case 11:
+                    displayNestedStructures(symbolTable, scanner);
+                    break;
+                case 0:
+                    exit = true;
+                    System.out.println("شكرًا لاستخدامك النظام!");
+                    visitor.cleanup();
+                    break;
+                default:
+                    System.out.println("خيار غير صحيح!");
+            }
+        }
 
-            // طباعة تحليل Symbol Table
-            visitorWithST.printSymbolAnalysis();
+        scanner.close();
+    }
 
-            // ============ 7. معلومات إضافية من Symbol Table ============
-            SymbolTableImpl symbolTable = visitorWithST.getSymbolTable();
+    private static void displaySymbolTable(HtmlCssJinjaSymbolTable symbolTable) {
+        System.out.println("\n=== عرض جدول الرموز ===");
+        symbolTable.printStatistics();
 
-            System.out.println("\n🔍 ============== معلومات مفصلة ============== 🔍\n");
+        System.out.println("\n=== العناصر HTML ===");
+        List<HtmlElementSymbol> htmlElements = getAllHtmlElements(symbolTable);
+        for (HtmlElementSymbol element : htmlElements) {
+            System.out.printf("• <%s> (السطر: %d, النوع: %s)\n",
+                    element.getName(),
+                    element.getLine(),
+                    element.getCategory().toString()); // تم التعديل هنا
+            if (element.getAttributes() != null && !element.getAttributes().isEmpty()) {
+                System.out.println("  السمات:");
+                for (HtmlAttributeSymbol attr : element.getAttributes().values()) {
+                    System.out.printf("    - %s=\"%s\"\n",
+                            attr.getName(),
+                            attr.getValueWithoutQuotes());
+                }
+            }
+        }
 
-            // أ. إحصائيات عامة
-            System.out.println("📈 الإحصائيات:");
-            System.out.println("  • عدد العقد في AST: " + countASTNodes(ast));
-            System.out.println("  • عدد الرموز الكلي: " + symbolTable.getAllSymbols().size());
+        System.out.println("\n=== قواعد CSS ===");
+        List<CssRuleSymbol> cssRules = getAllCssRules(symbolTable);
+        for (CssRuleSymbol rule : cssRules) {
+            System.out.printf("• %s: %s (السطر: %d, النوع: %s)\n",
+                    rule.getProperty(),
+                    rule.getValuesAsString(),
+                    rule.getLine(),
+                    rule.getCategory());
+        }
 
-            // بقية الكود كما هو...
-            // ... [نفس الكود السابق]
-
-        } catch (Exception e) {
-            System.err.println("❌ حدث خطأ: " + e.getMessage());
-            e.printStackTrace();
+        System.out.println("\n=== تعبيرات Jinja ===");
+        List<JinjaSymbol> jinjaSymbols = getAllJinjaSymbols(symbolTable);
+        for (JinjaSymbol jinja : jinjaSymbols) {
+            System.out.printf("• %s: %s (السطر: %d)\n",
+                    jinja.getJinjaType(),
+                    jinja.getContent(),
+                    jinja.getLine());
         }
     }
 
-    private static int countASTNodes(ASTNode node) {
-        if (node == null) return 0;
-        int count = 1;
-        for (ASTNode child : node.getChildren()) {
-            count += countASTNodes(child);
+    private static void searchHtmlElement(HtmlCssJinjaSymbolTable symbolTable, Scanner scanner) {
+        System.out.print("أدخل اسم عنصر HTML للبحث (مثال: div, p, a): ");
+        String elementName = scanner.nextLine().toLowerCase();
+
+        List<HtmlElementSymbol> results = getHtmlElementsByTag(symbolTable, elementName);
+
+        System.out.println("\n=== نتائج البحث ===");
+        if (results.isEmpty()) {
+            System.out.println("لم يتم العثور على عناصر بهذا الاسم.");
+        } else {
+            System.out.println("عدد العناصر التي تم العثور عليها: " + results.size());
+            for (HtmlElementSymbol element : results) {
+                System.out.printf("• <%s> في السطر %d، النوع: %s\n",
+                        element.getName(),
+                        element.getLine(),
+                        element.getCategory().toString()); // تم التعديل هنا
+            }
         }
-        return count;
+    }
+
+    private static void searchCssAttribute(HtmlCssJinjaSymbolTable symbolTable, Scanner scanner) {
+        System.out.print("أدخل اسم خاصية CSS للبحث (مثال: color, width, margin): ");
+        String propertyName = scanner.nextLine().toLowerCase();
+
+        List<CssRuleSymbol> results = getCssRulesByProperty(symbolTable, propertyName);
+
+        System.out.println("\n=== نتائج البحث ===");
+        if (results.isEmpty()) {
+            System.out.println("لم يتم العثور على قواعد CSS بهذه الخاصية.");
+        } else {
+            System.out.println("عدد القواعد التي تم العثور عليها: " + results.size());
+            for (CssRuleSymbol rule : results) {
+                System.out.printf("• %s: %s في السطر %d\n",
+                        rule.getProperty(),
+                        rule.getValuesAsString(),
+                        rule.getLine());
+            }
+        }
+    }
+
+    private static void searchJinja(HtmlCssJinjaSymbolTable symbolTable, Scanner scanner) {
+        System.out.print("أدخل كلمة للبحث في تعبيرات Jinja: ");
+        String searchWord = scanner.nextLine();
+
+        List<JinjaSymbol> results = getJinjaSymbolsByContent(symbolTable, searchWord);
+
+        System.out.println("\n=== نتائج البحث ===");
+        if (results.isEmpty()) {
+            System.out.println("لم يتم العثور على تعبيرات Jinja تحتوي على: " + searchWord);
+        } else {
+            System.out.println("عدد تعبيرات Jinja التي تم العثور عليها: " + results.size());
+            for (JinjaSymbol jinja : results) {
+                System.out.printf("• %s: %s في السطر %d\n",
+                        jinja.getJinjaType(),
+                        jinja.getContent(),
+                        jinja.getLine());
+            }
+        }
+    }
+
+    private static void displayStatistics(HtmlCssJinjaSymbolTable symbolTable) {
+        System.out.println("\n=== إحصائيات جدول الرموز ===");
+
+        List<HtmlElementSymbol> htmlElements = getAllHtmlElements(symbolTable);
+        List<CssRuleSymbol> cssRules = getAllCssRules(symbolTable);
+        List<JinjaSymbol> jinjaSymbols = getAllJinjaSymbols(symbolTable);
+
+        System.out.println("إجمالي العناصر HTML: " + htmlElements.size());
+        System.out.println("إجمالي قواعد CSS: " + cssRules.size());
+        System.out.println("إجمالي تعبيرات Jinja: " + jinjaSymbols.size());
+
+        Map<String, Integer> typeStatistics = new HashMap<>();
+        Map<String, Integer> attributeStatistics = new HashMap<>();
+        Map<JinjaSymbol.JinjaType, Integer> jinjaStatistics = new HashMap<>();
+
+        for (HtmlElementSymbol element : htmlElements) {
+            String elementType = element.getCategory().toString(); // تم التعديل هنا
+            typeStatistics.put(elementType, typeStatistics.getOrDefault(elementType, 0) + 1);
+
+            if (element.getAttributes() != null) {
+                for (HtmlAttributeSymbol attr : element.getAttributes().values()) {
+                    String attributeType = attr.getAttributeType().toString();
+                    attributeStatistics.put(attributeType, attributeStatistics.getOrDefault(attributeType, 0) + 1);
+                }
+            }
+        }
+
+        for (JinjaSymbol jinja : jinjaSymbols) {
+            JinjaSymbol.JinjaType type = jinja.getJinjaType();
+            jinjaStatistics.put(type, jinjaStatistics.getOrDefault(type, 0) + 1);
+        }
+
+        System.out.println("\n=== توزيع العناصر HTML حسب النوع ===");
+        for (Map.Entry<String, Integer> entry : typeStatistics.entrySet()) {
+            System.out.printf("  • %s: %d عنصر\n", entry.getKey(), entry.getValue());
+        }
+
+        System.out.println("\n=== توزيع السمات حسب النوع ===");
+        for (Map.Entry<String, Integer> entry : attributeStatistics.entrySet()) {
+            System.out.printf("  • %s: %d سمة\n", entry.getKey(), entry.getValue());
+        }
+
+        System.out.println("\n=== توزيع تعبيرات Jinja حسب النوع ===");
+        for (Map.Entry<JinjaSymbol.JinjaType, Integer> entry : jinjaStatistics.entrySet()) {
+            System.out.printf("  • %s: %d تعبير\n", entry.getKey(), entry.getValue());
+        }
+    }
+
+    private static void searchWithinScope(HtmlCssJinjaSymbolTable symbolTable, Scanner scanner) {
+        System.out.println("اختر نوع النطاق للبحث:");
+        System.out.println("1. داخل عنصر HTML محدد");
+        System.out.println("2. داخل سمة style");
+        System.out.println("3. داخل كتلة Jinja");
+        System.out.print("اختر خيارًا: ");
+
+        int scopeType = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (scopeType) {
+            case 1:
+                searchWithinHtmlElement(symbolTable, scanner);
+                break;
+            case 2:
+                searchWithinStyleAttribute(symbolTable, scanner);
+                break;
+            case 3:
+                searchWithinJinjaBlock(symbolTable, scanner);
+                break;
+            default:
+                System.out.println("خيار غير صحيح!");
+        }
+    }
+
+    private static void searchWithinHtmlElement(HtmlCssJinjaSymbolTable symbolTable, Scanner scanner) {
+        System.out.print("أدخل اسم عنصر HTML: ");
+        String elementName = scanner.nextLine();
+
+        List<HtmlElementSymbol> elements = getHtmlElementsByTag(symbolTable, elementName);
+
+        if (elements.isEmpty()) {
+            System.out.println("لم يتم العثور على عنصر بهذا الاسم.");
+            return;
+        }
+
+        System.out.println("العناصر التي تم العثور عليها:");
+        for (int i = 0; i < elements.size(); i++) {
+            HtmlElementSymbol element = elements.get(i);
+            System.out.printf("%d. <%s> في السطر %d\n", i + 1, element.getName(), element.getLine());
+        }
+
+        System.out.print("اختر رقم العنصر للبحث داخله: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (choice < 1 || choice > elements.size()) {
+            System.out.println("اختيار غير صحيح!");
+            return;
+        }
+
+        HtmlElementSymbol selectedElement = elements.get(choice - 1);
+
+        System.out.println("\n=== محتوى العنصر " + selectedElement.getName() + " ===");
+        System.out.println("السمات:");
+        for (HtmlAttributeSymbol attr : selectedElement.getAttributes().values()) {
+            System.out.printf("  • %s=\"%s\"\n", attr.getName(), attr.getValueWithoutQuotes());
+        }
+    }
+
+    private static void searchWithinStyleAttribute(HtmlCssJinjaSymbolTable symbolTable, Scanner scanner) {
+        System.out.print("أدخل رقم السطر لسمة style: ");
+        int lineNumber = scanner.nextInt();
+        scanner.nextLine();
+
+        // البحث عن سمة style في السطر المحدد
+        List<StyleAttributeSymbol> styleAttributes = getAllStyleAttributes(symbolTable);
+        StyleAttributeSymbol styleAttr = null;
+
+        for (StyleAttributeSymbol attr : styleAttributes) {
+            if (attr.getLine() == lineNumber) {
+                styleAttr = attr;
+                break;
+            }
+        }
+
+        if (styleAttr == null) {
+            System.out.println("لم يتم العثور على سمة style في السطر " + lineNumber);
+            return;
+        }
+
+        System.out.println("\n=== قواعد CSS في سمة style ===");
+        List<CssRuleSymbol> rules = styleAttr.getCssRules();
+        System.out.println("عدد القواعد: " + rules.size());
+
+        for (CssRuleSymbol rule : rules) {
+            System.out.printf("• %s: %s\n", rule.getProperty(), rule.getValuesAsString());
+        }
+    }
+
+    private static void searchWithinJinjaBlock(HtmlCssJinjaSymbolTable symbolTable, Scanner scanner) {
+        System.out.println("اختر نوع كتلة Jinja:");
+        System.out.println("1. كتل IF");
+        System.out.println("2. كتل FOR");
+        System.out.print("اختر خيارًا: ");
+
+        int typeChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        List<JinjaSymbol> blocks = new ArrayList<>();
+
+        if (typeChoice == 1) {
+            blocks = getJinjaSymbolsByType(symbolTable, JinjaSymbol.JinjaType.IF);
+        } else if (typeChoice == 2) {
+            blocks = getJinjaSymbolsByType(symbolTable, JinjaSymbol.JinjaType.FOR);
+        } else {
+            System.out.println("خيار غير صحيح!");
+            return;
+        }
+
+        System.out.println("\n=== كتل Jinja التي تم العثور عليها ===");
+        if (blocks.isEmpty()) {
+            System.out.println("لم يتم العثور على كتل من النوع المحدد.");
+            return;
+        }
+
+        for (int i = 0; i < blocks.size(); i++) {
+            JinjaSymbol block = blocks.get(i);
+            System.out.printf("%d. %s في السطر %d\n",
+                    i + 1,
+                    block.getJinjaType(),
+                    block.getLine());
+        }
+    }
+
+    private static void displayJinjaByType(HtmlCssJinjaSymbolTable symbolTable, Scanner scanner) {
+        System.out.println("اختر نوع تعبير Jinja:");
+        System.out.println("1. تعبيرات (Expressions)");
+        System.out.println("2. عبارات (Statements)");
+        System.out.println("3. تعليقات (Comments)");
+        System.out.println("4. كتل IF");
+        System.out.println("5. كتل FOR");
+        System.out.print("اختر خيارًا: ");
+
+        int typeChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        List<JinjaSymbol> results = new ArrayList<>();
+
+        switch (typeChoice) {
+            case 1:
+                results = getJinjaSymbolsByType(symbolTable, JinjaSymbol.JinjaType.EXPRESSION);
+                break;
+            case 2:
+                results = getJinjaSymbolsByType(symbolTable, JinjaSymbol.JinjaType.STATEMENT);
+                break;
+            case 3:
+                results = getJinjaSymbolsByType(symbolTable, JinjaSymbol.JinjaType.COMMENT);
+                break;
+            case 4:
+                results = getJinjaSymbolsByType(symbolTable, JinjaSymbol.JinjaType.IF);
+                break;
+            case 5:
+                results = getJinjaSymbolsByType(symbolTable, JinjaSymbol.JinjaType.FOR);
+                break;
+            default:
+                System.out.println("خيار غير صحيح!");
+                return;
+        }
+
+        System.out.println("\n=== نتائج البحث ===");
+        if (results.isEmpty()) {
+            System.out.println("لم يتم العثور على تعبيرات من النوع المحدد.");
+        } else {
+            System.out.println("عدد النتائج: " + results.size());
+            for (JinjaSymbol jinja : results) {
+                System.out.printf("• %s: %s (السطر: %d)\n",
+                        jinja.getJinjaType(),
+                        jinja.getContent(),
+                        jinja.getLine());
+            }
+        }
+    }
+
+    private static void displayErrorsAndWarnings(VisitorJinjaSymbolTable visitor) {
+        System.out.println("\n=== الأخطاء والتحذيرات ===");
+
+        List<String> errors = visitor.getErrors();
+        List<String> warnings = visitor.getWarnings();
+
+        System.out.println("عدد الأخطاء: " + errors.size());
+        System.out.println("عدد التحذيرات: " + warnings.size());
+
+        if (!errors.isEmpty()) {
+            System.out.println("\n=== الأخطاء ===");
+            for (String error : errors) {
+                System.out.println("• " + error);
+            }
+        }
+
+        if (!warnings.isEmpty()) {
+            System.out.println("\n=== التحذيرات ===");
+            for (String warning : warnings) {
+                System.out.println("• " + warning);
+            }
+        }
+    }
+
+    private static void testAllFunctions(HtmlCssJinjaSymbolTable symbolTable, VisitorJinjaSymbolTable visitor) {
+        System.out.println("\n=== اختبار جميع الوظائف ===");
+
+        System.out.println("1. اختبار الحصول على جميع العناصر HTML...");
+        List<HtmlElementSymbol> htmlElements = getAllHtmlElements(symbolTable);
+        System.out.println("   عدد العناصر: " + htmlElements.size());
+
+        System.out.println("2. اختبار الحصول على جميع قواعد CSS...");
+        List<CssRuleSymbol> cssRules = getAllCssRules(symbolTable);
+        System.out.println("   عدد القواعد: " + cssRules.size());
+
+        System.out.println("3. اختبار الحصول على جميع تعبيرات Jinja...");
+        List<JinjaSymbol> jinjaSymbols = getAllJinjaSymbols(symbolTable);
+        System.out.println("   عدد التعبيرات: " + jinjaSymbols.size());
+
+        System.out.println("4. اختبار البحث عن عنصر div...");
+        List<HtmlElementSymbol> divElements = getHtmlElementsByTag(symbolTable, "div");
+        System.out.println("   عدد عناصر div: " + divElements.size());
+
+        System.out.println("5. اختبار البحث عن سمة color في CSS...");
+        List<CssRuleSymbol> colorRules = getCssRulesByProperty(symbolTable, "color");
+        System.out.println("   عدد قواعد color: " + colorRules.size());
+
+        System.out.println("6. اختبار الحصول على الأخطاء...");
+        List<String> errors = visitor.getErrors();
+        System.out.println("   عدد الأخطاء: " + errors.size());
+
+        System.out.println("7. اختبار الحصول على التحذيرات...");
+        List<String> warnings = visitor.getWarnings();
+        System.out.println("   عدد التحذيرات: " + warnings.size());
+
+        System.out.println("8. اختبار البحث في تعبيرات Jinja...");
+        List<JinjaSymbol> searchResults = getJinjaSymbolsByContent(symbolTable, "");
+        System.out.println("   نتائج البحث: " + searchResults.size());
+
+        System.out.println("9. اختبار الحصول على سمات Style...");
+        List<StyleAttributeSymbol> styleAttributes = getAllStyleAttributes(symbolTable);
+        System.out.println("   عدد سمات Style: " + styleAttributes.size());
+
+        System.out.println("10. اختبار الحصول على كتل Jinja IF...");
+        List<JinjaSymbol> ifBlocks = getJinjaSymbolsByType(symbolTable, JinjaSymbol.JinjaType.IF);
+        System.out.println("   عدد كتل IF: " + ifBlocks.size());
+
+        System.out.println("11. اختبار الحصول على كتل Jinja FOR...");
+        List<JinjaSymbol> forBlocks = getJinjaSymbolsByType(symbolTable, JinjaSymbol.JinjaType.FOR);
+        System.out.println("   عدد كتل FOR: " + forBlocks.size());
+
+        System.out.println("12. اختبار عرض الإحصائيات...");
+        System.out.println("   إجمالي العناصر: " + getAllHtmlElements(symbolTable).size());
+        System.out.println("   إجمالي القواعد: " + getAllCssRules(symbolTable).size());
+        System.out.println("   إجمالي التعبيرات: " + getAllJinjaSymbols(symbolTable).size());
+
+        System.out.println("\n تم اختبار جميع الوظائف بنجاح!");
+    }
+
+    private static void exportSymbolTable(HtmlCssJinjaSymbolTable symbolTable) {
+        System.out.println("\n=== تصدير جدول الرموز ===");
+        Map<String, Object> exportedData = symbolTable.exportToJson();
+
+        System.out.println("تم تصدير البيانات بنجاح!");
+        System.out.println("إحصائيات: " + exportedData.get("statistics"));
+
+        try {
+            // استخدام JSON بسيط بدون مكتبات خارجية
+            StringBuilder jsonBuilder = new StringBuilder();
+            jsonBuilder.append("{\n");
+
+            // إحصائيات
+            jsonBuilder.append("  \"statistics\": {\n");
+            Map<String, Integer> stats = (Map<String, Integer>) exportedData.get("statistics");
+            int i = 0;
+            for (Map.Entry<String, Integer> entry : stats.entrySet()) {
+                jsonBuilder.append("    \"").append(entry.getKey()).append("\": ").append(entry.getValue());
+                if (i < stats.size() - 1) {
+                    jsonBuilder.append(",");
+                }
+                jsonBuilder.append("\n");
+                i++;
+            }
+            jsonBuilder.append("  },\n");
+
+            // رمز الإشعار
+            jsonBuilder.append("  \"exported\": true,\n");
+            jsonBuilder.append("  \"timestamp\": \"").append(new java.util.Date()).append("\"\n");
+            jsonBuilder.append("}");
+
+            String jsonContent = jsonBuilder.toString();
+            Files.writeString(Paths.get("Files/symbol_table_export.json"), jsonContent);
+            System.out.println("تم التصدير إلى ملف: Files/symbol_table_export.json");
+        } catch (IOException e) {
+            System.out.println("خطأ في حفظ الملف: " + e.getMessage());
+        }
+    }
+
+    private static void displayNestedStructures(HtmlCssJinjaSymbolTable symbolTable, Scanner scanner) {
+        System.out.println("\n=== تحليل الهياكل المتداخلة ===");
+
+        System.out.println("1. تحليل العلاقات بين العناصر");
+        System.out.println("2. عرض التسلسل الهرمي");
+        System.out.println("3. البحث عن عناصر ضمن سياق معين");
+        System.out.print("اختر خيارًا: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+            case 1:
+                analyzeElementRelationships(symbolTable);
+                break;
+            case 2:
+                displayHierarchy(symbolTable);
+                break;
+            case 3:
+                searchWithinContext(symbolTable, scanner);
+                break;
+            default:
+                System.out.println("خيار غير صحيح!");
+        }
+    }
+
+    // ================ Helper Methods ================
+
+    private static List<HtmlElementSymbol> getAllHtmlElements(HtmlCssJinjaSymbolTable symbolTable) {
+        List<HtmlElementSymbol> result = new ArrayList<>();
+        for (Symbol symbol : symbolTable.findSymbolsByType("HTML_ELEMENT")) {
+            if (symbol instanceof HtmlElementSymbol) {
+                result.add((HtmlElementSymbol) symbol);
+            }
+        }
+        return result;
+    }
+
+    private static List<CssRuleSymbol> getAllCssRules(HtmlCssJinjaSymbolTable symbolTable) {
+        List<CssRuleSymbol> result = new ArrayList<>();
+        for (Symbol symbol : symbolTable.findSymbolsByType("CSS_RULE")) {
+            if (symbol instanceof CssRuleSymbol) {
+                result.add((CssRuleSymbol) symbol);
+            }
+        }
+        return result;
+    }
+
+    private static List<JinjaSymbol> getAllJinjaSymbols(HtmlCssJinjaSymbolTable symbolTable) {
+        List<JinjaSymbol> result = new ArrayList<>();
+        for (Symbol symbol : symbolTable.findSymbolsByType("JINJA")) {
+            if (symbol instanceof JinjaSymbol) {
+                result.add((JinjaSymbol) symbol);
+            }
+        }
+        return result;
+    }
+
+    private static List<HtmlElementSymbol> getHtmlElementsByTag(HtmlCssJinjaSymbolTable symbolTable, String tagName) {
+        List<HtmlElementSymbol> result = new ArrayList<>();
+        for (Symbol symbol : symbolTable.findSymbolsByType("HTML_ELEMENT")) {
+            if (symbol instanceof HtmlElementSymbol && symbol.getName().equalsIgnoreCase(tagName)) {
+                result.add((HtmlElementSymbol) symbol);
+            }
+        }
+        return result;
+    }
+
+    private static List<CssRuleSymbol> getCssRulesByProperty(HtmlCssJinjaSymbolTable symbolTable, String property) {
+        List<CssRuleSymbol> result = new ArrayList<>();
+        for (Symbol symbol : symbolTable.findSymbolsByType("CSS_RULE")) {
+            if (symbol instanceof CssRuleSymbol && ((CssRuleSymbol) symbol).getProperty().equalsIgnoreCase(property)) {
+                result.add((CssRuleSymbol) symbol);
+            }
+        }
+        return result;
+    }
+
+    private static List<JinjaSymbol> getJinjaSymbolsByContent(HtmlCssJinjaSymbolTable symbolTable, String content) {
+        List<JinjaSymbol> result = new ArrayList<>();
+        for (Symbol symbol : symbolTable.findSymbolsByType("JINJA")) {
+            if (symbol instanceof JinjaSymbol && ((JinjaSymbol) symbol).getContent().contains(content)) {
+                result.add((JinjaSymbol) symbol);
+            }
+        }
+        return result;
+    }
+
+    private static List<JinjaSymbol> getJinjaSymbolsByType(HtmlCssJinjaSymbolTable symbolTable, JinjaSymbol.JinjaType type) {
+        List<JinjaSymbol> result = new ArrayList<>();
+        for (Symbol symbol : symbolTable.findSymbolsByType("JINJA")) {
+            if (symbol instanceof JinjaSymbol && ((JinjaSymbol) symbol).getJinjaType() == type) {
+                result.add((JinjaSymbol) symbol);
+            }
+        }
+        return result;
+    }
+
+    private static List<StyleAttributeSymbol> getAllStyleAttributes(HtmlCssJinjaSymbolTable symbolTable) {
+        List<StyleAttributeSymbol> result = new ArrayList<>();
+        for (Symbol symbol : symbolTable.findSymbolsByType("HTML_ATTRIBUTE")) {
+            if (symbol instanceof StyleAttributeSymbol) {
+                result.add((StyleAttributeSymbol) symbol);
+            }
+        }
+        return result;
+    }
+
+    private static void analyzeElementRelationships(HtmlCssJinjaSymbolTable symbolTable) {
+        System.out.println("\n=== تحليل العلاقات بين العناصر ===");
+
+        List<HtmlElementSymbol> elements = getAllHtmlElements(symbolTable);
+
+        Map<String, List<String>> parentRelationships = new HashMap<>();
+        Map<String, List<String>> childRelationships = new HashMap<>();
+
+        for (HtmlElementSymbol element : elements) {
+            String elementName = element.getName();
+            String parentName = element.getParent() != null ? element.getParent().getName() : "root";
+
+            // إضافة العلاقة الأب-ابن
+            parentRelationships.computeIfAbsent(parentName, k -> new ArrayList<>()).add(elementName);
+
+            // إضافة العلاقة الابن-أب
+            childRelationships.put(elementName, element.getAncestors().stream()
+                    .map(HtmlElementSymbol::getName)
+                    .collect(Collectors.toList()));
+        }
+
+        System.out.println("العلاقات الأب-ابن:");
+        for (Map.Entry<String, List<String>> entry : parentRelationships.entrySet()) {
+            System.out.printf("  • %s -> %s\n", entry.getKey(), entry.getValue());
+        }
+    }
+
+    private static void displayHierarchy(HtmlCssJinjaSymbolTable symbolTable) {
+        System.out.println("\n=== التسلسل الهرمي للعناصر ===");
+
+        List<HtmlElementSymbol> elements = getAllHtmlElements(symbolTable);
+
+        // العثور على العناصر الجذرية (التي ليس لها أب)
+        List<HtmlElementSymbol> rootElements = elements.stream()
+                .filter(element -> element.getParent() == null)
+                .collect(Collectors.toList());
+
+        for (HtmlElementSymbol root : rootElements) {
+            displayElementAndContent(root, 0);
+        }
+    }
+
+    private static void displayElementAndContent(HtmlElementSymbol element, int level) {
+        String indent = "  ".repeat(level);
+        System.out.printf("%s• <%s> (السطر: %d)\n", indent, element.getName(), element.getLine());
+
+        // عرض السمات
+        if (element.getAttributes() != null && !element.getAttributes().isEmpty()) {
+            for (HtmlAttributeSymbol attr : element.getAttributes().values()) {
+                System.out.printf("%s  - %s=\"%s\"\n", indent, attr.getName(), attr.getValueWithoutQuotes());
+            }
+        }
+
+        // عرض العناصر الفرعية
+        for (HtmlElementSymbol child : element.getChildren()) {
+            displayElementAndContent(child, level + 1);
+        }
+    }
+
+    private static void searchWithinContext(HtmlCssJinjaSymbolTable symbolTable, Scanner scanner) {
+        System.out.print("أدخل اسم سياق Jinja للبحث (مثال: if, for, with): ");
+        String contextName = scanner.nextLine();
+
+        List<JinjaSymbol> results = getAllJinjaSymbols(symbolTable).stream()
+                .filter(symbol -> symbol.getContent().contains(contextName))
+                .collect(Collectors.toList());
+
+        System.out.println("\n=== العناصر ضمن سياق " + contextName + " ===");
+        if (results.isEmpty()) {
+            System.out.println("لم يتم العثور على عناصر ضمن هذا السياق.");
+            return;
+        }
+
+        System.out.println("عدد العناصر: " + results.size());
+        for (JinjaSymbol symbol : results) {
+            System.out.printf("• %s: %s (السطر: %d)\n",
+                    symbol.getJinjaType(),
+                    symbol.getContent(),
+                    symbol.getLine());
+        }
     }
 }
