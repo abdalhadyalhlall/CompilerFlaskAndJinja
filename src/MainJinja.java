@@ -46,8 +46,7 @@ public class MainJinja {
         ASTNode astRoot = visitor.visit(parseTree);
 
         if (astRoot instanceof DocumentNode) {
-            System.out.println("تم بناء AST بنجاح!");
-            System.out.println("عدد العناصر: " + ((DocumentNode) astRoot).getChildren().size());
+            astRoot.print();
         }
         System.out.println("===========================\n");
 

@@ -11,7 +11,6 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.*;
 
 public class SymbolTableBuilder extends Visitor {
-
     private Scope currentScope;
     private Stack<Scope> scopeStack = new Stack<>();
     private Scope globalScope;
@@ -34,6 +33,7 @@ public class SymbolTableBuilder extends Visitor {
         addBuiltinFunctions();
     }
 
+
     private void addBuiltinFunctions() {
         String[] builtins = {
                 "len", "next", "float", "int", "str", "list", "dict",
@@ -49,7 +49,7 @@ public class SymbolTableBuilder extends Visitor {
         builtinConstants.add("True");
         builtinConstants.add("False");
         builtinConstants.add("None");
-        builtinConstants.add("__name__");
+        builtinConstants.add("__Name__");
 
         VariableSymbol trueSymbol = new VariableSymbol("True", "bool", 0, globalScope, true);
         VariableSymbol falseSymbol = new VariableSymbol("False", "bool", 0, globalScope, false);
@@ -62,11 +62,6 @@ public class SymbolTableBuilder extends Visitor {
         globalScope.addSymbol(nameSymbol);
     }
 
-    private void enterScope(String name) {
-        Scope newScope = new Scope(name, currentScope);
-        currentScope = newScope;
-        scopeStack.push(newScope);
-    }
 
     private void exitScope() {
         scopeStack.pop();
@@ -75,6 +70,12 @@ public class SymbolTableBuilder extends Visitor {
         } else {
             currentScope = globalScope;
         }
+    }
+
+    private void enterScope(String name) {
+        Scope newScope = new Scope(name, currentScope);
+        currentScope = newScope;
+        scopeStack.push(newScope);
     }
 
     private void addSymbolToProperScope(Symbol symbol) {
@@ -119,16 +120,16 @@ public class SymbolTableBuilder extends Visitor {
 
 
     @Override
-    public Object visitProgeRoot(ProjectParser.ProgeRootContext ctx) {
-        enterScope("program");
+    public Object visitSuite(ProjectParser.SuiteContext ctx) {
         visitChildren(ctx);
-        exitScope();
         return null;
     }
 
     @Override
-    public Object visitSuite(ProjectParser.SuiteContext ctx) {
+    public Object visitProgeRoot(ProjectParser.ProgeRootContext ctx) {
+        enterScope("program");
         visitChildren(ctx);
+        exitScope();
         return null;
     }
 
@@ -178,7 +179,7 @@ public class SymbolTableBuilder extends Visitor {
         ClassSymbol classSymbol = new ClassSymbol(className, line, currentScope);
         addSymbolToProperScope(classSymbol);
 
-        enterScope("class:" + className);
+        enterScope("Class:" + className);
 
         if (ctx.suite() != null) {
             visit(ctx.suite());
@@ -468,7 +469,6 @@ public class SymbolTableBuilder extends Visitor {
             visit(ctx.suite(1));
             exitScope();
         }
-
         return null;
     }
 
@@ -488,7 +488,7 @@ public class SymbolTableBuilder extends Visitor {
             for (Symbol s : globalScope.symbols.values()) {
                 if (s instanceof VariableSymbol) {
                     VariableSymbol var = (VariableSymbol) s;
-                    if ((var.type.equals("module") || var.type.equals("imported")) &&
+                    if ((var.type.equals("Module") || var.type.equals("Imported")) &&
                             var.name.equals(name)) {
                         isImported = true;
                         break;
@@ -516,7 +516,7 @@ public class SymbolTableBuilder extends Visitor {
 
                 VariableSymbol moduleSymbol = new VariableSymbol(
                         alias != null ? alias : moduleName,
-                        "module",
+                        "Module",
                         line,
                         globalScope
                 );
@@ -671,7 +671,6 @@ public class SymbolTableBuilder extends Visitor {
             visit(ctx.suite(1));
             exitScope();
         }
-
         return null;
     }
 
@@ -715,7 +714,6 @@ public class SymbolTableBuilder extends Visitor {
 
             exitScope();
         }
-
         return null;
     }
 
@@ -835,7 +833,6 @@ public class SymbolTableBuilder extends Visitor {
         if (scope.parent != null) {
             return lookupRecursive(scope.parent, name, typeFilter, caseSensitive, visitedScopes);
         }
-
         return null;
     }
 
@@ -906,7 +903,6 @@ public class SymbolTableBuilder extends Visitor {
                 result.add(symbol);
             }
 
-            // البحث في الحقول المتداخلة
             List<VariableSymbol> nested = getNestedSymbols(symbol.name);
             for (VariableSymbol nestedSym : nested) {
                 if (nestedSym.name.contains(pattern)) {
@@ -1053,21 +1049,6 @@ public class SymbolTableBuilder extends Visitor {
         return success;
     }
 
-    public boolean deleteSymbolFromScope(String name, String scopeName) {
-        Scope targetScope = findScopeByName(scopeName);
-        if (targetScope == null) {
-            return false;
-        }
-
-        boolean success = targetScope.removeSymbol(name);
-        if (success) {
-            symbolUsage.remove(name);
-            nestedSymbols.remove(name);
-        } else {
-        }
-
-        return success;
-    }
 
     public int deleteAllSymbolsByType(String type) {
         List<Symbol> symbolsToDelete = findAllSymbolsByType(type);
@@ -1085,6 +1066,22 @@ public class SymbolTableBuilder extends Visitor {
         }
 
         return deletedCount;
+    }
+
+    public boolean deleteSymbolFromScope(String name, String scopeName) {
+        Scope targetScope = findScopeByName(scopeName);
+        if (targetScope == null) {
+            return false;
+        }
+
+        boolean success = targetScope.removeSymbol(name);
+        if (success) {
+            symbolUsage.remove(name);
+            nestedSymbols.remove(name);
+        } else {
+        }
+
+        return success;
     }
 
     public boolean renameSymbol(String oldName, String newName) {
@@ -1262,7 +1259,7 @@ public class SymbolTableBuilder extends Visitor {
         sb.append(indent).append("[").append(scope.name.toUpperCase()).append("]\n");
 
         if (scope.symbols.isEmpty()) {
-            sb.append(indent).append("  (no symbols)\n");
+            sb.append(indent).append("  (No Symbols)\n");
         } else {
             for (Symbol symbol : scope.symbols.values()) {
                 sb.append(indent).append("  • ").append(symbol.toString()).append("\n");
@@ -1310,12 +1307,31 @@ public class SymbolTableBuilder extends Visitor {
             return globalScope;
         }
 
-        if (currentScope == globalScope || currentScope.name.equals("program")) {
+        if (currentScope == globalScope || currentScope.name.equals("Program")) {
             return globalScope;
         }
 
         return currentScope;
     }
+
+
+
+    public void printSymbolTable() {
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("SYMBOL TABLE");
+        System.out.println("=".repeat(60));
+
+        Set<Scope> visitedScopes = new HashSet<>();
+        printScopeHierarchy(globalScope, 0, visitedScopes);
+
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("SUMMARY");
+        System.out.println("=".repeat(60));
+        printSummary();
+
+        printNestedSymbols();
+    }
+
 
     private Scope findScopeByName(String scopeName) {
         if (scopeName.equals("global")) {
@@ -1342,21 +1358,7 @@ public class SymbolTableBuilder extends Visitor {
         return null;
     }
 
-    public void printSymbolTable() {
-        System.out.println("\n" + "=".repeat(60));
-        System.out.println("SYMBOL TABLE");
-        System.out.println("=".repeat(60));
 
-        Set<Scope> visitedScopes = new HashSet<>();
-        printScopeHierarchy(globalScope, 0, visitedScopes);
-
-        System.out.println("\n" + "=".repeat(60));
-        System.out.println("SUMMARY");
-        System.out.println("=".repeat(60));
-        printSummary();
-
-        printNestedSymbols();
-    }
 
     private void printScopeHierarchy(Scope scope, int depth, Set<Scope> visitedScopes) {
         if (scope == null || visitedScopes.contains(scope)) {
@@ -1369,7 +1371,7 @@ public class SymbolTableBuilder extends Visitor {
         System.out.println(indent + "[" + scope.name.toUpperCase() + "]");
 
         if (scope.symbols.isEmpty()) {
-            System.out.println(indent + "  (empty)");
+            System.out.println(indent + "  (Empty)");
             return;
         }
 
@@ -1381,7 +1383,7 @@ public class SymbolTableBuilder extends Visitor {
         for (Symbol symbol : scope.symbols.values()) {
             if (symbol instanceof VariableSymbol) {
                 VariableSymbol var = (VariableSymbol) symbol;
-                if (var.type.equals("module") || var.type.equals("imported") || var.type.equals("star_import")) {
+                if (var.type.equals("Module") || var.type.equals("Imported") || var.type.equals("Star_Import")) {
                     imports.add(symbol);
                 } else if (!builtinConstants.contains(var.name)) {
                     variables.add(symbol);
@@ -1398,8 +1400,8 @@ public class SymbolTableBuilder extends Visitor {
             for (Symbol var : variables) {
                 VariableSymbol v = (VariableSymbol) var;
                 String typeStr = v.type.equals("iteration") ? "loop var" :
-                        v.type.equals("context") ? "context var" :
-                                v.type.equals("any") ? "variable" : v.type;
+                        v.type.equals("Context") ? "Context var" :
+                                v.type.equals("any") ? "Variable" : v.type;
 
                 System.out.println(indent + "    • " + v.name + " (" + typeStr + ") at line " + v.line);
 
@@ -1436,7 +1438,7 @@ public class SymbolTableBuilder extends Visitor {
                 System.out.println(indent + "    • " + c.name + " at line " + c.line);
 
                 for (Scope s : scopeStack) {
-                    if (s.name.equals("class:" + c.name) && !visitedScopes.contains(s)) {
+                    if (s.name.equals("Class:" + c.name) && !visitedScopes.contains(s)) {
                         printScopeHierarchy(s, depth + 2, visitedScopes);
                         break;
                     }
@@ -1467,7 +1469,7 @@ public class SymbolTableBuilder extends Visitor {
         for (Scope scope : scopeStack) {
             if (scope != globalScope) {
                 int symbolCount = scope.symbols.size();
-                System.out.println("  • " + scope.name + ": " + symbolCount + " symbols");
+                System.out.println("  • " + scope.name + ": " + symbolCount + " Symbols");
             }
         }
 
@@ -1482,9 +1484,9 @@ public class SymbolTableBuilder extends Visitor {
                 uniqueFields.add(fieldName);
             }
         }
-        System.out.println("  • Total nested fields: " + totalNested);
-        System.out.println("  • Unique fields: " + uniqueFields.size());
-        System.out.println("  • Variables with nested fields: " + nestedSymbols.size());
+        System.out.println("  • Total Nested Fields: " + totalNested);
+        System.out.println("  • Unique Fields: " + uniqueFields.size());
+        System.out.println("  • Variables With Nested Fields: " + nestedSymbols.size());
     }
 
 
@@ -1501,13 +1503,14 @@ public class SymbolTableBuilder extends Visitor {
             return this;
         }
 
-        public LookupOptions recursive(boolean value) {
-            this.recursive = value;
-            return this;
-        }
 
         public LookupOptions typeFilter(String type) {
             this.typeFilter = type;
+            return this;
+        }
+
+        public LookupOptions recursive(boolean value) {
+            this.recursive = value;
             return this;
         }
 
@@ -1555,7 +1558,7 @@ public class SymbolTableBuilder extends Visitor {
         }
     }
 
-    // ==================== Getters ====================
+    // ================ Getters =================
 
     public Scope getGlobalSymbolTable() {
         return globalScope;
