@@ -53,15 +53,11 @@ public class JinjaBlockNode extends ASTNode {
         if (!conditionBlocks.isEmpty()) {
             ConditionBlock lastCondition = conditionBlocks.get(conditionBlocks.size() - 1);
             lastCondition.getContent().add(node);
-            // ⚠️ مهم: لا تضيف node كطفل مباشرة هنا
-            // سيتم إضافتها في finalizeBlock()
         }
     }
 
     public void addElseContent(ASTNode node) {
         elseContent.add(node);
-        // ⚠️ مهم: لا تضيف node كطفل مباشرة هنا
-        // سيتم إضافتها في finalizeBlock()
     }
 
     public List<ConditionBlock> getConditionBlocks() {
@@ -72,19 +68,15 @@ public class JinjaBlockNode extends ASTNode {
         return elseContent;
     }
 
-    // دالة جديدة: تجميع جميع المحتويات كأطفال للعقدة
     public void finalizeBlock() {
-        // مسح الأطفال الحاليين إذا كانوا موجودين
         children.clear();
 
-        // إضافة محتوى جميع الكتل الشرطية
         for (ConditionBlock conditionBlock : conditionBlocks) {
             for (ASTNode node : conditionBlock.getContent()) {
                 super.addChild(node);
             }
         }
 
-        // إضافة محتوى else
         for (ASTNode node : elseContent) {
             super.addChild(node);
         }

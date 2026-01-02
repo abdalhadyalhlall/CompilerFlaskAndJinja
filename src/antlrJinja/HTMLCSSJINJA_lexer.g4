@@ -1,5 +1,4 @@
 lexer grammar HTMLCSSJINJA_lexer;
-
 WS : [ \t\r\n]+ -> skip;
 
 JINJA_EXPR_START    : '{{' -> pushMode(JINJA_EXPR_MODE);
@@ -22,7 +21,7 @@ mode TAG_MODE;
 
 EQUALS : '=';
 
-STYLE_ATTRIBUTE_START : 'style' [ \t\r\n]* EQUALS [ \t\r\n]* '"' -> pushMode(STYLE_MODE);
+STYLE_ATTRIBUTE_START : 'style' EQUALS  '"' -> pushMode(STYLE_MODE);
 
 TAG_DOCTYPE: '!DOCTYPE html';
 TAG_HTML   : 'html';
@@ -109,7 +108,6 @@ TAG_MAIN        : 'main';
 TAG_SPAN        : 'span';
 
 
-// HTML ATTRIBUTES
 ATTR_HIDDEN             : 'hidden';
 ATTR_DRAGGABLE          : 'draggable';
 ATTR_CONTENTEDITABLE    : 'contenteditable';
@@ -188,7 +186,6 @@ ATTR_PROPERTY           : 'property';
 VALUE_LANG_EN: '"en"';
 VALUE_LANG_AR: '"ar"';
 
-ATTRIBUTE_NAME  : [a-zA-Z_:][a-zA-Z0-9._:-]*;
 
 ATTRIBUTE_VALUE
     : '"' (~["])* '"'
@@ -203,11 +200,9 @@ mode STYLE_MODE;
 
 STYLE_END               : '"' -> popMode;
 
-// Punctuation
 CSS_TWOPOINT            : ':';
 CSS_SEMI                : ';';
 
-// CSS Properties
 CSS_TEXT_PROPERTY
     : 'text-align'
     | 'text-decoration'
@@ -286,7 +281,6 @@ CSS_EFFECT_PROPERTY
     : 'opacity' | 'cursor' | 'filter' | 'mix-blend-mode'
     ;
 
-// CSS Values - Reordered to handle conflicts
 CSS_TEXT_VALUE
     : 'left' | 'right' | 'center' | 'justify' | 'start' | 'end'
     | 'underline' | 'overline' | 'line-through' | 'none'
@@ -297,28 +291,28 @@ CSS_TEXT_VALUE
     | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap' | 'break-spaces'
     ;
 
-CSS_SHORTHAND_VALUE
-    : LENGTH
-    | PERCENT
-    | INT
-    | FLOAT
-    | 'none'
-    | 'auto'
-    | 'left' | 'right' | 'center' | 'justify'  // Added text-align values
-    | 'top' | 'bottom'  // Added position values
-    | 'solid' | 'dashed' | 'dotted' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' | 'hidden'
-    | 'thin' | 'medium' | 'thick'
-    | 'normal' | 'italic' | 'oblique'
-    | 'bold' | 'bolder' | 'lighter'
-    | 'small' | 'medium' | 'large' | 'x-small' | 'xx-small' | 'x-large' | 'xx-large'
-    | 'pointer' | 'default' | 'move' | 'text' | 'wait' | 'help' | 'not-allowed' | 'crosshair'
-    | 'inherit' | 'initial' | 'unset'
-    | 'rtl' | 'ltr'
-    | 'block' | 'inline' | 'inline-block' | 'flex' | 'grid' | 'table'
-    | 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
-    | 'visible' | 'hidden' | 'scroll' | 'auto'
-    | 'cover' | 'contain' | 'fill' | 'scale-down'
-    ;
+//CSS_SHORTHAND_VALUE
+//    : LENGTH
+//    | PERCENT
+//    | INT
+//    | FLOAT
+//    | 'none'
+//    | 'auto'
+//    | 'left' | 'right' | 'center' | 'justify'
+//    | 'top' | 'bottom'
+//    | 'solid' | 'dashed' | 'dotted' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' | 'hidden'
+//    | 'thin' | 'medium' | 'thick'
+//    | 'normal' | 'italic' | 'oblique'
+//    | 'bold' | 'bolder' | 'lighter'
+//    | 'small' | 'medium' | 'large' | 'x-small' | 'xx-small' | 'x-large' | 'xx-large'
+//    | 'pointer' | 'default' | 'move' | 'text' | 'wait' | 'help' | 'not-allowed' | 'crosshair'
+//    | 'inherit' | 'initial' | 'unset'
+//    | 'rtl' | 'ltr'
+//    | 'block' | 'inline' | 'inline-block' | 'flex' | 'grid' | 'table'
+//    | 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
+//    | 'visible' | 'hidden' | 'scroll' | 'auto'
+//    | 'cover' | 'contain' | 'fill' | 'scale-down'
+//    ;
 
 CSS_EFFECT_VALUE
     : OPACITY_VALUE
@@ -429,7 +423,6 @@ fragment NAMED_COLOR
     | 'wheat' | 'whitesmoke' | 'yellowgreen'
     ;
 
-// Text Keywords
 fragment FONT_SIZE_VALUE
     : 'small' | 'medium' | 'large'
     | 'x-small' | 'xx-small' | 'x-large' | 'xx-large'
@@ -475,13 +468,9 @@ fragment BLEND_MODE_VALUE
 
 fragment NAME : [a-zA-Z_][a-zA-Z0-9_-]* ;
 
-STYLE_WS : [ \t\r\n]+ -> skip;
-
 mode JINJA_EXPR_MODE;
 
 JINJA_EXPR_END     : '}}' -> popMode;
-
-JINJA_EXPR_WS : [ \t\r\n]+ -> skip;
 
 JINJA_EXPR_STRING
     : '"' (~["]|'\\"')* '"'
@@ -490,9 +479,7 @@ JINJA_EXPR_STRING
 
 JINJA_EXPR_ATOM : [a-zA-Z_][a-zA-Z0-9_.]* ;
 
-JINJA_EXPR_SYMBOL : [+\-*/%=><!&|.,:;()[\]{}] ;
-
-JINJA_EXPR_UNKNOWN : . ;
+JINJA_EXPR_SYMBOL : [+\-*/%=><!&|.,:;()[\]{}];
 
 mode JINJA_STMT_MODE;
 
@@ -516,7 +503,6 @@ JINJA_STMT_INCLUDE   : 'include';
 JINJA_STMT_EXTENDS   : 'extends';
 JINJA_STMT_FROM      : 'from';
 
-JINJA_STMT_WS : [ \t\r\n]+ -> skip;
 
 JINJA_STMT_STRING
     : '"' (~["]|'\\"')* '"'
@@ -526,5 +512,3 @@ JINJA_STMT_STRING
 JINJA_STMT_ATOM : [a-zA-Z_][a-zA-Z0-9_.]* ;
 
 JINJA_STMT_SYMBOL : [+\-*/%=><!&|.,:;()[\]{}] ;
-
-JINJA_STMT_UNKNOWN : . ;
