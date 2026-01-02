@@ -19,12 +19,7 @@ public class CatchStatment extends StatmentRoot {
         this.body = body;
     }
 
-    public void addBodyStmt(Statment stmt) {
-        if (this.body == null) {
-            this.body = new ArrayList<>();
-        }
-        this.body.add(stmt);
-    }
+
 
     @Override
     public String toString() {

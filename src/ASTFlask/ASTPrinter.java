@@ -24,7 +24,7 @@ public class ASTPrinter {
         return sb.toString();
     }
 
-    private static void printStatement(Statment stmt, StringBuilder sb, int depth) {
+    public static void printStatement(Statment stmt, StringBuilder sb, int depth) {
         String indent = "  ".repeat(depth);
         String nodeType = stmt.getClass().getSimpleName();
 
@@ -34,7 +34,7 @@ public class ASTPrinter {
         printStatementDetails(stmt, sb, depth + 1);
     }
 
-    private static void printStatementDetails(Statment stmt, StringBuilder sb, int depth) {
+    public static void printStatementDetails(Statment stmt, StringBuilder sb, int depth) {
         String indent = "  ".repeat(depth);
         String nodeType = stmt.getClass().getSimpleName();
 
@@ -618,9 +618,5 @@ public class ASTPrinter {
         } catch (ClassCastException e) {
             sb.append("[Error: ").append(e.getMessage()).append("]\n");
         }
-    }
-
-    public static void print(Proge program) {
-        System.out.println(printTree(program));
     }
 }

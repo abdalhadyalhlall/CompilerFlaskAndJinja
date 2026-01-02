@@ -2,17 +2,15 @@ import VISITORJINJA.*;
 
 import AST_HTMLCSSJINJA.*;
 import VISITORJINJA.ST.*;
-import antlrJinja.HTMLCSSJINJA_parser;
 import antlrJinja.HTMLCSSJINJA_lexer;
+import antlrJinja.HTMLCSSJINJA_parser;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MainJinja {
     public static void main(String[] args) throws IOException {
@@ -121,9 +119,6 @@ public class MainJinja {
                     Operation.testAllFunctions(symbolTable, visitor);
                     break;
                 case 10:
-                    Operation.exportSymbolTable(symbolTable);
-                    break;
-                case 11:
                     Operation.displayNestedStructures(symbolTable, scanner);
                     break;
                 case 0:

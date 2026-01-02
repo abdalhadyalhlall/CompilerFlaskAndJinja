@@ -1,8 +1,4 @@
 package ASTFlask.TheMainContintOfComplexStatment;
-//@x
-//@y(5)
-//def f():
-//pass
 
 import ASTFlask.AtomExpression.ExpressionAtom;
 import ASTFlask.StatmentRoot;

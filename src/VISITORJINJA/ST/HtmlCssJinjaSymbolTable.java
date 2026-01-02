@@ -2,14 +2,13 @@ package VISITORJINJA.ST;
 
 import java.util.*;
 
-// ================ جدول الرموز الرئيسي ================
+
 public class HtmlCssJinjaSymbolTable {
     public SymbolScope globalScope;
     public SymbolScope currentScope;
-    public Map<Integer, List<Symbol>> symbolsByLine; // الرموز مرتبة حسب السطر
-    public Map<String, List<Symbol>> symbolsByType;  // الرموز مرتبة حسب النوع
+    public Map<Integer, List<Symbol>> symbolsByLine;
+    public Map<String, List<Symbol>> symbolsByType;
 
-    // إحصائيات
     public int htmlElementCount;
     public int htmlAttributeCount;
     public int cssRuleCount;
@@ -22,7 +21,6 @@ public class HtmlCssJinjaSymbolTable {
         this.symbolsByType = new HashMap<>();
     }
 
-    // ================ إدارة النطاقات ================
     public void enterScope(String name, SymbolScope.ScopeType type) {
         SymbolScope newScope = new SymbolScope(name, type, currentScope);
         currentScope = newScope;
@@ -38,12 +36,11 @@ public class HtmlCssJinjaSymbolTable {
         return currentScope;
     }
 
-    // ================ إضافة الرموز ================
+
     public void addHtmlElement(HtmlElementSymbol element) {
         addSymbol(element);
         htmlElementCount++;
 
-        // إنشاء نطاق جديد للعنصر
         enterScope("element_" + element.name, SymbolScope.ScopeType.HTML_ELEMENT);
     }
 
@@ -65,7 +62,7 @@ public class HtmlCssJinjaSymbolTable {
         addSymbol(jinjaSymbol);
         jinjaSymbolCount++;
 
-        // إنشاء نطاق جديد إذا كانت كتلة
+
         if (jinjaSymbol instanceof JinjaBlockSymbol) {
             String scopeName = "jinja_" + jinjaSymbol.jinjaType.toString().toLowerCase();
             enterScope(scopeName, SymbolScope.ScopeType.JINJA_BLOCK);
@@ -77,26 +74,18 @@ public class HtmlCssJinjaSymbolTable {
     }
 
     public void addSymbol(Symbol symbol) {
-        // إضافة للنطاق الحالي
+
         currentScope.addSymbol(symbol);
 
-        // إضافة للفهرس حسب السطر
+
         symbolsByLine.computeIfAbsent(symbol.line, k -> new ArrayList<>())
                 .add(symbol);
 
-        // إضافة للفهرس حسب النوع
+
         symbolsByType.computeIfAbsent(symbol.type, k -> new ArrayList<>())
                 .add(symbol);
     }
 
-    // ================ عمليات البحث ================
-    public Symbol findSymbol(String name) {
-        return currentScope.lookupRecursive(name);
-    }
-
-    public List<Symbol> findSymbolsAtLine(int line) {
-        return symbolsByLine.getOrDefault(line, new ArrayList<>());
-    }
 
     public List<Symbol> findSymbolsByType(String type) {
         return symbolsByType.getOrDefault(type, new ArrayList<>());
@@ -122,7 +111,6 @@ public class HtmlCssJinjaSymbolTable {
         return result;
     }
 
-    // ================ التحليلات والإحصائيات ================
     public void printStatistics() {
         System.out.println("========== SYMBOL TABLE STATISTICS ==========");
         System.out.println("HTML Elements: " + htmlElementCount);
@@ -134,18 +122,9 @@ public class HtmlCssJinjaSymbolTable {
         System.out.println("============================================");
     }
 
-    public void printAllSymbols() {
-        System.out.println("========== ALL SYMBOLS ==========");
-        printScopeHierarchy(globalScope, 0);
-        System.out.println("=================================");
-    }
 
-    public void printScopeHierarchy(SymbolScope scope, int depth) {
-        scope.printScope(depth);
 
-        // البحث عن النطاقات الفرعية (سيتم إدارتها بشكل أفضل في تطبيق كامل)
-        // ...
-    }
+
 
     public int getTotalSymbols() {
         return htmlElementCount + htmlAttributeCount + cssRuleCount + jinjaSymbolCount;
@@ -161,64 +140,10 @@ public class HtmlCssJinjaSymbolTable {
         return depth;
     }
 
-    // ================ عمليات مساعدة ================
-    public Map<String, Integer> getElementDistribution() {
-        Map<String, Integer> distribution = new HashMap<>();
-        for (Symbol symbol : symbolsByType.getOrDefault("HTML_ELEMENT", new ArrayList<>())) {
-            distribution.put(symbol.name, distribution.getOrDefault(symbol.name, 0) + 1);
-        }
-        return distribution;
-    }
 
-    public Map<String, Integer> getAttributeDistribution() {
-        Map<String, Integer> distribution = new HashMap<>();
-        for (Symbol symbol : symbolsByType.getOrDefault("HTML_ATTRIBUTE", new ArrayList<>())) {
-            distribution.put(symbol.name, distribution.getOrDefault(symbol.name, 0) + 1);
-        }
-        return distribution;
-    }
 
-    public List<HtmlElementSymbol> getElementsWithStyle() {
-        List<HtmlElementSymbol> result = new ArrayList<>();
-        for (Symbol symbol : symbolsByType.getOrDefault("HTML_ELEMENT", new ArrayList<>())) {
-            HtmlElementSymbol element = (HtmlElementSymbol) symbol;
-            // التحقق من وجود سمة style
-            // (سيتم تنفيذ هذا في الزائر Visitor)
-        }
-        return result;
-    }
 
-    // ================ تصدير البيانات ================
-    public Map<String, Object> exportToJson() {
-        Map<String, Object> json = new HashMap<>();
 
-        // الإحصائيات
-        Map<String, Integer> stats = new HashMap<>();
-        stats.put("html_elements", htmlElementCount);
-        stats.put("html_attributes", htmlAttributeCount);
-        stats.put("css_rules", cssRuleCount);
-        stats.put("jinja_symbols", jinjaSymbolCount);
-        json.put("statistics", stats);
-
-        // توزيع العناصر
-        json.put("element_distribution", getElementDistribution());
-
-        // توزيع السمات
-        json.put("attribute_distribution", getAttributeDistribution());
-
-        // الرموز حسب السطر
-        Map<Integer, List<String>> symbolsByLineJson = new HashMap<>();
-        for (Map.Entry<Integer, List<Symbol>> entry : symbolsByLine.entrySet()) {
-            List<String> symbolNames = new ArrayList<>();
-            for (Symbol symbol : entry.getValue()) {
-                symbolNames.add(symbol.name + " [" + symbol.type + "]");
-            }
-            symbolsByLineJson.put(entry.getKey(), symbolNames);
-        }
-        json.put("symbols_by_line", symbolsByLineJson);
-
-        return json;
-    }
     public void closeAllScopes() {
         while (currentScope != globalScope) {
             exitScope();

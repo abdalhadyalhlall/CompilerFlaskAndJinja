@@ -56,17 +56,6 @@ public class JinjaBlockNode extends ASTNode {
         }
     }
 
-    public void addElseContent(ASTNode node) {
-        elseContent.add(node);
-    }
-
-    public List<ConditionBlock> getConditionBlocks() {
-        return conditionBlocks;
-    }
-
-    public List<ASTNode> getElseContent() {
-        return elseContent;
-    }
 
     public void finalizeBlock() {
         children.clear();

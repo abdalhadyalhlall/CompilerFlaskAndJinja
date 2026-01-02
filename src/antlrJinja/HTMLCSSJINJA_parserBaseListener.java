@@ -1,4 +1,4 @@
-// Generated from C:/D/CompilerFlaskAndJinja/src/antlrJinja/HTMLCSSJINJA_parser.g4 by ANTLR 4.13.2
+// Generated from C:/Users/User/Desktop/المشاريع/CompilerFlaskAndJinja/src/antlrJinja/HTMLCSSJINJA_parser.g4 by ANTLR 4.13.2
 package antlrJinja;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -36,18 +36,6 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitHtmlelementlabel(HTMLCSSJINJA_parser.HtmlelementlabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterHtmlcommentlabel(HTMLCSSJINJA_parser.HtmlcommentlabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitHtmlcommentlabel(HTMLCSSJINJA_parser.HtmlcommentlabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -809,18 +797,6 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJinjaCommentlabel(HTMLCSSJINJA_parser.JinjaCommentlabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJinjaCommentlabel(HTMLCSSJINJA_parser.JinjaCommentlabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterJinjaIfBlocklabel(HTMLCSSJINJA_parser.JinjaIfBlocklabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -840,30 +816,6 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitJinjaForBlocklabel(HTMLCSSJINJA_parser.JinjaForBlocklabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterJinjaCompactElementlabel(HTMLCSSJINJA_parser.JinjaCompactElementlabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJinjaCompactElementlabel(HTMLCSSJINJA_parser.JinjaCompactElementlabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterJinjaCompactElement(HTMLCSSJINJA_parser.JinjaCompactElementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJinjaCompactElement(HTMLCSSJINJA_parser.JinjaCompactElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -984,18 +936,6 @@ public class HTMLCSSJINJA_parserBaseListener implements HTMLCSSJINJA_parserListe
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitJinjaStmt(HTMLCSSJINJA_parser.JinjaStmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

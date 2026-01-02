@@ -7,7 +7,6 @@ document
     ;
 
 html:  htmlelement      #htmlelementlabel
-      |HTML_COMMENT     #htmlcommentlabel
       |doctipe          #doctipelabel
       |jinjaElement     #jinjaElementlabel
       ;
@@ -292,7 +291,6 @@ attributenamehead
 jinjaElement
     : jinjaExpr         #jinjaExprlabel
     | jinjaStmt         #jinjaStmtlabel
-    | jinjaComment      #jinjaCommentlabel
     | jinjaIfBlock      #jinjaIfBlocklabel
     | jinjaForBlock     #jinjaForBlocklabel
     ;
@@ -350,8 +348,4 @@ jinjaStmtArgument
 
 jinjaStmt
     : JINJA_STMT_START jinjaStmtArgument+ JINJA_STMT_END
-    ;
-
-jinjaComment
-    : JANJI_COMMENT
     ;

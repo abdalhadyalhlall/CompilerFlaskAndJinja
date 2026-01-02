@@ -65,7 +65,7 @@ public class Operation {
                 System.out.printf("• <%s> في السطر %d، النوع: %s\n",
                         element.getName(),
                         element.getLine(),
-                        element.getCategory().toString()); // تم التعديل هنا
+                        element.getCategory().toString());
             }
         }
     }
@@ -223,7 +223,6 @@ public class Operation {
         int lineNumber = scanner.nextInt();
         scanner.nextLine();
 
-        // البحث عن سمة style في السطر المحدد
         List<StyleAttributeSymbol> styleAttributes = getAllStyleAttributes(symbolTable);
         StyleAttributeSymbol styleAttr = null;
 
@@ -411,44 +410,7 @@ public class Operation {
         System.out.println("\n تم اختبار جميع الوظائف بنجاح!");
     }
 
-     public static void exportSymbolTable(HtmlCssJinjaSymbolTable symbolTable) {
-        System.out.println("\n=== تصدير جدول الرموز ===");
-        Map<String, Object> exportedData = symbolTable.exportToJson();
 
-        System.out.println("تم تصدير البيانات بنجاح!");
-        System.out.println("إحصائيات: " + exportedData.get("statistics"));
-
-        try {
-            // استخدام JSON بسيط بدون مكتبات خارجية
-            StringBuilder jsonBuilder = new StringBuilder();
-            jsonBuilder.append("{\n");
-
-            // إحصائيات
-            jsonBuilder.append("  \"statistics\": {\n");
-            Map<String, Integer> stats = (Map<String, Integer>) exportedData.get("statistics");
-            int i = 0;
-            for (Map.Entry<String, Integer> entry : stats.entrySet()) {
-                jsonBuilder.append("    \"").append(entry.getKey()).append("\": ").append(entry.getValue());
-                if (i < stats.size() - 1) {
-                    jsonBuilder.append(",");
-                }
-                jsonBuilder.append("\n");
-                i++;
-            }
-            jsonBuilder.append("  },\n");
-
-            // رمز الإشعار
-            jsonBuilder.append("  \"exported\": true,\n");
-            jsonBuilder.append("  \"timestamp\": \"").append(new java.util.Date()).append("\"\n");
-            jsonBuilder.append("}");
-
-            String jsonContent = jsonBuilder.toString();
-            Files.writeString(Paths.get("Files/symbol_table_export.json"), jsonContent);
-            System.out.println("تم التصدير إلى ملف: Files/symbol_table_export.json");
-        } catch (IOException e) {
-            System.out.println("خطأ في حفظ الملف: " + e.getMessage());
-        }
-    }
 
      public static void displayNestedStructures(HtmlCssJinjaSymbolTable symbolTable, Scanner scanner) {
         System.out.println("\n=== تحليل الهياكل المتداخلة ===");
@@ -476,7 +438,6 @@ public class Operation {
         }
     }
 
-    // ================ Helper Methods ================
 
      public static List<HtmlElementSymbol> getAllHtmlElements(HtmlCssJinjaSymbolTable symbolTable) {
         List<HtmlElementSymbol> result = new ArrayList<>();
@@ -570,10 +531,8 @@ public class Operation {
             String elementName = element.getName();
             String parentName = element.getParent() != null ? element.getParent().getName() : "root";
 
-            // إضافة العلاقة الأب-ابن
             parentRelationships.computeIfAbsent(parentName, k -> new ArrayList<>()).add(elementName);
 
-            // إضافة العلاقة الابن-أب
             childRelationships.put(elementName, element.getAncestors().stream()
                     .map(HtmlElementSymbol::getName)
                     .collect(Collectors.toList()));
@@ -590,7 +549,6 @@ public class Operation {
 
         List<HtmlElementSymbol> elements = getAllHtmlElements(symbolTable);
 
-        // العثور على العناصر الجذرية (التي ليس لها أب)
         List<HtmlElementSymbol> rootElements = elements.stream()
                 .filter(element -> element.getParent() == null)
                 .collect(Collectors.toList());
@@ -604,14 +562,12 @@ public class Operation {
         String indent = "  ".repeat(level);
         System.out.printf("%s• <%s> (السطر: %d)\n", indent, element.getName(), element.getLine());
 
-        // عرض السمات
         if (element.getAttributes() != null && !element.getAttributes().isEmpty()) {
             for (HtmlAttributeSymbol attr : element.getAttributes().values()) {
                 System.out.printf("%s  - %s=\"%s\"\n", indent, attr.getName(), attr.getValueWithoutQuotes());
             }
         }
 
-        // عرض العناصر الفرعية
         for (HtmlElementSymbol child : element.getChildren()) {
             displayElementAndContent(child, level + 1);
         }

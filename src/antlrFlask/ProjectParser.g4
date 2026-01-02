@@ -37,9 +37,9 @@ annAssign
     ;
 
 augassign
-    : PLUS EQ
+    : PLUS  EQ
     | MINUS EQ
-    | STAR EQ
+    | STAR  EQ
     | SLASH EQ
     ;
 
@@ -91,7 +91,7 @@ power
     ;
 
 atom_expr
-    :  atom trailer*
+    : atom trailer*
     | LPAREN (test | testlist_comp)? RPAREN
     ;
 
@@ -132,9 +132,9 @@ listmaker
 dictmaker
     : test COLON test (COMMA test COLON test)* (COMMA)?
     | (test COLON test) comp_for
-    | test (COMMA test)* (COMMA)?
-    | test comp_for
+    | NEWLINE* test COLON test (COMMA NEWLINE* test COLON test)* (COMMA)? NEWLINE*
     ;
+
 comp_for
     : FOR exprlist IN testlist (IF test)* #compFor
     ;

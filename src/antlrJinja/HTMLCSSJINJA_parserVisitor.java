@@ -1,4 +1,4 @@
-// Generated from C:/D/CompilerFlaskAndJinja/src/antlrJinja/HTMLCSSJINJA_parser.g4 by ANTLR 4.13.2
+// Generated from C:/Users/User/Desktop/المشاريع/CompilerFlaskAndJinja/src/antlrJinja/HTMLCSSJINJA_parser.g4 by ANTLR 4.13.2
 package antlrJinja;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -24,13 +24,6 @@ public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitHtmlelementlabel(HTMLCSSJINJA_parser.HtmlelementlabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code htmlcommentlabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#html}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitHtmlcommentlabel(HTMLCSSJINJA_parser.HtmlcommentlabelContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code doctipelabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#html}.
@@ -444,13 +437,6 @@ public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJinjaStmtlabel(HTMLCSSJINJA_parser.JinjaStmtlabelContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code jinjaCommentlabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaElement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJinjaCommentlabel(HTMLCSSJINJA_parser.JinjaCommentlabelContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code jinjaIfBlocklabel}
 	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaElement}.
 	 * @param ctx the parse tree
@@ -464,19 +450,6 @@ public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJinjaForBlocklabel(HTMLCSSJINJA_parser.JinjaForBlocklabelContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code jinjaCompactElementlabel}
-	 * labeled alternative in {@link HTMLCSSJINJA_parser#jinjaElement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJinjaCompactElementlabel(HTMLCSSJINJA_parser.JinjaCompactElementlabelContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaCompactElement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJinjaCompactElement(HTMLCSSJINJA_parser.JinjaCompactElementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaExpr}.
 	 * @param ctx the parse tree
@@ -541,10 +514,4 @@ public interface HTMLCSSJINJA_parserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJinjaStmt(HTMLCSSJINJA_parser.JinjaStmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HTMLCSSJINJA_parser#jinjaComment}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx);
 }

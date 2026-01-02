@@ -10,9 +10,6 @@ public class ExpressionStatment extends Statment {
         super(nodeName, line);
     }
 
-    public void addValue(ExpressionAtom value) {
-        this.value = value;
-    }
 
     @Override
     public String toString() {

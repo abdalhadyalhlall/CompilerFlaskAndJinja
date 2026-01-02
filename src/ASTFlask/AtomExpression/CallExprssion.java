@@ -1,6 +1,5 @@
 package ASTFlask.AtomExpression;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CallExprssion extends ExpressionAtom{
@@ -14,14 +13,7 @@ public class CallExprssion extends ExpressionAtom{
         this.args = args;
     }
 
-    public void setFunction(ExpressionAtom function) { this.function = function; }
 
-    public void addArg(ExpressionAtom arg) {
-        if (this.args == null) this.args = new ArrayList<>();
-        this.args.add(arg);
-    }
-
-    public void setArgs(List<ExpressionAtom> args) { this.args = args; }
 
     @Override
     public String toString() {
