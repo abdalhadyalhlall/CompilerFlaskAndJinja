@@ -12,8 +12,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitDocumentLabel(HTMLCSSJINJA_parser.DocumentLabelContext ctx) {
         DocumentNode document = new DocumentNode(ctx.getStart().getLine());
-
-        // ✅ **تصحيح**: لا تستخدم ctx.children بل قم بزيارة html فقط
         for (HTMLCSSJINJA_parser.HtmlContext htmlCtx : ctx.html()) {
             ASTNode childNode = visit(htmlCtx);
             if (childNode != null) {
@@ -46,16 +44,12 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 "html",
                 HtmlElementNode.ElementType.HTML
         );
-
-        // زيارة السمات
         for (HTMLCSSJINJA_parser.AttruputehtmlContext attrCtx : ctx.attruputehtml()) {
             ASTNode attrNode = visit(attrCtx);
             if (attrNode != null) {
                 htmlElement.addChild(attrNode);
             }
         }
-
-        // زيارة المحتوى (head و body)
         for (HTMLCSSJINJA_parser.ContenthtmlContext contentCtx : ctx.contenthtml()) {
             ASTNode contentNode = visit(contentCtx);
             if (contentNode != null) {
@@ -74,8 +68,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         } else if (ctx.VALUE_LANG_AR() != null) {
             value = ctx.VALUE_LANG_AR().getText();
         }
-
-        // إزالة علامات الاقتباس
         if (value.length() >= 2) {
             value = value.substring(1, value.length() - 1);
         }
@@ -124,7 +116,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 HtmlElementNode.ElementType.BODY
         );
 
-        // زيارة السمات
         if (ctx.attributebody() != null) {
             for (HTMLCSSJINJA_parser.AttributebodyContext attrCtx : ctx.attributebody()) {
                 ASTNode attrNode = visit(attrCtx);
@@ -133,8 +124,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 }
             }
         }
-
-        // زيارة المحتوى
         if (ctx.contentbody() != null) {
             for (HTMLCSSJINJA_parser.ContentbodyContext contentCtx : ctx.contentbody()) {
                 ASTNode childNode = visit(contentCtx);
@@ -159,7 +148,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitNormaltaghead(HTMLCSSJINJA_parser.NormaltagheadContext ctx) {
-        // ✅ **تصحيح**: استخدم getText() مباشرة
         String tagName = ctx.tagsheadnormal(0).getText();
 
         HtmlElementNode element = new HtmlElementNode(
@@ -168,7 +156,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 HtmlElementNode.ElementType.NORMAL
         );
 
-        // زيارة السمات
         if (ctx.attributehead() != null) {
             for (HTMLCSSJINJA_parser.AttributeheadContext attrCtx : ctx.attributehead()) {
                 ASTNode attrNode = visit(attrCtx);
@@ -177,8 +164,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 }
             }
         }
-
-        // زيارة النصوص
         if (ctx.text() != null) {
             for (HTMLCSSJINJA_parser.TextContext textCtx : ctx.text()) {
                 ASTNode textNode = visit(textCtx);
@@ -200,7 +185,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 HtmlElementNode.ElementType.SELF_CLOSING
         );
 
-        // زيارة السمات
         if (ctx.attributehead() != null) {
             for (HTMLCSSJINJA_parser.AttributeheadContext attrCtx : ctx.attributehead()) {
                 ASTNode attrNode = visit(attrCtx);
@@ -234,7 +218,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitNormal_Tag_Element_body(HTMLCSSJINJA_parser.Normal_Tag_Element_bodyContext ctx) {
-        // ✅ **تصحيح**: استخدم getText() مباشرة
         String tagName = ctx.tagsbodynamenormal(0).getText();
 
         HtmlElementNode element = new HtmlElementNode(
@@ -243,7 +226,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 HtmlElementNode.ElementType.NORMAL
         );
 
-        // زيارة السمات
         if (ctx.attributebody() != null) {
             for (HTMLCSSJINJA_parser.AttributebodyContext attrCtx : ctx.attributebody()) {
                 ASTNode attrNode = visit(attrCtx);
@@ -253,7 +235,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
             }
         }
 
-        // زيارة المحتوى
         if (ctx.contentbody() != null) {
             for (HTMLCSSJINJA_parser.ContentbodyContext contentCtx : ctx.contentbody()) {
                 ASTNode childNode = visit(contentCtx);
@@ -275,7 +256,7 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 HtmlElementNode.ElementType.SELF_CLOSING
         );
 
-        // زيارة السمات
+
         if (ctx.attributebody() != null) {
             for (HTMLCSSJINJA_parser.AttributebodyContext attrCtx : ctx.attributebody()) {
                 ASTNode attrNode = visit(attrCtx);
@@ -297,7 +278,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
     public ASTNode visitStylelabel(HTMLCSSJINJA_parser.StylelabelContext ctx) {
         StyleAttributeNode styleAttr = new StyleAttributeNode(ctx.getStart().getLine());
 
-        // زيارة جميع قواعد CSS
         if (ctx.stylename() != null) {
             for (HTMLCSSJINJA_parser.StylenameContext styleCtx : ctx.stylename()) {
                 ASTNode ruleNode = visit(styleCtx);
@@ -505,7 +485,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         if (ctx.CSS_BORDER_PROPERTY() != null) {
             StringBuilder valueBuilder = new StringBuilder();
 
-            // جمع CSS values
             if (ctx.css_value() != null) {
                 for (HTMLCSSJINJA_parser.Css_valueContext valueCtx : ctx.css_value()) {
                     if (valueBuilder.length() > 0) valueBuilder.append(" ");
@@ -513,7 +492,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 }
             }
 
-            // جمع CSS color values
             if (ctx.CSS_COLOR_VALUE() != null) {
                 for (TerminalNode colorNode : ctx.CSS_COLOR_VALUE()) {
                     if (valueBuilder.length() > 0) valueBuilder.append(" ");
@@ -609,7 +587,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         String name = ctx.attributenamebody().getText();
         String value = ctx.ATTRIBUTE_VALUE().getText();
 
-        // إزالة علامات الاقتباس إذا وجدت
         if (value.startsWith("\"") && value.endsWith("\"")) {
             value = value.substring(1, value.length() - 1);
         }
@@ -639,7 +616,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         String name = ctx.attributenamehead().getText();
         String value = ctx.ATTRIBUTE_VALUE().getText();
 
-        // إزالة علامات الاقتباس إذا وجدت
         if (value.startsWith("\"") && value.endsWith("\"")) {
             value = value.substring(1, value.length() - 1);
         }
@@ -696,7 +672,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
     public ASTNode visitJinjaExpr(HTMLCSSJINJA_parser.JinjaExprContext ctx) {
         StringBuilder content = new StringBuilder();
 
-        // جمع محتوى التعبير
         if (ctx.jinjaExprContent() != null) {
             for (HTMLCSSJINJA_parser.JinjaExprContentContext exprCtx : ctx.jinjaExprContent()) {
                 if (exprCtx.getText() != null) {
@@ -717,7 +692,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
     public ASTNode visitJinjaStmt(HTMLCSSJINJA_parser.JinjaStmtContext ctx) {
         StringBuilder content = new StringBuilder();
 
-        // جمع محتوى ال statement
         if (ctx.jinjaStmtArgument() != null) {
             for (HTMLCSSJINJA_parser.JinjaStmtArgumentContext argCtx : ctx.jinjaStmtArgument()) {
                 if (argCtx.getText() != null) {
@@ -737,7 +711,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx) {
         String content = ctx.JANJI_COMMENT().getText();
-        // إزالة علامات التعليق {# و #}
         if (content.startsWith("{#") && content.endsWith("#}")) {
             content = content.substring(2, content.length() - 2).trim();
         }
@@ -756,13 +729,9 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 JinjaBlockNode.BlockType.IF
         );
 
-        // ✅ **تصحيح مهم**: استدعاء finalizeBlock في النهاية
-
-        // معالجة الكتلة الرئيسية if
         String condition = extractJinjaArguments(ctx.jinjaStmtArgument());
         ifBlock.addConditionBlock(condition);
 
-        // معالجة المحتوى داخل if
         if (ctx.jinjaBlockContent() != null) {
             for (HTMLCSSJINJA_parser.JinjaBlockContentContext contentCtx : ctx.jinjaBlockContent()) {
                 ASTNode contentNode = visit(contentCtx);
@@ -772,7 +741,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
             }
         }
 
-        // ✅ **مهم جداً**: استدعاء finalizeBlock
         ifBlock.finalizeBlock();
 
         return ifBlock;
@@ -785,11 +753,9 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
                 JinjaBlockNode.BlockType.FOR
         );
 
-        // معالجة الشرط في for
         String condition = extractJinjaArguments(ctx.jinjaStmtArgument());
         forBlock.addConditionBlock(condition);
 
-        // معالجة المحتوى داخل for
         if (ctx.jinjaBlockContent() != null) {
             for (HTMLCSSJINJA_parser.JinjaBlockContentContext contentCtx : ctx.jinjaBlockContent()) {
                 ASTNode contentNode = visit(contentCtx);
@@ -799,7 +765,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
             }
         }
 
-        // ✅ **مهم جداً**: استدعاء finalizeBlock
         forBlock.finalizeBlock();
 
         return forBlock;
@@ -831,7 +796,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitHtmlcommentlabel(HTMLCSSJINJA_parser.HtmlcommentlabelContext ctx) {
-        // HTML comments عادة يتم تخطيها، ولكن إذا أردت الاحتفاظ بها:
         String commentText = ctx.HTML_COMMENT().getText();
         return new TextNode(
                 ctx.getStart().getLine(),
@@ -849,7 +813,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         );
     }
 
-    // ✅ **طريقة مساعدة مبسطة لاستخراج arguments**
     private String extractJinjaArguments(List<HTMLCSSJINJA_parser.JinjaStmtArgumentContext> arguments) {
         if (arguments == null || arguments.isEmpty()) {
             return "";
@@ -864,11 +827,8 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         return condition.toString().trim();
     }
 
-    // ✅ **تجاوز visitChildren لمنع التكرار**
     @Override
     public ASTNode visitChildren(org.antlr.v4.runtime.tree.RuleNode node) {
-        // لا نريد زيارة جميع الأطفال تلقائياً
-        // نرجع null ونترك كل طريقة تزور الأطفال التي تريدها
         return null;
     }
 }
