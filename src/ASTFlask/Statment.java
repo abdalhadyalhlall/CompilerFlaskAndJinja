@@ -1,7 +1,5 @@
 package ASTFlask;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Statment extends StatmentRoot {
     public Statment(String nodeName, int line) {
@@ -13,7 +11,5 @@ public abstract class Statment extends StatmentRoot {
     }
 
 
-    public List<Statment> getChildren() {
-        return new ArrayList<>();
-    }
+
 }

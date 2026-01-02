@@ -19,19 +19,6 @@ public class ClassStatment extends Statment {
         this.body = body;
     }
 
-    public void addBase(ExpressionAtom base) {
-        if (this.bases == null) {
-            this.bases = new ArrayList<>();
-        }
-        this.bases.add(base);
-    }
-
-    public void addBodyStmt(Statment stmt) {
-        if (this.body == null) {
-            this.body = new ArrayList<>();
-        }
-        this.body.add(stmt);
-    }
 
     @Override
     public String toString() {

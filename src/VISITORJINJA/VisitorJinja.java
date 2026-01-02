@@ -653,10 +653,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         return visit(ctx.jinjaStmt());
     }
 
-    @Override
-    public ASTNode visitJinjaCommentlabel(HTMLCSSJINJA_parser.JinjaCommentlabelContext ctx) {
-        return visit(ctx.jinjaComment());
-    }
 
     @Override
     public ASTNode visitJinjaIfBlocklabel(HTMLCSSJINJA_parser.JinjaIfBlocklabelContext ctx) {
@@ -708,19 +704,7 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         );
     }
 
-    @Override
-    public ASTNode visitJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx) {
-        String content = ctx.JANJI_COMMENT().getText();
-        if (content.startsWith("{#") && content.endsWith("#}")) {
-            content = content.substring(2, content.length() - 2).trim();
-        }
 
-        return new JinjaNode(
-                ctx.getStart().getLine(),
-                JinjaNode.JinjaType.COMMENT,
-                content
-        );
-    }
 
     @Override
     public ASTNode visitJinjaIfBlock(HTMLCSSJINJA_parser.JinjaIfBlockContext ctx) {
@@ -794,15 +778,6 @@ public class VisitorJinja extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
         );
     }
 
-    @Override
-    public ASTNode visitHtmlcommentlabel(HTMLCSSJINJA_parser.HtmlcommentlabelContext ctx) {
-        String commentText = ctx.HTML_COMMENT().getText();
-        return new TextNode(
-                ctx.getStart().getLine(),
-                commentText,
-                TextNode.TextContext.HTML
-        );
-    }
 
     @Override
     public ASTNode visitText(HTMLCSSJINJA_parser.TextContext ctx) {

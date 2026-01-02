@@ -18,9 +18,8 @@ public class SymbolTableBuilder extends Visitor {
     private Set<String> builtinConstants = new HashSet<>();
     private Map<String, List<Symbol>> symbolUsage = new HashMap<>();
 
-    // لتتبع الهياكل المتداخلة
     private Map<String, List<VariableSymbol>> nestedSymbols = new HashMap<>();
-    private String currentVariableName = null;
+
     private static final Set<String> COMPLEX_TYPES = new HashSet<>(Arrays.asList(
             "dict", "list", "tuple", "set", "array", "Dict", "List", "Tuple", "Set", "any"
     ));
@@ -223,7 +222,6 @@ public class SymbolTableBuilder extends Visitor {
     }
 
     private String extractMainVariableName(String leftSide) {
-        // إزالة الأقواس المربعة والفواصل
         leftSide = leftSide.replace("[", "").replace("]", "").trim();
 
         if (leftSide.contains(",")) {
@@ -766,10 +764,8 @@ public class SymbolTableBuilder extends Visitor {
             System.out.println("Variable: " + entry.getKey());
             System.out.println("Nested Fields:");
 
-            // تجميع الحقول الفريدة
             Set<String> uniqueFields = new HashSet<>();
             for (VariableSymbol nested : entry.getValue()) {
-                // استخراج اسم الحقل من الاسم الكامل
                 String fullName = nested.name;
                 String fieldName = fullName.substring(fullName.indexOf(".") + 1);
                 uniqueFields.add(fieldName);
@@ -994,28 +990,6 @@ public class SymbolTableBuilder extends Visitor {
         return success;
     }
 
-    public boolean addSymbolToScope(Symbol symbol, String scopeName) {
-        if (symbol == null || symbol.name == null || symbol.name.isEmpty()) {
-            return false;
-        }
-
-        Scope targetScope = findScopeByName(scopeName);
-        if (targetScope == null) {
-            return false;
-        }
-
-        Symbol existing = targetScope.lookupCurrent(symbol.name);
-        if (existing != null) {
-            return false;
-        }
-
-        boolean success = targetScope.addSymbol(symbol);
-        if (success) {
-            recordSymbolUsage(symbol);
-        }
-
-        return success;
-    }
 
     public boolean updateSymbol(String name, Symbol newSymbol) {
         SymbolLookupResult lookupResult = lookupWithScope(name);
@@ -1558,19 +1532,10 @@ public class SymbolTableBuilder extends Visitor {
         }
     }
 
-    // ================ Getters =================
-
-    public Scope getGlobalSymbolTable() {
-        return globalScope;
-    }
-
     public Scope getCurrentScope() {
         return currentScope;
     }
 
-    public Stack<Scope> getScopeStack() {
-        return scopeStack;
-    }
 }
 
 

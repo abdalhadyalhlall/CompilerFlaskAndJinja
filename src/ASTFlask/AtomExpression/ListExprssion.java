@@ -12,14 +12,6 @@ public class ListExprssion extends ExpressionAtom{
         this.items = items;
     }
 
-    public void addItem(ExpressionAtom expr) {
-        if (this.items == null) this.items = new ArrayList<>();
-        this.items.add(expr);
-    }
-
-    public void setItems(List<ExpressionAtom> items) {
-        this.items = items;
-    }
 
     @Override
     public String toString() {

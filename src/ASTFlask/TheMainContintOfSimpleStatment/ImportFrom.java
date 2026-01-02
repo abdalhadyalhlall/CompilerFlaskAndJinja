@@ -13,11 +13,6 @@ public class ImportFrom extends ImportStatment{
         this.items = items;
     }
 
-    public void addItem(ImportItem item) {
-        if (this.items == null) this.items = new ArrayList<>();
-        this.items.add(item);
-    }
-
     @Override
     public String toString() {
         return "ImportFromStmt(line=" + line + ", module=" + module + ", items=" + items + ")";

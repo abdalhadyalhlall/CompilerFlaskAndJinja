@@ -1,5 +1,4 @@
 package ASTFlask.AtomExpression;
-//a if b else c:
 public class ThreeConditionExprssion extends ExpressionAtom {
     public ExpressionAtom thenExpr;
     public ExpressionAtom condExpr;

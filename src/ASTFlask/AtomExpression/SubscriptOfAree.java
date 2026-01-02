@@ -1,7 +1,5 @@
 package ASTFlask.AtomExpression;
-//a[0]
-//a[1:5]
-//a[x:y:z]
+
 public class SubscriptOfAree extends ExpressionAtom{
     public ExpressionAtom value;
     public SliceTowSubscriptOfAree slice;
@@ -16,9 +14,6 @@ public class SubscriptOfAree extends ExpressionAtom{
         this.value = value;
     }
 
-    public void setSlice(SliceTowSubscriptOfAree slice) {
-        this.slice = slice;
-    }
 
     @Override
     public String toString() {

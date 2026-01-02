@@ -14,20 +14,6 @@ public class DeleteStatment extends Statment {
         this.elementsTdelete = elementsTdelete;
     }
 
-    public void addelementTdelete(ExpressionAtom expr) {
-        if (this.elementsTdelete == null) {
-            this.elementsTdelete = new ArrayList<>();
-        }
-        this.elementsTdelete.add(expr);
-    }
-
-    public void addelementsTdelete(List<ExpressionAtom> list) {
-        if (this.elementsTdelete == null) {
-            this.elementsTdelete = new ArrayList<>();
-        }
-        this.elementsTdelete.addAll(list);
-    }
-
     @Override
     public String toString() {
         return "DelStmt(line=" + line + ", targets=" + elementsTdelete + ")";

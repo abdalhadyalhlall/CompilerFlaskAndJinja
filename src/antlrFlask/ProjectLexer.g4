@@ -70,6 +70,7 @@ NEWLINE
                 if (indentCount > currentIndent) {
                     indents.push(indentCount);
                     pendingTokens.add(createToken(INDENT, ""));
+
                 } else if (indentCount < currentIndent) {
                     while (!indents.isEmpty() && indents.peek() > indentCount) {
                         indents.pop();

@@ -3,37 +3,31 @@ package VISITORJINJA.ST;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * فئة تمثل رمز سمة HTML في جدول الرموز
- */
+
 public class HtmlAttributeSymbol extends Symbol {
 
-    /**
-     * أنواع سمات HTML
-     */
+
     public enum AttributeType {
-        GLOBAL,       // id, class, style, title, lang, dir, etc.
-        EVENT,        // onclick, onchange, onsubmit, etc.
-        FORM,         // name, value, placeholder, required, etc.
-        MEDIA,        // src, alt, width, height, controls, etc.
-        LINK,         // href, target, rel, download, etc.
-        META,         // charset, content, http-equiv, property
-        BOOLEAN,      // hidden, disabled, checked, readonly, etc.
-        CUSTOM,       // السمات المخصصة
-        DATA,         // data-* attributes
-        ARIA          // aria-* attributes
+        GLOBAL,
+        EVENT,
+        FORM,
+        MEDIA,
+        LINK,
+        META,
+        BOOLEAN,
+        CUSTOM,
+        DATA,
+        ARIA
     }
 
-    // خصائص السمة
+
     private AttributeType attributeType;
     private String value;
     private boolean hasValue;
     private HtmlElementSymbol parentElement;
-    private Map<String, Object> metadata; // معلومات إضافية عن السمة
+    private Map<String, Object> metadata;
 
-    /**
-     * مُنشئ السمة
-     */
+
     public HtmlAttributeSymbol(String name, AttributeType type,
                                String value, boolean hasValue,
                                int line, int column) {
@@ -46,108 +40,51 @@ public class HtmlAttributeSymbol extends Symbol {
         initializeMetadata();
     }
 
-    /**
-     * مُنشئ للسمات بدون قيمة (boolean attributes)
-     */
+
     public HtmlAttributeSymbol(String name, AttributeType type,
                                int line, int column) {
         this(name, type, null, false, line, column);
     }
 
-    /**
-     * مُنشئ مع قيمة افتراضية
-     */
-    public HtmlAttributeSymbol(String name, String value,
-                               int line, int column) {
-        this(name, inferAttributeType(name), value, true, line, column);
-    }
 
-    // ================ Getter و Setter Methods ================
 
-    /**
-     * الحصول على نوع السمة
-     */
+
+
     public AttributeType getAttributeType() {
         return attributeType;
     }
 
-    /**
-     * تعيين نوع السمة
-     */
-    public void setAttributeType(AttributeType attributeType) {
-        this.attributeType = attributeType;
-    }
 
-    /**
-     * الحصول على قيمة السمة
-     */
+
     public String getValue() {
         return value;
     }
 
-    /**
-     * تعيين قيمة السمة
-     */
+
     public void setValue(String value) {
         this.value = value;
         this.hasValue = true;
         initializeMetadata();
     }
 
-    /**
-     * التحقق مما إذا كانت السمة لها قيمة
-     */
-    public boolean hasValue() {
-        return hasValue;
-    }
 
-    /**
-     * تعيين ما إذا كانت السمة لها قيمة
-     */
-    public void setHasValue(boolean hasValue) {
-        this.hasValue = hasValue;
-    }
 
-    /**
-     * الحصول على العنصر الأب
-     */
     public HtmlElementSymbol getParentElement() {
         return parentElement;
     }
 
-    /**
-     * تعيين العنصر الأب
-     */
+
     public void setParentElement(HtmlElementSymbol parentElement) {
         this.parentElement = parentElement;
     }
 
-    /**
-     * الحصول على البيانات الوصفية
-     */
-    public Map<String, Object> getMetadata() {
-        return new HashMap<>(metadata);
-    }
 
-    /**
-     * الحصول على بيانات وصفية محددة
-     */
-    public Object getMetadata(String key) {
-        return metadata.get(key);
-    }
 
-    /**
-     * تعيين بيانات وصفية
-     */
+
     public void setMetadata(String key, Object value) {
         metadata.put(key, value);
     }
 
-    // ================ باقي الأكواد (كما هي) ================
-
-    /**
-     * تهيئة البيانات الوصفية
-     */
     private void initializeMetadata() {
         metadata.put("isBooleanAttribute", !hasValue);
         metadata.put("isCustomAttribute", attributeType == AttributeType.CUSTOM);
@@ -163,15 +100,13 @@ public class HtmlAttributeSymbol extends Symbol {
         }
     }
 
-    /**
-     * الحصول على قيمة السمة بدون علامات الاقتباس
-     */
+
     public String getValueWithoutQuotes() {
         if (value == null || value.isEmpty()) {
             return "";
         }
 
-        // إزالة علامات الاقتباس
+
         if (value.startsWith("\"") && value.endsWith("\"")) {
             return value.substring(1, value.length() - 1);
         }
@@ -182,93 +117,65 @@ public class HtmlAttributeSymbol extends Symbol {
         return value;
     }
 
-    /**
-     * الحصول على قيمة السمة كمصفوفة (لسمات مثل class)
-     */
+
     public String[] getValueAsArray() {
         String cleanValue = getValueWithoutQuotes();
         if (cleanValue.isEmpty()) {
             return new String[0];
         }
 
-        // تقسيم القيمة حسب المسافات
+
         return cleanValue.split("\\s+");
     }
 
-    // ================ التحليلات ================
 
-    /**
-     * التحقق مما إذا كانت سمة boolean
-     */
     public boolean isBooleanAttribute() {
         return Boolean.TRUE.equals(metadata.get("isBooleanAttribute"));
     }
 
-    /**
-     * التحقق مما إذا كانت سمة مخصصة
-     */
     public boolean isCustomAttribute() {
         return Boolean.TRUE.equals(metadata.get("isCustomAttribute"));
     }
 
-    /**
-     * التحقق مما إذا كانت سمة data
-     */
     public boolean isDataAttribute() {
         return Boolean.TRUE.equals(metadata.get("isDataAttribute"));
     }
 
-    /**
-     * التحقق مما إذا كانت سمة aria
-     */
+
     public boolean isAriaAttribute() {
         return Boolean.TRUE.equals(metadata.get("isAriaAttribute"));
     }
 
-    /**
-     * التحقق مما إذا كانت سمة event
-     */
+
     public boolean isEventAttribute() {
         return Boolean.TRUE.equals(metadata.get("isEventAttribute"));
     }
 
-    /**
-     * التحقق مما إذا كانت القيمة محاطة بعلامات اقتباس
-     */
+
     public boolean hasQuotes() {
         return Boolean.TRUE.equals(metadata.get("hasQuotes"));
     }
 
-    /**
-     * الحصول على طول القيمة
-     */
+
     public int getValueLength() {
         Integer length = (Integer) metadata.get("valueLength");
         return length != null ? length : 0;
     }
 
-    /**
-     * التحقق مما إذا كانت القيمة تحتوي على تعبير Jinja
-     */
+
     public boolean containsJinjaExpression() {
         if (value == null) return false;
         return value.contains("{{") || value.contains("{%");
     }
 
-    /**
-     * التحقق مما إذا كانت القيمة تحتوي على CSS
-     */
+
     public boolean containsCss() {
         if (!name.equals("style")) return false;
         if (value == null) return false;
         return value.contains(":") || value.contains(";");
     }
 
-    // ================ المعلومات التفصيلية ================
 
-    /**
-     * الحصول على معلومات تفصيلية عن السمة
-     */
     @Override
     public String getDetailedInfo() {
         StringBuilder sb = new StringBuilder();
@@ -287,7 +194,7 @@ public class HtmlAttributeSymbol extends Symbol {
         sb.append(" [").append(attributeType).append("]");
         sb.append(" line:").append(line).append(", col:").append(column);
 
-        // معلومات إضافية
+
         if (isDataAttribute()) {
             sb.append(" [data-*]");
         } else if (isAriaAttribute()) {
@@ -303,9 +210,7 @@ public class HtmlAttributeSymbol extends Symbol {
         return sb.toString();
     }
 
-    /**
-     * تمثيل نصي مختصر للسمة
-     */
+
     @Override
     public String toString() {
         if (hasValue && value != null) {
@@ -317,9 +222,7 @@ public class HtmlAttributeSymbol extends Symbol {
         }
     }
 
-    /**
-     * تصدير السمة ككائن JSON
-     */
+
     public Map<String, Object> toJson() {
         Map<String, Object> json = new HashMap<>();
         json.put("name", name);
@@ -349,28 +252,15 @@ public class HtmlAttributeSymbol extends Symbol {
         return json;
     }
 
-    /**
-     * تصدير السمة بصيغة HTML
-     */
-    public String toHtmlString() {
-        if (hasValue && value != null) {
-            return String.format("%s=\"%s\"", name, getValueWithoutQuotes());
-        } else {
-            return name;
-        }
-    }
 
-    // ================ طرق ثابتة مساعدة ================
 
-    /**
-     * الاستدلال على نوع السمة من اسمها
-     */
+
     public static AttributeType inferAttributeType(String attributeName) {
         if (attributeName == null) return AttributeType.CUSTOM;
 
         String attrLower = attributeName.toLowerCase();
 
-        // السمات العامة
+
         if (attrLower.equals("id") || attrLower.equals("class") ||
                 attrLower.equals("style") || attrLower.equals("title") ||
                 attrLower.equals("lang") || attrLower.equals("dir") ||
@@ -380,12 +270,12 @@ public class HtmlAttributeSymbol extends Symbol {
             return AttributeType.GLOBAL;
         }
 
-        // سمات الأحداث
+
         if (attrLower.startsWith("on")) {
             return AttributeType.EVENT;
         }
 
-        // سمات النماذج
+
         if (attrLower.equals("name") || attrLower.equals("value") ||
                 attrLower.equals("placeholder") || attrLower.equals("required") ||
                 attrLower.equals("readonly") || attrLower.equals("disabled") ||
@@ -410,7 +300,7 @@ public class HtmlAttributeSymbol extends Symbol {
             return AttributeType.MEDIA;
         }
 
-        // سمات الروابط
+
         if (attrLower.equals("href") || attrLower.equals("target") ||
                 attrLower.equals("rel") || attrLower.equals("download") ||
                 attrLower.equals("hreflang") || attrLower.equals("type") ||
@@ -418,14 +308,12 @@ public class HtmlAttributeSymbol extends Symbol {
             return AttributeType.LINK;
         }
 
-        // سمات الميتا
         if (attrLower.equals("charset") || attrLower.equals("content") ||
                 attrLower.equals("http-equiv") || attrLower.equals("property") ||
                 attrLower.equals("name") || attrLower.equals("scheme")) {
             return AttributeType.META;
         }
 
-        // السمات المنطقية
         if (attrLower.equals("hidden") || attrLower.equals("disabled") ||
                 attrLower.equals("checked") || attrLower.equals("readonly") ||
                 attrLower.equals("required") || attrLower.equals("multiple") ||
@@ -438,7 +326,6 @@ public class HtmlAttributeSymbol extends Symbol {
             return AttributeType.BOOLEAN;
         }
 
-        // سمات البيانات والوصول
         if (attrLower.startsWith("data-")) {
             return AttributeType.DATA;
         }
@@ -447,43 +334,11 @@ public class HtmlAttributeSymbol extends Symbol {
             return AttributeType.ARIA;
         }
 
-        // السمات المخصصة
         return AttributeType.CUSTOM;
     }
 
-    /**
-     * التحقق مما إذا كانت السمة من النوع المنطقي (boolean)
-     */
-    public static boolean isBooleanAttribute(String attributeName) {
-        AttributeType type = inferAttributeType(attributeName);
-        return type == AttributeType.BOOLEAN;
-    }
 
-    /**
-     * التحقق مما إذا كانت السمة تتطلب قيمة
-     */
-    public static boolean requiresValue(String attributeName) {
-        // معظم السمات المنطقية لا تحتاج إلى قيمة
-        return !isBooleanAttribute(attributeName);
-    }
 
-    /**
-     * الحصول على القيمة الافتراضية للسمة
-     */
-    public static String getDefaultValue(String attributeName) {
-        switch (attributeName.toLowerCase()) {
-            case "type":
-                return "text";
-            case "method":
-                return "get";
-            case "enctype":
-                return "application/x-www-form-urlencoded";
-            case "target":
-                return "_self";
-            case "rel":
-                return "noopener noreferrer";
-            default:
-                return "";
-        }
+
+
     }
-}

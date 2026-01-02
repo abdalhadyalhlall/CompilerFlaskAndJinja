@@ -1,4 +1,4 @@
-// Generated from C:/D/CompilerFlaskAndJinja/src/antlrJinja/HTMLCSSJINJA_parser.g4 by ANTLR 4.13.2
+// Generated from C:/Users/User/Desktop/المشاريع/CompilerFlaskAndJinja/src/antlrJinja/HTMLCSSJINJA_parser.g4 by ANTLR 4.13.2
 package antlrJinja;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -26,13 +26,6 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitHtmlelementlabel(HTMLCSSJINJA_parser.HtmlelementlabelContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitHtmlcommentlabel(HTMLCSSJINJA_parser.HtmlcommentlabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -480,13 +473,6 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitJinjaCommentlabel(HTMLCSSJINJA_parser.JinjaCommentlabelContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitJinjaIfBlocklabel(HTMLCSSJINJA_parser.JinjaIfBlocklabelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -495,20 +481,6 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitJinjaForBlocklabel(HTMLCSSJINJA_parser.JinjaForBlocklabelContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitJinjaCompactElementlabel(HTMLCSSJINJA_parser.JinjaCompactElementlabelContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitJinjaCompactElement(HTMLCSSJINJA_parser.JinjaCompactElementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -579,11 +551,4 @@ public class HTMLCSSJINJA_parserBaseVisitor<T> extends AbstractParseTreeVisitor<
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitJinjaStmt(HTMLCSSJINJA_parser.JinjaStmtContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx) { return visitChildren(ctx); }
 }

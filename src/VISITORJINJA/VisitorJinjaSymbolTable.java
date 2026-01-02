@@ -8,62 +8,52 @@ import org.antlr.v4.runtime.ParserRuleContext;
 
 import java.util.*;
 
-/**
- * Visitor متخصص لبناء جدول الرموز (Symbol Table)
- * يرث من Visitor الأصلي ويضيف وظائف Symbol Table فقط
- */
+
+
 public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTNode> {
 
-    // ================ المتغيرات الداخلية ================
 
     private HtmlCssJinjaSymbolTable symbolTable;
 
-    // Stacks للإدارة الهرمية
     private Stack<HtmlElementSymbol> elementStack;
     private Stack<StyleAttributeSymbol> styleAttrStack;
     private Stack<JinjaBlockSymbol> jinjaBlockStack;
 
-    // تتبع السياق الحالي
     private boolean inJinjaContext;
     private boolean inStyleContext;
 
-    // إدارة الأخطاء
     private List<String> errors;
     private List<String> warnings;
 
-    // المرجع إلى Visitor الأصلي (اختياري)
     private VisitorJinja originalVisitor;
 
-    // ================ المُنشئ والتهيئة ================
+
 
     public VisitorJinjaSymbolTable() {
         this.symbolTable = new HtmlCssJinjaSymbolTable();
 
-        // تهيئة Stacks
+
         this.elementStack = new Stack<>();
         this.styleAttrStack = new Stack<>();
         this.jinjaBlockStack = new Stack<>();
 
-        // تهيئة سياقات
+
         this.inJinjaContext = false;
         this.inStyleContext = false;
 
-        // تهيئة قوائم الأخطاء والتحذيرات
+
         this.errors = new ArrayList<>();
         this.warnings = new ArrayList<>();
 
         this.originalVisitor = null;
     }
 
-    /**
-     * مُنشئ مع Visitor الأصلي
-     */
+
     public VisitorJinjaSymbolTable(VisitorJinja originalVisitor) {
         this();
         this.originalVisitor = originalVisitor;
     }
 
-    // ================ طرق الوصول العامة ================
 
     public HtmlCssJinjaSymbolTable getSymbolTable() {
         return symbolTable;
@@ -88,7 +78,6 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
         System.out.println("Warnings: " + warnings.size());
     }
 
-    // ================ إدارة الأخطاء والتحذيرات ================
 
     private void addError(String error, int line, int column) {
         String errorMsg = String.format("SymbolTable Error at line %d, col %d: %s",
@@ -108,11 +97,9 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
         System.out.println("[SymbolTable INFO] " + info);
     }
 
-    // ================ طرق مساعدة للتحقق ================
 
     private boolean isValidId(String id) {
         if (id == null || id.isEmpty()) return false;
-        // يجب أن يبدأ بحرف أو underscore
         return id.matches("^[a-zA-Z_][a-zA-Z0-9_\\-]*$");
     }
 
@@ -120,8 +107,6 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
         if (className == null || className.isEmpty()) return false;
         return !className.contains(" ") && className.matches("^[a-zA-Z_][a-zA-Z0-9_\\-]*$");
     }
-
-    // ================ إدارة العناصر HTML ================
 
     @Override
     public ASTNode visitHtmlelement(HTMLCSSJINJA_parser.HtmlelementContext ctx) {
@@ -134,18 +119,14 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                     true
             );
 
-            // دخول نطاق العنصر
             symbolTable.enterScope("html_element", SymbolScope.ScopeType.HTML_ELEMENT);
             elementStack.push(htmlElement);
 
-            // زيارة الأطفال
             ASTNode result = super.visitHtmlelement(ctx);
 
-            // الخروج من نطاق العنصر
             symbolTable.closeHtmlElement();
             elementStack.pop();
 
-            // إضافة للجدول
             symbolTable.addHtmlElement(htmlElement);
             logInfo("Added HTML element: <html>");
 
@@ -173,17 +154,14 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                     true
             );
 
-            // دخول نطاق العنصر
             symbolTable.enterScope("element_" + tagName, SymbolScope.ScopeType.HTML_ELEMENT);
             elementStack.push(element);
 
             ASTNode result = super.visitNormaltaghead(ctx);
 
-            // الخروج من نطاق العنصر
             symbolTable.closeHtmlElement();
             elementStack.pop();
 
-            // إضافة للجدول
             symbolTable.addHtmlElement(element);
             logInfo("Added head element: <" + tagName + ">");
 
@@ -212,12 +190,10 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                     !isSelfClosing
             );
 
-            // تعيين سياق Jinja إذا كنا داخل واحد
             if (inJinjaContext) {
                 element.setInJinjaContext(true);
             }
 
-            // دخول نطاق العنصر (إذا لم يكن مغلقاً ذاتياً)
             if (!isSelfClosing) {
                 symbolTable.enterScope("element_" + tagName, SymbolScope.ScopeType.HTML_ELEMENT);
                 elementStack.push(element);
@@ -225,13 +201,11 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
 
             ASTNode result = super.visitNormal_Tag_Element_body(ctx);
 
-            // الخروج من نطاق العنصر
             if (!isSelfClosing) {
                 symbolTable.closeHtmlElement();
                 elementStack.pop();
             }
 
-            // إضافة للجدول
             symbolTable.addHtmlElement(element);
             logInfo("Added body element: <" + tagName + ">");
 
@@ -256,22 +230,20 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                     category,
                     ctx.getStart().getLine(),
                     ctx.getStart().getCharPositionInLine(),
-                    false  // self-closing
+                    false
             );
 
-            // تعيين سياق Jinja إذا كنا داخل واحد
+
             if (inJinjaContext) {
                 element.setInJinjaContext(true);
             }
 
-            // زيارة السمات
             super.visitSelfClosingTagElementbody(ctx);
 
-            // إضافة للجدول
             symbolTable.addHtmlElement(element);
             logInfo("Added self-closing element: <" + tagName + "/>");
 
-            return null; // نرجع null لأننا لا نبني AST
+            return null;
         } catch (Exception e) {
             addError("Error processing self-closing tag: " + e.getMessage(),
                     ctx.getStart().getLine(),
@@ -280,7 +252,7 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
         }
     }
 
-    // ================ إدارة السمات HTML ================
+
 
     @Override
     public ASTNode visitAttributenamebodylabel(HTMLCSSJINJA_parser.AttributenamebodylabelContext ctx) {
@@ -300,13 +272,11 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                     ctx.getStart().getCharPositionInLine()
             );
 
-            // ربط السمة بالعنصر الحالي
             if (!elementStack.isEmpty()) {
                 HtmlElementSymbol currentElement = elementStack.peek();
                 attribute.setParentElement(currentElement);
                 currentElement.addAttribute(attribute);
 
-                // التحقق من السمات الخاصة
                 if ("id".equals(attrName)) {
                     String idValue = attribute.getValueWithoutQuotes();
                     if (!isValidId(idValue)) {
@@ -330,7 +300,6 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                         ctx.getStart().getCharPositionInLine());
             }
 
-            // إضافة للجدول
             symbolTable.addHtmlAttribute(attribute);
             logInfo("Added attribute: " + attrName + "=\"" +
                     attribute.getValueWithoutQuotes() + "\"");
@@ -358,14 +327,12 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                     ctx.getStart().getCharPositionInLine()
             );
 
-            // ربط السمة بالعنصر الحالي
             if (!elementStack.isEmpty()) {
                 HtmlElementSymbol currentElement = elementStack.peek();
                 attribute.setParentElement(currentElement);
                 currentElement.addAttribute(attribute);
             }
 
-            // إضافة للجدول
             symbolTable.addHtmlAttribute(attribute);
             logInfo("Added boolean attribute: " + attrName);
 
@@ -378,7 +345,6 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
         }
     }
 
-    // ================ إدارة سمة Style و CSS ================
 
     @Override
     public ASTNode visitStylelabel(HTMLCSSJINJA_parser.StylelabelContext ctx) {
@@ -388,27 +354,22 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                     ctx.getStart().getCharPositionInLine()
             );
 
-            // ربط سمة style بالعنصر الحالي
             if (!elementStack.isEmpty()) {
                 HtmlElementSymbol currentElement = elementStack.peek();
                 styleAttr.setParentElement(currentElement);
                 currentElement.addAttribute(styleAttr);
             }
 
-            // دخول نطاق CSS
             symbolTable.enterScope("style_attribute", SymbolScope.ScopeType.STYLE_ATTRIBUTE);
             styleAttrStack.push(styleAttr);
             inStyleContext = true;
 
-            // زيارة قواعد CSS
             super.visitStylelabel(ctx);
 
-            // الخروج من نطاق CSS
             symbolTable.exitScope();
             styleAttrStack.pop();
             inStyleContext = false;
 
-            // إضافة للجدول
             symbolTable.addHtmlAttribute(styleAttr);
             logInfo("Added style attribute with " + styleAttr.getRuleCount() + " rules");
 
@@ -436,18 +397,18 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                         ctx.getStart().getCharPositionInLine()
                 );
 
-                // إضافة القاعدة لسمة style الحالية
+
                 if (!styleAttrStack.isEmpty()) {
                     StyleAttributeSymbol currentStyle = styleAttrStack.peek();
                     currentStyle.addCssRule(rule);
 
-                    // ربط القاعدة بالعنصر
+
                     if (!elementStack.isEmpty()) {
                         rule.setTargetElement(elementStack.peek());
                     }
                 }
 
-                // إضافة للجدول
+
                 symbolTable.addCssRule(rule);
                 logInfo("Added CSS rule: " + property + ": " + value);
             }
@@ -480,18 +441,18 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                         ctx.getStart().getCharPositionInLine()
                 );
 
-                // إضافة القاعدة لسمة style الحالية
+
                 if (!styleAttrStack.isEmpty()) {
                     StyleAttributeSymbol currentStyle = styleAttrStack.peek();
                     currentStyle.addCssRule(rule);
 
-                    // ربط القاعدة بالعنصر
+
                     if (!elementStack.isEmpty()) {
                         rule.setTargetElement(elementStack.peek());
                     }
                 }
 
-                // إضافة للجدول
+
                 symbolTable.addCssRule(rule);
                 logInfo("Added CSS length rule: " + property);
             }
@@ -505,9 +466,6 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
         }
     }
 
-    // يمكن إضافة المزيد من قواعد CSS هنا...
-
-    // ================ إدارة Jinja2 ================
 
     @Override
     public ASTNode visitJinjaExpr(HTMLCSSJINJA_parser.JinjaExprContext ctx) {
@@ -527,22 +485,18 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                     ctx.getStart().getCharPositionInLine()
             );
 
-            // ربط بالعنصر الحالي
             if (!elementStack.isEmpty()) {
                 jinja.setParentElement(elementStack.peek());
             }
 
-            // إضافة للجدول
             symbolTable.addJinjaSymbol(jinja);
             logInfo("Added Jinja expression: {{ " + jinja.getContent() + " }}");
 
-            // تعيين سياق Jinja
             boolean previousJinjaContext = inJinjaContext;
             inJinjaContext = true;
 
             ASTNode result = super.visitJinjaExpr(ctx);
 
-            // استعادة السياق
             inJinjaContext = previousJinjaContext;
 
             return result;
@@ -572,26 +526,21 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                     ctx.getStart().getCharPositionInLine()
             );
 
-            // التحقق من نوع البيان
             if (jinja.isControlStructure()) {
                 logInfo("Found Jinja control structure: {% " + jinja.getContent() + " %}");
             }
 
-            // ربط بالعنصر الحالي
             if (!elementStack.isEmpty()) {
                 jinja.setParentElement(elementStack.peek());
             }
 
-            // إضافة للجدول
             symbolTable.addJinjaSymbol(jinja);
 
-            // تعيين سياق Jinja
             boolean previousJinjaContext = inJinjaContext;
             inJinjaContext = true;
 
             ASTNode result = super.visitJinjaStmt(ctx);
 
-            // استعادة السياق
             inJinjaContext = previousJinjaContext;
 
             return result;
@@ -606,37 +555,31 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
     @Override
     public ASTNode visitJinjaIfBlock(HTMLCSSJINJA_parser.JinjaIfBlockContext ctx) {
         try {
-            // استخراج الشرط
+
             String condition = extractJinjaCondition(ctx);
 
-            // إنشاء كتلة IF
             JinjaBlockSymbol ifBlock = JinjaBlockSymbol.createIfBlock(
                     condition,
                     ctx.getStart().getLine(),
                     ctx.getStart().getCharPositionInLine()
             );
 
-            // ربط بالعنصر الحالي
             if (!elementStack.isEmpty()) {
                 ifBlock.setParentElement(elementStack.peek());
             }
 
-            // دخول نطاق Jinja IF
             symbolTable.enterScope("jinja_if_" + condition.hashCode(),
                     SymbolScope.ScopeType.JINJA_IF);
             jinjaBlockStack.push(ifBlock);
             boolean previousJinjaContext = inJinjaContext;
             inJinjaContext = true;
 
-            // زيارة محتوى الكتلة
             super.visitJinjaIfBlock(ctx);
 
-            // الخروج من نطاق Jinja IF
             symbolTable.closeJinjaBlock();
             jinjaBlockStack.pop();
             inJinjaContext = previousJinjaContext;
 
-            // إضافة للجدول
             symbolTable.addJinjaSymbol(ifBlock);
             logInfo("Added Jinja IF block with condition: " + condition);
 
@@ -652,10 +595,8 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
     @Override
     public ASTNode visitJinjaForBlock(HTMLCSSJINJA_parser.JinjaForBlockContext ctx) {
         try {
-            // استخراج معلومات الحلقة
             ForLoopInfo loopInfo = extractForLoopInfo(ctx);
 
-            // إنشاء كتلة FOR
             JinjaBlockSymbol forBlock = JinjaBlockSymbol.createForBlock(
                     loopInfo.iterator,
                     loopInfo.iterable,
@@ -663,27 +604,22 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
                     ctx.getStart().getCharPositionInLine()
             );
 
-            // ربط بالعنصر الحالي
             if (!elementStack.isEmpty()) {
                 forBlock.setParentElement(elementStack.peek());
             }
 
-            // دخول نطاق Jinja FOR
             symbolTable.enterScope("jinja_for_" + loopInfo.iterator,
                     SymbolScope.ScopeType.JINJA_FOR);
             jinjaBlockStack.push(forBlock);
             boolean previousJinjaContext = inJinjaContext;
             inJinjaContext = true;
 
-            // زيارة محتوى الكتلة
             super.visitJinjaForBlock(ctx);
 
-            // الخروج من نطاق Jinja FOR
             symbolTable.closeJinjaBlock();
             jinjaBlockStack.pop();
             inJinjaContext = previousJinjaContext;
 
-            // إضافة للجدول
             symbolTable.addJinjaSymbol(forBlock);
             logInfo("Added Jinja FOR block: " + loopInfo.iterator + " in " + loopInfo.iterable);
 
@@ -696,37 +632,6 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
         }
     }
 
-    @Override
-    public ASTNode visitJinjaComment(HTMLCSSJINJA_parser.JinjaCommentContext ctx) {
-        try {
-            String commentText = ctx.JANJI_COMMENT().getText();
-            // إزالة علامات التعليق {# و #}
-            String content = commentText;
-            if (content.startsWith("{#") && content.endsWith("#}")) {
-                content = content.substring(2, content.length() - 2).trim();
-            }
-
-            JinjaSymbol jinja = new JinjaSymbol(
-                    JinjaSymbol.JinjaType.COMMENT,
-                    content,
-                    ctx.getStart().getLine(),
-                    ctx.getStart().getCharPositionInLine()
-            );
-
-            // إضافة للجدول
-            symbolTable.addJinjaSymbol(jinja);
-            logInfo("Added Jinja comment");
-
-            return super.visitJinjaComment(ctx);
-        } catch (Exception e) {
-            addError("Error processing Jinja comment: " + e.getMessage(),
-                    ctx.getStart().getLine(),
-                    ctx.getStart().getCharPositionInLine());
-            return super.visitJinjaComment(ctx);
-        }
-    }
-
-    // ================ طرق مساعدة ================
 
     private String extractJinjaCondition(HTMLCSSJINJA_parser.JinjaIfBlockContext ctx) {
         StringBuilder condition = new StringBuilder();
@@ -772,19 +677,15 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
         return info;
     }
 
-    // ================ فئة مساعدة ================
 
     private static class ForLoopInfo {
         String iterator;
         String iterable;
     }
 
-    // ================ الزيارة للعناصر الأخرى ================
-
     @Override
     public ASTNode visitText(HTMLCSSJINJA_parser.TextContext ctx) {
-        // نعامل النص فقط إذا كنا نريد تتبعه في جدول الرموز
-        // يمكن إضافة رمز نصي إذا لزم الأمر
+
         return super.visitText(ctx);
     }
 
@@ -794,21 +695,14 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
         return super.visitDoctipe(ctx);
     }
 
-    @Override
-    public ASTNode visitHtmlcommentlabel(HTMLCSSJINJA_parser.HtmlcommentlabelContext ctx) {
-        logInfo("Found HTML comment");
-        return super.visitHtmlcommentlabel(ctx);
-    }
 
-    // ================ معالجة النهايات ================
 
     @Override
     public ASTNode visitChildren(org.antlr.v4.runtime.tree.RuleNode node) {
-        // نستخدم زيارة الأطفال العادية
+
         try {
             return super.visitChildren(node);
         } catch (Exception e) {
-            // تسجيل الخطأ دون إيقاف التنفيذ
             if (node instanceof ParserRuleContext) {
                 ParserRuleContext ctx = (ParserRuleContext) node;
                 addError("Error visiting children: " + e.getMessage(),
@@ -819,11 +713,8 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
         }
     }
 
-    /**
-     * تنظيف الذاكرة وإغلاق النطاقات المفتوحة
-     */
+
     public void cleanup() {
-        // إغلاق أي نطاقات مفتوحة
         while (!elementStack.isEmpty()) {
             elementStack.pop();
         }
@@ -834,7 +725,7 @@ public class VisitorJinjaSymbolTable extends HTMLCSSJINJA_parserBaseVisitor<ASTN
             jinjaBlockStack.pop();
         }
 
-        // إغلاق جميع النطاقات في جدول الرموز
+
         symbolTable.closeAllScopes();
 
         logInfo("Cleanup completed. Open scopes: " + symbolTable.getScopeDepth());
