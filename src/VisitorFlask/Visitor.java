@@ -43,6 +43,8 @@ public class Visitor extends ProjectParserBaseVisitor {
 
         return new Proge(statements, ctx.getStart().getLine());
     }
+
+
     @Override
     public Object visitSimpleStatement(ProjectParser.SimpleStatementContext ctx) {
         List<Statment> statements = new ArrayList<>();
@@ -54,6 +56,7 @@ public class Visitor extends ProjectParserBaseVisitor {
 
         return statements;
     }
+
     @Override
     public Object visitCompoundStatement(ProjectParser.CompoundStatementContext ctx) {
         return visit(ctx.compound_stmt());
@@ -164,7 +167,7 @@ public class Visitor extends ProjectParserBaseVisitor {
     @Override
     public Object visitAnnotatedAssign(ProjectParser.AnnotatedAssignContext ctx) {
         int line = ctx.getStart().getLine();
-       // ExpressionAtom target = (ExpressionAtom) visit(ctx.getParent().getChild(0));
+        // ExpressionAtom target = (ExpressionAtom) visit(ctx.getParent().getChild(0));
         ExpressionAtom target = (ExpressionAtom) visit(((ProjectParser.ExprStmtContext) ctx.getParent()).testlist_star_expr(0));
 
         ExpressionAtom value = null;
@@ -185,9 +188,20 @@ public class Visitor extends ProjectParserBaseVisitor {
     @Override
     public Object visitTestlist_star_expr(ProjectParser.Testlist_star_exprContext ctx) {
         List<ExpressionAtom> exprs = new ArrayList<>();
-        for (ProjectParser.TestContext tctx : ctx.test()) exprs.add((ExpressionAtom) visit(tctx));
-        if (exprs.size() == 1) return exprs.get(0);
-        else return new ListExprssion(exprs, ctx.getStart().getLine());
+        for (ProjectParser.TestContext tctx : ctx.test()) {
+            exprs.add((ExpressionAtom) visit(tctx));
+        }
+
+        if (ctx.comp_for() != null) {
+
+            return exprs.get(0);
+        }
+
+        if (exprs.size() == 1) {
+            return exprs.get(0);
+        } else {
+            return new ListExprssion(exprs, ctx.getStart().getLine());
+        }
     }
 
     @Override
@@ -232,46 +246,46 @@ public class Visitor extends ProjectParserBaseVisitor {
         } else return visit(ctx.comparison());
     }
 
-@Override
-public Object visitComparison(ProjectParser.ComparisonContext ctx) {
-    int line = ctx.getStart().getLine();
+    @Override
+    public Object visitComparison(ProjectParser.ComparisonContext ctx) {
+        int line = ctx.getStart().getLine();
 
-    ExpressionAtom left = (ExpressionAtom) visit(ctx.arith_expr(0));
+        ExpressionAtom left = (ExpressionAtom) visit(ctx.arith_expr(0));
 
-    if (ctx.comp_op().isEmpty()) {
-        return left;
+        if (ctx.comp_op().isEmpty()) {
+            return left;
+        }
+
+        List<String> ops = new ArrayList<>();
+        List<ExpressionAtom> rights = new ArrayList<>();
+
+        for (int i = 0; i < ctx.comp_op().size(); i++) {
+            String op = (String) visit(ctx.comp_op(i));
+            ExpressionAtom right = (ExpressionAtom) visit(ctx.arith_expr(i + 1));
+            ops.add(op);
+            rights.add(right);
+        }
+
+        return new CompareExprssion(left, ops, rights, line);
     }
-
-    List<String> ops = new ArrayList<>();
-    List<ExpressionAtom> rights = new ArrayList<>();
-
-    for (int i = 0; i < ctx.comp_op().size(); i++) {
-        String op = (String) visit(ctx.comp_op(i));
-        ExpressionAtom right = (ExpressionAtom) visit(ctx.arith_expr(i + 1));
-        ops.add(op);
-        rights.add(right);
-    }
-
-    return new CompareExprssion(left, ops, rights, line);
-}
 
     @Override
     public Object visitComp_op(ProjectParser.Comp_opContext ctx) {
         return ctx.getText();
     }
 
-@Override
-public Object visitFactor(ProjectParser.FactorContext ctx) {
-    int line = ctx.getStart().getLine();
+    @Override
+    public Object visitFactor(ProjectParser.FactorContext ctx) {
+        int line = ctx.getStart().getLine();
 
-    if (ctx.PLUS() != null || ctx.MINUS() != null || ctx.TILDE() != null) {
-        String op = ctx.getChild(0).getText();
-        ExpressionAtom expr = (ExpressionAtom) visit(ctx.factor());
-        return new OneOperationExprssion(op, expr, line);
-    } else {
-        return visit(ctx.power());
+        if (ctx.PLUS() != null || ctx.MINUS() != null || ctx.TILDE() != null) {
+            String op = ctx.getChild(0).getText();
+            ExpressionAtom expr = (ExpressionAtom) visit(ctx.factor());
+            return new OneOperationExprssion(op, expr, line);
+        } else {
+            return visit(ctx.power());
+        }
     }
-}
 
 
     @Override
@@ -362,26 +376,40 @@ public Object visitFactor(ProjectParser.FactorContext ctx) {
         return object;
     }
 
-@Override
-public Object visitAtomParen(ProjectParser.AtomParenContext ctx) {
-    int line = ctx.getStart().getLine();
-    List<ExpressionAtom> items = new ArrayList<>();
+    @Override
+    public Object visitAtomParen(ProjectParser.AtomParenContext ctx) {
+        int line = ctx.getStart().getLine();
+        List<ExpressionAtom> items = new ArrayList<>();
 
-    if (ctx.testlist_comp() != null) {
-        Object result = visit(ctx.testlist_comp());
-        if (result instanceof List<?> list) {
-            for (Object o : list) {
-                if (o instanceof ExpressionAtom e) {
-                    items.add(e);
+        if (ctx.testlist_comp() != null) {
+            Object result = visit(ctx.testlist_comp());
+
+            if (result instanceof ComplexListOfFor) {
+                ComplexListOfFor comp = (ComplexListOfFor) result;
+
+                if (comp.type == TypeOfFor_Complex.GENERATOR) {
+                    List<ExpressionAtom> compList = new ArrayList<>();
+                    compList.add(comp);
+                    return new TupleExprssion(compList, line);
                 }
-            }
-        } else if (result instanceof ExpressionAtom e) {
-            items.add(e);
-        }
-    }
 
-    return new TupleExprssion(items, line);
-}
+                items.add(comp);
+                return new TupleExprssion(items, line);
+            }
+
+            if (result instanceof List<?> list) {
+                for (Object o : list) {
+                    if (o instanceof ExpressionAtom e) {
+                        items.add(e);
+                    }
+                }
+            } else if (result instanceof ExpressionAtom e) {
+                items.add(e);
+            }
+        }
+
+        return new TupleExprssion(items, line);
+    }
 
     @Override
     public Object visitAtomList(ProjectParser.AtomListContext ctx) {
@@ -390,12 +418,27 @@ public Object visitAtomParen(ProjectParser.AtomParenContext ctx) {
 
         if (ctx.listmaker() != null) {
             Object result = visit(ctx.listmaker());
+
+            if (result instanceof ComplexListOfFor) {
+                ComplexListOfFor comp = (ComplexListOfFor) result;
+
+
+                if (comp.type != TypeOfFor_Complex.LIST) {
+                    comp.type = TypeOfFor_Complex.LIST;
+                }
+
+
+                return comp;
+            }
+
             if (result instanceof List<?> list) {
                 for (Object o : list) {
                     if (o instanceof ExpressionAtom e) {
                         items.add(e);
                     }
                 }
+            } else if (result instanceof ExpressionAtom e) {
+                items.add(e);
             }
         }
 
@@ -410,8 +453,22 @@ public Object visitAtomParen(ProjectParser.AtomParenContext ctx) {
 
         if (ctx.dictmaker() != null) {
             Object result = visit(ctx.dictmaker());
-            if (result instanceof Map<?, ?>) {
-                Map<?, ?> map = (Map<?, ?>) result;
+
+            // إذا كانت النتيجة ComplexListOfFor (Dict Comprehension)
+            if (result instanceof ComplexListOfFor) {
+                ComplexListOfFor comp = (ComplexListOfFor) result;
+
+                // تأكد من أن النوع هو DICT
+                if (comp.type != TypeOfFor_Complex.DICT) {
+                    comp.type = TypeOfFor_Complex.DICT;
+                }
+
+                // نعيد ComplexListOfFor مباشرةً
+                return comp;
+            }
+
+            // الحالة العادية: dict
+            if (result instanceof Map<?, ?> map) {
                 for (Map.Entry<?, ?> entry : map.entrySet()) {
                     if (entry.getKey() instanceof ExpressionAtom) {
                         keys.add((ExpressionAtom) entry.getKey());
@@ -426,12 +483,12 @@ public Object visitAtomParen(ProjectParser.AtomParenContext ctx) {
         return new DictionaryExprssion(keys, values, line);
     }
 
-@Override
-public Object visitAtomName(ProjectParser.AtomNameContext ctx) {
-    int line = ctx.getStart().getLine();
-    String name = ctx.getText();
-    return new NameExpression(name, line);
-}
+    @Override
+    public Object visitAtomName(ProjectParser.AtomNameContext ctx) {
+        int line = ctx.getStart().getLine();
+        String name = ctx.getText();
+        return new NameExpression(name, line);
+    }
 
     @Override
     public Object visitAtomNumber(ProjectParser.AtomNumberContext ctx) {
@@ -485,42 +542,42 @@ public Object visitAtomName(ProjectParser.AtomNameContext ctx) {
         return args;
     }
 
-@Override
-public Object visitSubscriptTrailer(ProjectParser.SubscriptTrailerContext ctx) {
-    Object result = visit(ctx.subscriptlist());
-    if (result instanceof List<?> list) return list;
-    return new ArrayList<>();
-}
-
-@Override
-public Object visitDotTrailer(ProjectParser.DotTrailerContext ctx) {
-    return null;
-}
-
-@Override
-public Object visitSubscriptlist(ProjectParser.SubscriptlistContext ctx) {
-    List<Object> elements = new ArrayList<>();
-    for (ProjectParser.SubscriptContext s : ctx.subscript()) {
-        elements.add(visit(s));
-    }
-    return elements;
-}
-
-@Override
-public Object visitSubscript(ProjectParser.SubscriptContext ctx) {
-    int line = ctx.getStart().getLine();
-
-    if (ctx.COLON() == null) {
-        return visit(ctx.test(0));
+    @Override
+    public Object visitSubscriptTrailer(ProjectParser.SubscriptTrailerContext ctx) {
+        Object result = visit(ctx.subscriptlist());
+        if (result instanceof List<?> list) return list;
+        return new ArrayList<>();
     }
 
-    ExpressionAtom start = null, end = null, step = null;
-    if (ctx.test().size() >= 1) start = (ExpressionAtom) visit(ctx.test(0));
-    if (ctx.test().size() >= 2) end = (ExpressionAtom) visit(ctx.test(1));
-    if (ctx.test().size() == 3) step = (ExpressionAtom) visit(ctx.test(2));
+    @Override
+    public Object visitDotTrailer(ProjectParser.DotTrailerContext ctx) {
+        return null;
+    }
 
-    return new SliceTowSubscriptOfAree(start, end, step, line);
-}
+    @Override
+    public Object visitSubscriptlist(ProjectParser.SubscriptlistContext ctx) {
+        List<Object> elements = new ArrayList<>();
+        for (ProjectParser.SubscriptContext s : ctx.subscript()) {
+            elements.add(visit(s));
+        }
+        return elements;
+    }
+
+    @Override
+    public Object visitSubscript(ProjectParser.SubscriptContext ctx) {
+        int line = ctx.getStart().getLine();
+
+        if (ctx.COLON() == null) {
+            return visit(ctx.test(0));
+        }
+
+        ExpressionAtom start = null, end = null, step = null;
+        if (ctx.test().size() >= 1) start = (ExpressionAtom) visit(ctx.test(0));
+        if (ctx.test().size() >= 2) end = (ExpressionAtom) visit(ctx.test(1));
+        if (ctx.test().size() == 3) step = (ExpressionAtom) visit(ctx.test(2));
+
+        return new SliceTowSubscriptOfAree(start, end, step, line);
+    }
     @Override
     public Object visitListmaker(ProjectParser.ListmakerContext ctx) {
         if (ctx.comp_for() != null) {
@@ -545,31 +602,31 @@ public Object visitSubscript(ProjectParser.SubscriptContext ctx) {
         return items;
     }
 
-@Override
-public Object visitDictmaker(ProjectParser.DictmakerContext ctx) {
-    if (ctx.comp_for() != null) {
-        ExpressionAtom key = (ExpressionAtom) visit(ctx.test(0));
-        ExpressionAtom value = (ExpressionAtom) visit(ctx.test(1));
-        CoplexForExpression forClause = (CoplexForExpression) visit(ctx.comp_for());
+    @Override
+    public Object visitDictmaker(ProjectParser.DictmakerContext ctx) {
+        if (ctx.comp_for() != null) {
+            ExpressionAtom key = (ExpressionAtom) visit(ctx.test(0));
+            ExpressionAtom value = (ExpressionAtom) visit(ctx.test(1));
+            CoplexForExpression forClause = (CoplexForExpression) visit(ctx.comp_for());
 
-        ComplexListOfFor node = new ComplexListOfFor(
-                TypeOfFor_Complex.DICT,
-                value,
-                Collections.singletonList(forClause),
-                ctx.getStart().getLine()
-        );
-        node.setKey(key);
-        return node;
-    }
+            ComplexListOfFor node = new ComplexListOfFor(
+                    TypeOfFor_Complex.DICT,
+                    value,
+                    Collections.singletonList(forClause),
+                    ctx.getStart().getLine()
+            );
+            node.setKey(key);
+            return node;
+        }
 
-    Map<Object, Object> map = new LinkedHashMap<>();
-    for (int i = 0; i < ctx.test().size(); i += 2) {
-        Object key = visit(ctx.test(i));
-        Object value = visit(ctx.test(i + 1));
-        map.put(key, value);
+        Map<Object, Object> map = new LinkedHashMap<>();
+        for (int i = 0; i < ctx.test().size(); i += 2) {
+            Object key = visit(ctx.test(i));
+            Object value = visit(ctx.test(i + 1));
+            map.put(key, value);
+        }
+        return map;
     }
-    return map;
-}
     @Override
     public Object visitCompFor(ProjectParser.CompForContext ctx) {
         int line = ctx.getStart().getLine();
@@ -610,62 +667,67 @@ public Object visitDictmaker(ProjectParser.DictmakerContext ctx) {
         return clause;
     }
 
-@Override
-public Object visitTestlist_comp(ProjectParser.Testlist_compContext ctx) {
-    int line = ctx.getStart().getLine();
+    @Override
+    public Object visitTestlist_comp(ProjectParser.Testlist_compContext ctx) {
+        int line = ctx.getStart().getLine();
 
-    if (ctx.comp_for() != null) {
-        ExpressionAtom first = (ExpressionAtom) visit(ctx.test(0));
+        if (ctx.comp_for() != null) {
+            ExpressionAtom first = (ExpressionAtom) visit(ctx.test(0));
 
+            if (ctx.test().size() == 2) {
+                // Dict comprehension: {x:y for k,v in items}
+                ExpressionAtom key = (ExpressionAtom) visit(ctx.test(0));
+                ExpressionAtom value = (ExpressionAtom) visit(ctx.test(1));
 
-        if (ctx.test().size() == 2) {
-            ExpressionAtom key = (ExpressionAtom) visit(ctx.test(0));
-            ExpressionAtom value = (ExpressionAtom) visit(ctx.test(1));
+                CoplexForExpression clause = (CoplexForExpression) visit(ctx.comp_for());
+
+                ComplexListOfFor comp = new ComplexListOfFor(
+                        TypeOfFor_Complex.DICT,
+                        value,
+                        new ArrayList<>(),
+                        line
+                );
+                comp.setKey(key);
+                comp.addForClause(clause);
+
+                return comp;
+            }
+
+            // List comprehension أو Generator expression
+            // نحدد النوع بناءً على السياق
+            boolean isGenerator = false;
+            if (ctx.getParent() instanceof ProjectParser.AtomParenContext) {
+                // (x for y in m) - Generator Expression
+                isGenerator = true;
+            }
+
+            TypeOfFor_Complex type = isGenerator ? TypeOfFor_Complex.GENERATOR : TypeOfFor_Complex.LIST;
 
             CoplexForExpression clause = (CoplexForExpression) visit(ctx.comp_for());
 
-            ComplexListOfFor comp = new ComplexListOfFor(
-                    TypeOfFor_Complex.DICT,
-                    value,
-                    new ArrayList<>(),
-                    line
-            );
-            comp.setKey(key);
+            ComplexListOfFor comp = new ComplexListOfFor(type, first, new ArrayList<>(), line);
             comp.addForClause(clause);
 
             return comp;
         }
 
-        boolean isGenerator = ctx.getParent() instanceof ProjectParser.Atom_exprContext ||
-                ctx.getParent() instanceof ProjectParser.AtomContext;
-
-        TypeOfFor_Complex type = isGenerator ? TypeOfFor_Complex.GENERATOR : TypeOfFor_Complex.LIST;
-
-        CoplexForExpression clause = (CoplexForExpression) visit(ctx.comp_for());
-
-        ComplexListOfFor comp = new ComplexListOfFor(type, first, new ArrayList<>(), line);
-        comp.addForClause(clause);
-
-        return comp;
+        List<ExpressionAtom> list = new ArrayList<>();
+        for (ProjectParser.TestContext t : ctx.test()) {
+            list.add((ExpressionAtom) visit(t));
+        }
+        return list;
     }
+    @Override
+    public Object visitArglist(ProjectParser.ArglistContext ctx) {
+        List<Object> args = new ArrayList<>();
 
-    List<ExpressionAtom> list = new ArrayList<>();
-    for (ProjectParser.TestContext t : ctx.test()) {
-        list.add((ExpressionAtom) visit(t));
+        for (ProjectParser.ArgumentContext argCtx : ctx.argument()) {
+            Object arg = visit(argCtx);
+            args.add(arg);
+        }
+
+        return args;
     }
-    return list;
-}
-@Override
-public Object visitArglist(ProjectParser.ArglistContext ctx) {
-    List<Object> args = new ArrayList<>();
-
-    for (ProjectParser.ArgumentContext argCtx : ctx.argument()) {
-        Object arg = visit(argCtx);
-        args.add(arg);
-    }
-
-    return args;
-}
 
     @Override
     public Object visitArgument(ProjectParser.ArgumentContext ctx) {
@@ -771,130 +833,130 @@ public Object visitArglist(ProjectParser.ArglistContext ctx) {
 
         return new DecoratedStatmentOfFunction(decorators, stmt, line);
     }
-@Override
-public Object visitIf_stmt(ProjectParser.If_stmtContext ctx) {
-    int line = ctx.getStart().getLine();
+    @Override
+    public Object visitIf_stmt(ProjectParser.If_stmtContext ctx) {
+        int line = ctx.getStart().getLine();
 
-    ExpressionAtom condition = null;
-    Object condObj = visit(ctx.test(0));
-    if (condObj instanceof ExpressionAtom) {
-        condition = (ExpressionAtom) condObj;
-    }
-
-    List<Statment> body = new ArrayList<>();
-    Object bodyResult = visit(ctx.suite(0));
-    if (bodyResult instanceof List<?>) {
-        for (Object stmt : (List<?>) bodyResult)
-            if (stmt instanceof Statment) body.add((Statment) stmt);
-    }
-
-    List<ElifStatment> elifs = new ArrayList<>();
-    int elifCount = ctx.ELIF().size();
-    for (int i = 0; i < elifCount; i++) {
-        ExpressionAtom elifCond = null;
-        Object elifCondObj = visit(ctx.test(i + 1));
-        if (elifCondObj instanceof ExpressionAtom) {
-            elifCond = (ExpressionAtom) elifCondObj;
+        ExpressionAtom condition = null;
+        Object condObj = visit(ctx.test(0));
+        if (condObj instanceof ExpressionAtom) {
+            condition = (ExpressionAtom) condObj;
         }
 
-        List<Statment> elifBody = new ArrayList<>();
-        Object elifBodyResult = visit(ctx.suite(i + 1));
-        if (elifBodyResult instanceof List<?>) {
-            for (Object stmt : (List<?>) elifBodyResult)
-                if (stmt instanceof Statment) elifBody.add((Statment) stmt);
+        List<Statment> body = new ArrayList<>();
+        Object bodyResult = visit(ctx.suite(0));
+        if (bodyResult instanceof List<?>) {
+            for (Object stmt : (List<?>) bodyResult)
+                if (stmt instanceof Statment) body.add((Statment) stmt);
         }
 
-        elifs.add(new ElifStatment(elifCond, elifBody, ctx.ELIF(i).getSymbol().getLine()));
-    }
+        List<ElifStatment> elifs = new ArrayList<>();
+        int elifCount = ctx.ELIF().size();
+        for (int i = 0; i < elifCount; i++) {
+            ExpressionAtom elifCond = null;
+            Object elifCondObj = visit(ctx.test(i + 1));
+            if (elifCondObj instanceof ExpressionAtom) {
+                elifCond = (ExpressionAtom) elifCondObj;
+            }
 
-    List<Statment> elseBody = null;
-    if (ctx.ELSE() != null) {
-        elseBody = new ArrayList<>();
-        Object elseResult = visit(ctx.suite(ctx.suite().size() - 1));
-        if (elseResult instanceof List<?>) {
-            for (Object stmt : (List<?>) elseResult)
-                if (stmt instanceof Statment) elseBody.add((Statment) stmt);
+            List<Statment> elifBody = new ArrayList<>();
+            Object elifBodyResult = visit(ctx.suite(i + 1));
+            if (elifBodyResult instanceof List<?>) {
+                for (Object stmt : (List<?>) elifBodyResult)
+                    if (stmt instanceof Statment) elifBody.add((Statment) stmt);
+            }
+
+            elifs.add(new ElifStatment(elifCond, elifBody, ctx.ELIF(i).getSymbol().getLine()));
         }
-    }
 
-    return new IfStatment(condition, body, elifs, elseBody, line);
-}
-@Override
-public Object visitWhile_stmt(ProjectParser.While_stmtContext ctx) {
-    int line = ctx.getStart().getLine();
-
-    ExpressionAtom condition = null;
-    Object condObj = visit(ctx.test());
-    if (condObj instanceof ExpressionAtom) {
-        condition = (ExpressionAtom) condObj;
-    }
-
-    List<Statment> body = new ArrayList<>();
-    Object bodyResult = visit(ctx.suite(0)); // suite(0) دائمًا جسم الحلقة
-    if (bodyResult instanceof List<?>) {
-        for (Object stmt : (List<?>) bodyResult)
-            if (stmt instanceof Statment) body.add((Statment) stmt);
-    }
-
-    List<Statment> elseBody = null;
-    if (ctx.ELSE() != null) {
-        elseBody = new ArrayList<>();
-        Object elseResult = visit(ctx.suite(1)); // suite(1) جسم else
-        if (elseResult instanceof List<?>) {
-            for (Object stmt : (List<?>) elseResult)
-                if (stmt instanceof Statment) elseBody.add((Statment) stmt);
+        List<Statment> elseBody = null;
+        if (ctx.ELSE() != null) {
+            elseBody = new ArrayList<>();
+            Object elseResult = visit(ctx.suite(ctx.suite().size() - 1));
+            if (elseResult instanceof List<?>) {
+                for (Object stmt : (List<?>) elseResult)
+                    if (stmt instanceof Statment) elseBody.add((Statment) stmt);
+            }
         }
+
+        return new IfStatment(condition, body, elifs, elseBody, line);
     }
+    @Override
+    public Object visitWhile_stmt(ProjectParser.While_stmtContext ctx) {
+        int line = ctx.getStart().getLine();
 
-    return new WhileStatment(
-            condition,
-            body,
-            elseBody,
-            line
-    );
-}
-
-@Override
-public Object visitFor_stmt(ProjectParser.For_stmtContext ctx) {
-    int line = ctx.getStart().getLine();
-
-    ExpressionAtom target = null;
-    Object targetObj = visit(ctx.exprlist());
-    if (targetObj instanceof ExpressionAtom) {
-        target = (ExpressionAtom) targetObj;
-    }
-
-    ExpressionAtom iterable = null;
-    Object iterableObj = visit(ctx.testlist());
-    if (iterableObj instanceof ExpressionAtom) {
-        iterable = (ExpressionAtom) iterableObj;
-    }
-
-    List<Statment> body = new ArrayList<>();
-    Object bodyResult = visit(ctx.suite(0));
-    if (bodyResult instanceof List<?>) {
-        for (Object stmt : (List<?>) bodyResult)
-            if (stmt instanceof Statment) body.add((Statment) stmt);
-    }
-
-    List<Statment> elseBody = null;
-    if (ctx.ELSE() != null) {
-        elseBody = new ArrayList<>();
-        Object elseResult = visit(ctx.suite(1));
-        if (elseResult instanceof List<?>) {
-            for (Object stmt : (List<?>) elseResult)
-                if (stmt instanceof Statment) elseBody.add((Statment) stmt);
+        ExpressionAtom condition = null;
+        Object condObj = visit(ctx.test());
+        if (condObj instanceof ExpressionAtom) {
+            condition = (ExpressionAtom) condObj;
         }
+
+        List<Statment> body = new ArrayList<>();
+        Object bodyResult = visit(ctx.suite(0)); // suite(0) دائمًا جسم الحلقة
+        if (bodyResult instanceof List<?>) {
+            for (Object stmt : (List<?>) bodyResult)
+                if (stmt instanceof Statment) body.add((Statment) stmt);
+        }
+
+        List<Statment> elseBody = null;
+        if (ctx.ELSE() != null) {
+            elseBody = new ArrayList<>();
+            Object elseResult = visit(ctx.suite(1)); // suite(1) جسم else
+            if (elseResult instanceof List<?>) {
+                for (Object stmt : (List<?>) elseResult)
+                    if (stmt instanceof Statment) elseBody.add((Statment) stmt);
+            }
+        }
+
+        return new WhileStatment(
+                condition,
+                body,
+                elseBody,
+                line
+        );
     }
 
-    return new ForStatment(
-            target,
-            iterable,
-            body,
-            elseBody,
-            line
-    );
-}
+    @Override
+    public Object visitFor_stmt(ProjectParser.For_stmtContext ctx) {
+        int line = ctx.getStart().getLine();
+
+        ExpressionAtom target = null;
+        Object targetObj = visit(ctx.exprlist());
+        if (targetObj instanceof ExpressionAtom) {
+            target = (ExpressionAtom) targetObj;
+        }
+
+        ExpressionAtom iterable = null;
+        Object iterableObj = visit(ctx.testlist());
+        if (iterableObj instanceof ExpressionAtom) {
+            iterable = (ExpressionAtom) iterableObj;
+        }
+
+        List<Statment> body = new ArrayList<>();
+        Object bodyResult = visit(ctx.suite(0));
+        if (bodyResult instanceof List<?>) {
+            for (Object stmt : (List<?>) bodyResult)
+                if (stmt instanceof Statment) body.add((Statment) stmt);
+        }
+
+        List<Statment> elseBody = null;
+        if (ctx.ELSE() != null) {
+            elseBody = new ArrayList<>();
+            Object elseResult = visit(ctx.suite(1));
+            if (elseResult instanceof List<?>) {
+                for (Object stmt : (List<?>) elseResult)
+                    if (stmt instanceof Statment) elseBody.add((Statment) stmt);
+            }
+        }
+
+        return new ForStatment(
+                target,
+                iterable,
+                body,
+                elseBody,
+                line
+        );
+    }
     @Override
     public Object visitFuncdef(ProjectParser.FuncdefContext ctx) {
         String funcName = ctx.NAME().getText();
@@ -1034,78 +1096,78 @@ public Object visitFor_stmt(ProjectParser.For_stmtContext ctx) {
         return new ClassStatment(className, bases, body, line);
     }
 
-@Override
-public Object visitTry_stmt(ProjectParser.Try_stmtContext ctx) {
+    @Override
+    public Object visitTry_stmt(ProjectParser.Try_stmtContext ctx) {
 
-    int line = ctx.getStart().getLine();
+        int line = ctx.getStart().getLine();
 
-    List<Statment> body = new ArrayList<>();
-    Object result = visit(ctx.suite(0));
-    if (result instanceof List<?>) {
-        for (Object stmt : (List<?>) result) {
-            if (stmt instanceof Statment) body.add((Statment) stmt);
-        }
-    }
-
-    List<CatchStatment> handlers = new ArrayList<>();
-    int handlerCount = ctx.EXCEPT().size();
-
-    for (int i = 0; i < handlerCount; i++) {
-
-        ExpressionAtom exceptionType = null;
-        String exceptionVar = null;
-        int suiteIndex = 1 + i;
-
-        if (ctx.test(i) != null) {
-            exceptionType = (ExpressionAtom) visit(ctx.test(i));
-
-            if (ctx.NAME(i) != null) {
-                exceptionVar = ctx.NAME(i).getText();
-            }
-        }
-
-        List<Statment> handlerBody = new ArrayList<>();
-        result = visit(ctx.suite(suiteIndex));
+        List<Statment> body = new ArrayList<>();
+        Object result = visit(ctx.suite(0));
         if (result instanceof List<?>) {
             for (Object stmt : (List<?>) result) {
-                if (stmt instanceof Statment) handlerBody.add((Statment) stmt);
+                if (stmt instanceof Statment) body.add((Statment) stmt);
             }
         }
 
-        handlers.add(new CatchStatment(
-                exceptionType,
-                exceptionVar,
-                handlerBody,
-                ctx.EXCEPT(i).getSymbol().getLine()
-        ));
-    }
+        List<CatchStatment> handlers = new ArrayList<>();
+        int handlerCount = ctx.EXCEPT().size();
 
-    List<Statment> elseBody = null;
-    List<Statment> finallyBody = null;
-    int suiteCount = ctx.suite().size();
+        for (int i = 0; i < handlerCount; i++) {
 
-    if (suiteCount > handlerCount + 1) {
-        int lastSuiteIndex = suiteCount - 1;
+            ExpressionAtom exceptionType = null;
+            String exceptionVar = null;
+            int suiteIndex = 1 + i;
 
-        if (ctx.FINALLY() != null) {
-            finallyBody = new ArrayList<>();
-            result = visit(ctx.suite(lastSuiteIndex));
-            if (result instanceof List<?>) {
-                for (Object stmt : (List<?>) result)
-                    if (stmt instanceof Statment) finallyBody.add((Statment) stmt);
+            if (ctx.test(i) != null) {
+                exceptionType = (ExpressionAtom) visit(ctx.test(i));
+
+                if (ctx.NAME(i) != null) {
+                    exceptionVar = ctx.NAME(i).getText();
+                }
             }
-        } else if (ctx.ELSE() != null) {
-            elseBody = new ArrayList<>();
-            result = visit(ctx.suite(lastSuiteIndex));
+
+            List<Statment> handlerBody = new ArrayList<>();
+            result = visit(ctx.suite(suiteIndex));
             if (result instanceof List<?>) {
-                for (Object stmt : (List<?>) result)
-                    if (stmt instanceof Statment) elseBody.add((Statment) stmt);
+                for (Object stmt : (List<?>) result) {
+                    if (stmt instanceof Statment) handlerBody.add((Statment) stmt);
+                }
+            }
+
+            handlers.add(new CatchStatment(
+                    exceptionType,
+                    exceptionVar,
+                    handlerBody,
+                    ctx.EXCEPT(i).getSymbol().getLine()
+            ));
+        }
+
+        List<Statment> elseBody = null;
+        List<Statment> finallyBody = null;
+        int suiteCount = ctx.suite().size();
+
+        if (suiteCount > handlerCount + 1) {
+            int lastSuiteIndex = suiteCount - 1;
+
+            if (ctx.FINALLY() != null) {
+                finallyBody = new ArrayList<>();
+                result = visit(ctx.suite(lastSuiteIndex));
+                if (result instanceof List<?>) {
+                    for (Object stmt : (List<?>) result)
+                        if (stmt instanceof Statment) finallyBody.add((Statment) stmt);
+                }
+            } else if (ctx.ELSE() != null) {
+                elseBody = new ArrayList<>();
+                result = visit(ctx.suite(lastSuiteIndex));
+                if (result instanceof List<?>) {
+                    for (Object stmt : (List<?>) result)
+                        if (stmt instanceof Statment) elseBody.add((Statment) stmt);
+                }
             }
         }
-    }
 
-    return new TryStatment(body, handlers, elseBody, finallyBody, line);
-}
+        return new TryStatment(body, handlers, elseBody, finallyBody, line);
+    }
 
     @Override
     public Object visitWith_item(ProjectParser.With_itemContext ctx) {

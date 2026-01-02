@@ -13,20 +13,6 @@ public class FlowReturn extends FlowStatment{
         this.values = values;
     }
 
-    public void addValue(ExpressionAtom expr) {
-        if (this.values == null) {
-            this.values = new ArrayList<>();
-        }
-        this.values.add(expr);
-    }
-
-    public void addValues(List<ExpressionAtom> list) {
-        if (this.values == null) {
-            this.values = new ArrayList<>();
-        }
-        this.values.addAll(list);
-    }
-
     @Override
     public String toString() {
         return "ReturnStmt(line=" + line + ", values=" + values + ")";

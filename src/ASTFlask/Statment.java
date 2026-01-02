@@ -13,7 +13,5 @@ public abstract class Statment extends StatmentRoot {
     }
 
 
-    public List<Statment> getChildren() {
-        return new ArrayList<>();
-    }
+
 }

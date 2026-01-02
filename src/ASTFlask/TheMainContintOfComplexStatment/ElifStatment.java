@@ -17,12 +17,6 @@ public class ElifStatment extends Statment {
         this.body = body;
     }
 
-    public void addToBody(Statment stmt) {
-        if (this.body == null) {
-            this.body = new ArrayList<>();
-        }
-        this.body.add(stmt);
-    }
 
     @Override
     public String toString() {

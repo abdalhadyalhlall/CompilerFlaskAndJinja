@@ -10,9 +10,6 @@ public class AttributeOfVariable extends ExpressionAtom{
         this.property = property;
     }
 
-    public void setObject(ExpressionAtom object) {
-        this.object = object;
-    }
 
     public void setProperty(String property) {
         this.property = property;

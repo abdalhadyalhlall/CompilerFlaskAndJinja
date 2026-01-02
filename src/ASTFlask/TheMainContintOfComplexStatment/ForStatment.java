@@ -21,15 +21,6 @@ public class ForStatment extends Statment {
         this.elseBody = elseBody;
     }
 
-    public void addToBody(Statment stmt) {
-        if (body == null) body = new ArrayList<>();
-        body.add(stmt);
-    }
-
-    public void addToElse(Statment stmt) {
-        if (elseBody == null) elseBody = new ArrayList<>();
-        elseBody.add(stmt);
-    }
 
     @Override
     public String toString() {

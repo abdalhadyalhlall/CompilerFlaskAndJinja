@@ -12,10 +12,6 @@ public class TwoOperationExprssion extends ExpressionAtom{
         this.right = right;
     }
 
-    public void setLeft(ExpressionAtom left) { this.left = left; }
-    public void setOp(String op) { this.op = op; }
-    public void setRight(ExpressionAtom right) { this.right = right; }
-
     @Override
     public String toString() {
         return nodeName + "(line=" + line + ", left=" + left + ", op=" + op + ", right=" + right + ")";

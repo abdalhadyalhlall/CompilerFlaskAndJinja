@@ -37,9 +37,9 @@ annAssign
     ;
 
 augassign
-    : PLUS EQ
+    : PLUS  EQ
     | MINUS EQ
-    | STAR EQ
+    | STAR  EQ
     | SLASH EQ
     ;
 

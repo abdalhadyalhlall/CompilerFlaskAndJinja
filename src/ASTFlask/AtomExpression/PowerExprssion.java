@@ -11,7 +11,7 @@ public class PowerExprssion extends ExpressionAtom{
     }
 
     public void setBase(ExpressionAtom base) { this.base = base; }
-    public void setExponent(ExpressionAtom exponent) { this.exponent = exponent; }
+
 
     @Override
     public String toString() {
