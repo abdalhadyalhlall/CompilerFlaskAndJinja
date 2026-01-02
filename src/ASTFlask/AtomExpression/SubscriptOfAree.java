@@ -16,9 +16,6 @@ public class SubscriptOfAree extends ExpressionAtom{
         this.value = value;
     }
 
-    public void setSlice(SliceTowSubscriptOfAree slice) {
-        this.slice = slice;
-    }
 
     @Override
     public String toString() {

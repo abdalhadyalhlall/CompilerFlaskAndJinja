@@ -14,14 +14,7 @@ public class DictionaryExprssion extends ExpressionAtom{
         this.values = values;
     }
 
-    public void addItem(ExpressionAtom key, ExpressionAtom value) {
-        if (this.keys == null) this.keys = new ArrayList<>();
-        if (this.values == null) this.values = new ArrayList<>();
-        this.keys.add(key);
-        this.values.add(value);
-    }
 
-    public void setKeys(List<ExpressionAtom> keys) { this.keys = keys; }
     public void setValues(List<ExpressionAtom> values) { this.values = values; }
 
     @Override

@@ -15,8 +15,7 @@ public class AugassignEqual extends ExpressionStatment {
         this.value = value;
     }
 
-    public void addTarget(ExpressionAtom target) { this.target = target; }
-    public void setOperator(String operator) { this.operator = operator; }
+
     public void setValue(ExpressionAtom value) {
         this.value = value;
         super.value = value;

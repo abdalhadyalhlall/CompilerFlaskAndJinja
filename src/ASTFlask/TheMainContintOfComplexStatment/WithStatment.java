@@ -16,15 +16,6 @@ public class WithStatment extends Statment {
         this.body = body;
     }
 
-    public void addItem(WithItemStatment item) {
-        if (this.items == null) this.items = new ArrayList<>();
-        this.items.add(item);
-    }
-
-    public void addBodyStmt(Statment stmt) {
-        if (this.body == null) this.body = new ArrayList<>();
-        this.body.add(stmt);
-    }
 
     @Override
     public String toString() {

@@ -25,12 +25,6 @@ public class CoplexForExpression extends StatmentRoot {
         this.conditions.add(condition);
     }
 
-    public void addConditions(List<ExpressionAtom> conds) {
-        if (this.conditions == null) {
-            this.conditions = new ArrayList<>();
-        }
-        this.conditions.addAll(conds);
-    }
 
     @Override
     public String toString() {
