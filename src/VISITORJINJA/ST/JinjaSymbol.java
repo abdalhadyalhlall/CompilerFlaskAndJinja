@@ -166,30 +166,7 @@ public class JinjaSymbol extends Symbol {
     }
 
 
-    public Map<String, Object> toJson() {
-        Map<String, Object> json = new HashMap<>();
-        json.put("type", jinjaType.name());
-        json.put("name", getName());
-        json.put("content", content);
-        json.put("line", getLine());
-        json.put("column", getColumn());
-        json.put("isControlStructure", isControlStructure);
-        json.put("hasFilters", hasFilters);
-        json.put("contextSize", context.size());
-        json.put("nestedSymbolsCount", nestedSymbols.size());
 
-        if (parentElement != null) {
-            json.put("parentElement", parentElement.getName());
-        }
-
-        List<String> nestedNames = new ArrayList<>();
-        for (JinjaSymbol symbol : nestedSymbols) {
-            nestedNames.add(symbol.getName() + " [" + symbol.getJinjaType() + "]");
-        }
-        json.put("nestedSymbols", nestedNames);
-
-        return json;
-    }
 
 
 

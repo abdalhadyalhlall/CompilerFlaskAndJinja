@@ -1,4 +1,5 @@
 lexer grammar HTMLCSSJINJA_lexer;
+
 WS : [ \t\r\n]+ -> skip;
 
 JINJA_EXPR_START    : '{{' -> pushMode(JINJA_EXPR_MODE);
@@ -21,7 +22,7 @@ mode TAG_MODE;
 
 EQUALS : '=';
 
-STYLE_ATTRIBUTE_START : 'style' EQUALS  '"' -> pushMode(STYLE_MODE);
+STYLE_ATTRIBUTE_START : 'style' EQUALS '"' -> pushMode(STYLE_MODE);
 
 TAG_DOCTYPE: '!DOCTYPE html';
 TAG_HTML   : 'html';
@@ -186,6 +187,7 @@ ATTR_PROPERTY           : 'property';
 VALUE_LANG_EN: '"en"';
 VALUE_LANG_AR: '"ar"';
 
+ATTRIBUTE_NAME  : [a-zA-Z_:][a-zA-Z0-9._:-]*;
 
 ATTRIBUTE_VALUE
     : '"' (~["])* '"'
@@ -291,28 +293,28 @@ CSS_TEXT_VALUE
     | 'nowrap' | 'pre' | 'pre-line' | 'pre-wrap' | 'break-spaces'
     ;
 
-//CSS_SHORTHAND_VALUE
-//    : LENGTH
-//    | PERCENT
-//    | INT
-//    | FLOAT
-//    | 'none'
-//    | 'auto'
-//    | 'left' | 'right' | 'center' | 'justify'
-//    | 'top' | 'bottom'
-//    | 'solid' | 'dashed' | 'dotted' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' | 'hidden'
-//    | 'thin' | 'medium' | 'thick'
-//    | 'normal' | 'italic' | 'oblique'
-//    | 'bold' | 'bolder' | 'lighter'
-//    | 'small' | 'medium' | 'large' | 'x-small' | 'xx-small' | 'x-large' | 'xx-large'
-//    | 'pointer' | 'default' | 'move' | 'text' | 'wait' | 'help' | 'not-allowed' | 'crosshair'
-//    | 'inherit' | 'initial' | 'unset'
-//    | 'rtl' | 'ltr'
-//    | 'block' | 'inline' | 'inline-block' | 'flex' | 'grid' | 'table'
-//    | 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
-//    | 'visible' | 'hidden' | 'scroll' | 'auto'
-//    | 'cover' | 'contain' | 'fill' | 'scale-down'
-//    ;
+CSS_SHORTHAND_VALUE
+    : LENGTH
+    | PERCENT
+    | INT
+    | FLOAT
+    | 'none'
+    | 'auto'
+    | 'left' | 'right' | 'center' | 'justify'
+    | 'top' | 'bottom'
+    | 'solid' | 'dashed' | 'dotted' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' | 'hidden'
+    | 'thin' | 'medium' | 'thick'
+    | 'normal' | 'italic' | 'oblique'
+    | 'bold' | 'bolder' | 'lighter'
+    | 'small' | 'medium' | 'large' | 'x-small' | 'xx-small' | 'x-large' | 'xx-large'
+    | 'pointer' | 'default' | 'move' | 'text' | 'wait' | 'help' | 'not-allowed' | 'crosshair'
+    | 'inherit' | 'initial' | 'unset'
+    | 'rtl' | 'ltr'
+    | 'block' | 'inline' | 'inline-block' | 'flex' | 'grid' | 'table'
+    | 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky'
+    | 'visible' | 'hidden' | 'scroll' | 'auto'
+    | 'cover' | 'contain' | 'fill' | 'scale-down'
+    ;
 
 CSS_EFFECT_VALUE
     : OPACITY_VALUE
@@ -468,9 +470,13 @@ fragment BLEND_MODE_VALUE
 
 fragment NAME : [a-zA-Z_][a-zA-Z0-9_-]* ;
 
+STYLE_WS : [ \t\r\n]+ -> skip;
+
 mode JINJA_EXPR_MODE;
 
 JINJA_EXPR_END     : '}}' -> popMode;
+
+JINJA_EXPR_WS : [ \t\r\n]+ -> skip;
 
 JINJA_EXPR_STRING
     : '"' (~["]|'\\"')* '"'
@@ -479,7 +485,9 @@ JINJA_EXPR_STRING
 
 JINJA_EXPR_ATOM : [a-zA-Z_][a-zA-Z0-9_.]* ;
 
-JINJA_EXPR_SYMBOL : [+\-*/%=><!&|.,:;()[\]{}];
+JINJA_EXPR_SYMBOL : [+\-*/%=><!&|.,:;()[\]{}] ;
+
+JINJA_EXPR_UNKNOWN : . ;
 
 mode JINJA_STMT_MODE;
 
@@ -503,6 +511,7 @@ JINJA_STMT_INCLUDE   : 'include';
 JINJA_STMT_EXTENDS   : 'extends';
 JINJA_STMT_FROM      : 'from';
 
+JINJA_STMT_WS : [ \t\r\n]+ -> skip;
 
 JINJA_STMT_STRING
     : '"' (~["]|'\\"')* '"'
@@ -512,3 +521,5 @@ JINJA_STMT_STRING
 JINJA_STMT_ATOM : [a-zA-Z_][a-zA-Z0-9_.]* ;
 
 JINJA_STMT_SYMBOL : [+\-*/%=><!&|.,:;()[\]{}] ;
+
+JINJA_STMT_UNKNOWN : . ;

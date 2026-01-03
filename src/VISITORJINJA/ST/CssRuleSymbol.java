@@ -40,7 +40,7 @@ public class CssRuleSymbol extends Symbol {
         this.property = property;
         this.category = category;
         this.values = values != null ? new ArrayList<>(values) : new ArrayList<>();
-        this.isInline = true; // افتراضيًا inline في سياق HTML+CSS+Jinja
+        this.isInline = true;
         this.isImportant = false;
         this.metadata = new HashMap<>();
         this.specificity = "0,0,0,0";
@@ -116,8 +116,7 @@ public class CssRuleSymbol extends Symbol {
         if (!values.isEmpty()) {
             String lastValue = values.get(values.size() - 1);
             if (lastValue != null && lastValue.trim().equalsIgnoreCase("!important")) {
-                this.isImportant = true;
-                // إزالة !important من القيم
+
                 values.set(values.size() - 1,
                         lastValue.replace("!important", "").trim());
             }

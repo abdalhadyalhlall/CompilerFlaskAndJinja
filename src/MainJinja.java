@@ -39,7 +39,7 @@ public class MainJinja {
         HTMLCSSJINJA_parser parser = new HTMLCSSJINJA_parser(tokens);
         ParseTree parseTree = parser.document();
 
-        System.out.println("=== بناء شجرة الـAST ===");
+        System.out.println("=== ASTبناء شجرة الـ ===");
         VisitorJinja visitor = new VisitorJinja();
         ASTNode astRoot = visitor.visit(parseTree);
 
@@ -52,7 +52,7 @@ public class MainJinja {
         VisitorJinjaSymbolTable symbolTableVisitor = new VisitorJinjaSymbolTable(visitor);
         symbolTableVisitor.visit(parseTree);
         HtmlCssJinjaSymbolTable symbolTable = symbolTableVisitor.getSymbolTable();
-        System.out.println("تم بناء جدول الرموز بنجاح!");
+        System.out.println("تم بناء جدول الرموز ");
         System.out.println("==============================\n");
 
         interactiveMenu(symbolTableVisitor, symbolTable);
@@ -62,7 +62,7 @@ public class MainJinja {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
 
-        System.out.println("=== نظام إدارة جدول الرموز HTML/CSS/Jinja ===");
+        System.out.println("=== HTML/CSS/Jinjaنظام إدارة جدول الرموز  ===");
 
         while (!exit) {
             System.out.println("\n=== القائمة الرئيسية ===");
@@ -75,8 +75,7 @@ public class MainJinja {
             System.out.println("7. عرض عناصر Jinja حسب النوع");
             System.out.println("8. عرض الأخطاء والتحذيرات");
             System.out.println("9. اختبار جميع الوظائف");
-            System.out.println("10. تصدير جدول الرموز");
-            System.out.println("11. عرض الهياكل المتداخلة");
+            System.out.println("10. عرض الهياكل المتداخلة");
             System.out.println("0. الخروج");
             System.out.print("اختر خيارًا: ");
 
@@ -85,7 +84,7 @@ public class MainJinja {
                 choice = scanner.nextInt();
                 scanner.nextLine();
             } catch (java.util.InputMismatchException e) {
-                System.out.println("يرجى إدخال رقم صحيح!");
+                System.out.println("!يرجى إدخال رقم صحيح");
                 scanner.nextLine();
                 continue;
             }
@@ -123,11 +122,11 @@ public class MainJinja {
                     break;
                 case 0:
                     exit = true;
-                    System.out.println("شكرًا لاستخدامك النظام!");
+                    System.out.println("شكرًا لاستخدامك النظام");
                     visitor.cleanup();
                     break;
                 default:
-                    System.out.println("خيار غير صحيح!");
+                    System.out.println(" !خيار غير صحيح ");
             }
         }
 
