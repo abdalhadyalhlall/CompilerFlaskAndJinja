@@ -92,8 +92,8 @@ effect: CSS_EFFECT_PROPERTY CSS_TWOPOINT css_value+ CSS_SEMI;
 layout: CSS_LAYOUT_PROPERTY CSS_TWOPOINT css_value+ CSS_SEMI;
 
 css_value:
-//    CSS_SHORTHAND_VALUE
-    CSS_TEXT_VALUE
+    CSS_SHORTHAND_VALUE
+    | CSS_TEXT_VALUE
     | CSS_LAYOUT_VALUE
     | CSS_EFFECT_VALUE
     | CSS_OFFSET_PROPERTY
@@ -295,6 +295,7 @@ jinjaElement
     | jinjaForBlock     #jinjaForBlocklabel
     ;
 
+
 jinjaExpr
     : JINJA_EXPR_START jinjaExprContent* JINJA_EXPR_END
     ;
@@ -303,6 +304,7 @@ jinjaExprContent
     : JINJA_EXPR_STRING
     | JINJA_EXPR_ATOM
     | JINJA_EXPR_SYMBOL
+    | JINJA_EXPR_UNKNOWN
     ;
 
 jinjaBlockContent
@@ -331,6 +333,7 @@ jinjaStmtArgument
     : JINJA_STMT_ATOM
     | JINJA_STMT_SYMBOL
     | JINJA_STMT_STRING
+    | JINJA_STMT_UNKNOWN
     | JINJA_STMT_ELSE
     | JINJA_STMT_ELIF
     | JINJA_STMT_IN

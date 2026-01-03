@@ -205,7 +205,7 @@ with_item : test (AS test)? ;
 
 suite
     : simple_stmt
-    | NEWLINE+ INDENT (statement | empty_line)+ DEDENT
+    | (NEWLINE|INDENT) (statement | empty_line)+ (DEDENT)?
     ;
 
 exprlist : test (COMMA test)* (COMMA)? ;

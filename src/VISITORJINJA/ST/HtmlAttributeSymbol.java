@@ -223,34 +223,6 @@ public class HtmlAttributeSymbol extends Symbol {
     }
 
 
-    public Map<String, Object> toJson() {
-        Map<String, Object> json = new HashMap<>();
-        json.put("name", name);
-        json.put("type", attributeType.name());
-        json.put("line", line);
-        json.put("column", column);
-        json.put("hasValue", hasValue);
-
-        if (hasValue && value != null) {
-            json.put("value", value);
-            json.put("valueWithoutQuotes", getValueWithoutQuotes());
-            json.put("valueLength", getValueLength());
-        }
-
-        json.put("isBoolean", isBooleanAttribute());
-        json.put("isCustom", isCustomAttribute());
-        json.put("isDataAttribute", isDataAttribute());
-        json.put("isAriaAttribute", isAriaAttribute());
-        json.put("isEventAttribute", isEventAttribute());
-        json.put("containsJinja", containsJinjaExpression());
-        json.put("containsCss", containsCss());
-
-        if (parentElement != null) {
-            json.put("parentElement", parentElement.name);
-        }
-
-        return json;
-    }
 
 
 
@@ -290,7 +262,7 @@ public class HtmlAttributeSymbol extends Symbol {
             return AttributeType.FORM;
         }
 
-        // سمات الوسائط
+
         if (attrLower.equals("src") || attrLower.equals("alt") ||
                 attrLower.equals("width") || attrLower.equals("height") ||
                 attrLower.equals("controls") || attrLower.equals("autoplay") ||
